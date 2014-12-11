@@ -7,41 +7,40 @@
         var inB = cdpm.flightdetails && cdpm.flightdetails.inbound && cdpm.flightdetails.inbound[0] || '';
 
         cdl.DL_sub2 = {
-            Title : cdpm.address && cdpm.address.title || '',
-            Forename : cdpm.address && cdpm.address.name || '',
-            Surname : cdpm.address && cdpm.address.surname || '',
-            Address1 : cdpm.address && cdpm.address.house || '',
-            Address2 : cdpm.address && cdpm.address.street1 || '',
-            Postcode : cdpm.address && cdpm.address.postcode || '',
-            Email_Address : cdpm.address && cdpm.address.email || '',
-            Mobile_Number : cdpm.address && cdpm.address.phone || '',
-            Optout1P : false,
-            Optout3P : '',
-            sendBasket : '',
-            OrderID : cdpm.bookingref || '',
-            Total : parseInt(cdpm.bookingvalue) || cdpm.accomprice || 0,
+            Title : cdl.DL_sub2 && cdl.DL_sub2.Title || cdl.DL_sub2 && cdl.DL_sub2.storeData && cdl.DL_sub2.storeData.Title || cdpm.address && cdpm.address.title || '',
+            Forename : cdl.DL_sub2 && cdl.DL_sub2.Forename || cdl.DL_sub2 && cdl.DL_sub2.storeData && cdl.DL_sub2.storeData.Forename|| cdpm.address && cdpm.address.name || '',
+            Surname : cdl.DL_sub2 && cdl.DL_sub2.Surname || cdl.DL_sub2 && cdl.DL_sub2.storeData && cdl.DL_sub2.storeData.Surname|| cdpm.address && cdpm.address.surname || '',
+            Address1 : cdl.DL_sub2 && cdl.DL_sub2.Address1 || cdl.DL_sub2 && cdl.DL_sub2.storeData && cdl.DL_sub2.storeData.Address1|| cdpm.address && cdpm.address.house || '',
+            Address2 : cdl.DL_sub2 && cdl.DL_sub2.Address2 || cdl.DL_sub2 && cdl.DL_sub2.storeData && cdl.DL_sub2.storeData.Address2|| cdpm.address && cdpm.address.street1 || '',
+            Postcode : cdl.DL_sub2 && cdl.DL_sub2.Postcode || cdl.DL_sub2 && cdl.DL_sub2.storeData && cdl.DL_sub2.storeData.Postcode|| cdpm.address && cdpm.address.postcode || '',
+            Email_Address : cdl.DL_sub2 && cdl.DL_sub2.Email_Address || cdl.DL_sub2 && cdl.DL_sub2.storeData && cdl.DL_sub2.storeData.Email_Address|| cdpm.address && cdpm.address.email || '',
+            Mobile_Number : cdl.DL_sub2 && cdl.DL_sub2.Mobile_Number || cdl.DL_sub2 && cdl.DL_sub2.storeData && cdl.DL_sub2.storeData.Mobile_Number|| cdpm.address && cdpm.address.phone || '',
+            Optout1P : cdl.DL_sub2 && cdl.DL_sub2.Optout1P || cdl.DL_sub2 && cdl.DL_sub2.storeData && cdl.DL_sub2.storeData.Optout1P|| false,
+            sendBasket : cdl.DL_sub2 && cdl.DL_sub2.sendBasket || '',
+            OrderID : cdl.DL_sub2 && cdl.DL_sub2.OrderID || cdpm.bookingref || '',
+            Total : cdl.DL_sub2 && cdl.DL_sub2.Total || parseInt(cdpm.bookingvalue) || cdpm.accomprice || 0,
             Tax : '0' ,
-            SKU : cdpm.accomcode || '',
-            Hotel_ID : cdpm.accomguid || '',
+            SKU : cdl.DL_sub2 && cdl.DL_sub2.SKU || cdpm.accomcode || '',
+            Hotel_ID : cdl.DL_sub2 && cdl.DL_sub2.Hotel_ID || cdpm.accomguid || '',
             Category : 'Resort',
-            Product_Name : cdpm.accomname || '',
-            Accommodation_Detail_1 : jQ('.room-description').text() || '',
-            Accommodation_Detail_2 : cdpm.boardbasis || '',
-            CO : cdl.gadate(cdpm.returndate || 0),
-            Flight_Detail_1 : outB && cdl.gadate(outB.depart && outB.depart.date || 0) +'|'+ (outB.depart && outB.depart.airport || '') +'|'+ (outB.flightno || '') || '',
-            Flight_Detail_2 : outB && cdl.gadate(outB.arrive && outB.arrive.date || 0) +'|'+ (outB.arrive && outB.arrive.airport || '') || '',
-            Flight_Detail_3 : inB && cdl.gadate(inB.depart && inB.depart.date || 0) +'|'+ (inB.depart && inB.depart.airport || '') +'|'+ (inB.flightno || '') || '',
-            Flight_Detail_4 : inB && cdl.gadate(inB.arrive && inB.arrive.date || 0) +'|'+ (inB.arrive && inB.arrive.airport || '') || '',
-            CI : cdl.gadate(cdpm.deptdate || 0),
-            NoA : cdpm.paxadult || '0',
-            NoC : cdpm.paxchild || '0',
-            NoI : cdpm.paxinfant || '0',
+            Product_Name : cdl.DL_sub2 && cdl.DL_sub2.Product_Name || cdpm.accomname || '',
+            Accommodation_Detail_1 : cdl.DL_sub2 && cdl.DL_sub2.Accommodation_Detail_1 || jQ('.room-description').text() || '',
+            Accommodation_Detail_2 : cdl.DL_sub2 && cdl.DL_sub2.Accommodation_Detail_2 || cdpm.boardbasis || '',
+            CO : cdl.DL_sub2 && cdl.DL_sub2.CO || cdpm.returndate && cdl.gadate(cdpm.returndate || 0) || '',
+            Flight_Detail_1 : cdl.DL_sub2 && cdl.DL_sub2.Flight_Detail_1 || outB && cdl.gadate(outB.depart && outB.depart.date || 0) +'|'+ (outB.depart && outB.depart.airport || '') +'|'+ (outB.flightno || '') || '',
+            Flight_Detail_2 : cdl.DL_sub2 && cdl.DL_sub2.Flight_Detail_2 || outB && cdl.gadate(outB.arrive && outB.arrive.date || 0) +'|'+ (outB.arrive && outB.arrive.airport || '') || '',
+            Flight_Detail_3 : cdl.DL_sub2 && cdl.DL_sub2.Flight_Detail_3 || inB && cdl.gadate(inB.depart && inB.depart.date || 0) +'|'+ (inB.depart && inB.depart.airport || '') +'|'+ (inB.flightno || '') || '',
+            Flight_Detail_4 : cdl.DL_sub2 && cdl.DL_sub2.Flight_Detail_4 || inB && cdl.gadate(inB.arrive && inB.arrive.date || 0) +'|'+ (inB.arrive && inB.arrive.airport || '') || '',
+            CI : cdl.DL_sub2 && cdl.DL_sub2.CI || cdpm.deptdate && cdl.gadate(cdpm.deptdate || 0) || '',
+            NoA : cdl.DL_sub2 && cdl.DL_sub2.NoA || cdpm.paxadult || '0',
+            NoC : cdl.DL_sub2 && cdl.DL_sub2.NoC || cdpm.paxchild || '0',
+            NoI : cdl.DL_sub2 && cdl.DL_sub2.NoI || cdpm.paxinfant || '0',
             C1A : '',
             C2A : '',
             C3A : '',
             C4A : '',
-            Unit_Price : parseInt(cdpm.bookingvalue) || cdpm.accomprice || 0,
-            Quantity : cdpm.paxtotal || 0,
+            Unit_Price : cdl.DL_sub2 && cdl.DL_sub2.Unit_Price || parseInt(cdpm.bookingvalue) || cdpm.accomprice || 0,
+            Quantity : cdl.DL_sub2 && cdl.DL_sub2.Quantity || cdpm.paxtotal || 0,
             script     : {
                 status  : 'not fired',
                 src     : '//webservices.sub2tech.com/CodeBase/LIVE/Min/sub2.js?LICENSEKEY=24edfbd3-61e8-4661-84f0-59c37b83296f&trackPage=Y'
@@ -95,24 +94,43 @@
             }
             if (/pax/i.test(cdpm.pageid || '')) {
                 var newsletter = jQ('label.paxLabel input').length && jQ('label.paxLabel input') || '';
-                newsletter && newsletter.on('click', function(elt){
+                newsletter && newsletter.on('click', function(){
                     s2dl.Optout1P = !s2dl.Optout1P;
-                    window.__s2tQ && window.__s2tQ.push(['storeData',{
-                        'Title' : s2dl.title || '',
-                        'Forename' : s2dl.Forename || '',
-                        'Surname' : s2dl.Surname || '',
-                        'Address1' : s2dl.Address1 || '',
-                        'Address2' : s2dl.Address2 || '',
-                        'Postcode' : s2dl.Postcode || '',
-                        'Email_Address' : s2dl.Email_Address || '',
-                        'Mobile_Number' : s2dl.Mobile_Number || '',
+                    var formData = unescape(jQ('form').serialize() || '');
+                    var storeData = formData.length && {
+                        'Title' : jQ('select[analytics-id=pax-leadPassenger_title] option[value='+(formData.replace(/leadPassengerTitle=([^\&]+)&.*/, '$1') || '1')+']').text() || '',
+                        'Forename' : formData.replace(/.+&leadPassengerName=([^\&]*)&.*/, '$1') || '',
+                        'Surname' : formData.replace(/.+&leadPassengerSurname=([^\&]*)&.*/, '$1') || '',
+                        'Address1' : formData.replace(/.+&leadPassengerHouseNumber=([^\&]*)&leadPassengerStreet=([^\&]*)&.*/, '$1 $2').replace(/\+/g, ' ') || '',
+                        'Address2' : formData.replace(/.+&leadPassengerStreet1=([^\&]*)&.*/, '$1').replace(/\+/g, ' ') || '',
+                        'Postcode' : formData.replace(/.+&leadPassengerPostalcode=([^\&]*)&.*/, '$1').replace(/\+/g, ' ') || '',
+                        'Email_Address' : formData.replace(/.+&leadPassengerEmail=([^\&]*)&.*/, '$1') || '',
+                        'Mobile_Number' : formData.replace(/.+&leadPassengerPhonenumber=([^\&]*)&.*/, '$1') || '',
                         'Optout1P' : +s2dl.Optout1P
-                    }]);
+                    } || '';
+                    s2dl.storeData = storeData;
+                    window.__s2tQ && storeData && window.__s2tQ.push(['storeData', storeData]);
+                });
+                jQ('input#contactNumber').focusout(function() {
+                    var formData = unescape(jQ('form').serialize() || '');
+                    var storeData = formData.length && {
+                        'Title' : jQ('select[analytics-id=pax-leadPassenger_title] option[value='+(formData.replace(/leadPassengerTitle=([^\&]+)&.*/, '$1') || '1')+']').text() || '',
+                        'Forename' : formData.replace(/.+&leadPassengerName=([^\&]*)&.*/, '$1') || '',
+                        'Surname' : formData.replace(/.+&leadPassengerSurname=([^\&]*)&.*/, '$1') || '',
+                        'Address1' : formData.replace(/.+&leadPassengerHouseNumber=([^\&]*)&leadPassengerStreet=([^\&]*)&.*/, '$1 $2').replace(/\+/g, ' ') || '',
+                        'Address2' : formData.replace(/.+&leadPassengerStreet1=([^\&]*)&.*/, '$1').replace(/\+/g, ' ') || '',
+                        'Postcode' : formData.replace(/.+&leadPassengerPostalcode=([^\&]*)&.*/, '$1').replace(/\+/g, ' ') || '',
+                        'Email_Address' : formData.replace(/.+&leadPassengerEmail=([^\&]*)&.*/, '$1') || '',
+                        'Mobile_Number' : formData.replace(/.+&leadPassengerPhonenumber=([^\&]*)&.*/, '$1') || '',
+                        'Optout1P' : +s2dl.Optout1P
+                    } || '';
+                    s2dl.storeData = storeData;
+                    window.__s2tQ && storeData && window.__s2tQ.push(['storeData', storeData]);
                 });
             }
             if (/pay/i.test(cdpm.pageid || '')) {
-                window.__s2tQ && window.__s2tQ.push(['storeData',{
-                    'Title' : s2dl.title || '',
+                var storeData = s2dl.storeData && s2dl.storeData.Title || {
+                    'Title' : s2dl.Title || '',
                     'Forename' : s2dl.Forename || '',
                     'Surname' : s2dl.Surname || '',
                     'Address1' : s2dl.Address1 || '',
@@ -121,8 +139,10 @@
                     'Email_Address' : s2dl.Email_Address || '',
                     'Mobile_Number' : s2dl.Mobile_Number || '',
                     'Optout1P' : +s2dl.Optout1P
-                    }]);
-                }
+                };
+                s2dl.storeData = storeData;
+                window.__s2tQ && window.__s2tQ.push(['storeData', storeData]);
+            }
         });
     } catch(e) {
         cdl.error('GTM Sub2: '+e);
