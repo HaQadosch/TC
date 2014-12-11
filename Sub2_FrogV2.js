@@ -1,7 +1,7 @@
 <script id='gtm_Sub2TC'>
 (function gtm_Sub2TCDL(jQ, cdl, dl) {
     'use strict';
-    if (jQ && cdl && dl) try {
+    if (jQ && cdl && dl && /test=sub2/i.test(document.cookie)) try {
         var cdpm = cdl.CATTParams;
         var outB = cdpm.flightdetails && cdpm.flightdetails.outbound && cdpm.flightdetails.outbound[0] || '';
         var inB = cdpm.flightdetails && cdpm.flightdetails.inbound && cdpm.flightdetails.inbound[0] || '';
@@ -56,7 +56,7 @@
 
 (function gtm_Sub2TC(jQ, cdl, s2dl) {
     'use strict';
-    if (jQ && cdl && s2dl) try {
+    if (jQ && cdl && s2dl && /test=sub2/i.test(document.cookie)) try {
         var cdpm = cdl.CATTParams;
 
         jQ.ajaxSetup({cache: true});
