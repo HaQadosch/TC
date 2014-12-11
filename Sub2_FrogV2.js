@@ -18,7 +18,7 @@
             Optout1P : cdl.DL_sub2 && cdl.DL_sub2.Optout1P || cdl.DL_sub2 && cdl.DL_sub2.storeData && cdl.DL_sub2.storeData.Optout1P|| false,
             sendBasket : cdl.DL_sub2 && cdl.DL_sub2.sendBasket || '',
             OrderID : cdl.DL_sub2 && cdl.DL_sub2.OrderID || cdpm.bookingref || '',
-            Total : cdl.DL_sub2 && cdl.DL_sub2.Total || parseInt(cdpm.bookingvalue) || cdpm.accomprice || 0,
+            Total : cdl.DL_sub2 && cdl.DL_sub2.Total || parseInt(cdpm.totalprice) || cdpm.totalprice || 0,
             Tax : '0' ,
             SKU : cdl.DL_sub2 && cdl.DL_sub2.SKU || cdpm.accomcode || '',
             Hotel_ID : cdl.DL_sub2 && cdl.DL_sub2.Hotel_ID || cdpm.accomguid || '',
@@ -39,7 +39,7 @@
             C2A : '',
             C3A : '',
             C4A : '',
-            Unit_Price : cdl.DL_sub2 && cdl.DL_sub2.Unit_Price || parseInt(cdpm.bookingvalue) || cdpm.accomprice || 0,
+            Unit_Price : cdl.DL_sub2 && cdl.DL_sub2.Unit_Price || parseInt(cdpm.totalprice) || cdpm.totalprice || 0,
             Quantity : cdl.DL_sub2 && cdl.DL_sub2.Quantity || cdpm.paxtotal || 0,
             script     : {
                 status  : 'not fired',
@@ -64,7 +64,7 @@
         src && jQ.when(jQ.getScript(src)).done(function gtm_sub2Script(){
             window.__s2tQ = window.__s2tQ || [];
             s2dl.script.status = 'fired';
-            if (/accom|cust|pax|pay/i.test(cdpm.pageid || '')) {
+            if (/accom|cust|pax|pay|booking|conf/i.test(cdpm.pageid || '')) {
                 s2dl.sendBasket = "<Store>"+
                         "<Product>"+
                             "<SKU>"+(s2dl.SKU || '')+"</SKU>"+
@@ -128,7 +128,7 @@
                     window.__s2tQ && storeData && window.__s2tQ.push(['storeData', storeData]);
                 });
             }
-            if (/pay/i.test(cdpm.pageid || '')) {
+            if (/pay|booking|conf/i.test(cdpm.pageid || '')) {
                 var storeData = s2dl.storeData && s2dl.storeData.Title || {
                     'Title' : s2dl.Title || '',
                     'Forename' : s2dl.Forename || '',
@@ -142,6 +142,20 @@
                 };
                 s2dl.storeData = storeData;
                 window.__s2tQ && window.__s2tQ.push(['storeData', storeData]);
+            }
+            if (/booking|conf/i.test(cdpm.pageid || '')) {
+                window.__s2tQ && window.__s2tQ.push(['addOrder' ,{
+                    'OrderID' : s2dl.OrderID || '',
+                    'Total' : s2dl.Total || '0'
+                }]);
+                window.__s2tQ && window.__s2tQ.push(['addItem' ,{
+                    'OrderID' : s2dl.OrderID || '',
+                    'Product_ID' : s2dl.Hotel_ID || '' ,
+                    'Product_Name' : s2dl.Product_Name || '' ,
+                    'Category' : 'Resort',
+                    'Unit_Price' : s2dl.Unit_Price || '0' ,
+                    'Quantity' : s2dl.Quantity || '0'
+                }]);
             }
         });
     } catch(e) {
