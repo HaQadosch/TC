@@ -6,8 +6,8 @@
         var outB = cdpm.flightdetails && cdpm.flightdetails.outbound || ''
         var inB = cdpm.flightdetails && cdpm.flightdetails.inbound || ''
 
-        cdl.DL_Sub2 = {
-            poolTest : /Sub2Test/i.test(window.document.URL) || !(cdpm && cdpm.utmaguid || 1)%4 || 0,
+        cdl.DL_sub2 = {
+            poolTest : /Sub2Test/i.test(window.document.URL) || !((cdpm && cdpm.utmaguid || 1)%4) || 0,
             Title : cdpm.address && cdpm.address.title || '',
             Forename : cdpm.address && cdpm.address.name || '',
             Surname : cdpm.address && cdpm.address.surname || '',
@@ -29,10 +29,10 @@
             Accommodation_Detail_1 : cdpm.roomtypes && cdpm.roomtypes.length && cdpm.roomtypes.join('|') || '',
             Accommodation_Detail_2 : cdpm.boardbasis || '',
             CO : (cdpm.retdate || '').replace(/(\d\d\d\d)-(\d\d)-(\d\d)/, '$3/$2/$1'),
-            Flight_Detail_1 : outB && (outB.depart && outB.depart.date || '').replace(/\./g, '/') +'|'+ (outB.depart && outB.depart.location || '') +'|'+ (outB.flight || '') || '',
-            Flight_Detail_2 : outB && (outB.arrive && outB.arrive.date || '').replace(/\./g, '/') +'|'+ (outB.arrive && outB.arrive.location || '') || '',
-            Flight_Detail_3 : inB && (inB.depart && inB.depart.date || '').replace(/\./g, '/') +'|'+ (inB.depart && inB.depart.location || '') +'|'+ (inB.flight || '') || '',
-            Flight_Detail_4 : inB && (inB.arrive && inB.arrive.date || '').replace(/\./g, '/') +'|'+ (inB.arrive && inB.arrive.location || '') || '',
+            Flight_Detail_1 : outB && (outB.depart && outB.depart.date || '').replace(/\./g, '/') +'|'+ (outB.depart && outB.depart.location || '') +'|'+ (outB.flight || '') || ((cdpm.deptdate || '').replace(/-/g, '/') +'|'+ (cdpm.departureairportselected || '')) || '',
+            Flight_Detail_2 : outB && (outB.arrive && outB.arrive.date || '').replace(/\./g, '/') +'|'+ (outB.arrive && outB.arrive.location || '') || ((cdpm.deptdate || '').replace(/-/g, '/') +'|'+ (cdpm.destinationairportselected || '')) || '',
+            Flight_Detail_3 : inB && (inB.depart && inB.depart.date || '').replace(/\./g, '/') +'|'+ (inB.depart && inB.depart.location || '') +'|'+ (inB.flight || '') || ((cdpm.retdate || '').replace(/-/g, '/') +'|'+ (cdpm.destinationairportselected || ''))  || '',
+            Flight_Detail_4 : inB && (inB.arrive && inB.arrive.date || '').replace(/\./g, '/') +'|'+ (inB.arrive && inB.arrive.location || '')|| ((cdpm.retdate || '').replace(/-/g, '/') +'|'+ (cdpm.departureairportselected || ''))  || '',
             CI : cdpm.deptdate && (/-/i.test(cdpm.deptdate || '')?cdpm.deptdate.replace(/(\d\d\d\d)-(\d\d)-(\d\d)/, '$3/$2/$1'):cdpm.deptdate) || '',
             NoA : cdpm.paxadult || '0',
             NoC : cdpm.paxchild || '0',
@@ -53,7 +53,7 @@
     } finally {
         dl.push({event: 'DL Sub2'});
     }
-    return cdl && dl && cdl.DL_Sub2
+    return cdl && dl && cdl.DL_sub2
 }(window.CATTDL, window.externalDataLayer));
 
 (function gtm3rd_Sub2(jQ, cdl, s2dl) {
@@ -144,5 +144,5 @@
        tracker._trackEvent('Sub2', 'test', 'PoolControl', 1, true)
    })
     return jQ && cdl && s2dl
-}(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_Sub2))
+}(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_sub2))
 </script>
