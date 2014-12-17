@@ -137,9 +137,6 @@ if (typeof CATTParams.SearchHomepage != "undefined" && CATTParams.SearchHomepage
                 document.cookie="cattpvideos="+prevHotels +"|"+ iffCode+"; expires="+inAMonth.toUTCString()+";path=/";
             };
              // <Xavier Brinon>
-            $('a#srpvideom').mousedown(function(elt){
-                fireHotel((elt.currentTarget && elt.currentTarget.href || '').replace(/.*\/([^#]*)##.*/, '$1'), "Hotelvideo");
-            });
             $('a.showlightbox.videoUrl.video').mousedown(function(elt){
                 fireHotel((elt.currentTarget && elt.currentTarget.href || '').replace(/.*\/([^#]*)##.*/, '$1'), "Hotelvideo");
             });
