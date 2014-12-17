@@ -22,26 +22,26 @@ Hotels Path - Details Page: tck_ssn_hot_det_ads_uk
 
                 return r
             }(cdpm.lob, cdpm.pageid)) || '',
-            page_id         : (cdpm.lob || '')+'_'+(cdpm.pageid || ''),
-            visitor_id      : cdpm.gaguid || cdpm.utamguid || '',
-            travelers       : cdpm.paxtotal || '',
-            timestamp       : +Date.now() || '',
-            rooms           : cdpm.rooms || '',
-            hotel_property_id : cdpm.accomguid || '',
+            page_id             : (cdpm.lob || '')+'_'+(cdpm.pageid || ''),
+            visitor_id          : cdpm.gaguid || cdpm.utamguid || '',
+            travelers           : cdpm.paxtotal || '',
+            timestamp           : +Date.now() || '',
+            rooms               : cdpm.rooms || '',
+            hotel_property_id   : cdpm.accomguid || '',
 
-            callback        : '',
-            travel_date_start : cdpm.deptdate && (new Date(cdpm.deptdate)).toISOString().replace(/(\d\d\d\d)-(\d\d)-(\d\d)T.*/i, '$1$2$3') || '',
-            travel_date_end : cdpm.returndate && (new Date(cdpm.returndate)).toISOString().replace(/(\d\d\d\d)-(\d\d)-(\d\d)T.*/i, '$1$2$3') ||  '',
-            adults          : cdpm.paxadult || '',
-            children        : parseInt(cdpm.paxchild || 0) + parseInt(cdpm.paxinfant || 0),
+            callback            : '',
+            travel_date_start   : cdpm.deptdate && (new Date(cdpm.deptdate)).toISOString().replace(/(\d\d\d\d)-(\d\d)-(\d\d)T.*/i, '$1$2$3') || '',
+            travel_date_end     : cdpm.returndate && (new Date(cdpm.returndate)).toISOString().replace(/(\d\d\d\d)-(\d\d)-(\d\d)T.*/i, '$1$2$3') ||  '',
+            adults              : cdpm.paxadult || '',
+            children            : parseInt(cdpm.paxchild || 0) + parseInt(cdpm.paxinfant || 0),
             available_property_ids : '', //
-            site_country    : 'UK',
-            site_language   : 'EN',
-            site_currency   : 'GBP',
-            display_format_type : '', // either “DESKTOP”, “MOBILE”, “TABLET”
-            hotel_country_code : '', //
-            hotel_state_code : '',
-            hotel_city_name : '',
+            site_country        : 'UK',
+            site_language       : 'EN',
+            site_currency       : 'GBP',
+            display_format_type : '', // either DESKTOP, MOBILE, TABLET
+            hotel_country_code  : '', //
+            hotel_state_code    : '',
+            hotel_city_name     : '',
             call : {
                 src : '//a.intentmedia.net/api/ssn/hotels/v1/impressions?',
                 status : 'not fired'
@@ -78,9 +78,9 @@ Hotels Path - Details Page: tck_ssn_hot_det_ads_uk
             'display_format_type='+(imdl.display_format_type || '')+'&'+
             'hotel_country_code='+(imdl.hotel_country_code || '')+'&'+
             'hotel_state_code='+(imdl.hotel_state_code || '')+'&'+
-            'hotel_city_name='+(imdl.hotel_city_name || '')
+            'hotel_city_name='+(imdl.hotel_city_name || '');
 
-        src && jQ.getScript && jQ.getScript('', function gtm_getscriptIntentMedia(){
+        src && jQ.getScript && jQ.getScript(src, function gtm_getscriptIntentMedia(){
             imdl.call = {
                 src:src,
                 status:'fired'

@@ -1,44 +1,41 @@
-<script id='gtm_Trivago'>
-(function gtm_TrivagoDL(cdl, dl) {
+<script id='gtm_CIM'>
+(function gtm_CIMDL(dl, cdl){
     'use strict'
-    if (cdl && dl) try {
-        var cdpm = cdl.CATTParams
-
-        cdl.DL_trivago = {
-            partnerid    : 91,
-            hotel         : (cdpm.accomcode || '').replace(/(\w+)\|(.*)/g, '$2_$1'),
-            arrival     : +new Date(cdpm.deptdate && cdpm.deptdate.replace(/(\d\d)\/(\d\d)\/(\d\d\d\d)/, '$3 $2 $1') ||  0) || 0,
-            departure     : +new Date(cdpm.retdate && cdpm.retdate.replace(/(\d\d)\/(\d\d)\/(\d\d\d\d)/, '$3 $2 $1') || 0) || 0,
-            price         : cdpm.bookingvalue || 0,
-            currency     : cdpm.currency || 'GBP',
-            pixel         : {
-                src     : 'https://secde.trivago.com/page_check.php?pagetype=track&ref=_partnerid_&hotel=_hotel_&arrival=_arrival_&departure=_departure_&volume=_price_&currency=_currency_',
-                status     : 'not fired'
+    if (dl && cdl) try {
+        cdl.DL_cim = {
+            pp_gemius_identifier : 'B3A1liL6lR70I2KFOTduOHZ27A_BAgRs2tWsEQ0ZlTj.f7',
+            lan : (window.condorContextPath || window.Ecom && window.Ecom.Application && window.Ecom.Application.language || '').replace(/\//g, '').toUpperCase(),
+            key : 'keyword',
+            subs : 'subsection',
+            free : 'free_field',
+            script : {
+                src : '//gabe.hit.gemius.pl/xgemius.js',
+                status: 'not fired'
             }
-        }
-    } catch(e){
-        cdl.error("GTM Trivago: "+e)
-    } finally {
-        dl.push({event: 'DL Trivago'});
-    }
-    return cdl && dl && cdl.DL_trivago
-}(window.CATTDL, window.dataLayer));
-
-(function gtm_Trivago(jQ, cdl, tgdl) {
-    'use strict';
-    if (jQ && cdl && tgdl) try {
-        var img = jQ([])
-        var src = tgdl.pixel && tgdl.pixel.src.replace(/_partnerid_/, tgdl.partnerid).replace(/_hotel_/, tgdl.hotel).replace(/_arrival_/, tgdl.arrival).replace(/_departure_/, tgdl.departure).replace(/_price_/, tgdl.price).replace(/_currency_/, tgdl.currency) || ''
-        if (src) {
-            img = jQ('<img width="1" height=1" style="border-style:none;" alt="" id="TrivagoPixel">');
-            img.attr('src', src);
-            img.appendTo('body');
-            tgdl.pixel.src = src;
-            tgdl.pixel.status = 'fired'
-        }
+        };
+        cdl.DL_cim.pp_gemius_extraparameters = new Array('lan='+(cdl.DL_cim.lan || ''), 'key='+(cdl.DL_cim.key || ''), 'subs='+(cdl.DL_cim.subs || ''), 'free='+(cdl.DL_cim.free || ''))
     } catch(e) {
-        cdl.error('GTM Trivago: '+e)
+        cdl.error && cdl.error('GTM CIM DL:', e)
+    } finally {
+        dl.push({'event':'CIM DL'})
     }
-    return jQ && cdl && tgdl
-}(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_trivago))
+    return dl && cdl && cdl.DL_cim
+}(window.dataLayer, window.CATTDL));
+
+(function gtm_cim(jQ, dl, cdl, cmdl){
+    'use strict'
+    if (dl && cdl && cmdl) try {
+        window.pp_gemius_identifier = cmdl.pp_gemius_identifier;
+        window.pp_gemius_extraparameters = cmdl.pp_gemius_extraparameters;
+        jQ.ajaxSetup({cache: true});
+        jQ.getScript && jQ.getScript(cmdl.script && cmdl.script.src || '', function gtm_CIMGetScript(){
+            cmdl.script.status = 'fired'
+        })
+    } catch(e) {
+        cdl.error && cdl.error('GTM CIM:', e)
+    } finally {
+        dl.push({'event':'CIM'})
+    }
+    return dl && jQ && cdl && cmdl
+}(window.jQuery, window.dataLayer, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_cim))
 </script>
