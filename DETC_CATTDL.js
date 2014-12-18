@@ -1,7 +1,7 @@
 /*******************************************************
                         CATTDL Core
 ********************************************************/
-<script>
+<script id='gtm_CATTDLCore'>
 (function gtm_cattdlCore(jQ, d, w, dl) {
     'use strict'
     if (jQ && dl) try {
@@ -1085,5 +1085,3 @@
     }
     return cdl.CATTParams.attribution || !1
 }(window.CATTDL))
-
-
