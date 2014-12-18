@@ -43,7 +43,7 @@
             Unit_Price : cdl.DL_sub2 && cdl.DL_sub2.Unit_Price || parseInt(cdpm.totalprice) || cdpm.totalprice || 0,
             Quantity : cdl.DL_sub2 && cdl.DL_sub2.Quantity || cdpm.paxtotal || 0,
             script     : {
-                status  : 'not fired',
+                status  : 'not fired',   
                 src     : '//webservices.sub2tech.com/CodeBase/LIVE/Min/sub2.js?LICENSEKEY=24edfbd3-61e8-4661-84f0-59c37b83296f&trackPage=Y'
             }
         };
