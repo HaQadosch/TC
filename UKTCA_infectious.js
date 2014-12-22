@@ -113,9 +113,6 @@
 </script>
 
 
-
-
-
 PageID = PaidItinerary // not booking page
 
 <script async defer src="//pix.impdesk.com/pixel.js?id=3126&order_code=[order_code]&order_value=[order_value]&ud1=[DepartureAirportSearched]&ud2=[DestinationAirportSearched]&ud3=[DeptDateSelected]&ud4=[DurationSelected]&ud5=[PaxAdult]&ud6=[PaxChild]&ud8=[FlightType]" type="text/javascript"></script>
