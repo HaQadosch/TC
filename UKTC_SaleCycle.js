@@ -36,7 +36,7 @@
                  }
                  var tracker = window._gat._getTrackerByName && window._gat._getTrackerByName('CATTGATC');
                  tracker._setCustomVar(45, 'SaleCycleTest', 'PoolTest', 1);
-                 tracker._trackEvent('SaleCycleTest', 'test', 'PoolTest', 1, true)
+                 tracker._trackEvent('SaleCycle', 'test', 'PoolTest', 1, true)
              })
         }
     } catch(e) {
