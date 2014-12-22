@@ -43,7 +43,7 @@
             Unit_Price : cdl.DL_sub2 && cdl.DL_sub2.Unit_Price || parseInt(cdpm.totalprice) || cdpm.totalprice || 0,
             Quantity : cdl.DL_sub2 && cdl.DL_sub2.Quantity || cdpm.paxtotal || 0,
             script     : {
-                status  : 'not fired',   
+                status  : 'not fired',
                 src     : '//webservices.sub2tech.com/CodeBase/LIVE/Min/sub2.js?LICENSEKEY=24edfbd3-61e8-4661-84f0-59c37b83296f&trackPage=Y'
             }
         };
@@ -181,4 +181,37 @@
     })
     return jQ && cdl && s2dl;
 }(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_sub2))
+</script>
+
+
+<script>
+(function gtm_SalecycleDL(cdl, dl){
+    'use strict'
+    if (cdl) try {
+        cdl.DL_salecycle = {
+                        testPool : parseInt(CATTDL.CATTParams && CATTDL.CATTParams.utmaguid || 0)%2,
+            script         : {
+                status  : 'not fired',
+                url     : '//d16fk4ms6rqz1v.cloudfront.net/capture/thomascook.js'
+            }
+        }
+    } catch(e) {
+        cdl.error("GTM DL_salecycle: "+e)
+    } finally {
+        dl.push({event: 'Salecycle'});
+    }
+    return cdl.DL_salecycle
+}(window.CATTDL, window.externalLayer));
+
+(function gtm_Salecycle(jQ, cdl, scdl){
+    'use strict';
+    if (jQ && cdl && scdl && parseInt(CATTDL.CATTParams && CATTDL.CATTParams.utmaguid || 0)%2) try {
+        if (scdl.script) {
+            jQ.ajaxSetup({cache: true});
+            jQ.getScript && jQ.getScript(scdl.script.url, function gtm_salecyleScript(){
+                scdl.script.status = 'fired'
+             })
+        }
+    } catch (e){cdl.error('GTM Salecyle: '+e)}
+}(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_salecycle))
 </script>
