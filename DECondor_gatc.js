@@ -22,11 +22,20 @@
 
         if (/holidays/i.test(location.host || document.URL)) {
             if (/group/i.test(location.pathname || document.URL)) {
-                QSP_ST = 'SS_ST='+'|'+($('input#departure-hidden').val() || '')+'|'+($('input#destination-hidden').val() || '')+'|'+($('input#date-departuredate-send').val() || '')+'|search-durationchoice|inputDuration|traveller'+'&'; // $('input[type=hidden]')
-                QSP_CAT = 'SS_CAT=holidays_group_de&';
-            } else if (/offer/i.test(location.pathname || document.URL)) {
                 QSP_ST = 'SS_ST='+
-                    '|departure|destination|'+($('input#date-departuredate-send').val() || '')+
+                    '|'+($('input#departure-hidden').val() || $('input#departure.form-control.input-search').val() || '')+
+                    '|'+($('input#destination-hidden').val() || $('input#destination.form-control.input-search').val() || '')+
+                    '|'+($('input#date-departuredate-send').val() || '')+
+                    '|'+($('#search-durationchoice-flexible:checked').length?'flexible':'exactly' || '')+
+                    '|'+($('select#inputDuration option[selected=selected]').attr('data-to') || 0)+
+                    '|'+(($('input#traveller-hidden-adults').val() || '').split(';').length || 0)+
+                    '|'+(($('input#traveller-hidden-children').val() || '').split(';').length || 0)+
+                    '&'; // $('input[type=hidden]') "SS_ST=|west;DUS;DTM;FRA;CGN;FMO;PAD|150830|10.01.2015|flexible|7|2|1&"
+                QSP_CAT = 'SS_CAT=holidays_group_de&';
+            } else if (false && /offer/i.test(location.pathname || document.URL)) {
+                QSP_ST = 'SS_ST='+
+                    '|'+($('input#departure-hidden').val() || $('input#departure.form-control.input-search').val() || '')+
+                    '|destination|'+($('input#date-departuredate-send').val() || '')+
                     '|search-durationchoice|inputDuration|'+(($('input#traveller-hidden-adults').val() || []).split(';').length || 0)+
                     '|'+(($('input#traveller-hidden-children').val() || []).split(';').length || 0)+
                     '&';

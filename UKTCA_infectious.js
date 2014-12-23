@@ -21,7 +21,7 @@
             bookingval                     : cdpm.bookingvalue || '',
             dedup                         : /infectious/i.test(cdpm.attribution && cdpm.attribution.utm_source || '') && '1' || '0'
         };
-
+        var ifdl = cdl.DL_infectiousGDN;
         if (/PaidItinerary/i.test(cdpm.pageid || '')) {
             cdl.DL_infectiousGDN.img = {
                 status     : 'not fired',
