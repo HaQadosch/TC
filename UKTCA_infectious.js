@@ -57,11 +57,10 @@
                 src: '//pixel.adacado.com/1000651?',
                 status: 'not fired'
             }
-        } else if (/^itinerary$/i.test(cdpm.pageid || '')) cdl.DL_infectiousGDN.facebook = {
-            track : '6019814753600',
-            src: '//connect.facebook.net/en_US/fbds.js',
-            status: 'not fired'
-        }
+        } else if (/^itinerary$/i.test(cdpm.pageid || '')) cdl.DL_infectiousGDN.img = {
+            status     : 'not fired',
+            src     : '//googleads.g.doubleclick.net/pagead/viewthroughconversion/956036172/?value=0&amp;guid=ON&amp;script=0'
+        };
     } catch(e) {
         cdl.error("GTM DL_infectious: "+e)
     } finally {
@@ -70,7 +69,7 @@
     return jQ && cdl && dl && cdl.DL_infectiousGDN
 }(window.jQuery, window.CATTDL, window.dataLayer));
 
-(function gtm_infectious(jQ, cdl, ifdl) {
+(function gtm_infectiousGDN(jQ, cdl, ifdl) {
     'use strict';
     if (jQ && cdl && ifdl) try {
         if (ifdl.impdesk) {
@@ -81,7 +80,7 @@
                      jQ.getScript(ifdl.secimpedesk.src, function gtm_secimpedeskScript(){
                         ifdl.secimpedesk.status = 'fired'
                         if (ifdl.img) {
-                            var img = jQ('<img width="1" height=1" style="border-style:none;" alt="" id="InfectiousPixel">').attr('src', ifdl.img.src);
+                            var img = jQ('<img width="1" height=1" style="border-style:none;" alt="" id="InfectiousGDNPixel">').attr('src', ifdl.img.src);
                             img.appendTo('body');
                             ifdl.img.status = 'fired'
                         }
@@ -91,17 +90,6 @@
                             })
                         }
                      })
-                }
-                if (ifdl.facebook) {
-                    var _fbq = window._fbq || (window._fbq = []);
-                    if (!_fbq.loaded) {
-                        jQ.getScript(ifdl.facebook.src, function gtm_facebookScript(){
-                            _fbq.loaded = true;
-                            ifdl.facebook.status = 'fired';
-                        })
-                    }
-                    window._fbq = window._fbq || [];
-                    window._fbq.push(['track', '6019814753600', {'value':ifdl.bookingval, 'currency':'GBP'}]);
                 }
              })
         }
@@ -135,23 +123,20 @@ PageID = RetrieveBooking // not on booking page
 
 PageID = Itinerary
 
-<!-- Facebook Conversion Code for Thomas Cook FB Conversion Pixel -->
-<script>(function() {
-  var _fbq = window._fbq || (window._fbq = []);
-  if (!_fbq.loaded) {
-    var fbds = document.createElement('script');
-    fbds.async = true;
-    fbds.src = '//connect.facebook.net/en_US/fbds.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(fbds, s);
-    _fbq.loaded = true;
-  }
-})();
-window._fbq = window._fbq || [];
-window._fbq.push(['track', '6019814753600', {'value':'<order_value>','currency':'GBP'}]);
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 956036172;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
 </script>
-<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6019814753600&amp;cd[value]=<order_value>&amp;cd[currency]=GBP&amp;noscript=1" /></noscript>
-
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/956036172/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
 
 
 
