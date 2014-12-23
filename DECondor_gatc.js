@@ -22,10 +22,14 @@
 
         if (/holidays/i.test(location.host || document.URL)) {
             if (/group/i.test(location.pathname || document.URL)) {
-                QSP_ST = 'SS_ST='+'|departure|destination|date-departuredate|search-durationchoice|inputDuration|traveller'+'&'; // $('input[type=hidden]')
+                QSP_ST = 'SS_ST='+'|'+($('input#departure-hidden').val() || '')+'|'+($('input#destination-hidden').val() || '')+'|'+($('input#date-departuredate-send').val() || '')+'|search-durationchoice|inputDuration|traveller'+'&'; // $('input[type=hidden]')
                 QSP_CAT = 'SS_CAT=holidays_group_de&';
             } else if (/offer/i.test(location.pathname || document.URL)) {
-                QSP_ST = 'SS_ST='+'|departure|destination|date-departuredate|search-durationchoice|inputDuration|traveller'+'&';
+                QSP_ST = 'SS_ST='+
+                    '|departure|destination|'+($('input#date-departuredate-send').val() || '')+
+                    '|search-durationchoice|inputDuration|'+(($('input#traveller-hidden-adults').val() || []).split(';').length || 0)+
+                    '|'+(($('input#traveller-hidden-children').val() || []).split(';').length || 0)+
+                    '&';
                 QSP_CAT = 'SS_CAT=holidays_offer_de&';
             }
         } else if ((/search|select/i).test(cdpm.pageid) && (cdpm.departureairportsearched != "")) {

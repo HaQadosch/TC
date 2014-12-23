@@ -1,4 +1,3 @@
-
 <script id='gtm_InfectiousGDN'>
 (function gtm_infectiousDL(jQ, cdl, dl){
     'use strict'
@@ -74,24 +73,24 @@
     if (jQ && cdl && ifdl) try {
         if (ifdl.impdesk) {
             jQ.ajaxSetup({cache: true});
-             jQ.getScript && jQ.getScript(ifdl.impdesk.src, function gtm_impdeskScript(){
+            jQ.getScript && jQ.getScript(ifdl.impdesk.src, function gtm_impdeskScript(){
                 ifdl.impdesk.status = 'fired'
-                if (ifdl.secimpedesk) {
-                     jQ.getScript(ifdl.secimpedesk.src, function gtm_secimpedeskScript(){
-                        ifdl.secimpedesk.status = 'fired'
-                        if (ifdl.img) {
-                            var img = jQ('<img width="1" height=1" style="border-style:none;" alt="" id="InfectiousGDNPixel">').attr('src', ifdl.img.src);
-                            img.appendTo('body');
-                            ifdl.img.status = 'fired'
-                        }
-                        if (ifdl.adacado) {
-                            jQ.getScript(ifdl.adacado.src, function gtm_adacadoScript(){
-                                ifdl.adacado.status = 'fired'
-                            })
-                        }
-                     })
-                }
-             })
+            })
+        }
+         if (ifdl.secimpedesk) {
+            jQ.getScript(ifdl.secimpedesk.src, function gtm_secimpedeskScript(){
+                ifdl.secimpedesk.status = 'fired'
+            })
+        }
+        if (ifdl.img) {
+            var img = jQ('<img width="1" height=1" style="border-style:none;" alt="" id="InfectiousGDNPixel">').attr('src', ifdl.img.src);
+            img.appendTo('body');
+            ifdl.img.status = 'fired'
+        }
+        if (ifdl.adacado) {
+            jQ.getScript(ifdl.adacado.src, function gtm_adacadoScript(){
+                ifdl.adacado.status = 'fired'
+            })
         }
     } catch(e) {
         cdl.error('GTM infectiousGDN: '+e)
