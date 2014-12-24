@@ -35,7 +35,8 @@
                     '|'+(($('input#traveller-hidden-adults').val() || '').split(';').length || 0)+
                     '|'+(($('input#traveller-hidden-children').val() || '').split(';').length || 0)+
                     '&';
-                QSP_CAT = 'SS_CAT=holidays_group_de&';
+                QSP_CAT = 'SS_CAT=holidays_search_de&';
+                QSP_P = '';
             } else if (/offer/i.test(location.pathname || document.URL)) {
                 cdpm.pageid = 'accom';
                 QSP_ST = 'SS_ST='+
@@ -47,15 +48,18 @@
                     '|'+(($('input#traveller-hidden-adults').val() || '').split(';').length || 0)+
                     '|'+(($('input#traveller-hidden-children').val() || '').split(';').length || 0)+
                     '&';
-                QSP_CAT = 'SS_CAT=holidays_offer_de&';
-            } else if (/notbookable/i.test(location.pathname || document.URL)) { // http://holidays.condor.com/book?cid=8cbef329-8622-49ec-836b-0a1d2fa8a869
+                QSP_CAT = 'SS_CAT=holidays_accom_de&';
+                QSP_P = '';
+            } else if (/notbookable/i.test(location.pathname || document.URL)) {
                   cdpm.pageid = 'notbookable';
-                  QSP_ST = 'SS_ST=&';
-                  QSP_CAT = 'SS_CAT=holidays_offer_de&';
+                  QSP_ST = '';
+                  QSP_CAT = '';
+                  QSP_P = '';
             } else if (/book/i.test(location.pathname || document.URL)) { // http://holidays.condor.com/book?cid=8cbef329-8622-49ec-836b-0a1d2fa8a869
                   cdpm.pageid = (location.href || document.URL).replace('book?cid', 'book/step1?cid').replace(/.*(book\/step\d).*/, '$1').replace('/', '_').replace(/.*book\/success.*/, 'confirmation');
-                  QSP_ST = 'SS_ST=&';
-                  QSP_CAT = 'SS_CAT=holidays_offer_de&';
+                  QSP_ST = '';
+                  QSP_CAT = '';
+                  QSP_P = '';
             }
         } else if ((/search|select/i).test(cdpm.pageid) && (cdpm.departureairportsearched != "")) {
             QSP_ST = 'SS_ST='+(cdpm.departureairportsearched || '')+ '-'+(cdpm.returndestinationairportsearched || '')+ '|'+(cdpm.destinationairportsearched || '')+ '-'+(cdpm.returndepartureairportsearched || '')+'|'+(cdpm.deptdate || '')+ '|'+(cdpm.flighttype || '')+ '|'+(cdpm.durationsearched || '')+ '|'+(cdpm.paxadult || '')+ '|'+(cdpm.paxchild || '')+ '|'+(cdpm.paxinfant || '')+'&';
@@ -104,7 +108,7 @@
     if (/holidays/i.test(location.host || document.URL) && /success/i.test(location.pathname || document.URL)) {
         var z = '';
         $('div.row.panel-form--box').each(function(e, b){
-            z = $(b).text().trim().replace(/\s*\n\s*/g, '|'); 
+            z = $(b).text().trim().replace(/\s*\n\s*/g, '|');
             if (/Reiseziel\|/i.test(z)) { cdl.reiseziel = z.replace(/.*\|(.*)/, '$1');
             } else if (/Auftragsnummer/i.test(z)) {cdl.bookingref = z.replace(/.*\|(.*)/, '$1');
             } else if (/Gesamtpreise\|/i.test(z)) {cdl.bookingvalue = z.replace(/.*\|(.*)/, '$1').replace(' EUR', '').replace('.', '').replace(',', '.');
@@ -139,4 +143,3 @@
     return cdl && cdpm
 }(window.CATTDL, !window.CATTDL?!1:window.CATTDL.CATTParams))
 </script>
-
