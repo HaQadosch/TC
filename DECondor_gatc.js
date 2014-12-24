@@ -21,7 +21,7 @@
         QSP_P = QSP_P.replace(/^\&/, '').replace(/\=$/, '');
 
         if (/holidays/i.test(location.host || document.URL)) {
-            cdpm.language = 'de';
+            cdpm.language = window.condorContextPath.replace(/\//g, '') || 'de';
             cdpm.lob = 'holidays';
             cdpm.holidaytype = 'holidays'
             if (/group/i.test(location.pathname || document.URL)) {
@@ -37,7 +37,7 @@
                     '&';
                 QSP_CAT = 'SS_CAT=holidays_group_de&';
             } else if (/offer/i.test(location.pathname || document.URL)) {
-                cdpm.pageid = 'accom'
+                cdpm.pageid = 'accom';
                 QSP_ST = 'SS_ST='+
                     '|'+($('input#departure-hidden').val() || unescape(cdpm.searches && cdpm.searches.deparipcodes||'') || '')+
                     '|'+($('input#destination-hidden').val() || cdpm.searches && cdpm.searches.gilsearch || '')+
@@ -48,6 +48,14 @@
                     '|'+(($('input#traveller-hidden-children').val() || '').split(';').length || 0)+
                     '&';
                 QSP_CAT = 'SS_CAT=holidays_offer_de&';
+            } else if (/notbookable/i.test(location.pathname || document.URL)) { // http://holidays.condor.com/book?cid=8cbef329-8622-49ec-836b-0a1d2fa8a869
+                  cdpm.pageid = 'notbookable';
+                  QSP_ST = 'SS_ST=&';
+                  QSP_CAT = 'SS_CAT=holidays_offer_de&';
+            } else if (/book/i.test(location.pathname || document.URL)) { // http://holidays.condor.com/book?cid=8cbef329-8622-49ec-836b-0a1d2fa8a869
+                  cdpm.pageid = (location.href || document.URL).replace('book?cid', 'book/step1?cid').replace(/.*(book\/step\d).*/, '$1').replace('/', '_').replace(/.*book\/success.*/, 'confirmation');
+                  QSP_ST = 'SS_ST=&';
+                  QSP_CAT = 'SS_CAT=holidays_offer_de&';
             }
         } else if ((/search|select/i).test(cdpm.pageid) && (cdpm.departureairportsearched != "")) {
             QSP_ST = 'SS_ST='+(cdpm.departureairportsearched || '')+ '-'+(cdpm.returndestinationairportsearched || '')+ '|'+(cdpm.destinationairportsearched || '')+ '-'+(cdpm.returndepartureairportsearched || '')+'|'+(cdpm.deptdate || '')+ '|'+(cdpm.flighttype || '')+ '|'+(cdpm.durationsearched || '')+ '|'+(cdpm.paxadult || '')+ '|'+(cdpm.paxchild || '')+ '|'+(cdpm.paxinfant || '')+'&';
@@ -76,7 +84,7 @@
             window._gaq.push(['CATTGATC._trackPageview']);
         } else {
             if ((/^flight$|^ssr$|^etf$|^oci$|^coupon$/i).test(cdpm.lob || '') || (/^flight$|^ssr$|^etf$|^oci$|^coupon$/i).test(cdpm.holidaytype || '') || /holidays/i.test(location.host || document.URL)) {
-                window._gaq.push(['CATTGATC._trackPageview', fullVP.replace(/etf\/etf/, 'flight\/etf')])
+                window._gaq.push(['CATTGATC._trackPageview', fullVP.replace(/etf\/etf/, 'flight\/etf')]);
             } else     {
                 window._gaq.push(['CATTGATC._trackPageview']);
             }
@@ -88,11 +96,47 @@
         }
 
     } catch(e) {
-        cdl.error && cdl.error('GTM GATC:'+e)
+        cdl.error && cdl.error('GTM GATC:'+e);
     }
     else {window._gaq.push(['CATTGATC._trackPageview'])}
     (function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);})();
 
+    if (/holidays/i.test(location.host || document.URL) && /success/i.test(location.pathname || document.URL)) {
+        var z = '';
+        $('div.row.panel-form--box').each(function(e, b){
+            z = $(b).text().trim().replace(/\s*\n\s*/g, '|'); 
+            if (/Reiseziel\|/i.test(z)) { cdl.reiseziel = z.replace(/.*\|(.*)/, '$1');
+            } else if (/Auftragsnummer/i.test(z)) {cdl.bookingref = z.replace(/.*\|(.*)/, '$1');
+            } else if (/Gesamtpreise\|/i.test(z)) {cdl.bookingvalue = z.replace(/.*\|(.*)/, '$1').replace(' EUR', '').replace('.', '').replace(',', '.');
+            } else if (/Hinflug\|/i.test(z)) {
+                cdl.hinflug = z.replace(/.*\|(.*)Abflu.*/, '$1');
+                cdl.departureairport = cdl.hinflug.replace(/(.*)\s-.*/, '$1');
+                cdl.destinationairport = cdl.hinflug.replace(/[^-]*-\s(.*)/, '$1');
+            } else if (/Dauer\|/i.test(z)) {cdl.dauer = z.replace(/.*\|\D*(\d+)\D*/, '$1');
+            } else if (/Anreise\|/i.test(z)) {cdl.anreise = z.replace(/.*\|(.*)/, '$1');
+            } else if (/Hotel\|/i.test(z)) {cdl.hotel = z.replace(/.*\|(.*)/, '$1');
+            } else if (/Reiseveranstalter\|/i.test(z)) {cdl.reiseveranstalter = z.replace(/.*\|(.*)/, '$1');
+            } else if (/Unterbringung\|/i.test(z)) {
+                cdl.paxadult = z.replace(/.*\|\D*(\d+)\s?Erwa.*/g, '$1');
+                cdl.unterbringung = z.replace(/.*\|(.*)/g, '$1');
+            }
+            return true}
+        );
+        cdl.paxtotal = $('hr.hr-bookdscription:eq(2)').next().text().replace(/\D*(\d+)\D*/g, '$1');
+
+        window._gaq.push(['CATTGATC._addTrans', cdl.bookingref, '', (cdl.bookingvalue || 0), '', '', '', '', '']);
+        window._gaq.push(['CATTGATC._addItem',  cdl.bookingref,
+            (cdl.departureairport || '')+'|'+(cdl.destinationairport || '')+'|'+(cdl.anreise || '')+'|'+(cdl.reiseveranstalter || ''), // SKU
+            (cdpm.language || '')+'|'+(cdl.reiseziel || '')+'|'+(cdl.hinflug || '')+'|'+(cdl.paxtotal || '')+'|'+(cdl.paxadult || '')+'|'+(cdl.anreise || '')+'|'+(cdl.dauer || '')+'|'+(cdl.hotel || '')+'|'+(cdl.unterbringung || ''), // ProductName
+            ((cdpm.language === "")?"":cdpm.language+"-")+(cdpm.lob || 'generic').toLowerCase()+'|'+(cdpm.holidaytype || 'generic'),   // Category
+            (cdl.bookingvalue || 0),  // UnitPrice
+            '1'       // quantitycdl
+        ]);
+        window._gaq.push(['CATTGATC._trackTrans']);
+    }
+
+
     return cdl && cdpm
 }(window.CATTDL, !window.CATTDL?!1:window.CATTDL.CATTParams))
 </script>
+
