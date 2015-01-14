@@ -64,15 +64,17 @@
 'use strict'
     if (cdl) try {
         var cdpm = cdl.CATTParams
+        var jQBookingRef = $('.REFERENCE > .CheckoutItemContentHeader > span').text() || "na";
+        var jQPrice = $('.price').first().text().replace(/^./, '') || "0";
 
         cdl.DL_boldchatconv = {
             accountid         : '5202905059732673190',
             addconversion     : {
-                convamount      : cdpm.bookingvalue || null,
-                convref         : cdpm.bookingref || '',
+                convamount      : cdpm.bookingvalue || jQPrice || null,
+                convref         : cdpm.bookingref || jQBookingRef || '',
                 convinfo        : '',
-                websitedefid    : '3135583959424557065',
-                convcodeid      : '2002723353680610733'
+                websitedefid    : '310342275321263988',
+                convcodeid      : '3536211147432328603'
             },
             script         : {
                 status  : 'not fired',
