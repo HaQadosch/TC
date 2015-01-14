@@ -8,6 +8,9 @@ http://www.thomascook.fr/concours-selfies/
 http://www.thomascook.fr/
 <iframe src="http://4353627.fls.doubleclick.net/activityi;src=4353627;type=thoma0;cat=2014-000;ord=1;num=1?" width="1" height="1" frameborder="0" style="display:none"></iframe>
 
+Payment:
+<iframe src="https://4353627.fls.doubleclick.net/activityi;src=4353627;type=thoma0;cat=2014-002;ord=1;num=1?" width=" 1" height="1" frameborder="0" style="display:none"></iframe>
+
 https://secure.thomascook.fr/ Booking
 <iframe src="http://4353627.fls.doubleclick.net/activityi;src=4353627;type=thoma0;cat=2014-001;u1=[Danke];u2=[Buchungs-ID];ord=1;num=1?" width="1" height="1" frameborder="0" style="display:none"></iframe>
 */
@@ -20,7 +23,7 @@ https://secure.thomascook.fr/ Booking
         cdl.DL_iprospect = {
             iFrame: {
                 status: 'not fired',
-                src: /vacances-ete/i.test(location.pathname)?'http://4353627.fls.doubleclick.net/activityi;src=4353627;type=thoma0;cat=2014-0;ord=1;num=1?':/concours-selfies/i.test(location.pathname)?'http://4353627.fls.doubleclick.net/activityi;src=4353627;type=thoma0;cat=2014-00;ord=1;num=1?':/^\/$/i.test(location.pathname)?'http://4353627.fls.doubleclick.net/activityi;src=4353627;type=thoma0;cat=2014-000;ord=1;num=1?':/booking|conf/i.test(cdpm.pageid || '')?'http://4353627.fls.doubleclick.net/activityi;src=4353627;type=thoma0;cat=2014-001;u1=Danke;u2='+(cdpm.bookingref || '')+';ord=1;num=1?':''
+                src: /vacances-ete/i.test(location.pathname)?'http://4353627.fls.doubleclick.net/activityi;src=4353627;type=jetto0;cat=2014-0;ord=1;num=1?':/^\/$/i.test(location.pathname)?'http://4353627.fls.doubleclick.net/activityi;src=4353627;type=jetto0;cat=2014-00;ord=1;num=1?':/booking|conf/i.test(cdpm.pageid || '')?'http://4353627.fls.doubleclick.net/activityi;src=4353627;type=jetto0;cat=2014-000;u1=Danke;u2='+(cdpm.bookingref || '')+';ord=1;num=1?':/pay/i.test(cdpm.pageid || '')?'https://4353627.fls.doubleclick.net/activityi;src=4353627;type=thoma0;cat=2014-002;ord=1;num=1?':''
             }
         }
     } catch (e) {
