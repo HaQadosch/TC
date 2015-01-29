@@ -1,3 +1,52 @@
+<!-- BoldChat Visitor Monitor HTML v5.00 (Website=Thomascook.FR,ChatButton=Thomascook.FR Floating Chat Button,ChatInvitation=tcfrance) -->
+<script type="text/javascript">
+  var _bcvma = _bcvma || [];
+  _bcvma.push(["setAccountID", "506561190423742882"]);
+  _bcvma.push(["setParameter", "WebsiteDefID", "3177590592033593426"]);
+  _bcvma.push(["setParameter", "InvitationDefID", "658349628503165700"]);
+  _bcvma.push(["addFloat", {type: "chat", id: "1649681153134734931"}]);
+  _bcvma.push(["pageViewed"]);
+  var bcLoad = function(){
+    if(window.bcLoaded) return; window.bcLoaded = true;
+    var vms = document.createElement("script"); vms.type = "text/javascript"; vms.async = true;
+    vms.src = ('https:'==document.location.protocol?'https://':'http://') + "vmss.boldchat.com/aid/506561190423742882/bc.vms4/vms.js";
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(vms, s);
+  };
+  if(window.pageViewer && pageViewer.load) pageViewer.load();
+  else if(window.addEventListener) window.addEventListener('load', bcLoad, false);
+  else window.attachEvent('onload', bcLoad);
+</script>
+<noscript>
+<a href="http://www.boldchat.com" title="Live Chat" target="_blank"><img alt="Live Chat" src="https://vms.boldchat.com/aid/506561190423742882/bc.vmi?wdid=3177590592033593426" border="0" width="1" height="1" /></a>
+</noscript>
+<!-- /BoldChat Visitor Monitor HTML v5.00 -->
+
+<!-- BoldChat Conversion Tracking HTML v5.00 (Website=Thomascook.FR,ConversionCode=TC France) -->
+<script type="text/javascript">
+    var _bcvma = _bcvma || [];
+    _bcvma.push(["setAccountID", "506561190423742882"]);
+    _bcvma.push(["addConversion", {
+      ConversionAmount: null,
+      ConversionRef: "",
+      ConversionInfo: "",
+      WebsiteDefID: "3177590592033593426",
+      ConversionCodeID: "2422615716842941542"
+    }]);
+  var bcLoad = function(){
+    if(window.bcLoaded) return; window.bcLoaded = true;
+    var vms = document.createElement("script"); vms.type = "text/javascript"; vms.async = true;
+    vms.src = ('https:'==document.location.protocol?'https://':'http://') + "vmss.boldchat.com/aid/506561190423742882/bc.vms4/vms.js";
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(vms, s);
+  };
+  if(window.pageViewer && pageViewer.load) pageViewer.load();
+  else if(window.addEventListener) window.addEventListener('load', bcLoad, false);
+  else window.attachEvent('onload', bcLoad);
+</script>
+<noscript>
+<a href="http://www.boldchat.com" title="Live Chat" target="_blank"><img alt="Live Chat" src="https://vms.boldchat.com/aid/506561190423742882/bc.vci?wdid=3177590592033593426&amp;ccid=2422615716842941542&amp;ca=&amp;cr=&amp;ci=" border="0" width="1" height="1" /></a>
+</noscript>
+<!-- /BoldChat Conversion Tracking HTML v5.00 -->
+
 <script>
 (function gtm_boldchatDL(cdl, dl) {
     'use strict';
@@ -5,7 +54,7 @@
         cdl.DL_boldchat = {
             accountid       : '506561190423742882',
             websitedefid    : '3177590592033593426',
-            invitationdefid : '3823967141686248195',
+            invitationdefid : '658349628503165700',
             visitname       : '',
             visitphone      : '',
             visitemail      : '',
@@ -13,7 +62,7 @@
             visitinfo       : '',
             customurl       : '',
             windowparameters: '',
-            chatid          : '7280584607110301046',
+            chatid          : '1649681153134734931',
             script          : {
                 status  : 'not fired',
                 url     : '//vmss.boldchat.com/aid/506561190423742882/bc.vms4/vms.js'
