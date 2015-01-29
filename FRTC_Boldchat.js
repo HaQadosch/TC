@@ -47,10 +47,10 @@
 </noscript>
 <!-- /BoldChat Conversion Tracking HTML v5.00 -->
 
-<script>
-(function gtm_boldchatDL(cdl, dl) {
+<script id='gtm_boldchatMonitor'>
+(function gtm_boldchatDL(cdl, edl) {
     'use strict';
-    if (dl && cdl) try {
+    if (edl && cdl) try {
         cdl.DL_boldchat = {
             accountid       : '506561190423742882',
             websitedefid    : '3177590592033593426',
@@ -71,10 +71,10 @@
     } catch(e) {
         cdl.error("GTM DL_boldchat: "+e);
     } finally {
-        dl.push({event: 'Boldchat'});
+        edl.push({event: 'Boldchat'});
     }
-    return dl && cdl && cdl.DL_boldchat;
-}(window.CATTDL, window.dataLayer));
+    return edl && cdl && cdl.DL_boldchat;
+}(window.CATTDL, window.externaldataLayer));
 
 (function gtm_boldchat(jQ, cdl, bcdl) {
     'use strict';
@@ -108,10 +108,10 @@
 </script>
 
 
-<script>
-(function gtm_boldchatconvDL(cdl, dl) {
+<script id='gtm_boldchatConversion'>
+(function gtm_boldchatconvDL(cdl, edl) {
 'use strict'
-    if (cdl) try {
+    if (edl && cdl) try {
         var cdpm = cdl.CATTParams
         var jQBookingRef = $('.REFERENCE > .CheckoutItemContentHeader > span').text() || "na";
         var jQPrice = $('.price').first().text().replace(/^./, '') || "0";
@@ -133,14 +133,14 @@
     } catch(e) {
         cdl.error("GTM DL_boldchatconv: "+e)
     } finally {
-        dataLayer.push({event: 'BoldchatConv'});
+        edl.push({event: 'BoldchatConvDL'});
     }
     return cdl && cdl.DL_boldchatconv
-}(window.CATTDL, window.dataLayer));
+}(window.CATTDL, window.externaldataLayer));
 
-(function gtm_boldchatconv(jQ, cdl, bcdl){
+(function gtm_boldchatconv(jQ, cdl, bcdl, edl){
     'use strict';
-    if (jQ && cdl && bcdl) try {
+    if (jQ && cdl && bcdl && edl) try {
         jQ.ajaxSetup({cache: true});
         window._bcvma = window._bcvma || [];
         _bcvma.push(["setAccountID", bcdl.accountid]);
@@ -157,7 +157,9 @@
         })
     } catch(e) {
         cdl.error('GTM BoldChat Conv: '+e)
+    } finally {
+      edl.push({'event':'boldchatConv'})
     }
-    return jQ && cdl && bcdl
-}(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_boldchatconv))
+    return jQ && cdl && bcdl && edl
+}(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_boldchatconv, window.externaldataLayer))
 </script>
