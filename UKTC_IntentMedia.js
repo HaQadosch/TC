@@ -8,6 +8,9 @@ Hotels Path - Search Results Page: tck_ssn_hot_lst_ads_uk
 Hotels Path - Details Page: tck_ssn_hot_det_ads_uk
 
 */
+Non v2
+room ->  $('div.rooms-summary div.searchPanel-staticValue div').length
+retDate -> new Date(+new Date(CATTDL.CATTParams.deptdate.replace(/(\d\d)\/(\d\d)\/(\d\d\d\d)/, '$3 $2 $1'))+(7*24*60*60*1000)).toLocaleString()
 
 <script id='intentMedia'>
 (function gtm_IntentMediaDL(dl, cdl, cdpm){
@@ -26,8 +29,9 @@ Hotels Path - Details Page: tck_ssn_hot_det_ads_uk
             visitor_id          : cdpm.gaguid || cdpm.utamguid || '',
             travelers           : cdpm.paxtotal || '',
             timestamp           : +Date.now() || '',
-            rooms               : cdpm.rooms || '',
+            rooms               : (cdpm.srpresults || []).length && cdpm.srpresults.map(function(e){return e.accomguid || ''}).join('_') || cdpm.rooms  || '',
             hotel_property_id   : cdpm.accomguid || '',
+            available_property_ids : || '',
             callback            : '',
             travel_date_start   : /\//i.test(cdpm.deptdate || '') && (cdpm.deptdate || '').replace(/(\d\d)\/(\d\d)\/(\d\d\d\d)/, '$3$2$1') || cdpm.deptdate && (new Date(cdpm.deptdate)).toISOString().replace(/(\d\d\d\d)-(\d\d)-(\d\d)T.*/i, '$1$2$3') || '',
             travel_date_end     : cdpm.returndate && (new Date(cdpm.returndate)).toISOString().replace(/(\d\d\d\d)-(\d\d)-(\d\d)T.*/i, '$1$2$3') || (cdpm.retdate || '').replace(/(\d\d)\/(\d\d)\/(\d\d\d\d)/, '$3$2$1') ||  '',
@@ -39,13 +43,14 @@ Hotels Path - Details Page: tck_ssn_hot_det_ads_uk
             display_format_type : cdpm.device || ''
         };
     } catch(e) {
-        cdl.error && cdl.error('GTM IntentMEdia DL:', e) || '';
+        cdl.error && cdl.error('GTM IntentMEdia DL:', e);
     } finally {
         dl.push({'event':'IntentMediaDL'});
     }
     return dl && cdl && cdpm && cdl.DL_intentMedia;
 }(window.externalLayer || window.externalDataLayer, window.CATTDL, !window.CATTDL?!1:window.CATTDL.CATTParams));
 
+// ATG
 (function gtm_intentMedia(jQ, dl, cdl, imdl){
     'use strict';
     if (jQ && dl && cdl && imdl) try {
@@ -71,7 +76,7 @@ Hotels Path - Details Page: tck_ssn_hot_det_ads_uk
 </script>
 
 
-// URL Get format
+// URL Get format, V2 site
 (function gtm_intentMedia(jQ, dl, cdl, imdl){
     'use strict'
     if (jQ && dl && cdl && imdl) try {
@@ -108,6 +113,7 @@ Hotels Path - Details Page: tck_ssn_hot_det_ads_uk
             console.log(err)
             console.log(a)
             console.log(b)
+            console.log(src)
         })
     } catch(e) {
         cdl.error && cdl.error('GTM IntentMedia:'+ e) || ''
