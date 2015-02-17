@@ -83,15 +83,18 @@
         cdpm['pagetimestamp'] = Date.now();
 
         var locpath = window.document.location.pathname || '';
-        cdpm['lob'] = /\/holidays\//i.test(locpath)?'holidays':''
-            || /flights/i.test(locpath)?'flights':''
-            || /city-breaks/i.test(locpath)?'city-breaks':''
-            || /ski-holidays/i.test(locpath)?'ski-holidays':''
-            || /\/cruise\//i.test(locpath)?'cruise':''
-            || /\/hotels/i.test(locpath)?'hotels':''
+        cdpm['lob'] = (/\/holidays\//i.test(locpath)?'holidays':'')
+            || (/flights/i.test(locpath)?'flights':'')
+            || (/city-breaks/i.test(locpath)?'city-breaks':'')
+            || (/ski-holidays/i.test(locpath)?'ski-holidays':'')
+            || (/\/cruise\//i.test(locpath)?'cruise':'')
+            || (/\/hotels/i.test(locpath)?'hotels':'')
             || jQ('span.journeyName').text()
             || cdpm.lob
-            || ''
+            || '';
+
+        cdpm.lob && w.CATTDL.ckset && w.CATTDL.ckset('gtm_lob', cdpm.lob || '', Infinity, '/', '.co-operativetravel.co.uk');
+
         window.CATTDL.CATTParams = cdpm
     } catch(e) {
         var msg = 'GTM CATTDL Core: '+e;
