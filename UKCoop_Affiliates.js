@@ -2,7 +2,7 @@
 (function gtm_affilinateAffdirectDL(cdl, jQ) {
     'use strict';
     if (cdl && jQ) try {
-        var cdpm = cdl.CATTParams
+        var cdpm = cdl.CATTParams;
 
         var articles = "";
         var execCategory = /_gaq.push\(\[\"_addItem\",\s*.*,\s*"([^"]*)"/i.exec(document.head.innerHTML) || "notFound";
@@ -15,19 +15,39 @@
     TP:                             holidays
     TO:Transfer
 */
-        var jQBookingRef = $('.REFERENCE > .CheckoutItemContentHeader > span').text() || "na"
-        var jQFlightNameFO = $('.basketPriceLine > .Header:eq(0)').text() || "na"
-        var jQHotelNameHO = $('.basketPriceLine > .Header:eq(0)').text() || "na"
-        var jQPrice = $('.price').first().text().replace(/^./, '') || "0"
-        var jQDepartureAirport = $('.flightDetail:eq(0) > span:eq(0)').text() || "na"
-        var jQDestinationAirport = $('.flightDetail:eq(1) > span:eq(0)').text() || "na"
-        var jQDepartureDate = $('.flightDetail:eq(0) > span:eq(1)').text() || "na"
-        var jQDepartureDateHO = $('.CheckoutBasketTable th:eq(0) > span:eq(0)').text() || "na"
-        var jQTourOperator = $('.airlineReferenceValue').text() || "na"
-        var jQBoardBasis = $('.CheckoutBasketTable tr:eq(3) span:eq(0)').text() || "na"
-        var jQCarrier = $('.SupplierLogo').attr('alt') || "na"
+        var jQBookingRef = $('.REFERENCE > .CheckoutItemContentHeader > span').text() || "na";
+        var jQFlightNameFO = $('.basketPriceLine > .Header:eq(0)').text() || "na";
+        var jQHotelNameHO = $('.basketPriceLine > .Header:eq(0)').text() || "na";
+        var jQPrice = $('.price').first().text().replace(/^./, '') || "0";
+        var jQDepartureAirport = $('.flightDetail:eq(0) > span:eq(0)').text() || "na";
+        var jQDestinationAirport = $('.flightDetail:eq(1) > span:eq(0)').text() || "na";
+        var jQDepartureDate = $('.flightDetail:eq(0) > span:eq(1)').text() || "na";
+        var jQDepartureDateHO = $('.CheckoutBasketTable th:eq(0) > span:eq(0)').text() || "na";
+        var jQTourOperator = $('.airlineReferenceValue').text() || "na";
+        var jQBoardBasis = $('.CheckoutBasketTable tr:eq(3) span:eq(0)').text() || "na";
+        var jQCarrier = $('.SupplierLogo').attr('alt') || "na";
+        var execPop = execCategory && execCategory.pop() || '';
 
-        if ((/Accommodation/gi).test(execCategory && execCategory[1])){
+        if (/$^/gi.test(execPop) || (/Accommodation/gi.test(execPop) && /Flight/gi.test(execPop))) {
+            cdl.DL_attr_affdirect = {
+                articlenb     : jQHotelNameHO || "1",
+                productname : "Package booking for 2 Adults and 0 Children",
+                category     : "Package > "+(jQDestinationAirport || ''),
+                quantity     : 1,
+                singlePrice : jQPrice || '',
+                brand         : 'TourOperator',
+                property1     : jQDepartureAirport || '',
+                property2     : jQDestinationAirport || '',
+                property3     : 'Duration',
+                property4     : jQDepartureDate || '',
+                property5     : jQBoardBasis || '',
+                order         : jQBookingRef || '0',
+                voucher     : '',
+                season         : '',
+                site         : 12397,
+                ref         : cdpm.attribution && cdpm.attribution.utm_source || ''
+            }
+        } else if (/Accommodation/gi.test(execPop)){
             cdl.DL_attr_affdirect = {
                 articlenb     : jQHotelNameHO || "1",
                 productname : "Hotel Booking",
@@ -46,7 +66,7 @@
                 site         : 12397,
                 ref         : cdpm.attribution && cdpm.attribution.utm_source || ''
             }
-        } else if ((/Flight/gi).test(execCategory && execCategory[1])){
+        } else if (/Flight/gi.test(execPop)){
             cdl.DL_attr_affdirect = {
                 articlenb     : jQFlightNameFO || "1",
                 productname : "Flights",
@@ -59,25 +79,6 @@
                 property3     : 'Duration',
                 property4     : jQDepartureDate || '',
                 property5     : jQCarrier || '',
-                order         : jQBookingRef || '0',
-                voucher     : '',
-                season         : '',
-                site         : 12397,
-                ref         : cdpm.attribution && cdpm.attribution.utm_source || ''
-            }
-        } else if (/$^/gi.test(execCategory && execCategory[1])) {
-            cdl.DL_attr_affdirect = {
-                articlenb     : jQHotelNameHO || "1",
-                productname : "Package booking for 2 Adults and 0 Childre",
-                category     : "Package > "+(jQDestinationAirport || ''),
-                quantity     : 1,
-                singlePrice : jQPrice || '',
-                brand         : 'TourOperator',
-                property1     : jQDepartureAirport || '',
-                property2     : jQDestinationAirport || '',
-                property3     : 'Duration',
-                property4     : jQDepartureDate || '',
-                property5     : jQBoardBasis || '',
                 order         : jQBookingRef || '0',
                 voucher     : '',
                 season         : '',
