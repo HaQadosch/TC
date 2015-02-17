@@ -1,4 +1,3 @@
-
 <script id='gtm_DLCore'>
 (function gtm_cattdlCore(jQ, d, w, dl) {
     'use strict'

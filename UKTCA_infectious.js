@@ -24,7 +24,7 @@
         var ifdl = cdl.DL_infectiousGDN;
         if (/PaidItinerary/i.test(cdpm.pageid || '')) {
             cdl.DL_infectiousGDN.img = {
-                status     : 'not fired',
+                status  : 'not fired',
                 src     : '//ad.doubleclick.net/activity;src=4463882;type=invmedia;cat=1v8hjigp;ord=1?'
             };
             cdl.DL_infectiousGDN.impdesk = {
