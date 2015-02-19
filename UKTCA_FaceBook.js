@@ -18,7 +18,7 @@ Homepage (http://www.thomascookairlines.com/Search.aspx) - PageID = Search
         dl.push({event: 'facebookDL'});
     }
     return cdl && cdl.DL_facebook;
-}(window.CATTDL, window.dataLayer));
+}(window.CATTDL, window.dataLayer));// {'value':window.CATTDL.CATTParams.bookingvalue || '0','currency':'GBP'}
 
 (function gtm_facebook(jQ, cdl, fbdl, dl){
     'use strict';
