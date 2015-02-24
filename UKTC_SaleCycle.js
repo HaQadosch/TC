@@ -5,10 +5,10 @@
         var cdpm = cdl.CATTParams;
 
         cdl.DL_salecycle = {
-            poolTest : /salecycletest/i.test(window.document.URL) || !((cdpm && cdpm.utmaguid || 1)%2) || 0,
+            poolTest : /salecycletest/i.test(window.document.URL) || !((cdpm && cdpm.utmaguid || 1)%4) || 0,
             script         : {
                 status  : 'not fired',
-                url     : '//d16fk4ms6rqz1v.cloudfront.net/capture/thomascook.js'
+                url     : '//d16fk4ms6rqz1v.cloudfront.net/capture/'+(/directholidays/i.test(window.location.hostname || '')?'directholidays.js':'thomascook.js')
             }
         }
     } catch(e) {
@@ -17,11 +17,11 @@
         dl.push({event: 'Salecycle'});
     }
     return cdl.DL_salecycle
-}(window.CATTDL, window.externalDataLayer));
+}(window.CATTDL, window.externalLayer || window.externalDataLayer));
 
 (function gtm_Salecycle(jQ, cdl, scdl){
     'use strict';
-    if (jQ && cdl && scdl && scdl.poolTest) try {
+    if (jQ && cdl && scdl) try {
         if (scdl.script) {
             jQ.ajaxSetup({cache: true});
             jQ.getScript && jQ.getScript(scdl.script.url, function gtm_salecyleScript(){
