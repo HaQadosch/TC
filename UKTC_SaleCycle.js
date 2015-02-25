@@ -52,3 +52,6 @@
     return jQ && cdl && scdl && scdl.poolTest
 }(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_salecycle))
 </script>
+
+
+
