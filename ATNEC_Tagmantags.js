@@ -150,3 +150,63 @@ try{
 } catch (e){console && console.log && console.log("AT NEC Conf Cookie Attr: "+e)}
 
 
+// Goldbach LP
+try {
+    var axel = Math.random() + "";
+    var a = axel * 10000000000000;
+    document.write('<iframe src="http://4569027.fls.doubleclick.net/activityi;src=4569027;type=start;cat=start;ord=' + a + '?" width="1" height="1" frameborder="0" style="display:none"></iframe>');
+} catch (e) { if (typeof console != "undefined") console.log("AT NEC Goldbach HOME: " + e) }
+
+
+// Goldbach main generic
+try {
+    if(document.location.href.indexOf('pauschalreisen') >= 0) {
+        if (document.location.href.indexOf('pauschalreisen') >= 0) {
+            var blacklist = ['fruehbucher', 'all-inclusive', 'preisknueller', 'rundreisen', 'luxusurlaub', 'aktivurlaub'];
+            var countryDestination = document.location.href.substring(document.location.href.indexOf('pauschalreisen') + 15);
+            var country = countryDestination.substring(0, countryDestination.indexOf('/'));
+            var destination = countryDestination.substring(countryDestination.indexOf('/') + 1).replace(/\//g, '');
+            var axel = Math.random() + "";
+            var a = axel * 10000000000000;
+            if(blacklist.indexOf(country) < 0) {
+                if (country.trim().length > 0 && destination.trim().length > 0) {
+                    // Destination
+                    //console.log(destination);
+                    document.write('<iframe src="http://4569027.fls.doubleclick.net/activityi;src=4569027;type=start;cat=dest;u2=' + country + ';u3=' + destination + ';ord=' + a + '?" width="1" height="1" frameborder="0" style="display:none"></iframe>');
+                } else if (country.trim().length > 0) {
+                    // Country
+                    //console.log(country);
+                    document.write('<iframe src="http://4569027.fls.doubleclick.net/activityi;src=4569027;type=start;cat=country;u2=' + country + ';ord=' + a + '?" width="1" height="1" frameborder="0" style="display:none"></iframe>');
+                }
+            }
+        }
+    }
+} catch (e) { if (typeof console != "undefined") console.log("AT NEC Goldbach COUNTRY & DESTINATION: " + e) }
+
+// eSP all pages except Conf
+try {
+    (function () {
+        var esp = document.createElement('script');
+        esp.type = 'text/javascript';
+        esp.async = true;
+        var wca_event = '';
+        wca_event += '{"PageView":{';
+        wca_event += '"Destination":"' + window.CATTParams.Destination + '",';
+        wca_event += '"LOB":"' + window.CATTParams.LOB + '",';
+        wca_event += '"PaxAdult":"' + window.CATTParams.PaxAdult + '",';
+        wca_event += '"PaxChild":"' + window.CATTParams.PaxChild + '",';
+        wca_event += '"BookingValue":"' + window.CATTParams.BookingValue + '",';
+        wca_event += '"PageID":"' + window.CATTParams.PageID + '"';
+        wca_event += '}}';
+        var s = document.getElementsByTagName('script')[0];
+        esp.src = '//tracking.esp-srv.de/rtg/wca/a:5447704a-f668-49fb-a875-3f016def3350/e:5458d8ad-2178-43b3-9ebc-52636def3350/wca_event:' + wca_event + '/';
+        s.parentNode.insertBefore(esp, s);
+    })();
+} catch (e) { if (typeof console != "undefined") console.log("NEC AT eSP: " + e) }
+
+// eSP conf
+try{
+    $('body').append('<script src="https://tracking.esp-srv.de/Trackers/eventtracker/a:5447704a-f668-49fb-a875-3f016def3350/e:5447ac6c-0ba0-4024-a97d-27116def3350/uid:'+window.CATTParams.BookingRef+'/value:'+window.CATTParams.BookingValue+'"></script>');
+}catch(e){console && console.log && console.log('AT NEC Conf eSP: '+e);}
+
+
