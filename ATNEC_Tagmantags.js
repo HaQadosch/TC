@@ -63,91 +63,11 @@ try{
     }
 }(window.CATTParams, window.jQuery))
 
-// Attribution in Landing pages
-try{
-    var utm_medium = ""; try { utm_medium=(/utm_medium=(\w+)&?/gi).exec(document.location.search)[1] } catch (e) { utm_medium = ""; }
-    var utm_source = ""; try { utm_source=(/utm_source=(\w+)&?/gi).exec(document.location.search)[1] } catch (e) { utm_source = ""; }
-    var utm_campaign = ''; try { utm_campaign=(/utm_campaign=(\w+)&?/gi).exec(document.location.search)[1] } catch (e) { utm_campaign = ''; } // get the publisher ID for Affilinet
-    var gclid = false; try { gclid=(/gclid=/gi).test(document.location.search); if (gclid) utm_medium="gclid" } catch (e) { gclid = false; }
 
-    var today = inAMonth = new Date(); inAMonth.setDate(today.getDate()+30);
-    var prevXBCAttr = ""; try {prevXBCAttr = (/xbcattr=([^;]*)/gi).exec(document.cookie)[1]} catch (e){}
-    document.cookie="xbcattr="+prevXBCAttr +"|"+ utm_medium+"; expires="+inAMonth.toUTCString()+"; path=/; domain=.neckermann-reisen.at;"
+// GoldBach  Conf page
 
-    if (utm_medium.match(/aff/gi)) {
-        if (typeof console != "undefined") console.log ("Attrribution: affiliates");
-        var today = inAMonth = new Date(); inAMonth.setDate(today.getDate()+30); document.cookie="xbAFFPublisherID="+utm_campaign+"; expires="+inAMonth.toUTCString()+"; path=/; domain=.neckermann-reisen.at;"
-    } else if (utm_medium.match(/met|part/gi)) {
-        if (typeof console != "undefined") console.log ("Attrribution: partners");
-    } else if (utm_medium.match(/ban|criteo|dis/gi)) {
-        if (typeof console != "undefined") console.log ("Attrribution: display");
-    } else if (utm_medium.match(/email|newsletter/gi)) {
-        if (typeof console != "undefined") console.log ("Attrribution: eCRM");
-    } else if (utm_medium.match(/cp|ppc|gclid/gi)) {
-        if (typeof console != "undefined") console.log ("Attrribution: PPC");
-    } else if (utm_medium.match(/soc|twitter/gi)) {
-        if (typeof console != "undefined") console.log ("Attrribution: social media");
-    } else {
-        if (typeof console != "undefined") console.log ("Attrribution: default");
-    }
-} catch (e){if (typeof console != "undefined") console.log("AT NEC LP Code: "+e)}
-
-
-// Attribution Conf page
-try{
-    var pubID = "";     try {pubID = /xbAFFPublisherID=/i.test(document.cookie) && /xbAFFPublisherID=([^;]*)/i.exec(document.cookie)[1]} catch (e){}
-    var cAttr = "";     try {cAttr = /xbcattr=/i.test(document.cookie) && /xbcattr=([^;]*)/i.exec(document.cookie)[1]} catch (e){}
-    var xbcBANSrc = ""; try {xbcBANSrc = /xbcBANSrc/i.test(document.cookie) && /xbcBANSrc=([^;]*)/i.exec(document.cookie)[1]} catch (e){}
-    var paidChannels = /aff|met|part|agg|ban|criteo|dis|email|newsletter|cp|ppc|gclid|ret/i;
-
-    var winningCampaign = "default";
-    if (paidChannels.test(cAttr)){
-        var camps = cAttr.split('|');
-        for (var camp = camps.pop(); !paidChannels.test(camp); camp = camps.pop()){}
-        if (/aff/i.test(camp)) {
-            winningCampaign = 'affiliates';
-
-            var articles = lType = "";
-            if (/hotel/i.test(window.CATTParams.LOB)){
-                lType = "2"
-                articles += "ArticleNb="+window.CATTParams.AccomCode+"&ProductName=Hotel Booking&Category=Hotels&Quantity=1&SinglePrice="+window.CATTParams.BookingValue+"&Brand="+window.CATTParams.TourOperator+"&Property1="+window.CATTParams.AccomName.replace('&', ' and ')+"&Property2="+window.CATTParams.Destination+"&Property3="+window.CATTParams.Duration+"&Property4="+window.CATTParams.DeptDate+"&Property5="+window.CATTParams.StarRating+unescape("%0D%0A");
-            } else if (/flight/i.test(window.CATTParams.LOB)){
-                lType = "1"
-                articles += "ArticleNb="+window.CATTParams.AccomCode+"&ProductName=Flights&Category=Flights&Quantity=1&SinglePrice="+window.CATTParams.BookingValue+"&Brand="+window.CATTParams.TourOperator+"&Property1="+window.CATTParams.DepartureAirportSelected+"&Property2="+window.CATTParams.DestinationAirportSelected+"&Property3="+window.CATTParams.Duration+"&Property4="+window.CATTParams.DeptDate+"&Property5="+window.CATTParams.Carrier+unescape("%0D%0A");
-            } else {
-                lType = "3"
-                articles += "ArticleNb="+window.CATTParams.AccomCode+"&ProductName=Package booking for "+window.CATTParams.PaxAdult+" Adults and "+window.CATTParams.PaxChild+" Children&Category=Package > "+window.CATTParams.DestinationAirportSelected+"&Quantity=1&SinglePrice="+window.CATTParams.BookingValue+"&Brand="+window.CATTParams.TourOperator+"&Property1="+window.CATTParams.DepartureAirportSelected+"&Property2="+window.CATTParams.DestinationAirportSelected+"&Property3="+window.CATTParams.Duration+"&Property4="+window.CATTParams.DeptDate+"&Property5="+window.CATTParams.BoardBasis+unescape("%0D%0A");
-            }
-            $('body').append("<IMG SRC=\"https:\/\/partners.webmasterplan.com\/registersale.asp?mode=ppl&ltype="+lType+"&site=11836&order="+window.CATTParams.BookingRef+((pubID)?'&ref='+pubID:'')+"&basket="+escape(articles)+"\" WIDTH=\"1\" HEIGHT=\"1\" \/>");
-        }
-        else if (/met|part/i.test(camp)) winningCampaign = 'partners'
-        else if (/agg/i.test(camp)) winningCampaign = 'aggregator';
-        else if (/ban|criteo|dis/i.test(camp)){
-            winningCampaign = 'display';
-            xbcBANSrc && /mediascale/i.test(xbcBANSrc.split('|').pop()) && $('body').append('<iframe allowtransparency="true" scrolling="no" frameborder="0" border="0" width="1" height="1" marginwidth="0" marginheight="0" background-color="transparent" src="https://ad3.adfarm1.adition.com/track?tid=1199&sid=20370&type=html&orderid='+window.CATTParams.BookingRef+'&itemno=&descr=&quantity=1&price=0.00&total='+window.CATTParams.BookingValue+'"></iframe>');
-            xbcBANSrc && /esp/i.test(xbcBANSrc.split('|').pop()) && $('body').append('<script src="https://tracking.esp-srv.de/Trackers/eventtracker/a:5447704a-f668-49fb-a875-3f016def3350/e:5447ab9b-8f24-4bd9-8a09-1f076def3350/uid:'+window.CATTParams.BookingRef+'/value:'+window.CATTParams.BookingValue+'"></script>');
-            if(xbcBANSrc && /goldbach/i.test(xbcBANSrc.split('|').pop())){
-                // conditional firing of goldbach pixel (now always fire -> DSIGN-110)
-            }
-        }
-        else if (/email|newsletter/i.test(camp)) winningCampaign = 'eCRM';
-        else if (/cp|ppc|gclid/i.test(camp)) winningCampaign = 'PPC';
-        else if (/soc|twitter/i.test(camp)) winningCampaign = 'social';
-        else if (/ret/i.test(camp)) {
-            // Tracking is done in criteo tag
-            winningCampaign = 'retargeting';
-        }
-    }
   var country = $('.thanxTitle:contains("Land")').next().text();
-   $('body').append('<iframe src="https://4569027.fls.doubleclick.net/activityi;src=4569027;type=end;cat=sale;qty=1;cost=' + window.CATTParams.BookingValue + ';u1=AT;u2=' + country + ';u3=' + window.CATTParams.AccomResort + ';ord=' + window.CATTParams.BookingRef + '?" width="1" height="1" frameborder="0" style="display:none"></iframe>');
-    window._gaq = window._gaq || [];
-    window._gaq.push(['CATTGATC._setAccount', 'UA-33125004-1']);
-    window._gaq.push(['CATTGATC._setDomainName', 'neckermann-reisen.at']);
-    window._gaq.push(['_gat._anonymizeIp']);
-    window._gaq.push(['CATTGATC._addOrganic', 'search.sweetim.com', 'q'], ['CATTGATC._addOrganic', 'search.mywebsearch.com', 'searchfor'], ['CATTGATC._addOrganic', 'search.babylon.com', 'q'], ['CATTGATC._addOrganic', 'search.imesh.com', 'q'], ['CATTGATC._addOrganic', 'search.incredibar.com', 'q'], ['CATTGATC._addOrganic', 'searchsafer.com', 'q'], ['CATTGATC._addOrganic', 'fastbrowsersearch.com', 'q'], ['CATTGATC._addOrganic', 'search.1und1.de', 'q']);
-    window._gaq.push(['CATTGATC._setAllowLinker', true]);
-    window._gaq.push(['CATTGATC._trackEvent', 'BkgCookieAttrib', 'BookingRef='+window.CATTParams.BookingRef, 'Attr='+camp+'->'+winningCampaign+'|'+pubID+'|'+'_path='+cAttr, 1, true]);
-} catch (e){console && console.log && console.log("AT NEC Conf Cookie Attr: "+e)}
+   $('body').append('<iframe src="https://4569027.fls.doubleclick.net/activityi;src=4569027;type=end;cat=sale;qty=1;cost=' +window.CATTParams.BookingValue + ';u1=AT;u2=' + country + ';u3=' + window.CATTParams.AccomResort + ';ord=' + window.CATTParams.BookingRef + '?" width="1" height="1" frameborder="0" style="display:none"></iframe>');
 
 
 // Goldbach LP
@@ -210,3 +130,14 @@ try{
 }catch(e){console && console.log && console.log('AT NEC Conf eSP: '+e);}
 
 
+// NetSociety conf
+try{
+    var bookingValue="1";if(typeof window.CATTParams!="undefined"){if(typeof window.CATTParams.BookingValue!="undefined"){if(window.CATTParams.BookingValue!=""&&window.CATTParams.BookingValue!="0"){bookingValue=window.CATTParams.BookingValue}}}
+    document.write(unescape("%3Cimg%20height%3D%221%22%20width%3D%221%22%20style%3D%22border-style%3Anone%3B%22%20alt%3D%22%22%20src%3D%22https%3A//www.googleadservices.com/pagead/conversion/1041389759/%3Fvalue%3D"+bookingValue+"%26amp%3Blabel%3DxiZ1COPG-gIQv7HJ8AM%26amp%3Bguid%3DON%26amp%3Bscript%3D0%22/%3E%3Cimg%20height%3D%221%22%20width%3D%221%22%20style%3D%22border-style%3Anone%3B%22%20alt%3D%22%22%20src%3D%22https%3A//www.googleadservices.com/pagead/conversion/1041388589/%3Fvalue%3D"+bookingValue+"%26amp%3Blabel%3DOzOVCJPG8QIQrajJ8AM%26amp%3Bguid%3DON%26amp%3Bscript%3D0%22/%3E%3Cimg%20height%3D%221%22%20width%3D%221%22%20style%3D%22border-style%3Anone%3B%22%20alt%3D%22%22%20src%3D%22https%3A//www.googleadservices.com/pagead/conversion/1000168421/%3Fvalue%3D"+bookingValue+"%26amp%3Blabel%3DS_n1CIufgQMQ5bf13AM%26amp%3Bguid%3DON%26amp%3Bscript%3D0%22/%3E%3Cimg%20height%3D%221%22%20width%3D%221%22%20style%3D%22border-style%3Anone%3B%22%20alt%3D%22%22%20src%3D%22https%3A//www.googleadservices.com/pagead/conversion/997632276/%3Fvalue%3D"+bookingValue+"%26amp%3Blabel%3Djb_WCMTvlwMQlNLa2wM%26amp%3Bguid%3DON%26amp%3Bscript%3D0%22/%3E%3Cimg%20height%3D%221%22%20width%3D%221%22%20style%3D%22border-style%3Anone%3B%22%20alt%3D%22%22%20src%3D%22https%3A//www.googleadservices.com/pagead/conversion/997278255/%3Fvalue%3D"+bookingValue+"%26amp%3Blabel%3DxYbeCMmHzQQQr4TF2wM%26amp%3Bguid%3DON%26amp%3Bscript%3D0%22/%3E%3Cimg%20height%3D%221%22%20width%3D%221%22%20style%3D%22border-style%3Anone%3B%22%20alt%3D%22%22%20src%3D%22https%3A//www.googleadservices.com/pagead/conversion/1000261273/%3Fvalue%3D"+bookingValue+"%26amp%3Blabel%3DuER1CIfG9wIQmY373AM%26amp%3Bguid%3DON%26amp%3Bscript%3D0%22/%3E"));
+
+    // Google Code for MCC NEC.AT Booking Conversion Page
+    var google_conversion_id = 996232563;
+    var google_conversion_label = "2teMCM3zoQkQ85qF2wM";
+    var google_conversion_value = bookingValue;
+    document.write('<div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/'+google_conversion_id+'/?value='+google_conversion_value+'&amp;label='+google_conversion_label+'&amp;guid=ON&amp;script=0"/></div>');
+} catch (e){if (typeof console != "undefined") console.log("AT NEC Conf NetSociety AdWords: "+e);}

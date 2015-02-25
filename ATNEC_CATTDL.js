@@ -97,4 +97,271 @@
 }(window.jQuery, window.document, window, window.dataLayer))
 </script>
 
+// LP
+<script id='gtm_CATTDLLP'>
+(function gtm_cattdlLP(jQ, dl, cdl) {
+    'use strict'
+    if (jQ && jQ.extend && cdl) try {
+        var cdpm = cdl.CATTParams
+        var cdsr = cdpm.searches
+        var newPM = {}
+        var keeps = {}
 
+        var ck_cdpm = JSON.parse(cdl.ckget('gtm_cdpm') || '{}')
+
+        if (ck_cdpm.trailingsteps && /\(/i.test(ck_cdpm.trailingsteps)){
+            var steps = ck_cdpm.trailingsteps.split(/([^\)]+\(\d+\))$/)
+            if (steps[steps.length-1] === '') steps.pop()
+            var lastSteps = steps.pop();
+            lastSteps = /(.+)\((\d+)\)/.exec(lastSteps)
+            if (lastSteps[1] === cdpm.pageid)
+                lastSteps = lastSteps[1]+'('+(++lastSteps[2])+')'
+            else
+                lastSteps = cdpm.pageid+'(1)';
+            keeps['trailingsteps'] = lastSteps
+
+        } else keeps['trailingsteps'] = cdpm.pageid+'(1)';
+
+         cdl.ckset('gtm_cdpm', JSON.stringify(keeps), Infinity, '/', '.neckermann-reisen.at');
+
+         jQ.extend(cdl.CATTParams, newPM, keeps)
+
+    } catch(e) {
+        cdl.error('GTM CATTDL LP: '+e)
+    } finally {
+        dl.push({'event': 'pid_'+cdl.CATTParams.pageid});
+        dl.push({'event': 'CATTDL LP'})
+    }
+    return jQ && jQ.extend && cdl
+}(window.jQuery, window.dataLayer, window.CATTDL))
+</script>
+
+// Attribution LP
+<script id='gtm_attr'>
+(function gtm_attribtionLP(jQ, cdl) {
+    'use strict'
+    if (jQ && cdl) try {
+        var cdsr = cdl.CATTParams && cdl.CATTParams.searches || ''
+        var attrs = JSON.parse(cdl.ckget('gtm_attr') || '[]')
+        for (var i = 4; attrs.length > i; attrs.shift());
+
+        if (cdsr.utm_medium || cdsr.gclid){
+            var attribution = [
+                cdsr.gclid || '',
+                cdsr.utm_medium || '',
+                cdsr.utm_campaign || '',
+                cdsr.utm_content || '',
+                cdsr.utm_source || '',
+                Date.now() || ''
+            ]
+            attrs.push(attribution)
+        }
+         cdl.ckset('gtm_attr', JSON.stringify(attrs), Infinity, '/', '.neckermann-reisen.at')
+    } catch(e) {
+        cdl.error('GTM Attribution LP: '+e)
+    }
+    return jQ && cdl
+}(window.jQuery, window.CATTDL))
+</script>
+
+// Attribution Conf page
+<script id='gtm_Attribution'>
+(function gtm_attribution(dl, cdl){
+    'use strict';
+    if (dl && cdl) try {
+        var cdpm = cdl.CATTParams || {}
+        var lands = JSON.parse(cdl.ckget('gtm_attr') || '[]')
+        var paidChannels = /aff|met|part|agg|ban|criteo|dis|email|newsletter|cp|ppc|gclid/i
+        var validLand = lands.filter(function(e){return e[0] || paidChannels.test(e[1])}).filter(function(e){return new Date().setMonth(new Date(Date.now()).getMonth() - 1) < e[5]})
+
+        if (validLand.length) {
+            var vL = validLand.pop() || []
+            cdpm['attribution'] = {
+                gclid           : vL[0] || '',
+                utm_medium      : vL[1] || '',
+                utm_campaign    : vL[2] || '',
+                utm_content     : vL[3] || '',
+                utm_source      : vL[4] || '',
+                landing         : new Date(vL[5] || '') || '',
+                date            : vL[5] || ''
+            }
+            var winningCampaign = ''
+            var m = vL[1]
+            if ((/aff/i).test(m)) winningCampaign = 'aff';
+            else if ((/met/i).test(m)) winningCampaign = 'met';
+            else if ((/agg|part/i).test(m)) winningCampaign = 'agg';
+            else if ((/ban|criteo|dis/i).test(m)) winningCampaign = 'display '+ (cdpm.attribution && cdpm.attribution.source || '');
+            else if ((/email|newsletter/i).test(m)) winningCampaign = 'eCRM';
+            else if ((/cp|ppc|gclid/i).test(m) || vL[0]) winningCampaign = 'PPC';
+            else if ((/soc|twitter/i).test(m)) winningCampaign = 'social';
+
+            dl.push({event: 'Attribution '+winningCampaign});
+            cdl.ckset('gtm_attr', JSON.stringify([]), Infinity, '/', '.neckermann-reisen.at')
+        }
+    } catch(e) {
+        cdl.error('GTM Attr: '+e)
+    }
+    return cdl && dl && cdpm && cdpm.attribution
+}(window.dataLayer, window.CATTDL))
+</script>
+
+// Affilinet
+<script id='gtm_affilinateAff'>
+(function gtm_affilinateAffDL(cdl, jQ) {
+    'use strict';
+    if (cdl && jQ) try {
+        var cdpm = cdl.CATTParams;
+
+        if (/hotel/i.test(cdpm.lob || '')){
+            cdl.DL_attr_aff = {
+                ltype       : "2",
+                articlenb     : cdpm.accomcode || "1",
+                productname : "Hotel Booking",
+                category     : 'Hotels',
+                quantity     : 1,
+                singlePrice : cdpm.bookingvalue || '',
+                brand         : cdpm.touroperator || '',
+                property1     : cdpm.accomname && cdpm.accomname.replace('&', ' and ') || '',
+                property2     : cdpm.destination || '',
+                property3     : cdpm.duration || '',
+                property4     : cdpm.deptdate || '',
+                property5     : cdpm.starrating || '',
+                order         : cdpm.bookingref || '0',
+                voucher     : cdpm.voucher || '',
+                site         : 11836,
+                ref         : cdpm.attribution && cdpm.attribution.utm_source || ''
+            };
+        } else if (/flight/i.test(cdpm.lob || '')){
+            cdl.DL_attr_aff = {
+                ltype       : "1",
+                articlenb     : cdpm.accomcode || "1",
+                productname : "Flights",
+                category     : 'Flights',
+                quantity     : 1,
+                singlePrice : cdpm.bookingvalue || '',
+                brand         : cdpm.touroperator || '',
+                property1     : cdpm.departureairportselected || '',
+                property2     : cdpm.destinationairportselected || '',
+                property3     : cdpm.duration || '',
+                property4     : cdpm.deptdate || '',
+                property5     : cdpm.carrier || '',
+                order         : cdpm.bookingref || '0',
+                voucher     : cdpm.voucher || '',
+                site         : 11836,
+                ref         : cdpm.attribution && cdpm.attribution.utm_source || ''
+            };
+        } else {
+            cdl.DL_attr_aff = {
+                ltype       : "3",
+                articlenb     : cdpm.accomcode || "1",
+                productname : "Package booking for "+(cdpm.paxadult || '')+" Adults and "+(cdpm.paxchild || '')+" Children",
+                category     : 'Package > '+(cdpm.destinationairportselected || ''),
+                quantity     : 1,
+                singlePrice : cdpm.bookingvalue || '',
+                brand         : cdpm.touroperator || '',
+                property1     : cdpm.departureairportselected || '',
+                property2     : cdpm.destinationairportselected || '',
+                property3     : cdpm.duration || '',
+                property4     : cdpm.deptdate || '',
+                property5     : cdpm.boardbasis || '',
+                order         : cdpm.bookingref || '0',
+                voucher     : cdpm.voucher || '',
+                site         : 11836,
+                ref         : cdpm.attribution && cdpm.attribution.utm_source || ''
+            };
+        }
+    } catch(e){
+        cdl.error('GTM Attr: '+e);
+    }
+    return cdl && jQ && cdl.DL_attr_aff;
+}(window.CATTDL, window.jQuery));
+
+(function gtm_attrAffiliatesAff(cdl, jQ, afdl) {
+    'use strict';
+    if (cdl && jQ) try {
+        var article = "ArticleNb="+(afdl.articlenb || '')+
+            "&ProductName="+(afdl.productname || '')+
+            "&Category="+(afdl.category || '')+
+            "&Quantity="+(afdl.quantity || '')+
+            "&SinglePrice="+(afdl.singlePrice || '')+
+            "&Brand="+(afdl.brand || '')+
+            "&Property1="+(afdl.property1 || '')+
+            "&Property2="+(afdl.property2 || '')+
+            "&Property3="+(afdl.property3 || '')+
+            "&Property4="+(afdl.property4 || '')+
+            "&Property5="+(afdl.property5 || '')+
+            unescape("%0D%0A");
+        var src = 'https://partners.webmasterplan.com/registersale.asp?mode=ppl&ltype='+(afdl.ltype || '')+'&site='+(afdl.site || '')+((afdl.ref)?'&ref='+afdl.ref:'')+'&order='+(afdl.order || '')+((afdl.voucher)?'&vcode='+afdl.voucher:'')+'&basket='+escape(article)
+        var img = jQ('<img width="1" height=1" style="border-style:none;" alt="" id="affilinet_pixel">').attr('src', src);
+        img.appendTo('body');
+
+        afdl.pixel = {
+            article: article,
+            src: src
+        };
+    } catch(e) {
+        cdl.error('GTM Attr: '+e);
+    }
+    return cdl && jQ && afdl;
+}(window.CATTDL, window.jQuery, !window.CATTDL?!1:window.CATTDL.DL_attr_aff))
+</script>
+
+
+<script id='gtm_mediaScale'>
+(function gtm_mediaScaleDL(cdl, jQ) {
+    'use strict';
+    if (cdl && jQ) try {
+        var cdpm = cdl.CATTParams;
+
+        cdl.DL_mediascale = {
+           tid      : 1199,
+            sid     : 20370,
+            type    : 'html',
+            orderid : cdpm.bookingref || '',
+            itemno  : cdpm.accomcode || '',
+            price   : 0.00,
+            total   : cdpm.bookingvalue || '',
+            descr   : '',
+            quantity: 1,
+            iFrame  : {
+                src     : 'https://ad3.adfarm1.adition.com/track?',
+                status  : 'not fired'
+            }
+        };
+    } catch(e){
+        cdl.error('GTM Mediascale DL: '+e);
+    }
+    return cdl && jQ && cdl.DL_mediascale;
+}(window.CATTDL, window.jQuery));
+
+(function gtm_mediascale(cdl, jQ, msdl) {
+    'use strict';
+    if (cdl && jQ && msdl) try {
+        var src = (msdl.iFrame && msdl.iFrame.src || '//')+
+            "&tid="+(msdl.tid || '')+
+            "&sid="+(msdl.sid || '')+
+            "&type="+(msdl.type || '')+
+            "&orderid="+(msdl.orderid || '')+
+            "&itemno="+(msdl.itemno || '')+
+            "&descr="+(msdl.descr || '')+
+            "&quantity="+(msdl.quantity || '')+
+            "&price="+(msdl.price || '')+
+            "&total="+(msdl.total || '')
+
+        var iFrm = jQ('<iframe allowtransparency="true" scrolling="no" frameborder="0" border="0" width="1" height="1" marginwidth="0" marginheight="0" background-color="transparent" id="mediascale">').attr('src', src);
+        iFrm.appendTo('body');
+
+        msdl.iFrame = {
+            status: 'fired',
+            src: src
+        };
+    } catch(e) {
+        cdl.error('GTM MediaScale: '+e);
+    }
+    return cdl && jQ && msdl;
+}(window.CATTDL, window.jQuery, !window.CATTDL?!1:window.CATTDL.DL_mediascale))
+</script>
+
+
+Attribution for eSP:
+xbcBANSrc && /esp/i.test(xbcBANSrc.split('|').pop()) && $('body').append('<script src="https://tracking.esp-srv.de/Trackers/eventtracker/a:5447704a-f668-49fb-a875-3f016def3350/e:5447ab9b-8f24-4bd9-8a09-1f076def3350/uid:'+window.CATTParams.BookingRef+'/value:'+window.CATTParams.BookingValue+'"></script>');
