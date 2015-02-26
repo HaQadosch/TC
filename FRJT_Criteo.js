@@ -3,7 +3,7 @@
     'use strict'
     if (cdl && dl && jQ) try {
         var cdpm = cdl.CATTParams
-        var tagType = /home|generic|subsearch/.test(cdpm.pageid) && 'homepage'
+        var tagType = /home|generic|subsearch|subsrch/.test(cdpm.pageid) && 'homepage'
             || /search/.test(cdpm.pageid) && 'srp'
             || /accom/.test(cdpm.pageid) && 'product'
             || /pax|pay/.test(cdpm.pageid) && 'basket'
@@ -29,9 +29,9 @@
                 quantity: 1
             }],
             ref         : cdpm.bookingref || '',
-            dedup         : 1,
-            cin         : (cdpm.deptdate || '').replace(/(\d\d)-?\/?(\d\d)-?\/?(\d\d\d\d)/, '$3-$2-$1') || '',
-            cout         : (cdpm.retdate || '').replace(/(\d\d)\/(\d\d)\/(\d\d\d\d)/, '$3-$2-$1') || '',
+            dedup         : /criteo/i.test(cdpm.attribution && cdpm.attribution.utm_source || '')?1:0,
+            cin         : cdl.gadate && cdl.gadate(cdpm.deptdate || '').replace(/(\d\d)-?\/?(\d\d)-?\/?(\d\d\d\d)/, '$3-$2-$1') || '',
+            cout         : cdpm.retdate && cdl.gadate && cdl.gadate(cdpm.retdate || '').replace(/(\d\d)\/(\d\d)\/(\d\d\d\d)/, '$3-$2-$1') || '',
             email         : (jQ('input[type=hidden][name=email]').val() || '').replace(/\s*/g, '').toLowerCase() || jQ('a[href*=mailto]').filter(function(){return !/Contactez/i.test($(this).text())}).text() || '',
             script         : {
                 status     : 'not fired',
