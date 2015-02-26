@@ -1,0 +1,25 @@
+(function gtm3rd_SiteLink(jQ){
+    'use strict';
+    if (jQ) try {
+        var scrpt=document.createElement('script');
+        scrpt.type='application/ld+json';
+        scrpt.innerHTML = '{"@context": "http://schema.org","@type": "WebSite","url": "http://www.neckermann-reisen.de/","potentialAction": {"@type": "SearchAction","target": "http://www.neckermann-reisen.de/search/?q={search_term_string}","query-input": "required name=search_term_string"}}'
+        jQ("body").append(scrpt);
+   } catch(e) {
+        window.console && window.console.log('GTM SiteLinkJson', e)
+    }
+    return jQ
+}(window.jQuery))
+
+(function gtm3rd_SiteLink(jQ){
+    'use strict';
+    if (jQ) try {
+        var scrpt=document.createElement('script');
+        scrpt.type='application/ld+json';
+        scrpt.innerHTML = '{"@context": "http://schema.org","@type": "WebSite","url": "http://www.thomascook.de/","potentialAction": {"@type": "SearchAction","target": "http://www.thomascook.de/search/?q={search_term_string}","query-input": "required name=search_term_string"}}'
+        jQ("body").append(scrpt);
+   } catch(e) {
+        window.console && window.console.log('GTM SiteLinkJson', e)
+    }
+    return jQ
+}(window.jQuery))
