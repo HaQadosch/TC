@@ -35,6 +35,7 @@
 	{
 		try
 		{
+			jQ.ajaxSetup({cache: true});
         	jQ.getScript(ceggdl.script.url, function gtm_fireCrazyEggScript(data){
                 ceggdl.script.status = 'fired';	
         	});

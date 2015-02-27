@@ -72,7 +72,7 @@
 	        	} 
 	        	else
 	        	{
-	        		console.log("error - could not add marketing pixel");
+	        		console.log("Error - GTM_goldbach - Could not add marketing pixel");
 	        	}
         }
 		catch (err)
