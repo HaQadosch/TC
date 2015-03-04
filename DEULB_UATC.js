@@ -35,11 +35,11 @@
             }
         };
     } catch(e) {
-        cdl.error('GTM FR TC UATCDL LP: '+e)
+        cdl.error('GTM DE ULB UATCDL LP: ', e);
     } finally {
-        dl.push({'event': 'UATCDL LP'})
+        dl.push({'event': 'UATCDL LP'});
     }
-    return cdl && cdl.CATTParams && cdl.DL_uatc
+    return cdl && cdl.CATTParams && cdl.DL_uatc;
 }(window.CATTDL, window.dataLayer, window.location));
 
 (function gtm_uatcLP(jQ, cdl, uadl, w) {
@@ -76,7 +76,7 @@
             trc.send('pageview', sendSet);
         })
     } catch(e) {
-        cdl.error('GTM FR TC UATC LP: '+e)
+        cdl.error('GTM DE ULB UATC LP: '+e)
     }
     return
 }(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_uatc, window))
@@ -156,7 +156,7 @@
             }
         };
     } catch(e) {
-        cdl.error('GTM FR TC UATCDL SubSRP: '+e)
+        cdl.error('GTM DE ULB UATCDL SubSRP: '+e)
     } finally {
         dl.push({'event': 'UATCDL SubSRP'})
     }
@@ -197,7 +197,7 @@
             trc.send('pageview', sendSet);
         })
     } catch(e) {
-        cdl.error('GTM FR TC UATC SubSRP: '+e)
+        cdl.error('GTM DE ULB UATC SubSRP: '+e)
     }
     return cdl && uadl
 }(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_uatc, window, document, window.dataLayer))
@@ -302,7 +302,7 @@
             if (window.sessionStorage) window.sessionStorage.getItem('gtm_srpaccomposition|'+(jQ(elt).attr('data-hid') || 'na')) || window.sessionStorage.setItem('gtm_srpaccomposition|'+(jQ(elt).attr('data-hid') || 'na'), jQ(elt).attr('data-pos') || 'na')
         });
     } catch(e) {
-        cdl.error('GTM FR TC UATCDL SRP: '+e)
+        cdl.error('GTM DE ULB UATCDL SRP: '+e)
     } finally {
         dl.push({'event': 'UATCDL SRP'})
     }
@@ -370,7 +370,7 @@
             dl.push({'event': 'UATCECaddImpression'});
         })
     } catch(e) {
-        cdl.error('GTM FR TC UATC SRP: '+e)
+        cdl.error('GTM DE ULB UATC SRP: '+e)
     }
     return cdl && uadl
 }(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_uatc, window, document, window.dataLayer))
@@ -490,7 +490,7 @@
             position    : accPos || 0
         };
     } catch(e) {
-        cdl.error('GTM FR TC UATCDL Accom: '+e)
+        cdl.error('GTM DE ULB UATCDL Accom: '+e)
     } finally {
         dl.push({'event': 'UATCDL Accom'})
     }
@@ -584,7 +584,7 @@
             trc.send('pageview', sendSet);
         })
     } catch(e) {
-        cdl.error('GTM FR TC UATC Accom: '+e);
+        cdl.error('GTM DE ULB UATC Accom: '+e);
         dataLayer.push({'event': 'UATCECaddProduct'})
     }
     return cdl && uadl
@@ -708,7 +708,7 @@
             }
         }
     } catch(e) {
-        cdl.error('GTM FR TC UATCDL Pax: '+e)
+        cdl.error('GTM DE ULB UATCDL Pax: '+e)
     } finally {
         dl.push({'event': 'UATCDL Pax'})
     }
@@ -767,7 +767,7 @@
         })
         dl.push({'event': 'UATCECcheckout'});
     } catch(e) {
-        cdl.error('GTM FR TC UATC Pax: '+e);
+        cdl.error('GTM DE ULB UATC Pax: '+e);
         dataLayer.push({'event': 'UATCECcheckout'})
     }
 }(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_uatc, window, document, window.dataLayer))
@@ -892,7 +892,7 @@
             }
         }
     } catch(e) {
-        cdl.error('GTM FR TC UATCDL Pay: '+e)
+        cdl.error('GTM DE ULB UATCDL Pay: '+e)
     } finally {
         dl.push({'event': 'UATCDL Pay'})
     }
@@ -951,7 +951,7 @@
         })
         dl.push({'event': 'UATCECcheckout'});
     } catch(e) {
-        cdl.error('GTM FR TC UATC Pay: '+e);
+        cdl.error('GTM DE ULB UATC Pay: '+e);
         dataLayer.push({'event': 'UATCECcheckout'})
     }
 }(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_uatc, window, document, window.dataLayer))
@@ -974,7 +974,7 @@
             cookiedomain     : 'urlaub.de',
             name             : 'CATTUATC',
             set             : {
-                anonymizeIp    : true,`
+                anonymizeIp    : true,
                 location     : loc && ((loc.hostname || '')+(loc.pathname || '')) || '',
                 referrer     : document.referrer  || '',
                 hostname     : loc && loc.hostname || ''
@@ -1091,7 +1091,7 @@
             }
         }
     } catch(e) {
-        cdl.error('GTM FR TC UATCDL Book: '+e)
+        cdl.error('GTM DE ULB UATCDL Book: '+e)
     } finally {
         dl.push({'event': 'UATCDL Book'})
     }
@@ -1158,7 +1158,7 @@
         })
         dl.push({'event': 'UATCECTransaction'});
     } catch(e) {
-        cdl.error('GTM FR TC UATC Book: '+e);
+        cdl.error('GTM DE ULB UATC Book: '+e);
         dataLayer.push({'event': 'UATCECTransaction'})
     }
     return cdl && uadl
