@@ -11,7 +11,8 @@
     FO:Flight                         flight only
     ES&H:Eurostar,Accommodation
     AP:Parking
-    DP:Flight,Accommodation
+    DP:
+    
     TP:                             holidays
     TO:Transfer
 */

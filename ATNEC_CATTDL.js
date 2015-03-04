@@ -363,5 +363,64 @@
 </script>
 
 
+<script id='gtm_eSP'>
+(function gtm_eSPDL(cdl, jQ) {
+    'use strict';
+    if (cdl && jQ) try {
+        var cdpm = cdl.CATTParams;
+
+        cdl.DL_esp = {
+            a      : '5447704a-f668-49fb-a875-3f016def3350',
+            e     : '5447ab9b-8f24-4bd9-8a09-1f076def3350',
+            uid    : cdpm.bookingref || '',
+            itemno  : cdpm.accomcode || '',
+            value   : cdpm.bookingvalue || '',
+            script  : {
+                src     : '//tracking.esp-srv.de/Trackers/eventtracker',
+                status  : 'not fired'
+            }
+        };
+    } catch(e){
+        cdl.error('GTM eSP DL: '+e);
+    }
+    return cdl && jQ && cdl.DL_esp;
+}(window.CATTDL, window.jQuery));
+
+(function gtm_eSP(cdl, jQ, msdl) {
+    'use strict';
+    if (cdl && jQ && esdl) try {
+        var src = (esdl.script && esdl.script.src || '//')+
+            "/a:"+(esdl.a || '')+
+            "/e:"+(esdl.e || '')+
+            "/uid="+(esdl.type || '')+
+            "&orderid="+(esdl.orderid || '')+
+            "&itemno="+(esdl.itemno || '')+
+            "&descr="+(esdl.descr || '')+
+            "&quantity="+(esdl.quantity || '')+
+            "&price="+(esdl.price || '')+
+            "&total="+(esdl.total || '')
+
+        var iFrm = jQ('<iframe allowtransparency="true" scrolling="no" frameborder="0" border="0" width="1" height="1" marginwidth="0" marginheight="0" background-color="transparent" id="mediascale">').attr('src', src);
+        iFrm.appendTo('body');
+
+        msdl.iFrame = {
+            status: 'fired',
+            src: src
+        };
+    } catch(e) {
+        cdl.error('GTM eSP: '+e);
+    }
+    return cdl && jQ && esdl;
+}(window.CATTDL, window.jQuery, !window.CATTDL?!1:window.CATTDL.DL_esp))
+</script>
 Attribution for eSP:
-xbcBANSrc && /esp/i.test(xbcBANSrc.split('|').pop()) && $('body').append('<script src="https://tracking.esp-srv.de/Trackers/eventtracker/a:5447704a-f668-49fb-a875-3f016def3350/e:5447ab9b-8f24-4bd9-8a09-1f076def3350/uid:'+window.CATTParams.BookingRef+'/value:'+window.CATTParams.BookingValue+'"></script>');
+xbcBANSrc && /esp/i.test(xbcBANSrc.split('|').pop()) && $('body').append('<script src="
+https://
+tracking.esp-srv.de/
+Trackers/
+eventtracker/
+a:5447704a-f668-49fb-a875-3f016def3350/
+e:5447ab9b-8f24-4bd9-8a09-1f076def3350/
+uid:'+window.CATTParams.BookingRef+'/
+value:'+window.CATTParams.BookingValue+'
+"></script>');
