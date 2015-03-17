@@ -3,7 +3,7 @@
     'use strict';
     if (dl && cdl && cdpm) try {
         cdl.DL_iAdvise = {
-            sid : '1715',
+            sid : '1719',
             lang : 'fr',
             script: {
                 status: "not fired",
@@ -49,7 +49,7 @@
             cdl.DL_iAdvise = {
                 bookingamount: cdpm.bookingvalue || "",
                 bookingref: cdpm.bookingref || "",
-                sid : '1715',
+                sid : '1719',
                 lang : 'fr',
                 script: {
                     status: "not fired",
