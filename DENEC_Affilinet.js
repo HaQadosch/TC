@@ -132,58 +132,28 @@ try{
  * Affilinet
  *
  */
-
- if ((/aff/i).test(camp)) {
-         var pageID = ("{{PageId}}" == "charterflight") ? "Flight" : "{{PageId}}";
-         var makeSortString=function(){var a=unescape("%5B%F6%E4%FC%D6%C4%DC%C0%C1%C2%E0%E1%E2%C8%C9%CA%E8%E9%EA%EB%CC%CD%CE%EC%ED%EE%D2%D3%D4%F2%F3%F4%D9%DA%DB%F9%FA%FB%E7%5D");var b=new RegExp(a,"g");var c={"%F6":"o","%E4":"a","%FC":"u","%D6":"O","%C4":"A","%DC":"U","%C0":"A","%C1":"A","%C2":"A","%E0":"a","%E1":"a","%E2":"a","%C8":"E","%C9":"E","%CA":"E","%E8":"e","%E9":"e","%EA":"e","%EB":"e","%CC":"I","%CD":"I","%CE":"I","%EC":"i","%ED":"i","%EE":"i","%D2":"O","%D3":"O","%D4":"O","%F2":"o","%F3":"o","%F4":"o","%D9":"U","%DA":"U","%DB":"U","%F9":"u","%FA":"u","%FB":"u","%E7":"c","%5B":"","%5D":""};return function(a){return a.replace(b,function(a){return c[escape(a)]})}}();
-         var pubID = ""; try {pubID = (/xbAFFPublisherID=([^;]*)/gi).exec(document.cookie)[1]} catch (e){}
-         $('body').append('<IMG SRC="https://partners.webmasterplan.com/registersale.asp?site=5649&'+((pubID)?'&ref='+pubID:'')+'&order='+checkedBookingRef+'&vcode={{voucherCode}}&basket='+escape(makeSortString("ArticleNb={{IFF}}_Ticket&ProductName={{Brand}} {{PageId}} de {{Region}} {{nbPassengers}} Menschen&Category="+pageID+"&Quantity=1&SinglePrice={{levrev}}&Brand={{Brand}} {{TourOperator}}&Property1={{OutboundDepartAirport}}&Property2={{Location}}&Property3={{Duration}}&Property4={{RoomCategory}}&Property5={{Stars}}"+unescape("%0D%0A")))+'" WIDTH="1" HEIGHT="1" />')
-     }
- }
-
 <script id='gtm_affilinateAff'>
 (function gtm_affilinateAffDL(cdl, jQ) {
     'use strict';
     if (cdl && jQ) try {
         var cdpm = cdl.CATTParams;
-
-        if (/hotel/i.test(cdpm.lob || '')){
-            cdl.DL_attr_aff = {
-                articlenb     : cdpm.accomcode || "1",
-                productname : "Hotel Booking",
-                category     : 'Hotels',
-                quantity     : 1,
-                singlePrice : cdpm.bookingvalue || '',
-                brand         : cdpm.touroperator || '',
-                property1     : cdpm.accomname && cdpm.accomname.replace('&', ' and ') || '',
-                property2     : cdpm.destination || '',
-                property3     : cdpm.duration || '',
-                property4     : cdpm.deptdate || '',
-                property5     : cdpm.starrating || '',
-                order         : cdpm.bookingref || '0',
-                voucher     : cdpm.voucher || '',
-                site         : 5104,
-                ref         : cdpm.attribution && cdpm.attribution.utm_source || ''
-            };
-        } else if (/flight/i.test(cdpm.lob || '')){
-            cdl.DL_attr_aff = {
-                articlenb     : cdpm.accomcode || "1",
-                productname : "Flights",
-                category     : 'Flights',
-                quantity     : 1,
-                singlePrice : cdpm.bookingvalue || '',
-                brand         : cdpm.touroperator || '',
-                property1     : cdpm.departureairportselected || '',
-                property2     : cdpm.destinationairportselected || '',
-                property3     : cdpm.duration || '',
-                property4     : cdpm.deptdate || '',
-                property5     : cdpm.carrier || '',
-                order         : cdpm.bookingref || '0',
-                voucher     : cdpm.voucher || '',
-                site         : 5104,
-                ref         : cdpm.attribution && cdpm.attribution.utm_source || ''
-            };
-        }
+        cdl.DL_attr_aff = {
+            articlenb     : cdpm.accomcode || "1",
+            productname : "Flights",
+            category     : 'Flights',
+            quantity     : 1,
+            singlePrice : cdpm.bookingvalue || '',
+            brand         : cdpm.touroperator || '',
+            property1     : cdpm.departureairportselected || '',
+            property2     : cdpm.destinationairportselected || '',
+            property3     : cdpm.duration || '',
+            property4     : cdpm.deptdate || '',
+            property5     : cdpm.carrier || '',
+            order         : cdpm.bookingref || '0',
+            voucher     : cdpm.voucher || '',
+            site         : '5649',
+            ref         : cdpm.attribution && cdpm.attribution.utm_source || ''
+        };
     } catch(e){
         cdl.error('GTM Attr: '+e);
     }

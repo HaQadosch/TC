@@ -55,6 +55,20 @@
                 if (checked) cdpm[pp] = checked;
             }
         });
+        w.tmParam && jQ.each(w.tmParam, function gtm_eachtmParam(pP){
+            var pp = pP.toLowerCase();
+            var checked = "";
+            if (!cdpm[pp] || cdpm[pp] !== w.tmParam[pP]){
+                checked = w.tmParam[pP];
+                if (/string/i.test(typeof checked)) checked = checked.trim();
+                if (/lob|holidaytype/i.test(pp)) checked = checked.toLowerCase() || "generic";
+                else if (/pageid/i.test(pp)) checked = checked.toLowerCase() || "generic";
+                else if (/errorcode/i.test(pp)) checked = checked && checked.substr(0, 270) || "";
+                else if (/destination|boardbasis|searchresultstop3/i.test(pp)) checked = checked && checked.replace(/\&amp;/g, '-').replace(/\&/g, '-') || "";
+
+                if (checked) cdpm[pp] = checked;
+            }
+        });
         cdpm.cookies = {}; (document.cookie.split(/;\s?/g)).forEach(function cookies(coo, _){ var cur = /([^=]+)=(.*)/i.exec(coo); if (cur && cur.length > 1) cdpm.cookies[cur[1]]=cur[2]});
         cdpm.searches = {}; (d.location.href.split(/\?|&|#/g).slice(1)).forEach(function searches(prm, _){ var cur = /([^=]+)=(.*)/i.exec(prm); if (cur && cur.length > 1) cdpm.searches[cur[1]]=cur[2]});
 
