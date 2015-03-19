@@ -41,20 +41,6 @@
             error   : function error(msg) {console && ((console.error)?console.error(msg):console.log(msg)); return msg}
         };
 
-        w.CATTParams && jQ.each(w.CATTParams, function gtm_eachCATTParam(pP){
-            var pp = pP.toLowerCase();
-            var checked = "";
-            if (!cdpm[pp] || cdpm[pp] !== w.CATTParams[pP]){
-                checked = w.CATTParams[pP];
-                if (/string/i.test(typeof checked)) checked = checked.trim();
-                if (/lob|holidaytype/i.test(pp)) checked = checked.toLowerCase() || "generic";
-                else if (/pageid/i.test(pp)) checked = checked.toLowerCase() || "generic";
-                else if (/errorcode/i.test(pp)) checked = checked && checked.substr(0, 270) || "";
-                else if (/destination|boardbasis|searchresultstop3/i.test(pp)) checked = checked && checked.replace(/\&amp;/g, '-').replace(/\&/g, '-') || "";
-
-                if (checked) cdpm[pp] = checked;
-            }
-        });
         w.tmParam && jQ.each(w.tmParam, function gtm_eachtmParam(pP){
             var pp = pP.toLowerCase();
             var checked = "";
@@ -69,6 +55,21 @@
                 if (checked) cdpm[pp] = checked;
             }
         });
+        w.CATTParams && jQ.each(w.CATTParams, function gtm_eachCATTParam(pP){
+            var pp = pP.toLowerCase();
+            var checked = "";
+            if (!cdpm[pp] || cdpm[pp] !== w.CATTParams[pP]){
+                checked = w.CATTParams[pP];
+                if (/string/i.test(typeof checked)) checked = checked.trim();
+                if (/lob|holidaytype/i.test(pp)) checked = checked.toLowerCase() || "generic";
+                else if (/pageid/i.test(pp)) checked = checked.toLowerCase() || "generic";
+                else if (/errorcode/i.test(pp)) checked = checked && checked.substr(0, 270) || "";
+                else if (/destination|boardbasis|searchresultstop3/i.test(pp)) checked = checked && checked.replace(/\&amp;/g, '-').replace(/\&/g, '-') || "";
+
+                if (checked) cdpm[pp] = checked;
+            }
+        });
+
         cdpm.cookies = {}; (document.cookie.split(/;\s?/g)).forEach(function cookies(coo, _){ var cur = /([^=]+)=(.*)/i.exec(coo); if (cur && cur.length > 1) cdpm.cookies[cur[1]]=cur[2]});
         cdpm.searches = {}; (d.location.href.split(/\?|&|#/g).slice(1)).forEach(function searches(prm, _){ var cur = /([^=]+)=(.*)/i.exec(prm); if (cur && cur.length > 1) cdpm.searches[cur[1]]=cur[2]});
 
@@ -110,14 +111,14 @@
             || "";
 
         cdpm['pageid'] = cdpm.pageid
-            || /^\/$/i.test(location.pathname || '')?'home':''
+            || (/^\/$/i.test(location.pathname || '')?'home':'')
             || 'generic';
 
         cdpm['errors'] = cdpm.errorcode
             || '';
         cdpm['device'] = (function(t){var n="desktop";var r=/mobile/i.test(t);var i=/android/i.test(t);var s=/phone/i.test(t);var o=i&&!/mobile/i.test(t);var u=/ipad/i.test(t);var a=/tablet/i.test(t);if(a||o||u)n="tablet";else if(r||i||s)n="mobile";return n})(navigator.userAgent||"")
             || ''
-        ;cdpm['pagetimestamp'] = Date.now()
+        ;cdpm['pagetimestamp'] = Date.now();
 
         window.CATTDL.CATTParams = cdpm;
     } catch(e) {
