@@ -139,7 +139,7 @@ try{
         var cdpm = cdl.CATTParams;
         cdl.DL_attr_aff = {
             articlenb     : cdpm.accomcode || "1",
-            productname : "Flights",
+            productname : (cdpm.brand || '')+' '+(cdpm.lob || '')+' de '+(cdpm.region || '')+' '+(cdpm.paxtotal || '')+' Menschen',
             category     : cdpm.lob || '',
             quantity     : 1,
             singlePrice : cdpm.bookingvalue || '',
@@ -204,7 +204,7 @@ try{
         var cdpm = cdl.CATTParams;
         cdl.DL_attr_met = {
             articlenb     : cdpm.accomcode || "1",
-            productname : "Flights",
+            productname : (cdpm.brand || '')+' '+(cdpm.lob || '')+' de '+(cdpm.region || '')+' '+(cdpm.paxtotal || '')+' Menschen',
             category     : cdpm.lob || '',
             quantity     : 1,
             singlePrice : cdpm.bookingvalue || '',
