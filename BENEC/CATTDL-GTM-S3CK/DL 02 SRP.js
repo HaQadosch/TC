@@ -45,11 +45,9 @@
 					var ctpmval = ctpmkeys[i] || ''
 					var reg = new RegExp(ctpmval, 'i');
 					if (ctpmval && reg.test(refreshparams.join('|'))) { 
-						//console.log(ctpm[ctpmval])
 						cdpm[ctpmval.toLowerCase()] = ctpm[ctpmval]
-						//delete cdpm[cdpmkeys[i]]
 					}
-				};		
+		};		
 
 		cdpm['deptairport'] = ctpm.DepartureAirportSelected && ctpm.DepartureAirportSelected.toLowerCase()
 		cdpm['sessionid'] = ctpm.SessId || '';
