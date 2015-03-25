@@ -1,45 +1,75 @@
-<script id='gtm_turnSuedafrika'>
-(function gtm_TurnSuedafrikaDL(cdl, edl){
+try{
+    window['optimizely'] = window['optimizely'] || [];
+    // Tracking of the conversion value for Optimizely
+    window['optimizely'].push(['trackEvent', 'purchase_complete', {'revenue': parseInt(window.CATTParams.BookingValue*100)}]);
+}catch(e){console && console.log && console.log("DE NEC Optimizely Revenue Tag 1: " + e)}
+
+<script id='gtm_optimizelyRevenue'>
+(function gtm_optimizelyRevenueDL(cdl, edl){
     'use strict';
     if (cdl && edl) try {
         var cdpm = cdl.CATTParams || '';
 
-        cdl.DL_turnsuedafrika = {
-            bookingref : cdpm.bookingref || '',
-            img : {
-                src : '//r.turn.com/r/beacon?b2=Ww3Pm4lPJA9blEGfyZin_h-tCdfHCUVaqE8VAsUjbSZPPEys-Sgom6xjSZtvCGw_RhA6glI2EuI5CRDl2Hcibg&cid=_r_',
-                status : 'not fired'
-            }
+        cdl.DL_optimizelyrevenue = {
+            revenue : parseInt((cdpm.bookingvalue || 0)*100),
+            event : 'purchase_complete'
         };
     } catch(e) {
-        cdl.error && cdl.error('GTM Turn Suedafrika DL: '+e);
+        cdl.error && cdl.error('GTM Optimizely Revenue DL: '+e);
     } finally {
-        edl.push({'event':'DL Suedafrika'});
+        edl.push({'event':'DL OptiRevenue'});
     }
-    return cdl && edl && cdl.DL_turnsuedafrika;
-}(window.CATTDL, window.externaldataLayer))
+    return cdl && edl && cdl.DL_optimizelyrevenue;
+}(window.CATTDL, window.externaldataLayer));
 
-(function gtm_turnSuedafrika(jQ, edl, cdl, sadl){
+(function gtm_optimizelyRevenue(jQ, edl, cdl, redl){
     'use strict';
-    if (jQ && edl && cdl && sadl) try {
-        var src = sadl.img && sadl.img.src.replace(/_r_/, sadl.bookingref || '') || '';
-        jQ().append && jQ('body').append(jQ('<img>', {
-            src : src,
-            style : 'border-style:none;',
-            alt : '',
-            id : 'turnFlextag',
-            width : 1,
-            height : 1
-        }));
-        sadl.img = {
-            src : src,
-            status : 'fired'
+    if (jQ && edl && cdl && redl) try {
+        window.optimizely = window.optimizely || [];
+        window.optimizely.push(['trackEvent', 'purchase_complete', {'revenue': redl.revenue || 0}]);
+    } catch(e) {
+        cdl.error && cdl.error('GTM Optimizely Revenue: '+e);
+    } finally {
+        edl.push({'event':'OptiRevenue'});
+    }
+    return jQ && edl && cdl && redl;
+}(window.jQuery, window.externaldataLayer, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_optimizelyrevenue))
+</script>
+
+
+try{
+    window['optimizely'] = window['optimizely'] || [];
+    // Activating Universal Analytics
+    window['optimizely'].push(['activateUniversalAnalytics']);
+}catch(e){console && console.log && console.log("DE NEC Optimizely UA Tag 1: " + e)}
+
+<script id='gtm_optimizelyUA'>
+(function gtm_optimizelyUADL(cdl, edl){
+    'use strict';
+    if (cdl && edl) try {
+        var cdpm = cdl.CATTParams || '';
+
+        cdl.DL_optimizelyua = {
+            event : 'activateUniversalAnalytics'
         };
     } catch(e) {
-        cdl.error && cdl.error('GTM Turn Suedafrika: '+e);
+        cdl.error && cdl.error('GTM Optimizely UA DL: '+e);
     } finally {
-        edl.push({'event':'Suedafrika'});
+        edl.push({'event':'DL OptiUA'});
     }
-    return jQ && edl && cdl && sadl;
-}(window.jQuery, window.externaldataLayer, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_turnsuedafrika))
+    return cdl && edl && cdl.DL_optimizelyua;
+}(window.CATTDL, window.externaldataLayer));
+
+(function gtm_optimizelyUA(jQ, edl, cdl, uadl){
+    'use strict';
+    if (jQ && edl && cdl && uadl) try {
+        window.optimizely = window.optimizely || [];
+        window.optimizely.push(['activateUniversalAnalytics']);
+    } catch(e) {
+        cdl.error && cdl.error('GTM Optimizely UA: '+e);
+    } finally {
+        edl.push({'event':'OptiUA'});
+    }
+    return jQ && edl && cdl && uadl;
+}(window.jQuery, window.externaldataLayer, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_optimizelyua))
 </script>
