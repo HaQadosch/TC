@@ -176,6 +176,80 @@ try{
 
 /*
  *
+ * All pageview eSP
+ *
+ */
+try {
+    (function () {
+        var esp = document.createElement('script');
+        esp.type = 'text/javascript';
+        esp.async = true;
+        var wca_event = '';
+        wca_event += '{"PageView":{';
+        wca_event += '"Destination":"' + window.CATTParams.Destination + '",';
+        wca_event += '"LOB":"' + window.CATTParams.LOB + '",';
+        wca_event += '"PaxAdult":"' + window.CATTParams.PaxAdult + '",';
+        wca_event += '"PaxChild":"' + window.CATTParams.PaxChild + '",';
+        wca_event += '"BookingValue":"' + window.CATTParams.BookingValue + '",';
+        wca_event += '"PageID":"' + window.CATTParams.PageID + '"';
+        wca_event += '}}';
+        var s = document.getElementsByTagName('script')[0];
+        esp.src = '//tracking.esp-srv.de/rtg/wca/a:5446413e-9d60-4b60-b6b6-7c086def3350/e:544e07ba-4b68-4ac5-aac0-3daf6def3350/wca_event:' + wca_event + '/';
+        s.parentNode.insertBefore(esp, s);
+    })();
+} catch (e) { if (typeof console != "undefined") console.log("DE NEC eSP: " + e) }
+
+<script id='gtm_AlleSP'>
+(function gtm_eSPDL(cdl, jQ) {
+    'use strict';
+    if (cdl && jQ) try {
+        var cdpm = cdl.CATTParams;
+        cdl.DL_eSP = {
+            a   : '5446413e-9d60-4b60-b6b6-7c086def3350',
+            e   : '544e07ba-4b68-4ac5-aac0-3daf6def3350',
+            wca_event : {'PageView':{
+                'Destination': cdpm.destination || '',
+                'LOB': cdpm.lob || '',
+                'PaxAdult': cdpm.paxadult || '',
+                'PaxChild': cdpm.paxchild || '',
+                'BookingValue': cdpm.bookingvalue || '',
+                'PageID': cdpm.pageid || ''
+            }},
+            script  : {
+                status  : 'not fired',
+                src :   '//tracking.esp-srv.de/rtg/wca/a:_a_/e:_e_/wca_event:_v_/'
+            }
+        };
+    } catch(e){
+        cdl.error('GTM eSP DL: '+e);
+    }
+    return cdl && jQ && cdl.DL_eSP;
+}(window.CATTDL, window.jQuery));
+
+(function gtm_eSP(cdl, jQ, esdl) {
+    'use strict';
+    if (cdl && jQ && esdl) try {
+        var src = esdl.script && esdl.script.src.replace(/_a_/, esdl.a || '').replace(/_e_/, esdl.e || '').replace(/_v_/, JSON && JSON.stringify && JSON.stringify(esdl.wca_event || '{}') || '') || '';
+        src && jQ.getScript && jQ.getScript(src, function gtm_espScript(){
+            try {
+                esdl.script = {
+                    status: 'fired',
+                    src: src
+                };
+            } catch(err) {
+                cdl.error && cdl.error('GTM esp Script', err);
+            }
+        })
+    } catch(e) {
+        cdl.error('GTM eSP: '+e);
+    }
+    return cdl && jQ && esdl;
+}(window.CATTDL, window.jQuery, !window.CATTDL?!1:window.CATTDL.DL_eSP))
+</script>
+
+
+/*
+ *
  * All booking eSP
  *
  */
