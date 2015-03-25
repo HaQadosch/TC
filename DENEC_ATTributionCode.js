@@ -189,7 +189,8 @@ try{
             if ((/aff/i).test(m)) winningCampaign = 'aff';
             else if ((/met/i).test(m)) winningCampaign = 'met';
             else if ((/agg|part/i).test(m)) winningCampaign = 'agg';
-            else if ((/ban|criteo|dis/i).test(m)) winningCampaign = 'display';
+            else if ((/to/i).test(m)) winningCampaign = 'mindShare';
+            else if ((/ban|criteo|dis/i).test(m)) winningCampaign = /esp/i.test()?'eSP':'display';
             else if ((/email|newsletter/i).test(m)) winningCampaign = 'eCRM';
             else if ((/cp|ppc|gclid/i).test(m) || vL[0]) winningCampaign = 'PPC';
             else if ((/soc|twitter/i).test(m)) winningCampaign = 'social';
@@ -203,52 +204,3 @@ try{
     return cdl && edl && cdpm && cdpm.attribution;
 }(window.externaldataLayer, window.CATTDL))
 </script>
-
-
-try{
-    var pubID = ""; try {pubID = (/xbAFFPublisherID=([^;]*)/gi).exec(document.cookie)[1]} catch (e){}
-    var cAttr = ""; try {cAttr = (/xbcattr=([^;]*)/gi).exec(document.cookie)[1]} catch (e){}
-    var xbLastBanSource = false; try {xbLastBanSource = /xbLastBanSource/i.test(document.cookie) && /xbLastBanSource=([^;]*)/i.exec(document.cookie)[1]} catch (e){xbLastBanSource = false}
-    var paidChannels = /aff|met|part|agg|ban|criteo|dis|email|newsletter|cp|ppc|gclid|to|ret/i;
-    var winningCampaign = "default";
-    var utmcsr = false;
-    try {
-        utmcsr = /utmcsr/i.test(document.cookie) && /utmcsr=([^;]*)/i.exec(document.cookie)[1];
-        utmcsr = utmcsr.substring(0, utmcsr.indexOf('|'));
-    } catch (e){utmcsr = false}
-
-    if ((paidChannels).test(cAttr)){
-        var checkedBookingRef = ""
-        if ((typeof window.CATTParams == 'undefined') || (typeof window.CATTParams.BookingRef == 'undefined') || (CATTParams.BookingRef == "")){
-            checkedBookingRef = "empty_"+ Math.random()
-        } else {
-            checkedBookingRef = CATTParams.BookingRef
-        }
-        var camps = cAttr.split('|');
-        for (var camp = camps.pop(); !(paidChannels).test(camp); camp = camps.pop()){}
-        if ((/aff/i).test(camp)) {
-            winningCampaign = 'affiliates';
-            window.dataLayer && window.dataLayer.push({'event':'Attribution aff'});
-        }
-        else if ((/met|part/i).test(camp)) {
-            winningCampaign = 'partners';
-            window.dataLayer && window.dataLayer.push({'event':'Attribution met'});
-        }
-        else if ((/agg/i).test(camp)) winningCampaign = 'aggregator';
-        else if ((/ban|criteo|dis/i).test(camp)) {
-            winningCampaign = 'display';
-            xbLastBanSource && /esp/i.test(xbLastBanSource.split('|').pop()) && $('body').append('<script src="https://tracking.esp-srv.de/Trackers/eventtracker/a:5446413e-9d60-4b60-b6b6-7c086def3350/e:54464335-e6f0-4b89-94fd-7f396def3350/uid:'+window.CATTParams.BookingRef+'/value:'+window.CATTParams.BookingValue+'"></script>')
-                                                                                $('body').append('<script src="https://tracking.esp-srv.de/Trackers/eventtracker/a:5446413e-9d60-4b60-b6b6-7c086def3350/e:5446474a-3514-40b2-80b1-07a16def3350/uid:'+window.CATTParams.BookingRef+'/value:'+window.CATTParams.BookingValue+'"></script>');
-        }
-        else if ((/email|newsletter/i).test(camp)) winningCampaign = 'eCRM';
-        else if ((/cp|ppc|gclid/i).test(camp)) winningCampaign = 'PPC';
-        else if ((/soc|twitter/i).test(camp)) winningCampaign = 'social';
-        else if (/ret/i.test(camp)) {
-            // Tracking is done in criteo tag
-            winningCampaign = 'retargeting';
-        }
-    }
-
-} catch (e){if (typeof console != "undefined") console.log("DE NEC Conf Cookie Attr: "+e)}
-
-

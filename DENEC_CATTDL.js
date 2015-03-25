@@ -120,6 +120,10 @@
             || ''
         ;cdpm['pagetimestamp'] = Date.now();
 
+        cdpm['roomtype'] = cdpm.roomtype
+            || jQ('p i.icon.icon-uniE663').next().text()
+            || ''
+
         window.CATTDL.CATTParams = cdpm;
     } catch(e) {
         var msg = 'GTM CATTDL Core: '+e; console && ((console.error)?console.error(msg):console.log(msg));
