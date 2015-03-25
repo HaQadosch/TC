@@ -139,7 +139,7 @@ try{
         var cdpm = cdl.CATTParams;
         cdl.DL_attr_aff = {
             articlenb     : cdpm.accomcode || "1",
-            productname : /flight/i.test(cdpm.lob || '')?((cdpm.brand || '')+' '+(cdpm.lob || '')+' Buchung '+(cdpm.region || '')+' für '+(cdpm.paxtotal || '')+' Personen'):((cdpm.brand || '')+' '+(cdpm.lob || '')+' de '+(cdpm.region || '')+' '+(cdpm.paxtotal || '')+' Menschen'),
+            productname : (cdpm.brand || '')+' '+(cdpm.lob || '')+' Buchung '+(cdpm.region || '')+' für '+(cdpm.paxtotal || '')+' Personen',
             category     : cdpm.lob || '',
             quantity     : 1,
             singlePrice : cdpm.bookingvalue || '',
@@ -148,7 +148,7 @@ try{
             property2     : /hotel/i.test(cdpm.lob || '')?(cdpm.region || cdpm.cdpm.resortsearched || ''):(cdpm.destinationairportselected || ''),
             property3     : cdpm.duration || '',
             property4     : cdpm.deptdate || '',
-            property5     : /hotel/i.test(cdpm.lob || '')?(cdpm.roomtype || ''):(cdpm.carrier || ''),
+            property5     : /hotel/i.test(cdpm.lob || '')?(cdpm.hotelname || ''):(cdpm.carrier || ''),
             order         : cdpm.bookingref || (Math && Math.random()) || '1',
             voucher     : cdpm.voucher || '',
             site         : '5649',
