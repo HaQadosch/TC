@@ -183,3 +183,63 @@
     return jQ && cdl && ctdl
 }(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_criteo))
 </script>
+
+/* Vacances-Paques */
+<script id='gtm_CriteoPaques'>
+(function gtm_CriteoDL(cdl, dl, jQ) {
+    'use strict'
+    if (cdl && dl && jQ) try {
+        var cdpm = cdl.CATTParams || '';
+        var tagType = 'srp';
+        cdl.DL_criteo = {
+            account     : 14991,
+            siteType     : 'd',
+            event         : 'viewList',
+            requiresdom : 'yes',
+            itemsrp     : (function (){
+                var items = ($('div.tcrow > div > div.bloc_sejours_famille > p.image').map(function(i, e){return (/_\w([^_]*).jpg/i.exec(jQ(e).attr('data-offer-image') || '') || ['']).pop()}) || []).slice(0, 3) || [];
+                return items.length > 2 && [items[0], items[1], items[2]] || [];
+            }()),
+            dedup         : /criteo/i.test(cdpm.attribution && cdpm.attribution.utm_source || '')?1:0,
+            cin         : '',
+            cout         : '',
+            email         : (jQ('input[type=hidden][name=email]').val() || '').replace(/\s*/g, '').toLowerCase() || jQ('a[href*=mailto]').filter(function(){return !/Contactez/i.test($(this).text())}).text() || '',
+            script         : {
+                status     : 'not fired',
+                url     : '//static.criteo.net/js/ld/ld.js'
+            }
+        }
+    } catch(e) {
+        cdl.error("GTM DL_criteo Paques: "+e)
+    } finally {
+        dl.push({event: 'DL_criteo '+cdpm.pageid});
+    }
+    return cdl && dl && jQ && cdl.DL_criteo
+}(window.CATTDL, window.externaldataLayer, window.jQuery));
+
+(function gtm_criteoSRP(jQ, cdl, ctdl){
+    'use strict'
+    if (jQ && cdl && ctdl) try{
+        jQ.ajaxSetup({cache: true});
+        jQ.getScript && jQ.getScript(ctdl.script.url, function gtm_criteoScript(){
+            window.criteo_q = window.criteo_q || [];
+            if (ctdl.email)  { window.criteo_q.push(
+                { event: "setAccount", account: ctdl.account },
+                { event: "setSiteType", type: ctdl.siteType },
+                { event: "setEmail", email: [ctdl.email]},
+                { event: ctdl.event, item: ctdl.itemsrp},
+                { event: "viewSearch", checkin_date:ctdl.cin, checkout_date:ctdl.cout}
+            )} else { window.criteo_q.push(
+                { event: "setAccount", account: ctdl.account },
+                { event: "setSiteType", type: ctdl.siteType },
+                { event: ctdl.event, item: ctdl.itemsrp},
+                { event: "viewSearch", checkin_date:ctdl.cin, checkout_date:ctdl.cout}
+            )};
+            ctdl.script.status = 'fired'
+        })
+    } catch(err) {
+        cdl.error('GTM Criteo SRP Paques: '+err)
+    }
+    return jQ && cdl && ctdl
+}(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_criteo))
+</script>
