@@ -165,6 +165,127 @@ try{
 }(window.CATTDL, window.jQuery, !window.CATTDL?!1:window.CATTDL.DL_xpct))
 </script>
 
+
+SRP SEO
+// BEGIN XPCT-Tracking ************************************************************************************
+// 2014-05-14 Stefan Schaefer
+try{
+    // Writing ViewPixel and setting ClickPixelCookie when user leaves page
+    // This makes sure, the entire page (with iff codes) is present
+    $(window).unload(function(){
+        function setCookie( cookie_name, cookie_value,
+                            lifespan_in_days, valid_domain )
+        {
+            var domain_string = valid_domain ?
+                ("; domain=" + valid_domain) : '' ;
+            document.cookie = cookie_name +
+                "=" + ( cookie_value ) +
+                "; max-age=" + 60 * 60 *
+                24 * lifespan_in_days +
+                "; path=/" + domain_string ;
+        }
+
+        var listId = '';
+        var web = 'NEC_DE';
+        var productType = '?';
+        // Hotel or package booking? -> selected tab gives answer, different dom selection later in each loop
+        if ((/hotel/i).test($('#tabs').find('.activeTab').attr('id'))){
+            productType = 'H';
+            listId = '#c_hotel';
+        }else if ((/package/i).test($('#tabs').find('.activeTab').attr('id'))){
+            productType = 'P';
+            listId = '#c_package';
+        }
+        var supplierName = 'TT';
+        var pos = '';
+        var currentPos = 1;
+        var iffPos = '';
+        var matches;
+        $(listId).find('.tcroto-hotel').each(function(index) {
+            if($( this ).text().trim().length > 0){
+                // Parsing for IFF-Code
+                var supplierId = $(this).find('.hotelcard a').attr('href').split('/hotels/')[1].split('-')[0];
+                iffPos += supplierId + '@' + currentPos + '|';
+                pos += '&pos' + (currentPos++) + '=' + supplierId;
+            }
+        });
+
+        // Setting Cookie for tracking of click (is done on ACCOM Page)
+        setCookie('xpctIffPos', iffPos, 30, '.neckermann-reisen.de');
+        // Writing ViewPixel
+        document.write('<img src="http://tracker.xpct.de/viewPixel.gif?web=' + web + '&product_type=' + productType + '&supplier_name=' + supplierName + pos + '" width="1" height="1" style="height: 1px; width: 1px; display: hidden" />');
+    });
+} catch(e){ console.log("DE NEC SEO XPCT Tag 1 // XPCT-Tracking: " + e); }
+
+<script id='gtm_XPCT'>
+(function gtm_XPCTDL(cdl, jQ) {
+    'use strict';
+    if (cdl && jQ) try {
+        cdl.DL_xpct = {};
+
+    } catch(e){
+        cdl.error('GTM XPCT DL: '+e);
+    }
+    return cdl && jQ && cdl.DL_xpct;
+}(window.CATTDL, window.jQuery));
+
+(function gtm_XPCT(cdl, jQ, xpdl) {
+    'use strict';
+    if (jQ) try {
+        jQ(window).unload(function(){
+            function setCookie( cookie_name, cookie_value, lifespan_in_days, valid_domain ) {
+                var domain_string = valid_domain ?
+                    ("; domain=" + valid_domain) : '' ;
+                document.cookie = cookie_name +
+                    "=" + ( cookie_value ) +
+                    "; max-age=" + 60 * 60 *
+                    24 * lifespan_in_days +
+                    "; path=/" + domain_string ;
+            };
+            var listId = '';
+            var web = 'NEC_DE';
+            var productType = '?';
+            // Hotel or package booking? -> selected tab gives answer, different dom selection later in each loop
+            if ((/hotel/i).test($('#tabs').find('.activeTab').attr('id'))){
+                productType = 'H';
+                listId = '#c_hotel';
+            }else if ((/package/i).test($('#tabs').find('.activeTab').attr('id'))){
+                productType = 'P';
+                listId = '#c_package';
+            }
+            var supplierName = 'TT';
+            var pos = '';
+            var currentPos = 1;
+            var iffPos = '';
+            var matches;
+            jQ(listId).find('.tcroto-hotel').each(function(index) {
+                if(jQ( this ).text().trim().length > 0){
+                    // Parsing for IFF-Code
+                    var supplierId = $(this).find('.hotelcard a').attr('href').split('/hotels/')[1].split('-')[0];
+                    iffPos += supplierId + '@' + currentPos + '|';
+                    pos += '&pos' + (currentPos++) + '=' + supplierId;
+                }
+            });
+
+            // Setting Cookie for tracking of click (is done on ACCOM Page)
+            setCookie('xpctIffPos', iffPos, 30, '.neckermann-reisen.de');
+            jQuery('body').append('<img src="//tracker.xpct.de/viewPixel.gif?web=' + web + '&product_type=' + productType + '&supplier_name=' + supplierName + pos + '" width="1" height="1" style="height: 1px; width: 1px; display: hidden" />');
+
+            if (xpdl) window.CATTDL.DL_xpct = {
+                pixel : {
+                    src : '//tracker.xpct.de/viewPixel.gif?web=' + web + '&product_type=' + productType + '&supplier_name=' + supplierName + pos,
+                    status: 'fired'
+                }
+            }
+        });
+    } catch(e) {
+        cdl.error('GTM gtm_XPCT: '+e);
+    }
+    return cdl && jQ && xpdl;
+}(window.CATTDL, window.jQuery, !window.CATTDL?!1:window.CATTDL.DL_xpct))
+</script>
+
+
 ACCOM
 // BEGIN XPCT-Tracking *************************************************************************************
 // 2014-05-14 Stefan Schaefer
