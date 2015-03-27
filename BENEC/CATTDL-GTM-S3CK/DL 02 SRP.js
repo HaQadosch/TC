@@ -53,8 +53,8 @@
 					}
 				};		
 
-		cdpm['deptairport'] = ctpm.DepartureAirportSelected && ctpm.DepartureAirportSelected.toLowerCase() || 'any';
-		cdpm['destination'] = ctpm.Destination || 'any';
+		cdpm['deptairport'] = ctpm.DepartureAirportSelected && ctpm.DepartureAirportSelected.toLowerCase() || '';
+		cdpm['destination'] = ctpm.Destination || '';
 		cdpm['sortoption'] = (jQ('label.sort-by').find('select[id*=PagerSort]').find('option[selected="selected"]').eq(0).attr('sortby') || '').replace('-','') || ''
 		cdpm['sessionid'] = ctpm.SessId || '';
 
@@ -81,11 +81,21 @@
 		cdpm['deptmthstart'] = cdpm.deptmth && +new Date((cdpm.deptmth).replace(/(\d{4})(\d{2})/,'$1-$2-01')) || 0;
 		var nextmonth = deptmthstart && new Date(deptmthstart) || 0; nextmonth.setMonth(nextmonth.getMonth()+1);
 		cdpm['deptmthend'] = cdpm.deptmthstart && nextmonth && (+nextmonth-24*60*60*1000) || 0;
-		var depwkstring = (/\d+[^_]/.exec(unescape((/pr_period([^&]+)/.exec(jQuery('select#QsmChangeSelect_prXperiod').find('[selected="selected"]').attr('value')) || ['']).pop())) || ['']).pop()			
+		var depwkstring = (/\d+[^_]/.exec(unescape((/pr_period([^&]+)/.exec(jQ('select#QsmChangeSelect_prXperiod').find('[selected="selected"]').attr('value')) || ['']).pop())) || ['']).pop()			
 		cdpm['depwkstart'] = +(depwkstring && new Date(depwkstring.replace(/(\d{4})(\d{2})(\d{2})/,'$1-$2-$3')) || 0);
 		cdpm['depwkend'] = depwkstart && +new Date(depwkstart+6*24*60*60*1000) || 0;
+		cdpm['starrating'] = []; jQuery('ul#ExtraMultiSelectItems_XpkXownratingminimum').find('[class*="selected"]').find('[id*="QsmMultiSelect"]').each(function(e){
+			cdpm.starrating.push(jQ(this).attr('value'));
+		});
+		cdpm['boardbasis'] = []; 
+		jQuery('div.qsm-criteria.qsm-criteria-multiselect[critid="pr_boardtypes"]').find('[class*="selected"]').each(function(e){
+			cdpm.boardbasis.push((/[^(]+/.exec((jQ(this).text() || '') || ['']).pop().trim()));
+		});
+		jQuery('div.qsm-criteria.qsm-criteria-multiselect[critid*="BoardType"]').find('[class*="selected"]').each(function(e){
+			cdpm.boardbasis.push((/[^(]+/.exec((jQ(this).text() || '') || ['']).pop().trim()));
+		});
 
-		var srpresults = []
+		cdpm['srpresults'] = []
 		jQ('ul#ListerContainer').children().each(function(e){
 			var res = jQ(this)
 			var accomdeptdate = (/\d+\/\d+\/\d+/.exec(res.find('span[class="departure-date"]').text()) || []).pop()
