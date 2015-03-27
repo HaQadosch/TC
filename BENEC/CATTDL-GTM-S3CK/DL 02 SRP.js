@@ -78,7 +78,9 @@
 
 		cdpm['deptmth'] = (/\d+/.exec(unescape((/pr_month([^&]+)/.exec(jQ('select#QsmChangeSelect_prXmonth').find('[selected="selected"]').attr('value')) || ['']).pop())) || ['']).pop()
 			|| ''	
-		cdpm['deptmthstart'] = cdpm.deptmth && +new Date((cdpm.deptmth).replace(/(\d{4})(\d{2})/,'$1-$2-01')) || 0
+		cdpm['deptmthstart'] = cdpm.deptmth && +new Date((cdpm.deptmth).replace(/(\d{4})(\d{2})/,'$1-$2-01')) || 0;
+		var nextmonth = deptmthstart && new Date(deptmthstart) || 0; nextmonth.setMonth(nextmonth.getMonth()+1);
+		cdpm['deptmthend'] = cdpm.deptmthstart && nextmonth && (+nextmonth-24*60*60*1000) || 0;
 		var depwkstring = (/\d+[^_]/.exec(unescape((/pr_period([^&]+)/.exec(jQuery('select#QsmChangeSelect_prXperiod').find('[selected="selected"]').attr('value')) || ['']).pop())) || ['']).pop()			
 		cdpm['depwkstart'] = +(depwkstring && new Date(depwkstring.replace(/(\d{4})(\d{2})(\d{2})/,'$1-$2-$3')) || 0);
 		cdpm['depwkend'] = depwkstart && +new Date(depwkstart+6*24*60*60*1000) || 0;
