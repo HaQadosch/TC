@@ -78,6 +78,9 @@
 
 		cdpm['deptmonth'] = (/\d+/.exec(unescape((/pr_month([^&]+)/.exec(jQ('select#QsmChangeSelect_prXmonth').find('[selected="selected"]').attr('value')) || ['']).pop())) || ['']).pop()
 			|| ''	
+		var depwkstring = (/\d+[^_]/.exec(unescape((/pr_period([^&]+)/.exec(jQuery('select#QsmChangeSelect_prXperiod').find('[selected="selected"]').attr('value')) || ['']).pop())) || ['']).pop()			
+		var depwkstart = +(depwkstring && new Date(depwkstring.replace(/(\d{4})(\d{2})(\d{2})/,'$1-$2-$3')) || 0);
+		var depwkend = depwkstart && +new Date(depwkstart+6*24*60*60*1000) || 0;
 
 		var srpresults = []
 		jQ('ul#ListerContainer').children().each(function(e){
