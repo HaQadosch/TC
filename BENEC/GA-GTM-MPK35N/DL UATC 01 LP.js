@@ -28,16 +28,18 @@
                     dimension19     : {'errorcode'      : cdpm.errors && cdpm.errors.errormsg && cdpm.errors.errormsg.length > 0 && ((/\d+/.exec(cdpm.errors.errorcode) || '').pop() || "unknown") || ""},
                     dimension30     : {'utmaguid'       : cdpm.utmaguid || ''},
                     dimension31     : {'utmbguid'       : cdpm.utmbguid || ''},
-                    dimension31     : {'utmbguid'       : cdpm.utmbguid || ''},
                     dimension51     : {'gaguid'         : cdpm.gaguid || ''},
                     //dimension32     : {'emailguid'      : cdpm.emailguid || ''},
+                    dimension65     : {'pagetimestamp'  : cdl.gadate(cdpm.pagetimestamp || 0)+' '+cdl.gatime(cdpm.pagetimestamp || 0) || ''},                    
                     dimension75     : {'unixtimestamp'  : ''+cdpm.pagetimestamp || ''},
                     dimension102    : {'pagecontext'    : cdpm.pagecontext || ''},
-                    dimension119    : {'pagetimestamp'  : cdl.gadate(cdpm.pagetimestamp || 0)+' '+cdl.gatime(cdpm.pagetimestamp || 0) || ''},
-                    dimension132  : {'errormessage'   : cdpm.errors && cdpm.errors.errormsg || ''}                                
+                    dimension104    : {'searchapp'                  : ''+cdpm.searchapp || ''},                    
+                    dimension105    : {'initialholidaytype'         : ''+cdpm.initialholidaytype || ''},                    
+                    dimension115    : {'errormessage'   : cdpm.errors && cdpm.errors.errormsg || ''}                                
                 },
                 events : {
-                internalcampaignid  : {'category': 'InternalCampaign', 'action': cdpm.internalcampaignid || '', 'label': lochref, 'value': 1, 'noninteraction': true}
+                internalcampaignid  : {'category': 'InternalCampaign', 'action': cdpm.internalcampaignid || '', 'label': lochref, 'value': 1, 'noninteraction': true, 'page': (locpathname || '')+(locsearch || '')},
+                errorcode           : {'category': 'Errors', 'action': cdpm.errors && Object.keys(cdpm.errors) && (cdpm.errors.errorcode || '')+(cdpm.errors.errorcode && cdpm.errors.errormsg && ' ' || '')+(cdpm.errors.errormsg || '') || '', 'label': lochref, 'value': 1, 'noninteraction': true, 'page': (locpathname || '')+(locsearch || '')}
                 }
             }
         };
