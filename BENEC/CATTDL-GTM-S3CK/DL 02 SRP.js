@@ -102,7 +102,7 @@
 			var accomlink = (res.find('[class="booking-button"]').find('a').attr('href') || '').toLowerCase();
 			var accomlinkprm = {}; accomlink.split(/\?|&|#/g).slice(1).forEach(function searches(prm, _){ var cur = /([^=]+)=(.*)/i.exec(prm); if (cur && cur.length > 1) accomlinkprm[cur[1]]=cur[2]})
 
-			srpresults.push({
+			cdpm.srpresults.push({
 					accomcode 		: accomlinkprm.codeto || ''
 					,accomname 		: res.find('div[class="header-border"]').find('[id*=QsmSelect]').attr('title') || ''
 					,destination 	: (res.find('p[class="lro"]').text() || '').trim()
