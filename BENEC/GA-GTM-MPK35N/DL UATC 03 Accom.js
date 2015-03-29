@@ -10,7 +10,7 @@
         var locsearch = loc.search || '';
         var lochref = loc.href || document.URL || '';
 
-        var roomtype = cdpm.roomtype || [];
+        var roomcodes = cdpm.roomcodes || [];
 
         var vpagepath = '/vp/en/'+(cdpm.lob || 'lob')+'/'+(cdpm.holidaytype || 'holidaytype')+'/'+(cdpm.pageid || 'pageid');
         var vpqsp_cat   = ('ss_cat='+ 
@@ -98,12 +98,12 @@
                     dimension52     : {'pagelanguage'               : cdpm.sitelanguage || ''},
                     dimension53     : {'sessionlanguage'            : cdpm.sitelanguage || ''},     
                     dimension58     : {'accomguid'                  : cdpm.accomcode && (/\d+/.exec(cdpm.accomcode) || ['']).pop() || ''},                      
-                    dimension59     : {'room1code'                  : roomtype && roomtype[0] || ''},
-                    dimension60     : {'room2code'                  : roomtype && roomtype[1] || ''},
-                    dimension61     : {'room3code'                  : roomtype && roomtype[2] || ''},
-                    dimension62     : {'room4code'                  : roomtype && roomtype[3] || ''},
-                    dimension63     : {'room5code'                  : roomtype && roomtype[4] || ''},
-                    dimension64     : {'room6code'                  : roomtype && roomtype[5] || ''},
+                    dimension59     : {'room1code'                  : roomcodes && roomcodes[0] || ''},
+                    dimension60     : {'room2code'                  : roomcodes && roomcodes[1] || ''},
+                    dimension61     : {'room3code'                  : roomcodes && roomcodes[2] || ''},
+                    dimension62     : {'room4code'                  : roomcodes && roomcodes[3] || ''},
+                    dimension63     : {'room5code'                  : roomcodes && roomcodes[4] || ''},
+                    dimension64     : {'room6code'                  : roomcodes && roomcodes[5] || ''},
                     dimension65     : {'pagetimestamp'              : cdl.gadate(cdpm.pagetimestamp || 0)+' '+cdl.gatime(cdpm.pagetimestamp || 0) || ''},
                     dimension68     : {'discountvalue'              : cdpm.discountvalue || ''},
                     //dimension73     : {'deptdatestart'              : cdl.gadate && cdl.gadate(deptdatestart || 0)},
