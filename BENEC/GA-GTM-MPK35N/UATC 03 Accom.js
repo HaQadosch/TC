@@ -74,7 +74,15 @@
             
             for (evt in uawa.events) {
                 var gevt = uawa.events[evt]
-                if (gevt.action) (trc.send('event', gevt.category, gevt.action,  gevt.label, gevt.value, {'nonInteraction': gevt.noninteraction}));
+                if (gevt.action) (trc.send('event', gevt.category, gevt.action,  gevt.label, gevt.value
+                    , {'page': gevt.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                        ,'dimension51': cdpm.gaguid || ''
+                        ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                        ,'dimension75': ''+(window.Date && window.Date.now() || 0)
+                        ,'dimension118': (location.pathname || '')
+                        ,'dimension119': (location.search || '') 
+                    }
+                    , {'nonInteraction': gevt.noninteraction}));
             };
      
         });
