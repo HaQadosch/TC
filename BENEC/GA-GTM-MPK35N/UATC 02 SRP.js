@@ -65,14 +65,22 @@
             
             for (evt in uawa.events) {
                 var gevt = uawa.events[evt]
-                if (gevt.action) (trc.send('event', gevt.category, gevt.action,  gevt.label, gevt.value, {'nonInteraction': gevt.noninteraction}));
-            }
+                if (gevt.action) (trc.send('event', gevt.category, gevt.action,  gevt.label, gevt.value
+                    , {'page': gevt.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                        ,'dimension51': cdpm.gaguid || ''
+                        ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                        ,'dimension75': ''+(window.Date && window.Date.now() || 0)
+                        ,'dimension118': (location.pathname || '')
+                        ,'dimension119': (location.search || '') 
+                    }
+                    , {'nonInteraction': gevt.noninteraction}));
+            };
             dl.push({'event': 'UATC SRP'});
         })
     } catch(e) {
         cdl.error('GTM BE NEC UATC SRP: '+e)
     } finally {
-        window.externalLayer && externalLayer.push({'event' : 'uapageview'+'|'+(cdl.CATTParams && cdl.CATTParams.pageid || 'home')+'|'+(cdl.CATTParams && cdl.CATTParams.urlparams && cdl.CATTParams.urlparams.pathname || '/')})
+        window.externalLayer && externalLayer.push({'event' : 'uapageview'+'|'+(cdl.CATTParams && cdl.CATTParams.pageid || 'home')+'|'+(location.pathname || '/')})
     }
     return cdl && uadl
 }(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_uatc, window, document, window.dataLayer || []))
