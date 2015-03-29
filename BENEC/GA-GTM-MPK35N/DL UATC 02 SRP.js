@@ -56,16 +56,12 @@
                 page            : vppage,
                 location        : lochref,
                 metrics         : {
-                    metric1         : {'paxadult'                   : parseInt(cdpm.paxadult) || 0},
-                    metric2         : {'paxchild'                   : parseInt(cdpm.paxchild) || 0},
-                    metric3         : {'paxinfant'                  : parseInt(cdpm.paxinfant) || 0},
-                    metric4         : {'paxtotal'                   : parseInt(cdpm.paxtotal) || 0},
-                    metric5         : {'rooms'                      : parseInt(cdpm.rooms) || 0},
-                    metric6         : {'searchresultspagenbr'       : parseInt(cdpm.searchresultspagenbr) || 0},
-                    metric7         : {'searchresultspages'         : parseInt(cdpm.searchresultspages) || 0},
-                    metric8         : {'searchresultsperpage'       : parseInt(cdpm.searchresultsperpage) || 0},
-                    metric9         : {'searchresultstotal'         : parseInt(cdpm.searchresultstotal) || 0}
-                    //metric15        : {'hitcount'       : 1}
+                    metric1         : {'paxadult'                   : parseInt(cdpm.paxadult || 0)},
+                    metric2         : {'paxchild'                   : parseInt(cdpm.paxchild || 0)},
+                    metric3         : {'paxinfant'                  : parseInt(cdpm.paxinfant || 0)},
+                    metric4         : {'paxtotal'                   : parseInt(cdpm.paxtotal || 0)},
+                    metric5         : {'rooms'                      : parseInt(cdpm.rooms || 0)},
+                    metric15        : {'hitcount'       : 1}
                 },
                 dimensions      : {
                     dimension1      : {'deptairport'                : cdpm.deptairport || 'any'},
@@ -73,7 +69,7 @@
                     dimension4      : {'searchresultstop3'          : cdpm.searchresultstop3 || ''},
                     dimension5      : {'deptdate'                   : cdl.gadate && cdl.gadate(cdpm.deptdate || 0) || ''},
                     dimension6      : {'appserver'                  : cdpm.appserver || ''},
-                    dimension7      : {'boardbasis'                 : cdpm.boardbasis || 'any'},
+                    dimension7      : {'boardbasis'                 : boardbasis || 'any'},
                     //dimension8      : {'budget'                     : cdpm.budget || 'any'},
                     dimension9      : {'duration'                   : ''+(cdpm.duration || 'any')},
                     dimension10     : {'lob'                        : cdpm.lob || ''},
@@ -123,10 +119,15 @@
         var cdsr = cdl.CATTParams && cdl.CATTParams.srpresults || [];
         cdl.DL_uatc.webanalytics.nbrimpressions = cdsr.length || cdpm.searchlist || 0
         cdl.DL_uatc.webanalytics.addimpression = [];
-        var curCDSR = {};
-        var params = JSON.parse(cdl.ckget('gtm_params') || '{}');
-        var srpsortlist = params.srplist || 'search';
 
+        var params = JSON.parse(cdl.ckget('gtm_params') || '{}');
+        params.srplist = 'search';
+        params.sortoption = cdpm.sortoption || '';
+        params.srpresults = cdsr || [];
+        CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', '.neckermann.be');
+
+        var srpsortlist = 'search';
+        var curCDSR = {};
         for (var i = 0; i < cdl.DL_uatc.webanalytics.nbrimpressions; i++){
             if (cdsr[i]) {
                 curCDSR = cdsr[i]
