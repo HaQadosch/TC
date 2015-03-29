@@ -38,7 +38,10 @@
                             '&duration='+(cdpm.duration || '')+
                             '&sortoption='+(cdpm.sortoption || '')+
                             '&rooms='+(cdpm.rooms || '')+                            
-                            '&sessionid='+(cdpm.sessionid || '')                            
+                            '&sessionid='+(cdpm.sessionid || '')+
+                            '&appserver='+(cdpm.appserver || '')+
+                            '&searchapp='+(cdpm.searchapp || '')+                            
+                            '&sitelanguage='+(cdpm.sitelanguage || '')                                                       
                         ).toLowerCase();
         var vppage = (vpagepath || '') + '?' + (vpqsp_cat || '') +'&'+ (vpqsp_st || '') +'&'+ (vpqsp_p || '');
 
@@ -124,6 +127,7 @@
         params.srplist = 'search';
         params.sortoption = cdpm.sortoption || '';
         params.srpresults = cdsr || [];
+        params.searchresultspagenbr = cdpm.searchresultspagenbr || '';
         CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', '.neckermann.be');
 
         var srpsortlist = 'search';
