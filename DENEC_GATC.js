@@ -630,6 +630,8 @@
             window._gaq.push(['CATTGATC._trackEvent', 'Errors', errorLabel, window.document.referrer, 1, true]);
         }
         window.opCreative && window._gaq.push(['CATTGATC._trackEvent', 'OptimostCreative', window.opCreative, window.document.href, 1, true]);
+        var cdpm = window.CATTDL && window.CATTDL.CATTParams || '';
+        cdpm && window._gaq.push(['CATTGATC._trackEvent', 'accommodationDetail', cdpm.lob || '', (cdpm.accomcode || '') + '|' + (cdpm.accomname) + '|' + (cdpm.destination) + '|' + (cdpm.accomresort || ''), 1, true]);
 
     } catch(e) {
         console.error('GTM GATC: '+ e);
