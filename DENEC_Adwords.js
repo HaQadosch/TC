@@ -36,17 +36,17 @@ src && jQ().append && jQ('body').append(jQ('<img>', {
         var cdpm = cdl.CATTParams;
         cdl.DL_netsocadwords = {
             bookingvalue : cdpm.bookingvalue || '',
-            img01 : { conv_id : '1066595072', conv_label : 'F8dRCLjhigMQgObL_AM', src : '//www.googleadservices.com/pagead/conversion/_i_/?value=_v_&amp;label=_l_&amp;guid=ON&amp;script=0' },
-            img02 : { conv_id : '1066594832', conv_label : 'JsCOCIyu9AIQkOTL_AM', src : '//www.googleadservices.com/pagead/conversion/_i_/?value=_v_&amp;label=_l_&amp;guid=ON&amp;script=0' },
-            img03 : { conv_id : '1007871361', conv_label : 'aFzQCM-O4AIQgcvL4AM', src : '//www.googleadservices.com/pagead/conversion/_i_/?value=_v_&amp;label=_l_&amp;guid=ON&amp;script=0' },
-            img04 : { conv_id : '1003918547', conv_label : 'CB_9CK2O-wIQ06na3gM', src : '//www.googleadservices.com/pagead/conversion/_i_/?value=_v_&amp;label=_l_&amp;guid=ON&amp;script=0' },
-            img05 : { conv_id : '1066594952', conv_label : 'ezCFCJSt9AIQiOXL_AM', src : '//www.googleadservices.com/pagead/conversion/_i_/?value=_v_&amp;label=_l_&amp;guid=ON&amp;script=0' },
-            img06 : { conv_id : '1066595012', conv_label : 'VdL2CJDmigMQxOXL_AM', src : '//www.googleadservices.com/pagead/conversion/_i_/?value=_v_&amp;label=_l_&amp;guid=ON&amp;script=0' },
-            img07 : { conv_id : '1000396802', conv_label : 'Dd7nCM65vgMQgrCD3QM', src : '//www.googleadservices.com/pagead/conversion/_i_/?value=_v_&amp;label=_l_&amp;guid=ON&amp;script=0' },
-            img08 : { conv_id : '997283291', conv_label : 'D1b7CJXNhAMQ26vF2wM', src : '//www.googleadservices.com/pagead/conversion/_i_/?value=_v_&amp;label=_l_&amp;guid=ON&amp;script=0' },
-            img09 : { conv_id : '1011290872', conv_label : 'GTpVCMj9lAMQ-KWc4gM', src : '//www.googleadservices.com/pagead/conversion/_i_/?value=_v_&amp;label=_l_&amp;guid=ON&amp;script=0' },
-            img10 : { conv_id : '1004735623', conv_label : 'TIgCCOn9rAMQh5mM3wM', src : '//www.googleadservices.com/pagead/conversion/_i_/?value=_v_&amp;label=_l_&amp;guid=ON&amp;script=0' },
-            img11 : { conv_id : '999741924', conv_label : '0JViCNTGiwkQ5LPb3AM', src : '//www.googleadservices.com/pagead/conversion/_i_/?value=_v_&amp;label=_l_&amp;guid=ON&amp;script=0'}
+            img01 : { conv_id : '1066595072', conv_label : 'F8dRCLjhigMQgObL_AM', src : '//www.googleadservices.com/pagead/conversion/_i_/?value=_v_&label=_l_&guid=ON&script=0' },
+            img02 : { conv_id : '1066594832', conv_label : 'JsCOCIyu9AIQkOTL_AM', src : '//www.googleadservices.com/pagead/conversion/_i_/?value=_v_&label=_l_&guid=ON&script=0' },
+            img03 : { conv_id : '1007871361', conv_label : 'aFzQCM-O4AIQgcvL4AM', src : '//www.googleadservices.com/pagead/conversion/_i_/?value=_v_&label=_l_&guid=ON&script=0' },
+            img04 : { conv_id : '1003918547', conv_label : 'CB_9CK2O-wIQ06na3gM', src : '//www.googleadservices.com/pagead/conversion/_i_/?value=_v_&label=_l_&guid=ON&script=0' },
+            img05 : { conv_id : '1066594952', conv_label : 'ezCFCJSt9AIQiOXL_AM', src : '//www.googleadservices.com/pagead/conversion/_i_/?value=_v_&label=_l_&guid=ON&script=0' },
+            img06 : { conv_id : '1066595012', conv_label : 'VdL2CJDmigMQxOXL_AM', src : '//www.googleadservices.com/pagead/conversion/_i_/?value=_v_&label=_l_&guid=ON&script=0' },
+            img07 : { conv_id : '1000396802', conv_label : 'Dd7nCM65vgMQgrCD3QM', src : '//www.googleadservices.com/pagead/conversion/_i_/?value=_v_&label=_l_&guid=ON&script=0' },
+            img08 : { conv_id : '997283291', conv_label : 'D1b7CJXNhAMQ26vF2wM', src : '//www.googleadservices.com/pagead/conversion/_i_/?value=_v_&label=_l_&guid=ON&script=0' },
+            img09 : { conv_id : '1011290872', conv_label : 'GTpVCMj9lAMQ-KWc4gM', src : '//www.googleadservices.com/pagead/conversion/_i_/?value=_v_&label=_l_&guid=ON&script=0' },
+            img10 : { conv_id : '1004735623', conv_label : 'TIgCCOn9rAMQh5mM3wM', src : '//www.googleadservices.com/pagead/conversion/_i_/?value=_v_&label=_l_&guid=ON&script=0' },
+            img11 : { conv_id : '999741924', conv_label : '0JViCNTGiwkQ5LPb3AM', src : '//www.googleadservices.com/pagead/conversion/_i_/?value=_v_&label=_l_&guid=ON&script=0'}
         };
     } catch(e){
         cdl.error('GTM NetSoc Adwords DL: '+ e);
@@ -61,7 +61,7 @@ src && jQ().append && jQ('body').append(jQ('<img>', {
             /img/i.test(i) &&
             jQ().append &&
             jQ('body').append(jQ('<img>', {
-                src : awdl[i] && awdl[i].src && awdl[i].src.replace(/_i_/i, awdl[i].conv_id || '').replace(/_l_/i, awdl[i].conv_label || '').replace(/_v_/i, awdl.bookingvalue || '') || '',
+                src : awdl[i] && awdl[i].src && (awdl[i].src = awdl[i].src.replace(/_i_/i, awdl[i].conv_id || '').replace(/_l_/i, awdl[i].conv_label || '').replace(/_v_/i, awdl.bookingvalue || '')) || '',
                 style : 'border-style:none;',
                 alt : 'NetSocAdwords'+i,
                 id : 'NetSocAdwords'+i,
