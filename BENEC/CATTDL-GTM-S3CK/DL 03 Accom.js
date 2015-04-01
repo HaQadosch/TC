@@ -21,7 +21,9 @@
 			, "BoardBasis"
 			, "Brochure"
 			, "DeptDate"
+			, "DepartureAirportSelected"
 			, "Destination"
+			, "DestinationAirportSelected"
 			, "DestinationISOCode"
 			, "Duration"
 			, "PaxAdult"
@@ -58,16 +60,22 @@
 
 		cdpm['roomcodes'] = ctpm.RoomType && ctpm.RoomType.split('|') || [];
 		cdpm['sessionid'] = ctpm.SessId || '';
-		cdpm['pricetotal'] = (/\d+/.exec((jQuery('p.price.big-font') && jQuery('p.price.big-font').eq(0)).text() || '') || []).pop()
-		cdpm['pricepp'] = (/\d+/.exec((jQuery('p.price.big-font') && jQuery('p.price.big-font').eq(1)).text() || '') || []).pop()
+		cdpm['pricetotal'] = (/\d+/.exec((jQuery('p.price.big-font') && jQuery('p.price.big-font').eq(0)).text() || '') || []).pop();
+			|| (/\d+/.exec((jQuery('div.price-total-line').find('[class="price"]').text() || '').replace('.','')) || []).pop();
+		cdpm['pricepp'] = (/\d+/.exec((jQuery('p.price.big-font') && jQuery('p.price.big-font').eq(1)).text() || '') || []).pop();
+		cdpm['accomcountry'] = ctpm.Destination || '';
+		cdpm['accomregion'] = ctpm.Region || '';
+		cdpm['accomresort'] = ctpm.AccomResort || '';
+		cdpm['destairport'] = ctpm.DestinationAirportSelected || '';
+		cdpm['depairport'] = ctpm.DepartureAirportSelected || '';
 
 		window.CATTDL.CATTParams = cdpm;
 	} catch(e) {
-		cdl.error('GTM CATTDL LP: '+e)
+		cdl.error('GTM CATTDL Accom: '+e)
 	} finally {
 		dl.push({'event': 'pid_'+cdl.CATTParams.pageid});
 		dl.push({'event': 'CATTDL Accom'})
-		window.gatcDL && gatcDL.push({'event': 'CATTDL LP'})
+		window.gatcDL && gatcDL.push({'event': 'CATTDL Accom'})
 	}
 	return jQ && jQ.extend && cdl
 }(window.jQuery, window.dataLayer, window.CATTDL))
