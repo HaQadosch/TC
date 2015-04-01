@@ -11,7 +11,7 @@
 
         cdl.DL_kayak = {
             type : 'pixeltracking',
-            partnercode : '',
+            partnercode : 'HOTELS4UDOTCOM',
             price : cdpm.bookingvalue || '',
             currency : cdpm.searches && cdpm.searches.currency || cdpm.currency || 'GBP',
             linkid : cdpm.attribution && cdpm.attribution.utm_content || '',
