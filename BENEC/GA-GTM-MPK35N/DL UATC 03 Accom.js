@@ -114,6 +114,9 @@
                     dimension104    : {'searchapp'                  : cdpm.searchapp || ''},
                     dimension105    : {'initialholidaytype'         : cdpm.initialholidaytype || ''},
                     dimension111    : {'pricetotal'                 : ''+cdpm.pricetotal || ''},
+                    dimension112    : {'destinationcountry'         : cdpm.accomcountry || ''},
+                    dimension113    : {'destinationregion'          : cdpm.accomregion || ''},
+                    dimension14     : {'destinationresort'          : cdpm.accomresort || ''},
                     dimension115    : {'errormessage'               : cdpm.errors && cdpm.errors.errormsg || ''},
                     dimension118    : {'realurlpath'                : locpathname || ''},
                     dimension119    : {'realurlparams'              : locsearch || ''}                
