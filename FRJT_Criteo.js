@@ -212,7 +212,7 @@
     } catch(e) {
         cdl.error("GTM DL_criteo Paques: "+e)
     } finally {
-        dl.push({event: 'DL_criteo '+cdpm.pageid});
+        dl.push({event: 'DL_criteo landing seo '+cdpm.pageid});
     }
     return cdl && dl && jQ && cdl.DL_criteo
 }(window.CATTDL, window.externaldataLayer, window.jQuery));
