@@ -1,5 +1,5 @@
 <script>
-(function gtm_gatcSRP(jQ, dl, cdl) {
+(function gtm_gatcHP(jQ, dl, cdl) {
     'use strict'
         try {
             var ctpm = CATTParams || {};
@@ -31,6 +31,12 @@
                 window._gaq.push(['CATTGATC._setCustomVar', 22, 'SessionLanguage', cdpm.sitelanguage, 2]);
             }            
             if (/_utma=/i.test(document.cookie)) {window._gaq.push(['CATTGATC._setCustomVar', 30, 'UtmaGuid', (function(e){var t=/_utma=([^;%=]*)/i.exec(e)&&/_utma=([^;%=]*)/i.exec(e).pop()||false;t=t&&t.split(".")[1];return t||""})(document.cookie), 1]);}
-            if (/_utmb=/i.test(document.cookie)) {window._gaq.push(['CATTGATC._setCustomVar', 35, 'UtmbGuid', (function(e){var t=/_utmb=([^;%=]*)/i.exec(e)&&/_utmb=([^;%=]*)/i.exec(e).pop()||false;return t||""})(document.cookie), 2]);}
             if (/&m_i=/i.test(document.location.search)) {window._gaq.push(['CATTGATC._setCustomVar', 31, 'espID', (function(e){var t=/&m_i=([^&]*)/i.exec(e)&&/&m_i=([^&]*)/i.exec(e).pop()||false;return t||""})(document.location.search), 1]);}
+            if (/_utmb=/i.test(document.cookie)) {window._gaq.push(['CATTGATC._setCustomVar', 35, 'UtmbGuid', (function(e){var t=/_utmb=([^;%=]*)/i.exec(e)&&/_utmb=([^;%=]*)/i.exec(e).pop()||false;return t||""})(document.cookie), 2]);}
+        
+        } catch(e) {
+            cdl.info('GTM GATC HP: '+e)
+        } 
+        return jQ && jQ.extend && cdl
+    }(window.jQuery, window.dataLayer, window.CATTDL))
 </script>
