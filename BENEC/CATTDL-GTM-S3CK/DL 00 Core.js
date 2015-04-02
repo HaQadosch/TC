@@ -1,12 +1,18 @@
 <script>
-(function gtm_cattdlCore(w, dl, loc) {
+//jQuery plugin
+(function($,e,b){var c="hashchange",h=document,f,g=$.event.special,i=h.documentMode,d="on"+c in e&&(i===b||i>7);function a(j){j=j||location.href;return"#"+j.replace(/^[^#]*#?(.*)$/,"$1")}$.fn[c]=function(j){return j?this.bind(c,j):this.trigger(c)};$.fn[c].delay=50;g[c]=$.extend(g[c],{setup:function(){if(d){return false}$(f.start)},teardown:function(){if(d){return false}$(f.stop)}});f=(function(){var j={},p,m=a(),k=function(q){return q},l=k,o=k;j.start=function(){p||n()};j.stop=function(){p&&clearTimeout(p);p=b};function n(){var r=a(),q=o(m);if(r!==m){l(m=r,q);$(e).trigger(c)}else{if(q!==m){location.href=location.href.replace(/#.*/,"")+q}}p=setTimeout(n,$.fn[c].delay)}$.browser.msie&&!d&&(function(){var q,r;j.start=function(){if(!q){r=$.fn[c].src;r=r&&r+a();q=$('<iframe tabindex="-1" title="empty"/>').hide().one("load",function(){r||l(a());n()}).attr("src",r||"javascript:0").insertAfter("body")[0].contentWindow;h.onpropertychange=function(){try{if(event.propertyName==="title"){q.document.title=h.title}}catch(s){}}}};j.stop=k;o=function(){return a(q.location.href)};l=function(v,s){var u=q.document,t=$.fn[c].domain;if(v!==s){u.title=h.title;u.open();t&&u.write('<script>document.domain="'+t+'"<\/script>');u.close();q.location.hash=v}}})();return j})()})(jQuery,this);
+</script>
+
+<script>
+(function gtm_cattdlCore(w, dl, loc, jQ) {
     'use strict';
     //setTimeout(function(){
+    if (jQ) {
         try{
             w.CATTDL = w.CATTDL || {};
             var cdpm = w.CATTDL.CATTParams || {};
             var ctpm = w.CATTParams || {};
-            var keeps = {}          
+            var keeps = {};
 
             w.CATTDL = {
                 twlh    : function twlh(rg) {return RegExp.prototype.test.call(rg, loc.host)},
@@ -94,21 +100,56 @@
                 'lister'            : 'search'
                 ,'listersolr'       : 'search'
                 ,'detail'           : 'accom'
-                , 'detailsolr'      : 'accom'
-            })[ctpm.PageId] || ctpm.PageId || 'home').toLowerCase();            
+                ,'detailsolr'       : 'accom'
+                , 'pay'				: 'summary'
+            })[ctpm.PageId] || ctpm.PageId || 'home').toLowerCase();
 
             CATTDL.ckset('gtm_cdpm', JSON.stringify(keeps), Infinity, '/', domainName);
-            if (w.jQuery) {jQuery.extend(CATTDL.CATTParams, keeps)}
-            
             window.CATTDL.CATTParams = cdpm
 
+
+            jQuery.extend(CATTDL.CATTParams, keeps);
+
+            //Booking Diaglog pageid
+            if (/BookingDialog.aspx/.test(location.pathname)){
+            	var locationhash = (/[^#s=]+/.exec(window.location.hash) || ["1"]).pop();
+            		cdpm.pageid = ({
+                        "1": "pax",
+                        "2": "cust",
+                        "3": "contacts",
+                        "4": "summary",
+                        "" :  "none"
+                    })[locationhash];
+                 if (cdpm.pageid === 'summary' && !jQ('#defaultPaymentAgreed.go-to.payment-confirmation-button').is('visible')) {
+                 	cdpm.pageid = 'pay'
+                 };
+                jQuery(window).hashchange(function(e){
+                    locationhash = (/[^#s=]+/.exec(window.location.hash) || ["1"]).pop();
+                    var hashstep = ({
+                        "1": "pax",
+                        "2": "cust",
+                        "3": "contacts",
+                        "4": "summary",
+                        "" :  "none"
+                    })[locationhash];
+                   cdpm.pageid = hashstep;
+                   dl.push({'event' : 'core_'+(hashstep || 'pax')})
+                });
+                jQuery('#defaultPaymentAgreed.go-to.payment-confirmation-button').click(function(e){
+                   cdpm.pageid = 'pay';
+                   dl.push({'event' : 'core_pay'});
+                })
+            };
+            // End Booking Dialog pageid
+        
         } catch(e) {
             var msg = 'GTM CATTDL Core: '+e;
             console && ((console.error)?console.error(msg):console.log(msg))
         } finally {
             dl.push({'event': 'core_'+(window.CATTDL.CATTParams && window.CATTDL.CATTParams.pageid || 'home')});
         }
-        return w.CATTDL         
+        return w.CATTDL  
+    }      
     //}, 1000)
-}(window, window.dataLayer, document.location))
+}(window, window.dataLayer, document.location, window.jQuery))
 </script>
