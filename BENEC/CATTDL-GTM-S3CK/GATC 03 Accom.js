@@ -6,7 +6,7 @@
             var cdpm = cdl.CATTParams || {};
 
             var CATTPageId = cdpm.pageid || "accom";
-            var VP = '/VP/'+(cdpm.lob || 'lob')+'/'+(cdpm.holidaytype || 'holidaytype')+'/'+(cdpm.pageid || 'pageid');
+            var VP = '/VP/'+(cdpm.lob || 'lob')+'/'+(cdpm.holidaytype || 'holidaytype')+'/'+CATTPageId);
             var QSP_ST = 'SS_ST='+(cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'_'+(cdpm.accomname || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'_'+(cdpm.accomcode || '');
             var QSP_CAT = 'SS_CAT='+(cdpm.lob || '')+'_'+CATTPageId;
             var QSP_P = 'DeptDate='+(cdl.gadate && cdpm.deptdate && cdl.gadate(cdpm.deptdate) || '').replace(/\//g, '-')
@@ -44,7 +44,7 @@
             if(cdpm.lob){window._gaq.push(['CATTGATC._setCustomVar', 13, 'LOB', cdpm.lob, 3])};
             if(cdpm.holidaytype){window._gaq.push(['CATTGATC._setCustomVar', 14, 'HolidayType', cdpm.holidaytype, 3])};
             if(cdpm.initialholidaytype){window._gaq.push(['CATTGATC._setCustomVar', 15, 'InitialHolidayType', cdpm.holidaytype, 3])};            
-            if(cdpm.pageid){window._gaq.push(['CATTGATC._setCustomVar', 16, 'PageID', cdpm.pageid, 3])};
+            if(CATTPageId){window._gaq.push(['CATTGATC._setCustomVar', 16, 'PageID', CATTPageId, 3])};
             if(cdpm.duration){window._gaq.push(['CATTGATC._setCustomVar', 17, 'Duration', cdpm.duration, 3])};            
             if (cdpm.sitelanguage) {
                 window._gaq.push(['CATTGATC._setCustomVar', 19, 'PageLanguage', cdpm.sitelanguage, 3]);
