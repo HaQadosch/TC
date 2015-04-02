@@ -8,6 +8,7 @@
         var locpathname = loc.pathname || '';
         var locsearch = loc.search || '';
         var lochref = loc.href || document.URL || '';
+        var lochost = loc.host || loc.hostname || '';
 
         var deptdatestart = cdpm.deptwkstart?cdpm.deptwkstart:(cdpm.deptmthstart?cdpm.deptmthstart:(cdpm.deptdate?cdpm.deptdate:0));
         var deptdateend = cdpm.deptwkend?cdpm.deptwkend:(cdpm.deptmthend?cdpm.deptmthend:(cdpm.deptdate?cdpm.deptdate:0));
