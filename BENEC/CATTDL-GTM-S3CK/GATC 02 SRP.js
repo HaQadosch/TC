@@ -5,7 +5,7 @@
             var ctpm = CATTParams || {};
             var cdpm = cdl.CATTParams || {};
 
-            var CATTPageId = window.CATTParams.PageId; if (CATTPageId == "")  CATTPageId = "search";
+            var CATTPageId = cdpm.pageid || "search";
             var VP = '/VP/'+(cdpm.lob || 'lob')+'/'+(cdpm.holidaytype || 'holidaytype')+'/'+(cdpm.pageid || 'pageid');
             var QSP_ST = 'SS_ST='+(cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'_'+(cdl.gadate && cdpm.deptdate && cdl.gadate(cdpm.deptdate) || '').replace(/\//g, '-')+'_'+((cdpm.searchresultstotal == "0")?'nResults':'yResults');
             var QSP_CAT = 'SS_CAT='+((cdpm.lob || '')+'_'+(CATTPageId));
