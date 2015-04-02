@@ -1,82 +1,84 @@
 <script>
 (function gtm_cattdlAccom(jQ, dl, cdl) {
-	'use strict'
-	if (jQ && jQ.extend && cdl) try {
-		var cdpm = cdl.CATTParams || {};
-		var ctpm = window.CATTParams || {};
-		var newPM = {}
+    'use strict'
+    if (jQ && jQ.extend && cdl) try {
+        var cdpm = cdl.CATTParams || {};
+        var ctpm = window.CATTParams || {};
+        var newPM = {}
 
-		cdpm.errors = {}
-		var errorPM = {};
-		errorPM['errorcode'] = (/(^\d+)/.exec(ctpm.ErrorCode) || '') || [].pop() || '';
-		errorPM['errormsg'] = ctpm.ErrorCode || '';
-		jQ.extend(cdl.CATTParams.errors, errorPM);
-		
-		var refreshparams = [
-			"AccomCode"
-			, "AccomName"
-			, "AccomGEOLocation"
-			, "AccomResort"
-			, "AppServer"
-			, "BoardBasis"
-			, "Brochure"
-			, "DeptDate"
-			, "DepartureAirportSelected"
-			, "Destination"
-			, "DestinationAirportSelected"
-			, "DestinationISOCode"
-			, "Duration"
-			, "PaxAdult"
-			, "PaxChild"
-			, "PaxInfant"
-			, "PaxTotal"
-			, "Region"
-			, "RegionGEOLocation"
-			, "RetDate"
-			, "Rooms"
-			, "SearchApp"
-			, "SessId"
-			, "TourOperator"
-			, "PageContext"
-			, "PageType"
-			, "SearchResultsPageNbr"
-			, "SearchResultsPages"
-			, "SearchResultsPerPage"
-			, "SearchResultsTop3"
-			, "SearchResultsTotal"
-			, "SiteLanguage"
-			, "StarRating"			
-			, "siteType"
-		];
+        cdpm.errors = {}
+        var errorPM = {};
+        errorPM['errorcode'] = (/(^\d+)/.exec(ctpm.ErrorCode) || '') || [].pop() || '';
+        errorPM['errormsg'] = ctpm.ErrorCode || '';
+        jQ.extend(cdl.CATTParams.errors, errorPM);
+        
+        var refreshparams = [
+            "AccomCode"
+            , "AccomName"
+            , "AccomGEOLocation"
+            , "AccomResort"
+            , "AppServer"
+            , "BoardBasis"
+            , "Brochure"
+            , "DeptDate"
+            , "DepartureAirportSelected"
+            , "Destination"
+            , "DestinationAirportSelected"
+            , "DestinationISOCode"
+            , "Duration"
+            , "PaxAdult"
+            , "PaxChild"
+            , "PaxInfant"
+            , "PaxTotal"
+            , "Region"
+            , "RegionGEOLocation"
+            , "RetDate"
+            , "Rooms"
+            , "SearchApp"
+            , "SessId"
+            , "TourOperator"
+            , "PageContext"
+            , "PageType"
+            , "SearchResultsPageNbr"
+            , "SearchResultsPages"
+            , "SearchResultsPerPage"
+            , "SearchResultsTop3"
+            , "SearchResultsTotal"
+            , "SiteLanguage"
+            , "StarRating"          
+            , "siteType"
+        ];
 
-		var ctpmkeys = Object.keys(ctpm);
-		for (var i in ctpmkeys){
-					var ctpmval = ctpmkeys[i] || ''
-					var reg = new RegExp(ctpmval, 'i');
-					if (ctpmval && reg.test(refreshparams.join('|'))) { 
-						cdpm[ctpmval.toLowerCase()] = ctpm[ctpmval]
-					}
-		};		
+        var ctpmkeys = Object.keys(ctpm);
+        for (var i in ctpmkeys){
+                    var ctpmval = ctpmkeys[i] || ''
+                    var reg = new RegExp(ctpmval, 'i');
+                    if (ctpmval && reg.test(refreshparams.join('|'))) { 
+                        cdpm[ctpmval.toLowerCase()] = ctpm[ctpmval]
+                    }
+        };      
+        
+        cdpm['accomcountry'] = ctpm.Destination || '';
+        cdpm['accomregion'] = ctpm.Region || '';
+        cdpm['accomresort'] = ctpm.AccomResort || '';
+        cdpm['destairport'] = ctpm.DestinationAirportSelected || '';
+        cdpm['depairport'] = ctpm.DepartureAirportSelected || '';
+        cdpm['deptdate'] = +(new Date(ctpm.DeptDate && ctpm.DeptDate.replace(/(\d+)\/(\d+)\/(\d+)/,'$3-$2-$1'))) || 0;
+        cdpm['returndate'] = +(new Date(ctpm.RetDate && ctpm.RetDate.replace(/(\d+)\/(\d+)\/(\d+)/,'$3-$2-$1'))) || 0;
+        cdpm['roomcodes'] = ctpm.RoomType && ctpm.RoomType.split('|') || [];
+        cdpm['sessionid'] = ctpm.SessId || '';
+        cdpm['pricetotal'] = (/\d+/.exec((jQuery('p.price.big-font') && jQuery('p.price.big-font').eq(0)).text() || '') || []).pop()
+            || (/\d+/.exec((jQuery('div.price-total-line').find('[class="price"]').text() || '').replace('.','')) || []).pop();
+        cdpm['pricepp'] = (/\d+/.exec((jQuery('p.price.big-font') && jQuery('p.price.big-font').eq(1)).text() || '') || []).pop();
 
-		cdpm['roomcodes'] = ctpm.RoomType && ctpm.RoomType.split('|') || [];
-		cdpm['sessionid'] = ctpm.SessId || '';
-		cdpm['pricetotal'] = (/\d+/.exec((jQuery('p.price.big-font') && jQuery('p.price.big-font').eq(0)).text() || '') || []).pop();
-			|| (/\d+/.exec((jQuery('div.price-total-line').find('[class="price"]').text() || '').replace('.','')) || []).pop();
-		cdpm['pricepp'] = (/\d+/.exec((jQuery('p.price.big-font') && jQuery('p.price.big-font').eq(1)).text() || '') || []).pop();
-		cdpm['accomcountry'] = ctpm.Destination || '';
-		cdpm['accomregion'] = ctpm.Region || '';
-		cdpm['accomresort'] = ctpm.AccomResort || '';
-		cdpm['destairport'] = ctpm.DestinationAirportSelected || '';
-		cdpm['depairport'] = ctpm.DepartureAirportSelected || '';
-
-		window.CATTDL.CATTParams = cdpm;
-	} catch(e) {
-		cdl.error('GTM CATTDL Accom: '+e)
-	} finally {
-		dl.push({'event': 'pid_'+cdl.CATTParams.pageid});
-		dl.push({'event': 'CATTDL Accom'})
-		window.gatcDL && gatcDL.push({'event': 'CATTDL Accom'})
-	}
-	return jQ && jQ.extend && cdl
+        window.CATTDL.CATTParams = cdpm;
+    } catch(e) {
+        cdl.error('GTM CATTDL Accom: '+e)
+    } finally {
+        dl.push({'event': 'pid_'+cdl.CATTParams.pageid});
+        dl.push({'event': 'CATTDL Accom'})
+        window.gatcDL && gatcDL.push({'event': 'CATTDL Accom'})
+    }
+    return jQ && jQ.extend && cdl
 }(window.jQuery, window.dataLayer, window.CATTDL))
 </script>
