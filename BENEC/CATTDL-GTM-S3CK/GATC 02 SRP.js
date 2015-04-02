@@ -7,9 +7,9 @@
 
             var CATTPageId = window.CATTParams.PageId; if (CATTPageId == "")  CATTPageId = "search";
             var VP = '/VP/'+(cdpm.lob || 'lob')+'/'+(cdpm.holidaytype || 'holidaytype')+'/'+(cdpm.pageid || 'pageid');
-            var QSP_ST = 'SS_ST='+(cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'_'+(cdl.gadate && cdpm.deptdate && cdl.gadate(cdpm.deptdate) || '')+'_'+((window.CATTParams.SearchResultsTotal.tcTrim() == "0")?'nResults':'yResults');
+            var QSP_ST = 'SS_ST='+(cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'_'+(cdl.gadate && cdpm.deptdate && cdl.gadate(cdpm.deptdate) || '').replace(/\//g, '-')+'_'+((cdpm.searchresultstotal == "0")?'nResults':'yResults');
             var QSP_CAT = 'SS_CAT='+((cdpm.lob || '')+'_'+(CATTPageId));
-            var QSP_P = 'DeptDate='+(cdl.gadate && cdpm.deptdate && cdl.gadate(cdpm.deptdate) || '')
+            var QSP_P = 'DeptDate='+(cdl.gadate && cdpm.deptdate && cdl.gadate(cdpm.deptdate) || '').replace(/\//g, '-')
             +'&PaxAdult='+(cdpm.paxadult || '')
             +'&PaxChild='+(cdpm.paxchild || '')
             +'&BoardBasis='+(cdpm.boardbasis || '')
