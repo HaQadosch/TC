@@ -61,9 +61,10 @@
         cdpm['accomcountry'] = ctpm.Destination || '';
         cdpm['accomregion'] = ctpm.Region || '';
         cdpm['accomresort'] = ctpm.AccomResort || '';
+        cdpm['deptdate'] = +(new Date(ctpm.DeptDate && ctpm.DeptDate.replace(/(\d+)\/(\d+)\/(\d+)/,'$3-$2-$1'))) || 0;        
         cdpm['destairport'] = ctpm.DestinationAirportSelected || '';
         cdpm['depairport'] = ctpm.DepartureAirportSelected || '';
-        cdpm['deptdate'] = +(new Date(ctpm.DeptDate && ctpm.DeptDate.replace(/(\d+)\/(\d+)\/(\d+)/,'$3-$2-$1'))) || 0;
+        cdpm['duration'] = +(ctpm.duration || '0')
         cdpm['returndate'] = +(new Date(ctpm.RetDate && ctpm.RetDate.replace(/(\d+)\/(\d+)\/(\d+)/,'$3-$2-$1'))) || 0;
         cdpm['roomcodes'] = ctpm.RoomType && ctpm.RoomType.split('|') || [];
         cdpm['sessionid'] = ctpm.SessId || '';
