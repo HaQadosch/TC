@@ -9,6 +9,7 @@
         var locpathname = loc.pathname || '';
         var locsearch = loc.search || '';
         var lochref = loc.href || document.URL || '';
+        var lochost = loc.host || loc.hostname || '';
 
         var roomcodes = cdpm.roomcodes || [];
 
@@ -105,13 +106,10 @@
                     dimension63     : {'room5code'                  : roomcodes && roomcodes[4] || ''},
                     dimension64     : {'room6code'                  : roomcodes && roomcodes[5] || ''},
                     dimension65     : {'pagetimestamp'              : cdl.gadate(cdpm.pagetimestamp || 0)+' '+cdl.gatime(cdpm.pagetimestamp || 0) || ''},
-                    dimension68     : {'discountvalue'              : ''+cdpm.discountvalue || ''},
+                    dimension68     : {'discountvalue'              : cdpm.discountvalue || ''},
                     //dimension73     : {'deptdatestart'              : cdl.gadate && cdl.gadate(deptdatestart || 0)},
                     //dimension74     : {'deptdateend'                : cdl.gadate && cdl.gadate(deptdateend || 0)},
                     dimension75     : {'unixtimestamp'              : cdpm.pagetimestamp || ''},
-                    dimension76     : {'accomgeolocation'           : cdpm.accomgeolocation || ''},
-                    dimension77     : {'regiongeolocation'          : cdpm.regiongeolocation || ''},
-                    dimension78     : {'destinationisocode'         : cdpm.destinationisocode || ''},
                     dimension102    : {'pagecontext'                : cdpm.pagecontext || ''},
                     dimension103    : {'rooms'                      : ''+cdpm.rooms || ''},
                     dimension104    : {'searchapp'                  : cdpm.searchapp || ''},
