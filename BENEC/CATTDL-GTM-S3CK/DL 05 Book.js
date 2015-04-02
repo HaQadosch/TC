@@ -65,7 +65,7 @@
         cdpm['accomcountry'] = ctpm.Destination || '';
         cdpm['accomregion'] = ctpm.Region || '';
         cdpm['accomresort'] = ctpm.AccomResort || '';
-        cdpm['deptdate'] = +(new Date(ctpm.DeptDate && ctpm.DeptDate.replace(/(\d+)\/(\d+)\/(\d+)/,'$3-$2-$1')) || || '0');
+        cdpm['deptdate'] = +(new Date(ctpm.DeptDate && ctpm.DeptDate.replace(/(\d+)\/(\d+)\/(\d+)/,'$3-$2-$1')) || '0');
         cdpm['depairport'] = ctpm.DepartureAirportSelected;
         cdpm['destairport'] = ctpm.DestinationAirportSelected;
         cdpm['retdate'] = +(new Date(ctpm.RetDate && ctpm.RetDate.replace(/(\d+)\/(\d+)\/(\d+)/,'$3-$2-$1')) || '0');
