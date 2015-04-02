@@ -7,7 +7,7 @@
 
             var CATTPageId = window.CATTParams.PageId; if (CATTPageId == "")  CATTPageId = "accom";
             var VP = '/VP/'+(cdpm.lob || 'lob')+'/'+(cdpm.holidaytype || 'holidaytype')+'/'+(cdpm.pageid || 'pageid');
-            var QSP_ST = 'SS_ST='+window.(cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'_'+(cdpm.accomname.replace(/\&amp;/g, '-').replace(/\&/g, '-')+'_'+(cdpm.accomcode);
+            var QSP_ST = 'SS_ST='+window.(cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'_'+(cdpm.accomname || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'_'+(cdpm.accomcode || '');
             var QSP_CAT = 'SS_CAT='+(cdpm.lob || '')+'_'+CATTPageId;
             var QSP_P = 'DeptDate='+(cdl.gadate && cdpm.deptdate && cdl.gadate(cdpm.deptdate)).replace(/\//g, '-')
                                     +'&depAirport='+(cdpm.deptairport || '')
