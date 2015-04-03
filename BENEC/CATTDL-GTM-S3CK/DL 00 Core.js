@@ -106,6 +106,7 @@
                 ,'detailsolr'       : 'accom'
                 , 'pay'             : 'summary'
             })[ctpm.PageId] || ctpm.PageId || 'home').toLowerCase();
+            if(ctpm.LOB === 'seo-lp'){cdpm.pageid = 'home'};
 
             CATTDL.ckset('gtm_cdpm', JSON.stringify(keeps), Infinity, '/', domainName);
             window.CATTDL.CATTParams = cdpm
