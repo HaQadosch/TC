@@ -72,6 +72,11 @@
             || (/\d+/.exec((jQuery('div.price-total-line').find('[class="price"]').text() || '').replace('.','')) || []).pop()
         //cdpm['pricepp'] = (/\d+/.exec((jQuery('p.price.big-font') && jQuery('p.price.big-font').eq(1)).text() || '') || []).pop()
 
+        jQuery('#defaultPaymentAgreed.go-to.payment-confirmation-button').click(function(e){
+           cdpm.pageid = 'pay';
+           dl.push({'event' : 'core_pay'});
+        })
+        
         window.CATTDL.CATTParams = cdpm;
     } catch(e) {
         cdl.error('GTM CATTDL Summary: '+e)
