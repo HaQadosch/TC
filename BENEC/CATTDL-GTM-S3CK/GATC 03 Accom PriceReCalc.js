@@ -63,16 +63,10 @@
             if (/_utmb=/i.test(document.cookie)) {window._gaq.push(['CATTGATC._setCustomVar', 35, 'UtmbGuid', (function(e){var t=/_utmb=([^;%=]*)/i.exec(e)&&/_utmb=([^;%=]*)/i.exec(e).pop()||false;return t||""})(document.cookie), 2]);}
             window._gaq.push(['CATTGATC._trackPageview', fullVP]);
 
-            if (/scip=/i.test(document.location.href)){window._gaq.push(['CATTGATC._trackEvent', 'InternalCampaign', (cdpm.search && cdpm.scip || ''), window.document.referrer, 1, true]); }
- 
             if (cdpm.errors && cdpm.errors.errormsg){
                 var errorLabel= (cdpm.errors.errormsg)+'_SessionID='+(cdpm.sessionid || '')+'_AppServer='+(cdpm.appserver || '');
                 window._gaq.push(['CATTGATC._trackEvent', 'Errors', errorLabel, window.document.referrer, 1, true]); 
             };
-
-            setTimeout(function(){
-                /test=test/i.test(document.cookie) && jQuery('#emptyTextSearchPopup').length && window._gaq.push(['CATTGATC._trackEvent', 'Free Text Search without Results', jQuery('#emptyTextSearchPopup .keyword').text(),document.location.pathname.split('/')[1], 1, true]);
-            }, 1000)
 
         } catch(e) {
             window.CATTDL && CATTDL.info('GTM GATC PriceReCalc: '+e)
