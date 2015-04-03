@@ -44,6 +44,7 @@
             if(cdpm.holidaytype){window._gaq.push(['CATTGATC._setCustomVar', 14, 'HolidayType', cdpm.holidaytype, 3])};
             if(cdpm.initialholidaytype){window._gaq.push(['CATTGATC._setCustomVar', 15, 'InitialHolidayType', cdpm.holidaytype, 3])};            
             if(cdpm.pageid){window._gaq.push(['CATTGATC._setCustomVar', 16, 'PageID', cdpm.pageid, 3])};
+            if(cdpm.duration){window._gaq.push(['CATTGATC._setCustomVar', 17, 'Duration', cdpm.duration, 3])};            
             if (cdpm.sitelanguage) {
                 window._gaq.push(['CATTGATC._setCustomVar', 19, 'PageLanguage', cdpm.sitelanguage, 3]);
                 window._gaq.push(['CATTGATC._setCustomVar', 20, 'SessionLanguage', cdpm.sitelanguage, 2]);
@@ -61,8 +62,10 @@
             if (/_utmb=/i.test(document.cookie)) {window._gaq.push(['CATTGATC._setCustomVar', 35, 'UtmbGuid', (function(e){var t=/_utmb=([^;%=]*)/i.exec(e)&&/_utmb=([^;%=]*)/i.exec(e).pop()||false;return t||""})(document.cookie), 2]);}
             window._gaq.push(['CATTGATC._trackPageview', fullVP]);
 
-            if (/scip=/i.test(document.location.href)){window._gaq.push(['CATTGATC._trackEvent', 'InternalCampaign', (cdpm.search && cdpm.scip || ''), window.document.referrer, 1, true]); }
- 
+            if (/scip=/i.test(document.location.href)){window._gaq.push(['CATTGATC._trackEvent', 'InternalCampaign', (cdpm.searches && cdpm.searches.scip || ''), (window.document.referrer || 'None'), 1, true]); }
+            if (/s_cip=/i.test(document.location.href)){window._gaq.push(['CATTGATC._trackEvent', 'InternalCampaign', (cdpm.searches && cdpm.searches.s_cip || ''), (window.document.referrer || 'None'), 1, true]); }
+            if (/sccl=/i.test(document.location.href)){window._gaq.push(['CATTGATC._trackEvent', 'InternalCampaign', (cdpm.searches && cdpm.searches.sccl || ''), (window.document.referrer || 'None'), 1, true]); }
+           
             if (cdpm.errors && cdpm.errors.errormsg){
                 var errorLabel= (cdpm.errors.errormsg)+'_SessionID='+(cdpm.sessionid || '')+'_AppServer='+(cdpm.appserver || '');
                 window._gaq.push(['CATTGATC._trackEvent', 'Errors', errorLabel, window.document.referrer, 1, true]); 
