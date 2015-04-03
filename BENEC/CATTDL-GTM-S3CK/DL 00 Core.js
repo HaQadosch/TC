@@ -139,10 +139,6 @@
                    cdpm.pageid = hashstep;
                    dl.push({'event' : 'core_'+(hashstep || 'pax')})
                 });
-                jQuery('#defaultPaymentAgreed.go-to.payment-confirmation-button').click(function(e){
-                   cdpm.pageid = 'pay';
-                   dl.push({'event' : 'core_pay'});
-                })
             };
             // End Booking Dialog pageid
         
