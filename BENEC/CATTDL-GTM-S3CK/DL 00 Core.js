@@ -34,7 +34,7 @@
                     document.cookie = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "")
                     return true
                 },
-                post    : function post(key, value) {document.cookie = key+"="+value+"; path=/; domain=.thomascook.com;"},
+                post    : function post(key, value) {document.cookie = key+"="+value+"; path=/; domain=.neckermann.be;"},
                 get     : function get(key) {
                     var regKey = new RegExp(key+'=([^;]*)', 'i')
                     return regKey.test(document.cookie) && (regKey.exec(document.cookie) || []).pop() || false
