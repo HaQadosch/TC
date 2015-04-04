@@ -66,7 +66,7 @@
             if (/scip=/i.test(document.location.href)){window._gaq.push(['CATTGATC._trackEvent', 'InternalCampaign', (cdpm.searches && cdpm.searches.scip || ''), (window.document.referrer || 'None'), 1, true]); }
             if (/s_cip=/i.test(document.location.href)){window._gaq.push(['CATTGATC._trackEvent', 'InternalCampaign', (cdpm.searches && cdpm.searches.s_cip || ''), (window.document.referrer || 'None'), 1, true]); }
             if (/sccl=/i.test(document.location.href)){window._gaq.push(['CATTGATC._trackEvent', 'InternalCampaign', (cdpm.searches && cdpm.searches.sccl || ''), (window.document.referrer || 'None'), 1, true]); }
-           
+           if (/s_ip=/i.test(document.location.href)){window._gaq.push(['CATTGATC._trackEvent', 'InternalCampaign', (cdpm.searches && cdpm.searches.s_ip || ''), (window.document.referrer || 'None'), 1, true]); }
             if (cdpm.errors && cdpm.errors.errormsg){
                 var errorLabel= (cdpm.errors.errormsg)+'_SessionID='+(cdpm.sessionid || '')+'_AppServer='+(cdpm.appserver || '');
                 window._gaq.push(['CATTGATC._trackEvent', 'Errors', errorLabel, window.document.referrer, 1, true]); 
