@@ -1,4 +1,4 @@
-<script>
+script>
 (function gtm_gatcBook(jQ, dl, cdl) {
     'use strict'
         try {
@@ -42,6 +42,7 @@
               var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
             })();
 
+            window._gaq.push(['CATTGATC._setCustomVar',  1, 'Buyer',  (cdpm.lob)+'|'+(cdpm.holidaytype), 3]);
             if(cdpm.sessionid){window._gaq.push(['CATTGATC._setCustomVar', 11, 'SessionID', cdpm.sessionid, 3])};
             if(cdpm.appserver){window._gaq.push(['CATTGATC._setCustomVar', 12, 'AppServer', cdpm.appserver, 3])};
             if(cdpm.lob){window._gaq.push(['CATTGATC._setCustomVar', 13, 'LOB', cdpm.lob, 3])};
@@ -69,7 +70,7 @@
             window._gaq.push(['CATTGATC._addTrans', (cdpm.bookingref || ''),'',(cdpm.bookingvalue).replace(/\s+|\,/gi,''),'','','','','']);
             window._gaq.push(['CATTGATC._addItem', (cdpm.bookingref || ''),
                 (cdpm.destination || '')+'|'+(cdpm.destairport || '')+'|'+(cdpm.accomresort || '')+'|'+(cdpm.touroperator || ''), // SKU
-                (cdpm.accomname || '')+'|'+(cdpm.accomcode || '')+'|'+(cdpm.depairport || '')+'|'+(cdpm.paxtotal || '')+'|'+(cdpm.paxadult || '')+'|'+(cdpm.paxchild || '')+'|'+(cdl.gadate && cdpm.deptdate && cdl.gadate(cdpm.deptdate))+'|'+(cdpm.duration)+'|'+(cdpm.paymentoption || '') // ProductName
+                (cdpm.accomname || '')+'|'+(cdpm.accomcode || '')+'|'+(cdpm.depairport || '')+'|'+(cdpm.paxtotal || '')+'|'+(cdpm.paxadult || '')+'|'+(cdpm.paxchild || '')+'|'+(cdl.gadate && cdpm.deptdate && cdl.gadate(cdpm.deptdate) || '')+'|'+(''+cdpm.duration)+'|'+(cdpm.paymentoption || ''), // ProductName
                 (cdpm.lob || '').toLowerCase()+'|'+(cdpm.holidaytype || '').toLowerCase(),   // Category
                 (cdpm.bookingvalue || ''),  // UnitPrice
                 '1'       // quantity
@@ -84,7 +85,7 @@
             };
 
         } catch(e) {
-            window.CATTDL && CATTDL.info('GTM GATC Book: '+e)
+            console.info('GTM GATC Book: '+e)
         } finally {
             window.dataLayer && dataLayer.push({'event' : 'GATC Book'})
         }
