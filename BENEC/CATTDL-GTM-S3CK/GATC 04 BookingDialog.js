@@ -42,7 +42,7 @@
             if(cdpm.appserver){window._gaq.push(['CATTGATC._setCustomVar', 12, 'AppServer', cdpm.appserver, 3])};
             if(cdpm.lob){window._gaq.push(['CATTGATC._setCustomVar', 13, 'LOB', cdpm.lob, 3])};
             if(cdpm.holidaytype){window._gaq.push(['CATTGATC._setCustomVar', 14, 'HolidayType', cdpm.holidaytype, 3])};
-            if(cdpm.initialholidaytype){window._gaq.push(['CATTGATC._setCustomVar', 15, 'InitialHolidayType', cdpm.holidaytype, 3])};            
+            if(cdpm.initialholidaytype){window._gaq.push(['CATTGATC._setCustomVar', 15, 'InitialHolidayType', cdpm.initialholidaytype, 3])};            
             if(cdpm.pageid){window._gaq.push(['CATTGATC._setCustomVar', 16, 'PageID', cdpm.pageid, 3])};
             if(cdpm.duration){window._gaq.push(['CATTGATC._setCustomVar', 17, 'Duration', cdpm.duration, 3])};            
             if (cdpm.sitelanguage) {
