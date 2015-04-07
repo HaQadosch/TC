@@ -21,7 +21,7 @@
             cookiedomain    : twlh(/neckermann.io/i)?"neckermann.io":"neckermann.nl",
             name            : 'CATTUATC',
             set             : {
-                anonymizeIp : false,
+                anonymizeIp : true,
                 location    : (locpathname || '/')+(locsearch || '') || '',
                 referrer    : cdurl.referrer  || '',
                 hostname    : loc && loc.hostname || ''
