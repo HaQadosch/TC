@@ -1,4 +1,4 @@
-script>
+<script>
 (function gtm_cattdlBook(jQ, dl, cdl) {
     'use strict'
     if (jQ && jQ.extend && cdl) try {
