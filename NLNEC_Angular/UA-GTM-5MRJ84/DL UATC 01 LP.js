@@ -14,7 +14,7 @@
             cookiedomain    : twlh(/neckermann.io/i)?"neckermann.io":"neckermann.nl",
             name            : 'CATTUATC',
             set             : {
-                anonymizeIp : false             
+                anonymizeIp : true             
             },
             webanalytics    : {
                 page            : loc && ((locpathname || '/')+(locsearch || '')) || '',
