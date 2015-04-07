@@ -1,7 +1,7 @@
 <script id="gtm_iAdvise">
-(function gtm_iAdviseDL(dl, cdl, cdpm) {
+(function gtm_iAdviseDL(edl, cdl, cdpm) {
     'use strict';
-    if (dl && cdl && cdpm) try {
+    if (edl && cdl && cdpm) try {
         cdl.DL_iAdvise = {
             sid : '1715',
             lang : 'fr',
@@ -13,13 +13,13 @@
     } catch (err) {
         cdl.error ("GTM IAdviseDL :", err);
     } finally {
-        dl.push({"event":"iAdviseDL"});
+        edl.push({"event":"iAdviseDL"});
     }
-    return dl && cdl && cdpm && cdl.DL_iAdvise;
+    return edl && cdl && cdpm && cdl.DL_iAdvise;
 }(window.externaldataLayer, window.CATTDL, !window.CATTDL?!1:window.CATTDL.CATTParams));
 
-(function gtm_iAdvise (jQ, cdl, iadl, dl) {
-    if (jQ && cdl && iadl && dl) try {
+(function gtm_iAdvise (jQ, cdl, iadl, edl) {
+    if (jQ && cdl && iadl && edl) try {
         var src = (iadl.script && iadl.script.url || '').replace(/_sid_/, iadl.sid || '').replace(/_lang_/,  iadl.lang|| '');
         jQ.ajaxSetup({cache: true});
         src && jQ.getScript && jQ.getScript(src, function gtm_iAdviseScript() {
@@ -35,19 +35,19 @@
     } catch(err) {
         cdl.error && cdl.error("GTM IAdvise :", err);
     } finally {
-        dl.push({"event" : "iAdvise"});
+        edl.push({"event" : "iAdvise"});
     }
-    return jQ && cdl && iadl && dl;
+    return jQ && cdl && iadl && edl;
 }(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_iAdvise, window.externaldataLayer));
 </script>
 
 
 
 <script id="gtm_iAdviseBooking">
-(function gtm_IAdviseDL(dl, cdl, cdpm) {
-    if (dl && cdl && cdpm) try {
-            cdl.DL_iAdvise = {
-                bookingamount: cdpm.bookingvalue || "",
+(function gtm_IAdviseDL(edl, cdl, cdpm) {
+    if (edl && cdl && cdpm) try {
+            cdl.DL_iAdviseConf = {
+                bookingamount: cdpm.bookingvalue || '',
                 bookingref: cdpm.bookingref || "",
                 sid : '1715',
                 lang : 'fr',
@@ -57,17 +57,18 @@
                 }
             }
         } catch(err) {
-            cdl.error("GTM IAdviseDL :", err);
+            cdl.error("GTM iAdviseConfDL :", err);
         } finally {
-            dl.push({"event":"iAdviseDL"});
+            edl.push({"event":"iAdviseConfDL"});
         }
-        return dl && cdl && cdpm && cdl.DL_iAdvise;
+        return edl && cdl && cdpm && cdl.DL_iAdviseConf;
 }(window.externaldataLayer, window.CATTDL, window.CATTDL.CATTParams));
 
-(function gtm_iAdvise (jQ, cdl, iadl, dl) {
-    if (jQ && cdl && iadl && dl) try {
+(function gtm_iAdvise (jQ, cdl, iadl, edl) {
+    if (jQ && cdl && iadl && edl) try {
         var src = (iadl.script && iadl.script.url || '').replace(/_sid_/, iadl.sid || '').replace(/_lang_/,  iadl.lang|| '');
         jQ.ajaxSetup({cache: true});
+        window.idzTrans = {"cartAmount":(iadl.bookingamount || ''),"tID":(iadl.bookingref || '')};
         src && jQ.getScript && jQ.getScript(src, function gtm_iAdviseScript() {
             try {
                 if (iadl.script) {
@@ -75,14 +76,14 @@
                     iadl.script.url = src;
                 }
             } catch(e) {
-                cdl.error && cdl.error('GTM iAdvise gtm_iAdviseScript: ', e);
+                cdl.error && cdl.error('GTM iAdviseConf gtm_iAdviseScript: ', e);
             }
         });
     } catch (err) {
-        cdl.error("GTM IAdvise :", err);
+        cdl.error("GTM iAdviseConf :", err);
     } finally {
-        dl.push({"event" : "iAdvise"});
+        edl.push({"event" : "iAdviseConf"});
     }
-    return jQ && cdl && iadl && dl;
-}(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_iAdvise, window.externaldataLayer));
+    return jQ && cdl && iadl && edl;
+}(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_iAdviseConf, window.externaldataLayer));
 </script>
