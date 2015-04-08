@@ -1,13 +1,13 @@
-<script>
+//<script id='gtm_gatcdlAccom'>
 (function gtm_gatcdlAccom(cdl, dl, loc){
-    'use strict'
+    'use strict';
     if (cdl && cdl.CATTParams) try {
-        var twlh = cdl.twlh
+        var twlh = cdl.twlh;
         var cdpm = cdl.CATTParams || {};
         var cdurl = cdpm.urlparams || {};
         var cdfc = cdpm.srpfacets || {};
         cdl.DL_gatc = cdl.DL_gatc || {};
-        cdl.DL_gatc.webanalytics = cdl.DL_gatc.webanalytics || {}
+        cdl.DL_gatc.webanalytics = cdl.DL_gatc.webanalytics || {};
         var locpathname = cdurl && cdurl.pathname || loc.pathname || '';
         var locsearch = cdurl && cdurl.paramstring || loc.search || '';
         var lochref = cdurl && cdurl.fullurl || loc.href || '';
@@ -15,7 +15,7 @@
         var cdpmVP = ('/vp/'+
             (cdpm.lob || "")+'/'+
             (cdpm.holidaytype || "")+'/'+
-            (cdpm.pageid || "") 
+            (cdpm.pageid || "")
             ).toLowerCase();
 
         cdl.DL_gatc = {
@@ -40,16 +40,16 @@
         };
         cdl.DL_gatc.webanalytics = {
             vp  : cdpmVP,
-            qsp_st : ('ss_st='+ 
+            qsp_st : ('ss_st='+
                 (cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'_'+
                 (cdpm.accomname || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'_'+
                 (cdpm.accomcode || '')
                 ).toLowerCase(),
-            qsp_cat : ('ss_cat='+ 
+            qsp_cat : ('ss_cat='+
                 (cdpm.lob || '')+'_'+
                 (cdpm.pageid || '')
                 ).toLowerCase(),
-            qsp_p : ( 
+            qsp_p : (
                 'DeptDate='+(cdpm.deptdate && cdl.gadate(cdpm.deptdate) || '')+
                 '&depAirport='+(cdpm.deptairport || '')+
                 '&PaxAdult='+(cdpm.paxadult || '')+
@@ -65,12 +65,12 @@
             customvars : {
                 var02   : {'index': 2,  'name':'AppServer',         'value':(cdpm.appserver || ''),                                 'scope': 3},
                 var04   : {'index': 4,  'name':'InternalCampaign',  'value':(cdpm.internalcampaignid || ''),                        'scope': 3},
-                var09   : {'index': 9,  'name':'tcFrogVis',         'value':'Angular',                                              'scope': 1},
                 var11   : {'index': 11, 'name':'AccomVideoVisible', 'value':((cdpm.accomvideo || 'n')+'|'+(cdpm.accomguid || '')),  'scope': 3},
                 var30   : {'index': 30, 'name':'UtmaGuid',          'value':(cdpm.utmaguid || ''),                                  'scope': 1},
                 var31   : {'index': 31, 'name':'eCircleID',         'value':(cdpm.ecircleid || ''),                                 'scope': 1},
                 var32   : {'index': 32, 'name':'dreamCaptureID',    'value':(cdpm.dreamcaptureid || ''),                            'scope': 1},
                 var35   : {'index': 35, 'name':'UtmbGuid',          'value':(cdpm.utmbguid || ''),                                     'scope': 2},
+                var36   : {'index': 36,    'name':'tags',             'value':(cdpm.poolcontrol && 'control' || 'variant'),                    'scope': 1},
                 var39   : {'index': 39, 'name':'dreamCaptureAbtaVisitorSession',    'value':(cdpm.abtanumber || '')+(cdpm.consultantref?('-'+cdpm.consultantref):'' || ''), 'scope': 1}
             },
             events : {
@@ -81,13 +81,13 @@
                 opcreative          : {'category': 'OptimostCreative', 'action': cdpm.optimostcreative || '', 'label': loc.href || '', 'value': 1, 'noninteraction': true},
                 pathfinder          : {'category': 'ThePathfinder', 'action': (/product|ota\/accommodation|srv-search\/accom|\/holidays\//i.test(locpathname)?'': locpathname) || '', 'label': (locsearch?locsearch:"empty"), 'value': 1, 'noninteraction': true}
             }
-        }
+        };
     } catch(e) {
-        cdl.error('GTM UK TC GATCDL Accom: '+e)
+        cdl.error('GTM UK TC GATCDL Accom: '+e);
     } finally {
-        dl.push({'event': 'GATCDL Accom'})
-        window.gatcDL && gatcDL.push({'event': 'GATCDL Accom'})
+        dl.push({'event': 'GATCDL Accom'});
+        window.gatcDL && gatcDL.push({'event': 'GATCDL Accom'});
     }
-    return window.DL_gatc
-}(window.CATTDL, window.dataLayer || [], document.location || window.location))
+    return cdl && cdl.CATTParams && cdl.DL_gatc;
+}(window.CATTDL, window.dataLayer, document.location || window.location))
 </script>
