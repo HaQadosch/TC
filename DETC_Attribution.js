@@ -153,6 +153,7 @@ try{
                cdsr.utm_campaign || '',
                cdsr.utm_content || '',
                cdsr.utm_source || '',
+               cdsr.utm_term || '',
                Date.now() || ''
            ]);
         }
@@ -176,7 +177,7 @@ try{
         var cdpm = cdl.CATTParams || {}
         var lands = JSON.parse(cdl.ckget('gtm_attr') || '[]')
         var paidChannels = /aff|met|part|to|agg|ban|criteo|dis|email|newsletter|cp|ppc|gclid/i
-        var validLand = lands.filter(function(e){return e[0] || paidChannels.test(e[1])}).filter(function(e){return new Date().setMonth(new Date(Date.now()).getMonth() - 1) < e[5]})
+        var validLand = lands.filter(function(e){return e[0] || paidChannels.test(e[1])}).filter(function(e){return new Date().setMonth(new Date(Date.now()).getMonth() - 1) < e[6]})
 
         if (validLand.length) {
             var vL = validLand.pop() || []
@@ -186,8 +187,9 @@ try{
                 utm_campaign    : vL[2] || '',
                 utm_content     : vL[3] || '',
                 utm_source      : vL[4] || '',
-                landing         : new Date(vL[5] || '') || '',
-                date            : vL[5] || ''
+                utm_term        : vL[5] || '',
+                landing         : new Date(vL[6] || '') || '',
+                date            : vL[6] || ''
             }
             var winningCampaign = ''
             var m = vL[1]
@@ -207,5 +209,5 @@ try{
         cdl.error('GTM Attr: '+e)
     }
     return cdl && edl && cdpm && cdpm.attribution;
-}(window.dataLayer, window.CATTDL))
+}(window.externaldataLayer, window.CATTDL))
 </script>
