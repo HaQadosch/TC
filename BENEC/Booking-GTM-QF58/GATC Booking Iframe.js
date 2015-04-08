@@ -38,7 +38,7 @@
             if(ctpm.Duration){window._gaq.push(['CATTGATC._setCustomVar', 17, 'Duration', ctpm.Duration, 3])};            
             if (ctpm.Language) {
                 window._gaq.push(['CATTGATC._setCustomVar', 19, 'PageLanguage', ctpm.Language, 3]);
-                window._gaq.push(['CATTGATC._setCustomVar', 20, 'SessionLanguage', cdpm.Language, 2]);
+                window._gaq.push(['CATTGATC._setCustomVar', 20, 'SessionLanguage', ctpm.Language, 2]);
             };
             //if(cdpm.destination){window._gaq.push(['CATTGATC._setCustomVar', 21, 'Country', cdpm.destination, 3])};
             //if(cdpm.region){window._gaq.push(['CATTGATC._setCustomVar', 22, 'Region', cdpm.region, 3])};
