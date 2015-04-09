@@ -68,6 +68,7 @@
     if (jQ && cdl && iadl && dl) try {
         var src = (iadl.script && iadl.script.url || '').replace(/_sid_/, iadl.sid || '').replace(/_lang_/,  iadl.lang|| '');
         jQ.ajaxSetup({cache: true});
+        window.idzTrans = {"cartAmount":(iadl.bookingamount || ''),"tID":(iadl.bookingref || '')};
         src && jQ.getScript && jQ.getScript(src, function gtm_iAdviseScript() {
             try {
                 if (iadl.script) {
