@@ -1,9 +1,13 @@
-<script id='gtm_attribution'>
+//<script id='gtm_attribution'>
 (function gtm_attribution(cdl, dl){
     'use strict';
     if (cdl && dl) try {
         var lands = JSON.parse(cdl.ckget('gtm_attr') || '[]');
         if (typeof lands === 'string') lands = JSON.parse(lands);
+
+        var cdpm = cdl.CATTParams  || {};
+
+        if (/&affiliate=HC/i.test(location.search || '')) cdpm.hcBooking = ((cdl.ckget('gtm_attr') || '').replace(/\],\[/g, '|').replace(/,/g, '_').replace(/\"/g, '') || 'na');
         var paidChannels = /afflong|met|part|affdirect|ban|criteo|dis|email|newsletter|cp|ppc|gclid/i;
         var validLand = lands.filter(function(e){return e[0] || paidChannels.test(e[1])}).filter(function(e){return new Date().setMonth(new Date(Date.now()).getMonth() - 1) < e[5]});
 
@@ -18,7 +22,7 @@
                 landing     : new Date(vL[5] || '') || '',
                 date          : vL[5] || ''
             };
-            var winningCampaign = ''
+            var winningCampaign = '';
             var m = vL[1];
             if (/afflong/i.test(m)) winningCampaign = 'afflong';
             else if (/met/i.test(m)) winningCampaign = /hotelscombined/i.test(vL[2])?'hotelsCombined':/trivago/i.test(vL[4])?'trivago':/kayak/i.test(vL[4])?'kayak':'affmeta';
@@ -30,8 +34,7 @@
 
             dl.push({event: 'Attribution '+winningCampaign});
             cdl.ckset('gtm_attr', JSON.stringify([]), Infinity, '/', '.hotels4u.com');
-            cdl.CATTParams  = cdl.CATTParams  || {};
-            cdl.CATTParams.winningcampaign = winningCampaign;
+            cdpm.winningcampaign = winningCampaign;
             window.CATTDL = cdl;
         }
     } catch(e) {
@@ -40,3 +43,4 @@
     return cdl && dl && cdl.CATTParams && cdl.CATTParams.attribution;
 }(window.CATTDL, window.dataLayer))
 </script>
+
