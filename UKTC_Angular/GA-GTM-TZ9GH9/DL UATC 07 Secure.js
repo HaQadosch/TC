@@ -13,9 +13,9 @@
         var lochost = location.hostname || location.host || '';
 
         var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
-        var srpsortlist = params.srplist || 'search';
-        var srpsortoption = params.sortoption || '';
-        var accomposition = params.accomposition[cdpm.accomguid || ''] || '';        
+        var srpsortlist = params && params.srplist || 'search';
+        var srpsortoption = params && params.sortoption || '';
+        var accomposition = params && params.accomposition && params.accomposition[cdpm.accomguid || ''] || '';    
 
         var vpagepath = '/vp/en/'+(cdpm.lob || 'angular')+'/'+(cdpm.holidaytype || 'angular')+'/'+(cdpm.pageid || 'angular');
         var vpqsp_cat   = ('ss_cat='+ 
