@@ -52,7 +52,7 @@
 
             sendSet['page'] = uawa.page;
             sendSet['dimension52'] = window.userId || '';
-            sendSet['hitCallback'] = function gtm_uatcCustAddProduct(){
+            //function gtm_uatcCustAddProduct(){
                 w.ga(trackerName+'ec:addProduct', {
                     'id'        : uaprod.id,
                     'name'      : uaprod.name,
@@ -75,7 +75,7 @@
                             ,'dimension119': (locsearch || '')
                         }                        
                         , {'nonInteraction': true});
-            };
+            //};
             trc.send('pageview', sendSet);
             if (ux) {window.ECEOP.pageview = []};         
 
