@@ -83,7 +83,7 @@
 
             sendSet['page'] = uawa.page;
             sendSet['dimension52'] = window.userId || '';
-            sendSet['hitCallback'] = function gtm_uatcAccomAddProductListView(){
+            //function gtm_uatcAccomAddProductListView(){
                 w.ga(trackerName+'ec:addProduct', {
                     'id'        : uaprod.id || '',
                     'name'      : uaprod.name || '',
@@ -105,7 +105,7 @@
                             }
                         , {'nonInteraction': true});
                 dl.push({'event': 'UATCECaddProduct'});
-            };
+            //};
             trc.send('pageview', sendSet);
             
             for (evt in uawa.events) {
