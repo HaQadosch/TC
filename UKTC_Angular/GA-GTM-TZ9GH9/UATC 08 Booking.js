@@ -70,7 +70,7 @@
 
             sendSet['page'] = uawa.page;
             sendSet['dimension52'] = window.userId || '';
-            sendSet['hitCallback'] = function gtm_uatcBookAddProduct(){
+            //function gtm_uatcBookAddProduct(){
                 w.ga(trackerName+'ec:addProduct', prodDimMet);
                 w.ga(trackerName+'ec:setAction','purchase', {
                     'id'            : uapurch.id,
@@ -91,7 +91,7 @@
                                 ,'dimension119': (locsearch || '')
                             }
                             , {'nonInteraction': true});
-            };
+            //};
             trc.send('pageview', sendSet);
             if (ux) {window.ECEOP.pageview = []};            
 
