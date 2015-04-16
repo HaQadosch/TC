@@ -50,10 +50,11 @@
                     jQ.each(vMet, function valMetrics(_, val){val && (sendSet[kMet]=val)})
                 })  
             };
-            var accoms = [];
-            sendSet['page'] = uawa.page;
             sendSet['dimension52'] = window.userId || '';
-
+            sendSet['page'] = uawa.page;            
+            w.ga(trackerName+'send','pageview', sendSet);  
+            
+            var accoms = [];
             (function gtm_uatcSRPAddImpressions(){
                 var curUAImp = {}
                 if (uawa.nbrimpressions && uawa.addimpression && uawa.addimpression.length){
@@ -80,7 +81,6 @@
                     
                     };
             }());
-            w.ga(trackerName+'send','pageview', sendSet);  
             
             for (evt in uawa.events) {
                 var gevt = uawa.events[evt]
