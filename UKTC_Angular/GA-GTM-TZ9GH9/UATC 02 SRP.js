@@ -17,19 +17,21 @@
         window.ga && window.ga(function gtm_useTracker() {
             var trc = ga.getByName(uadl.name)
             if (trc) {
-                console.info('trc', trc)
-                trc.plugins_ && console.info('plugins', trc.plugins_.keys) || console.info('no plugins') 
-                console.info('clientID', trc.get('clientId'))
+                // console.info('trc', trc)
+                // trc.plugins_ && console.info('plugins', trc.plugins_.keys) || console.info('no plugins') 
+                 // console.info('clientID', trc.get('clientId'))
             } else {
-                console.info('no trc')
+                // console.info('no trc')
                 w.ga('create', uadl.profileid, uadl.cookiedomain, {'name': uadl.name})
                 trc = ga.getByName(uadl.name)
-                console.info('trc', trc)
-                console.info('clientID', trc.get('clientId'))
+                // console.info('trc', trc)
+                // console.info('clientID', trc.get('clientId'))
             }
             for (var setOption in uadl.set) trc.set(setOption, uadl.set[setOption]);
             if (typeof trc.plugins_ === 'undefined' || !/displayfeatures/i.test(trc.plugins_ && trc.plugins_.keys || '')) {trc.require && trc.require('displayfeatures') || w.ga(trackerName+'require', 'displayfeatures')};
-            if (typeof trc.plugins_ === 'undefined' || !/ec/i.test(trc.plugins_ && trc.plugins_.keys || '')) {trc.require && trc.require('ec', 'ec.js') || w.ga(trackerName+'require', 'ec', 'ec.js')};
+            //if (typeof trc.plugins_ === 'undefined' || !/ec/i.test(trc.plugins_ && trc.plugins_.keys || '')) {
+                trc.require && trc.require('ec', 'ec.js') || w.ga(trackerName+'require', 'ec', 'ec.js')
+                //};
             cdl.CATTParams.gaguid =  /(.+)\./i.exec(trc.get('clientId') || '.').pop() || cdl.CATTParams.gaguid || ''
             uawa && uawa.dimensions && (uawa.dimensions.dimension51 = {'gaguid' : cdl.CATTParams.gaguid || 'empty'}) || console.info('err', uawa)
 
@@ -51,11 +53,38 @@
             var accoms = [];
             sendSet['page'] = uawa.page;
             sendSet['dimension52'] = window.userId || '';
-            trc.send('pageview', sendSet);  
+
+            (function gtm_uatcSRPAddImpressions(){
+                var curUAImp = {}
+                if (uawa.nbrimpressions && uawa.addimpression && uawa.addimpression.length){
+                        for (var i = 0; i < uawa.nbrimpressions; i++){
+                            curUAImp = uaImp[i] || {}
+                            w.ga(trackerName+'ec:addImpression',Â {
+                                    Â Â 'id':             curUAImp.id || '',
+                                    Â Â 'name':           curUAImp.name || '',
+                                    Â Â 'category':       curUAImp.category || '',
+                                    Â Â 'brand':          curUAImp.brand || '',
+                                    Â Â 'variant':        curUAImp.variant || '',
+                                    Â Â 'list':           curUAImp.list || '',
+                                    Â Â 'position':       curUAImp.position || '',
+                                    Â Â 'dimension27':    curUAImp.dimension27 || ''
+                            })
+                        }               
+                        for (i = 0; i < uawa.nbrimpressions; accoms.push((uaImp[i++].id) || ""));
+                        //w.ga(trackerName+'ec:setAction', 'view', {'list': (uaImp[0] && uaImp[0].list || "")});
+                        w.ga(trackerName+'send','event', 'viewAddImpression', (uaImp[0].list || "")
+                            ,  (accoms && accoms.toString() || "")
+                            , 1
+                            , {'page': /[^\?]+/.exec(uawa.page) || (cdurl.pathname || '/') || ''}
+                            , {'nonInteraction': true, 'location': uawa.location});
+                    
+                    };
+            }());
+            w.ga(trackerName+'send','pageview', sendSet);  
             
             for (evt in uawa.events) {
                 var gevt = uawa.events[evt]
-                if (gevt.action) (trc.send('event', gevt.category, gevt.action,  gevt.label, gevt.value
+                if (gevt.action) (w.ga(trackerName+'send','event', gevt.category, gevt.action,  gevt.label, gevt.value
                     , {'page': gevt.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
                         ,'dimension51': cdpm.gaguid || 'empty'
                         ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
@@ -66,34 +95,7 @@
                     , {'nonInteraction': gevt.noninteraction}));
             };
     
-            (function gtm_uatcSRPAddImpressions(){
-                var curUAImp = {}
-                if (uawa.nbrimpressions && uawa.addimpression && uawa.addimpression.length){
-                        for (var i = 0; i < uawa.nbrimpressions; i++){
-                            curUAImp = uaImp[i] || {}
-                            w.ga(trackerName+'ec:addImpression', {
-                                      'id':             curUAImp.id || '',
-                                      'name':           curUAImp.name || '',
-                                      'category':       curUAImp.category || '',
-                                      'brand':          curUAImp.brand || '',
-                                      'variant':        curUAImp.variant || '',
-                                      'list':           curUAImp.list || '',
-                                      'position':       curUAImp.position || '',
-                                      'dimension27':    curUAImp.dimension27 || ''
-                            })
-                        }               
-                        for (i = 0; i < uawa.nbrimpressions; accoms.push((uaImp[i++].id) || ""));
-                        /*w.ga(trackerName+'ec:setAction', 'view', {'list': (uaImp[0] && uaImp[0].list || "")});
-                        trc.send('event', 'viewAddImpression', (uaImp[0].list || "")
-                            ,  (accoms && accoms.toString() || "")
-                            , 1
-                            , {'page': /[^\?]+/.exec(uawa.page) || (cdurl.pathname || '/') || ''}
-                            , {'nonInteraction': true, 'location': uawa.location});
-                        */
-                    };
-            }());
             dl.push({'event': 'UATC SRP'});
-            window.gatcDL && window.gatcDL.push({'event': 'UATC SRP'});
 
             if (ux) {window.ECEOP.pageview = []};
         });
