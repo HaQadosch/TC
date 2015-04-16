@@ -32,7 +32,9 @@
             }
 
             sendSet['page'] = uawa.page;
-            //sendSet['hitCallback'] = function gtm_uatcPayAddProduct(){
+            w.ga(trackerName+'send','pageview', sendSet);
+
+            (function gtm_uatcPayAddProduct(){
                 w.ga(trackerName+'ec:addProduct', {
                     'id'        : uaprod.id,
                     'name'      : uaprod.name,
@@ -42,26 +44,25 @@
                     'price'     : uaprod.price,
                     'quantity'  : uaprod.quantity                   
                 });
-
                 w.ga(trackerName+'ec:setAction','checkout', {'step': 2, 'label': 'pay'})
-                trc.send('event', 'ECProductView', uaprod.id, "1");
-            //};
-            trc.send('pageview', sendSet);
+            }());
+
+            w.ga(trackerName+'send','event', 'ECProductView', uaprod.id, "1");
 
             $('a#validPayment.button').on('click', function(e){    
                                                 var cdl = CATTDL || {};
                                                 var cdpm = cdl.CATTParams || {};
-                                                var trc = ga.getByName(cdl.DL_uatc && cdl.DL_uatc.name);                                                
+                                                var trackerName = (uadl.name+".") || ""                                        
                                                 var params = JSON.parse(cdl.ckget('gtm_params') || '{}');
                                                 var cardtype = /card/i.test(params.paymentoption)?params.cardtype:'na';
-                                                trc.send('event', 'confirm payment'
+                                                w.ga(trackerName+'send','event', 'confirm payment'
                                                             , (cdpm.lob || 'lob')+'|'+(cdpm.holidaytype || 'holidaytype')
                                                             ,  params.paymentoption || ''
                                                             , 1
                                                             , { 'dimension39': cardtype,
-                                                            	'dimension51': cdpm.gaguid || 'empty',
-										                        'dimension65': cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || '',
-										                        'dimension75': ''+(window.Date && window.Date.now() || 0)}   
+                                                                'dimension51': cdpm.gaguid || 'empty',
+                                                                'dimension65': cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || '',
+                                                                'dimension75': ''+(window.Date && window.Date.now() || 0)}   
                                                             , {'nonInteraction': true});
                                             })
         })
