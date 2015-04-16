@@ -67,7 +67,7 @@
                 });
 
                 w.ga(trackerName+'ec:setAction', 'click', {'list': uaprod.list});
-                trc.send('event', 'ECProductListClick', uaprod.id
+                w.ga(trackerName+'send','event', 'ECProductListClick', uaprod.id
                             ,  ''+uaprod.position
                             , 1
                             , {'page': uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
@@ -78,10 +78,11 @@
                                 ,'dimension119': (locsearch || '')
                             }
                             , {'nonInteraction': true});
-                dl.push({'event': 'UATCDL Accom EC'})
+                dl.push({'event': 'UATCEC productclick'})
             };
 
             sendSet['page'] = uawa.page;
+            w.ga(trackerName+'send','pageview', sendSet);            
             sendSet['dimension52'] = window.userId || '';
             //function gtm_uatcAccomAddProductListView(){
                 w.ga(trackerName+'ec:addProduct', {
@@ -93,7 +94,7 @@
                 });
 
                 w.ga(trackerName+'ec:setAction', 'detail');
-                trc.send('event', 'ECProductView', uaprod.id
+                w.ga(trackerName+'send','event', 'ECProductView', uaprod.id
                         ,  ''+uaprod.position
                         , 1
                         , {'page': uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
@@ -104,13 +105,13 @@
                                 ,'dimension119': (locsearch || '')
                             }
                         , {'nonInteraction': true});
-                dl.push({'event': 'UATCECaddProduct'});
+                dl.push({'event': 'UATCEC productview'});
             //};
-            trc.send('pageview', sendSet);
+
             
             for (evt in uawa.events) {
                 var gevt = uawa.events[evt]
-                if (gevt.action) (trc.send('event', gevt.category, gevt.action,  gevt.label, gevt.value
+                if (gevt.action) (w.ga(trackerName+'send','event', gevt.category, gevt.action,  gevt.label, gevt.value
                     , {'page': gevt.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
                         ,'dimension51': cdpm.gaguid || 'empty'
                         ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
@@ -126,8 +127,8 @@
             jQ('button.close').on('click',function(){
             var cdl = window.CATTDL || {};
             var cdpm = cdl && cdl.CATTParams || {};
-            var trc = window.ga.getByName(cdl && cdl.DL_uatc && cdl.DL_uatc.name);
-            trc.send('event'
+            var trackerName = (cdl.DL_uatc && cdl.DL_uatc.name+".") || "";
+            w.ga(trackerName+'send','event'
                 , 'Videoclosed'
                 , 'Hotelvideo'
                 , (cdpm.lob || '')+'|'+(cdpm.holidaytype || '')+'|'+(cdpm.pageid || '')+'|'+(cdpm.accomguid || 'accomguid')
