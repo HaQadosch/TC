@@ -71,15 +71,15 @@
                 if (uawa.nbrimpressions && uawa.addimpression && uawa.addimpression.length){
                         for (var i = 0; i < uawa.nbrimpressions; i++){
                             curUAImp = uaImp[i] || {}
-                            w.ga(trackerName+'ec:addImpression',Â {
-                                    Â Â 'id':             curUAImp.id || '',
-                                    Â Â 'name':           curUAImp.name || '',
-                                    Â Â 'category':       curUAImp.category || '',
-                                    Â Â 'brand':          curUAImp.brand || '',
-                                    Â Â 'variant':        curUAImp.variant || '',
-                                    Â Â 'list':           curUAImp.list || '',
-                                    Â Â 'position':       curUAImp.position || '',
-                                    Â Â 'dimension27':    curUAImp.dimension27 || ''
+                            w.ga(trackerName+'ec:addImpression', {
+                                      'id':             curUAImp.id || '',
+                                      'name':           curUAImp.name || '',
+                                      'category':       curUAImp.category || '',
+                                      'brand':          curUAImp.brand || '',
+                                      'variant':        curUAImp.variant || '',
+                                      'list':           curUAImp.list || '',
+                                      'position':       curUAImp.position || '',
+                                      'dimension27':    curUAImp.dimension27 || ''
                             })
                         }               
                         for (i = 0; i < uawa.nbrimpressions; accoms.push((uaImp[i++].id) || ""));
@@ -90,7 +90,6 @@
                             , {'page': /[^\?]+/.exec(uawa.page) || (cdurl.pathname || '/') || ''}
                             , {'nonInteraction': true, 'location': uawa.location});
                         */
-                    
                     };
             }());
             dl.push({'event': 'UATC SRP'});
