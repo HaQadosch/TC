@@ -10,16 +10,15 @@ setTimeout(function gtm_gatc(){
     var cdpm = cdl && cdl.CATTParams || '';
 
     var QSP_P = ''; for (var i in cdpm) {if (cdpm && cdpm[i] && !/cookies|searches/g.test(i)) QSP_P += '&'+i+'='+ cdpm[i];}
-
+    var VP = ""; var fullVP = "";
     var doneAlready = /xbGTMBooking=/i.test(document.cookie) && (/xbGTMBooking=([^;]*)/i.exec(document.cookie)|| []).pop() || '';
-    if (cdpm.bookingref && !/doneAlready/i.test(cdpm.bookingref)) try {
-        var VP = ""; var fullVP = "";
-        if (/GTMbookingAccount/i.test(document.cookie)) {
+    if (cdpm.bookingref && cdpm.bookingvalue && !doneAlready) try {
+        if (/GTMbookingAccount/i.test(document.cookie || '')) {
             VP = '/vp/hotel/hotel/booking_account'; fullVP = VP+QSP_P.replace(/\&/, '?');
             window._gaq.push(['CATTGATC._trackPageview', fullVP]);
         } else {
             VP = '/vp/hotel/hotel/booking'; fullVP = VP+QSP_P.replace(/\&/, '?');
-            var today = in5Min = new Date(); in5Min.setMinutes(today.getMinutes()+5);document.cookie="GTMbookingAccount=XB; expires="+in5Min.toUTCString()+"; path=/; domain=.hotels4u.com;"
+            var today = in5Min = new Date(); in5Min.setMinutes(today.getMinutes()+30);document.cookie="GTMbookingAccount=XB; expires="+in5Min.toUTCString()+"; path=/; domain=.hotels4u.com;"
             window._gaq.push(['CATTGATC._trackPageview', fullVP]);
             window._gaq.push(['CATTGATC._addTrans', (cdpm.bookingref || 'na'),'',(cdpm.bookingvalue || '0'),'','','','','']);
             window._gaq.push(['CATTGATC._addItem', (cdpm.bookingref || 'na'),
@@ -31,7 +30,7 @@ setTimeout(function gtm_gatc(){
             ]);
             window._gaq.push(['CATTGATC._set', 'currencyCode', (cdpm.currency || 'GBP')]);
             window._gaq.push(['CATTGATC._trackTrans']);
-            var today = inAMonth = new Date(); inAMonth.setDate(today.getDate()+30);
+            today = inAMonth = new Date(); inAMonth.setDate(today.getDate()+30);
             document.cookie="xbGTMBooking="+(cdpm.bookingref || '')+"; expires="+inAMonth.toUTCString()+"; path=/; domain=.hotels4u.com;";
         }
     } catch(e) {
@@ -47,8 +46,9 @@ setTimeout(function gtm_gatc(){
         window._gaq.push(['CATTGATC._set', 'currencyCode', (cdpm.currency || 'GBP')]);
         window._gaq.push(['CATTGATC._trackTrans']);
     }
-    (function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);})();
     window._gaq.push(['CATTGATC._trackEvent', 'booking tracking', (cdpm.bookingref || 'na') || ('ref_'+Date.now()), (cdpm.currency || 'GBP')+'_'+(cdpm.bookingvalue || '0.01'), 1, true]);
-    if (/&affiliate=HC/i.test(location.search || '')) window._gaq.push(['CATTGATC._trackEvent', 'HCtracking', (cdpm.bookingref || 'na'), (cdpm.hcBooking || 'na'), 1, true]);
+    if (/HC/i.test(cdpm.cookies && cdpm.cookies.affiliate || '')) window._gaq.push(['CATTGATC._trackEvent', 'HCtracking', (cdpm.bookingref || 'na'), (cdpm.hcBooking || 'na'), 1, true]);
+
+    (function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);})();
 },1500)
 </script>
