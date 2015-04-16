@@ -49,9 +49,10 @@
                     jQ.each(vMet, function valMetrics(_, val){val && (sendSet[kMet]=val)})
                 })  
             }
-
-            sendSet['page'] = uawa.page;
             sendSet['dimension52'] = window.userId || '';
+            sendSet['page'] = uawa.page;
+            w.ga(trackerName+'send','pageview', sendSet);            
+
             //function gtm_uatcCustAddProduct(){
                 w.ga(trackerName+'ec:addProduct', {
                     'id'        : uaprod.id,
@@ -62,9 +63,8 @@
                     'price'     : uaprod.price,
                     'quantity'  : uaprod.quantity                   
                 });
-
                 w.ga(trackerName+'ec:setAction','checkout', {'step': 2, 'label': 'pax'})
-                trc.send('event', 'ECProductView', uaprod.id
+                w.ga(trackerName+'send','event', 'ECProductView', uaprod.id
                         ,  ''+uaprod.position
                         , 1
                         , {'page': uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
@@ -76,12 +76,11 @@
                         }
                         , {'nonInteraction': true});
             //};
-            trc.send('pageview', sendSet);
             if (ux) {window.ECEOP.pageview = []};
 
             for (evt in uawa.events) {
                 var gevt = uawa.events[evt]
-                if (gevt.action) (trc.send('event', gevt.category, gevt.action,  gevt.label, gevt.value
+                if (gevt.action) (w.ga(trackerName+'send','event', gevt.category, gevt.action,  gevt.label, gevt.value
                     , {'page': gevt.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
                         ,'dimension51': cdpm.gaguid || 'empty'
                         ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
