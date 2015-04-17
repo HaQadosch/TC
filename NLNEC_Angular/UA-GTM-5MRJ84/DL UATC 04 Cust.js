@@ -14,7 +14,7 @@
         var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
         var srpsortlist = params.srplist || 'search';
         var srpsortoption = params.sortoption || '';
-        var accomposition = params.accomposition[cdpm.accomcode || ''] || '';
+        var accomposition = params.accomposition && params.accomposition[cdpm.accomcode || ''] || '';
 
         cdl.DL_uatc = {
             profileid       : 'UA-27847231-2',
@@ -102,6 +102,7 @@
                     dimension107    : {'departuretimeoutbound'      : cdl.gatime && cdpm.flightdetails && cdpm.flightdetails.outbound && cdpm.flightdetails.outbound[0] && cdpm.flightdetails.outbound[0].depart && cdl.gatime(cdpm.flightdetails && cdpm.flightdetails.outbound[0].depart.date) || ''},
                     dimension115    : {'realurl'                    : locpathname+locsearch || ''},
                     dimension119    : {'pagetimestamp'              : cdl.gadate(cdpm.pagetimestamp || 0)+' '+cdl.gatime(cdpm.pagetimestamp || 0) || ''},
+                    dimension122    : {'totalprice'                 : ''+(cdpm.totalprice || '0')},
                     dimension123    : {'discountperc'               : ''+(cdpm.discountperc || '0')},
                     dimension124    : {'discountvalue'              : ''+(cdpm.discountvalue || '0')},
                     dimension132    : {'errormessage'               : cdpm.errors && cdpm.errors.errormsg || ''},
