@@ -56,10 +56,11 @@
                     jQ.each(pvMet, function pvalMetrics(_, val){val && (prodDimMet[pkMet]=val)})
                 })  
             };
-
-            sendSet['page'] = uawa.page;
             sendSet['dimension31'] = window.userId || '';
-            sendSet['hitCallback'] = function gtm_uatcBookAddProduct(){
+            sendSet['page'] = uawa.page;
+            w.ga(trackerName+'send','pageview', sendSet);
+
+            (function gtm_uatcBookAddProduct(){
                 w.ga(trackerName+'ec:addProduct', prodDimMet);
                 w.ga(trackerName+'ec:setAction','purchase', {
                     'id'            : uapurch.id,
@@ -69,9 +70,8 @@
                     'shipping'      : uapurch.shipping,
                     'coupon'        : uapurch.coupon
                 });
-                trc.send('event', 'ECPurchase', uaprod.id,  ''+uaprod.position, 1, {'nonInteraction': true});
-            };
-            trc.send('pageview', sendSet);
+                w.ga(trackerName+'send','event', 'ECPurchase', uaprod.id,  ''+uaprod.position, 1, {'nonInteraction': true});
+            }());
 
             for (evt in uawa.events) {
                 var gevt = uawa.events[evt]
