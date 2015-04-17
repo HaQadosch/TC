@@ -86,9 +86,10 @@
                     dimension106    : {'arrivaltimeoutbound'        : cdl.gatime && cdpm.flightdetails && cdpm.flightdetails.outbound && cdpm.flightdetails.outbound[0] && cdpm.flightdetails.outbound[0].arrive && cdl.gatime(cdpm.flightdetails && cdpm.flightdetails.outbound[0].arrive.date) || ''},
                     dimension107    : {'departuretimeoutbound'      : cdl.gatime && cdpm.flightdetails && cdpm.flightdetails.outbound && cdpm.flightdetails.outbound[0] && cdpm.flightdetails.outbound[0].depart && cdl.gatime(cdpm.flightdetails && cdpm.flightdetails.outbound[0].depart.date) || ''},
                     dimension115    : {'realurl'                    : locpathname+locsearch || ''},
-                    dimension119    : {'pagetimestamp'             : cdl.gadate(cdpm.pagetimestamp || 0)+' '+cdl.gatime(cdpm.pagetimestamp || 0) || ''},
-                    dimension123    : {'discountperc'              : ''+(cdpm.discountperc || '0')},
-                    dimension124    : {'discountvalue'             : ''+(cdpm.discountvalue || '0')},
+                    dimension119    : {'pagetimestamp'              : cdl.gadate(cdpm.pagetimestamp || 0)+' '+cdl.gatime(cdpm.pagetimestamp || 0) || ''},
+                    dimension122    : {'totalprice'                 : ''+(cdpm.totalprice || '0')},
+                    dimension123    : {'discountperc'               : ''+(cdpm.discountperc || '0')},
+                    dimension124    : {'discountvalue'              : ''+(cdpm.discountvalue || '0')},
                     dimension132    : {'errormessage'               : cdpm.errors && cdpm.errors.errormsg || ''},
                     dimension133    : {'zooverrating'               : cdpm.ratings && cdpm.ratings.zoover && cdpm.ratings.zoover.avgrating || ''},
                     dimension134    : {'zoovercount'                : cdpm.ratings && cdpm.ratings.zoover && cdpm.ratings.zoover.count || ''}                    
