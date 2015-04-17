@@ -38,10 +38,11 @@
                     jQ.each(vMet, function valMetrics(_, val){val && (sendSet[kMet]=val)})
                 })  
             }
-
-            sendSet['page'] = uawa.page;
             sendSet['dimension31'] = window.userId || '';
-            sendSet['hitCallback'] = function gtm_uatcCustAddProduct(){
+            sendSet['page'] = uawa.page;
+            w.ga(trackerName+'send','pageview', sendSet);
+
+            (function gtm_uatcCustAddProduct(){
                 w.ga(trackerName+'ec:addProduct', {
                     'id'        : uaprod.id,
                     'name'      : uaprod.name,
@@ -51,11 +52,10 @@
                     'price'     : uaprod.price,
                     'quantity'  : uaprod.quantity                   
                 });
-
                 w.ga(trackerName+'ec:setAction','checkout', {'step': 2, 'label': 'pax'})
-                trc.send('event', 'ECProductView', uaprod.id,  ''+uaprod.position, 1, {'nonInteraction': true});
-            };
-            trc.send('pageview', sendSet);
+                w.ga(trackerName+'send','event', 'ECProductView', uaprod.id,  ''+uaprod.position, 1, {'nonInteraction': true});
+            }());
+
 
             for (evt in uawa.events) {
                 var gevt = uawa.events[evt]
