@@ -78,20 +78,20 @@
                     if (/test=test/i.test(document.cookie)) console.info('GTM error updated', '\n', d /*, '\n', Object.keys(window.getPageData()).join('|'), '\n', window.getPageData()*/);
                     dataLayer.push({'event': 'jserror'})
                     gatcDL.push({'event': 'jserror'})
-                });
-
-                cdpm['device'] = (function(t){var n="desktop";var r=/mobile/i.test(t);var i=/android/i.test(t);var s=/phone/i.test(t);var o=i&&!/mobile/i.test(t);var u=/ipad/i.test(t);var a=/tablet/i.test(t);if(a||o||u)n="tablet";else if(r||i||s)n="mobile";return n})(navigator.userAgent||"")
-                    || '';
-                cdpm.poolcontrol = !Boolean((cdpm.utmaguid || 1)%20);
-                window.CATTDL.CATTParams = cdpm;
-                
-                //UA call
-                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');                
-                
+                });             
             } else console.log('GTM $.subsribe undefined');
+
+            cdpm['device'] = (function(t){var n="desktop";var r=/mobile/i.test(t);var i=/android/i.test(t);var s=/phone/i.test(t);var o=i&&!/mobile/i.test(t);var u=/ipad/i.test(t);var a=/tablet/i.test(t);if(a||o||u)n="tablet";else if(r||i||s)n="mobile";return n})(navigator.userAgent||"")
+                    || '';
+            cdpm.poolcontrol = !Boolean((cdpm.utmaguid || 1)%20);
+            window.CATTDL.CATTParams = cdpm;
+                
+            //UA call
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');  
+            
         } catch(e) {
             var msg = 'GTM CATTDL Core: '+e;
             console && ((console.error)?console.error(msg):console.log(msg))
