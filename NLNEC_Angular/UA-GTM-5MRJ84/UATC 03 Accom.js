@@ -40,8 +40,8 @@
                     jQ.each(vMet, function valMetrics(_, val){val && (sendSet[kMet]=val)})
                 })  
             };
-    		
-    		var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
+            
+            var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
 
             var uaprod = uadl.webanalytics.addproductlist || {};
             if (wgdSrch && params && params.previouspageid && (params.previouspageid === 'search' || params.previouspageid === 'searchmap' || params.previouspageid === 'searchseo')) { 
@@ -56,13 +56,15 @@
                 });
 
                 w.ga(trackerName+'ec:setAction', 'click', {'list': uaprod.list});
-                trc.send('event', 'ECProductListClick', uaprod.id,  ''+uaprod.position, 1, {'nonInteraction': true});
-                dl.push({'event': 'UATCDL Accom EC'})
+                w.ga(trackerName+'send','event', 'ECProductListClick', uaprod.id,  ''+uaprod.position, 1, {'nonInteraction': true});
+                dl.push({'event': 'UATCEC productclick'});
             };
 
-            sendSet['page'] = uawa.page;
             sendSet['dimension31'] = window.userId || '';
-            sendSet['hitCallback'] = function gtm_uatcAccomAddProductListView(){
+            sendSet['page'] = uawa.page;
+            w.ga(trackerName+'send','pageview', sendSet);
+            
+            (function gtm_uatcAccomAddProductListView(){
                 w.ga(trackerName+'ec:addProduct', {
                     'id'        : uaprod.id || '',
                     'name'      : uaprod.name || '',
@@ -72,14 +74,13 @@
                 });
 
                 w.ga(trackerName+'ec:setAction', 'detail');
-                trc.send('event', 'ECProductView', uaprod.id,  ''+uaprod.position, 1, {'nonInteraction': true});
-                dl.push({'event': 'UATCECaddProduct'});
-            };
-            trc.send('pageview', sendSet);
+                w.ga(trackerName+'send','event', 'ECProductView', uaprod.id,  ''+uaprod.position, 1, {'nonInteraction': true});
+                dl.push({'event': 'UATCEC producview'});
+            }());
             
             for (evt in uawa.events) {
                 var gevt = uawa.events[evt]
-                if (gevt.action) (trc.send('event', gevt.category, gevt.action,  gevt.label, gevt.value, {'nonInteraction': gevt.noninteraction}));
+                if (gevt.action) (w.ga(trackerName+'send','event', gevt.category, gevt.action,  gevt.label, gevt.value, {'nonInteraction': gevt.noninteraction}));
             };
 
             jQ('button.close').on('click',function(){
@@ -98,9 +99,9 @@
 
     } catch(e) {
         cdl.error('GTM NL NEC UATC Accom: '+e);
-    } finally {   	
-		window.externalLayer && externalLayer.push({'event' : 'uapageview'+'|'+(cdl.CATTParams && cdl.CATTParams.pageid || 'home')+'|'+(cdl.CATTParams && cdl.CATTParams.urlparams && cdl.CATTParams.urlparams.pathname || '/')})
-	}
+    } finally {     
+        window.externalLayer && externalLayer.push({'event' : 'uapageview'+'|'+(cdl.CATTParams && cdl.CATTParams.pageid || 'home')+'|'+(cdl.CATTParams && cdl.CATTParams.urlparams && cdl.CATTParams.urlparams.pathname || '/')})
+    }
     return cdl && uadl
 }(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_uatc, window, document, window.dataLayer || []))
 </script>
