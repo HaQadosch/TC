@@ -10,7 +10,7 @@
             var QSP_ST = 'SS_ST='+(cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'_'+(cdpm.accomname || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'_'+(cdpm.accomcode || '');
             var QSP_CAT = 'SS_CAT='+(cdpm.lob || '')+'_'+CATTPageId;
             var QSP_P = 'DeptDate='+(cdl.gadate && cdpm.deptdate && cdl.gadate(cdpm.deptdate) || '').replace(/\//g, '-')
-                                    +'&depAirport='+(cdpm.deptairport || '')
+                                    +'&depAirport='+(cdpm.depairport || cdpm.deptairport || '')
                                     +'&PaxAdult='+(cdpm.paxadult || '')
                                     +'&PaxChild='+(cdpm.paxchild || '')
                                     +'&BoardBasis='+(cdpm.boardbasis).replace(/\&amp;/g, '-').replace(/\&/g, '-')
@@ -56,7 +56,7 @@
             if(cdpm.deptdate){window._gaq.push(['CATTGATC._setCustomVar', 24, 'DeptDate', (cdl.gadate && cdpm.deptdate && cdl.gadate(cdpm.deptdate)) , 3])};
             if(cdpm.accomcode){window._gaq.push(['CATTGATC._setCustomVar', 25, 'AccomCode', cdpm.accomcode, 3])};
             if(cdpm.accomname){window._gaq.push(['CATTGATC._setCustomVar', 26, 'AccomName', cdpm.accomname, 3])};
-            if(cdpm.depairport){window._gaq.push(['CATTGATC._setCustomVar', 27, 'DepartureAirport', cdpm.depairport, 3])};
+            if(cdpm.depairport || cdpm.deptairport){window._gaq.push(['CATTGATC._setCustomVar', 27, 'DepartureAirport', cdpm.depairport || cdpm.deptairport, 3])};
             if(cdpm.destairport){window._gaq.push(['CATTGATC._setCustomVar', 28, 'DestinationAirport', cdpm.destairport, 3])};
             if (/_utma=/i.test(document.cookie)) {window._gaq.push(['CATTGATC._setCustomVar', 30, 'UtmaGuid', (function(e){var t=/_utma=([^;%=]*)/i.exec(e)&&/_utma=([^;%=]*)/i.exec(e).pop()||false;t=t&&t.split(".")[1];return t||""})(document.cookie), 1]);}
             if (/&m_i=/i.test(document.location.search)) {window._gaq.push(['CATTGATC._setCustomVar', 31, 'espID', (function(e){var t=/&m_i=([^&]*)/i.exec(e)&&/&m_i=([^&]*)/i.exec(e).pop()||false;return t||""})(document.location.search), 1]);}
