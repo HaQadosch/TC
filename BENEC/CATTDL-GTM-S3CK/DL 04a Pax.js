@@ -63,7 +63,7 @@
         cdpm['accomresort'] = ctpm.AccomResort || '';
         cdpm['deptdate'] = +(new Date(ctpm.DeptDate && ctpm.DeptDate.replace(/(\d+)\/(\d+)\/(\d+)/,'$3-$2-$1')) || new Date((jQuery('div#foCashTicket').find('div[class="flight-breakdown"]').find('span[class="trip-datetime"]').eq(0).text() || '').trim().replace(/(\d+)\/(\d+)\/(\d+)/,'$3-$2-$1').substring(0,10)) || '0');
         cdpm['destairport'] = (ctpm.DestinationAirportSelected || '').toUpperCase();      
-        cdpm['depairport'] = (ctpm.DepartureAirportSelected || '').toUpperCase();
+        cdpm['deptairport'] = (ctpm.DepartureAirportSelected || '').toUpperCase();
         cdpm['returndate'] = +(new Date(ctpm.RetDate && ctpm.RetDate.replace(/(\d+)\/(\d+)\/(\d+)/,'$3-$2-$1')) ||new Date((jQuery('div#foCashTicket').find('div[class="flight-breakdown"]').find('span[class="trip-datetime"]').eq(2).text() || '').trim().replace(/(\d+)\/(\d+)\/(\d+)/,'$3-$2-$1').substring(0,10)) || '0');
         cdpm['duration'] = +(/\d+/.exec(jQuery('div#foCashTicket').find('div[class="flight-breakdown"]').find('span[class="trip-party"]').text()) || []).pop() || 0;
         cdpm['roomcodes'] = ctpm.RoomType && ctpm.RoomType.split('|') || [];
