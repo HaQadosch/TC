@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_uatcdlSecure'>
 (function gtm_uatcdlSecure(jQ, dl, cdl, loc) {
     'use strict';
     if (jQ && cdl && cdl.CATTParams) try {
@@ -147,6 +147,9 @@
                     dimension38     : {'paymentoption'              : cdpm.paymentoption || 'empty'},
                     dimension39     : {'cardtype'                   : cdpm.cardtype || 'empty'},
                     dimension51     : {'gaguid'                     : cdpm.gaguid || 'empty'},
+                    dimension52     : {'anonymousid'                : window.userId || ''},
+                    dimension53     : {'myaccountuserid'            : cdpm.user && cdpm.user.id || ''},
+                    //dimension54     : {'myaccountaction'            : ''},                          
                     dimension58     : {'accomguid'                  : cdpm.accomguid || 'empty'},
                     dimension59     : {'roomcode1'                  : cdpm.roomcodes && cdpm.roomcodes[0] || 'empty'},
                     dimension60     : {'roomcode2'                  : cdpm.roomcodes && cdpm.roomcodes[1] || ''},
