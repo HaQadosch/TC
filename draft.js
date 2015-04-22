@@ -1,124 +1,52 @@
-<script id='gtm_CIM'>
-(function gtm_CIMDL(dl, cdl){
-    'use strict'
-    if (dl && cdl) try {
-        cdl.DL_cim = {
-            pp_gemius_identifier : 'B3A1liL6lR70I2KFOTduOHZ27A_BAgRs2tWsEQ0ZlTj.f7',
-            lan : (window.condorContextPath || window.Ecom && window.Ecom.Application && window.Ecom.Application.language || '').replace(/\//g, '').toUpperCase(),
-            key : 'keyword',
-            subs : 'subsection',
-            free : 'free_field',
-            script : {
-                src : '//gabe.hit.gemius.pl/xgemius.js',
-                status: 'not fired'
-            }
-        };
-        cdl.DL_cim.pp_gemius_extraparameters = new Array('lan='+(cdl.DL_cim.lan || ''), 'key='+(cdl.DL_cim.key || ''), 'subs='+(cdl.DL_cim.subs || ''), 'free='+(cdl.DL_cim.free || ''))
-    } catch(e) {
-        cdl.error && cdl.error('GTM CIM DL:', e)
-    } finally {
-        dl.push({'event':'CIM DL'})
-    }
-    return dl && cdl && cdl.DL_cim
-}(window.dataLayer, window.CATTDL));
+http://topflug.thomascook.de/Flug/Palma%20de%20Mallorca/0.35.html?erwachsene=2&kind1=-1&kind2=-1&kind3=-1&von=22.05.2015&bis=24.05.2015&dauer=2&sort=preis&hotelid=&abflughafen=FRA&filter_abflughafen=FRA&veranstalter=CFI&filter_veranstalter=CFI&flight_type=return&bookingId=24WVUBCAY7UDVU44TRVLCRZ8JNDCYPBYW&flightNo=&sourceValue=Mzkw&utm_medium=met&utm_source=swoodoo&utm_campaign=Flight&utm_content=FRA%7CPMI%7C2%7C22.05.2015%7C24.05.2015%7C2&utm_term=490329&m=gfi&ref=490329&affmt=2&affmn=27
 
-(function gtm_cim(jQ, dl, cdl, cmdl){
-    'use strict'
-    if (dl && cdl && cmdl) try {
-        window.pp_gemius_identifier = cmdl.pp_gemius_identifier;
-        window.pp_gemius_extraparameters = cmdl.pp_gemius_extraparameters;
-        jQ.ajaxSetup({cache: true});
-        jQ.getScript && jQ.getScript(cmdl.script && cmdl.script.src || '', function gtm_CIMGetScript(){
-            cmdl.script.status = 'fired'
-        })
-    } catch(e) {
-        cdl.error && cdl.error('GTM CIM:', e)
-    } finally {
-        dl.push({'event':'CIM'})
-    }
-    return dl && jQ && cdl && cmdl
-}(window.jQuery, window.dataLayer, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_cim))
-</script>
+abflughafen: "FRA"
+affmn: "27"
+affmt: "2"
+bis: "24.05.2015"
+bookingId: "24WVUBCAY7UDVU44TRVLCRZ8JNDCYPBYW"
+dauer: "2"
+erwachsene: "2"
+filter_abflughafen: "FRA"
+filter_veranstalter: "CFI"
+flightNo: ""
+flight_type: "return"
+hotelid: ""
+kind1: "-1"
+kind2: "-1"
+kind3: "-1"
+m: "gfi"
+ref: "490329"
+sort: "preis"
+sourceValue: "Mzkw"
+utm_campaign: "Flight"
+utm_content: "FRA%7CPMI%7C2%7C22.05.2015%7C24.05.2015%7C2"
+utm_medium: "met"
+utm_source: "swoodoo"
+utm_term: "490329"
+veranstalter: "CFI"
+von: "22.05.2015"
+__proto__: Object
+
+CATTDL.ckget('gtm_attr')
+"[["","met","Flight","FRA%7CPMI%7C2%7C22.05.2015%7C24.05.2015%7C2","swoodoo","490329",1429694454095]]"
 
 
-<script id='gtm_SaleCycle'>
-(function gtm_SaleCycleDL(dl, cdl){
-    'use strict'
-    if (dl && cdl) try {
-        cdl.DL_salecycle = {
-            script1 : 'app.salecycle.com/capture/lib/json2.js',
-            script2 : 'app.salecycle.com/capture/lib/jstorage.js',
-            script3 : 'app.salecycle.com/capture/thomascook.js'
-        };
-    } catch(e) {
-        cdl.error && cdl.error('GTM SaleCycle DL:', e)
-    } finally {
-        dl.push({'event':'SaelCycle DL'})
-    }
-    return dl && cdl && cdl.DL_salecycle
-}(window.dataLayer, window.CATTDL));
+https://topflug.thomascook.de/buchen
+CATTDL.ckget('gtm_attr')
+"[["","met","Flight","FRA%7CPMI%7C2%7C22.05.2015%7C24.05.2015%7C2","swoodoo","490329",1429694454095]]"
 
-(function gtm_salecycle(jQ, dl, cdl, scdl){
-    'use strict'
-    if (dl && cdl && scdl) try {
-        var __scP=document.location.protocol=="https:"?"https://":"http://",
-            __scHEAD=document.getElementsByTagName("head")[0];
-        var __scD1=document.createElement("script");
-        __scD1.type="text/javascript";
-        __scD1.async=true;
-        __scD1.src=__scP+"app.salecycle.com/capture/lib/json2.js";
+https://topflug.thomascook.de/buchungsbestaetigung
 
-        var __scD2=document.createElement("script");
-        __scD2.type="text/javascript";
-        __scD2.async=true;
-        __scD2.src=__scP+"app.salecycle.com/capture/lib/jstorage.js";
+CATTDL.CATTParams.attribution
+date: 1429694454095
+gclid: ""
+landing: Wed Apr 22 2015 10:20:54 GMT+0100 (GMT Daylight Time)
+utm_campaign: "Flight"
+utm_content: "FRA%7CPMI%7C2%7C22.05.2015%7C24.05.2015%7C2"
+utm_medium: "met"
+utm_source: "swoodoo"
+utm_term: "490329"
+__proto__: Object
 
-        var __scS=document.createElement("script");
-        __scS.type="text/javascript";
-        __scS.async=true;
-        __scS.src=__scP+"app.salecycle.com/capture/thomascook.js";
-        __scHEAD.appendChild(__scD1);
-        __scHEAD.appendChild(__scD2);
-        __scHEAD.appendChild(__scS)
-        scdl.status = 'fired'
-    } catch(e) {
-        cdl.error && cdl.error('GTM SaleCycle:', e)
-    } finally {
-        dl.push({'event':'SaleCycle'})
-    }
-    return dl && jQ && cdl && scdl
-}(window.jQuery, window.dataLayer, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_salecycle))
-</script>
 
-<script>
-(function gtm_SalecycleDL(cdl, dl){
-    'use strict'
-    if (cdl) try {
-        cdl.DL_salecycle = {
-            script         : {
-                status  : 'not fired',
-                url     : '//d16fk4ms6rqz1v.cloudfront.net/capture/thomascook.js'
-            }
-        }
-    } catch(e) {
-        cdl.error("GTM DL_salecycle: "+e)
-    } finally {
-        dl.push({event: 'Salecycle'});
-    }
-    return cdl.DL_salecycle
-}(window.CATTDL, window.externalLayer));
-
-(function gtm_Salecycle(jQ, cdl, scdl){
-    'use strict';
-    if (jQ && cdl && scdl && /salecycle/i.test(cdl.CATTParams && cdl.CATTParams.cookies && cdl.CATTParams.cookies.test || '')) try {
-        if (scdl.script) {
-            jQ.ajaxSetup({cache: true});
-            jQ.getScript && jQ.getScript(scdl.script.url, function gtm_salecyleScript(){
-                scdl.script.status = 'fired'
-             })
-        }
-    } catch (e){cdl.error('GTM Salecyle: '+e)}
-}(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_salecycle))
-</script>
-
-&& /optilead/i.test(cdl.CATTParams && cdl.CATTParams.cookies && cdl.CATTParams.cookies.test || '')
