@@ -1,9 +1,10 @@
 //<script id='gtm_cattdlCore'>
 (function gtm_cattdlCore(jQ, d, w, dl) {
     'use strict';
+    var cdpm = {};
     if (jQ && dl) try {
         w.CATTDL = w.CATTDL || {};
-        var cdpm = w.CATTDL.CATTParams || {};
+        cdpm = w.CATTDL.CATTParams || {};
         if (!String.prototype.trim) {String.prototype.trim=function trim() {return this.replace(/^\s+|\s+$/g,"")}}
 
         w.CATTDL = {
@@ -167,9 +168,9 @@
             || hdnParams.find('input[id$=hdnCurrency]').val()
             || jQ('button.btn#selectedCurrencyCodeButton').text()
             || "";
-        cdpm['bookingvalue'] = cdpm.bookingvalue
-            || hdnParams.find('input[id$=hdnSinglePrice]').val()
-            || "";
+
+        cdpm['bookingvalue'] = ''+Math.max(cdpm.bookingvalue || '', (jQ('div.section.section-price b:eq(0)').text() || '').replace('GBP', ''))
+
         cdpm['starrating'] = cdpm.starrating
             || hdnParams.find('input[id$=hdnStarRating]').val()
             || "";
