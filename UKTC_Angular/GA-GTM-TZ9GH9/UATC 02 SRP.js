@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_uatcSRP'>
 (function gtm_uatcSRP(jQ, cdl, uadl, w, d, dl){
     'use strict';
     if (cdl && uadl) try {
@@ -29,11 +29,9 @@
             }
             for (var setOption in uadl.set) trc.set(setOption, uadl.set[setOption]);
             if (typeof trc.plugins_ === 'undefined' || !/displayfeatures/i.test(trc.plugins_ && trc.plugins_.keys || '')) {trc.require && trc.require('displayfeatures') || w.ga(trackerName+'require', 'displayfeatures')};
-            //if (typeof trc.plugins_ === 'undefined' || !/ec/i.test(trc.plugins_ && trc.plugins_.keys || '')) {
-                trc.require && trc.require('ec', 'ec.js') || w.ga(trackerName+'require', 'ec', 'ec.js')
-                //};
-            cdl.CATTParams.gaguid =  /(.+)\./i.exec(trc.get('clientId') || '.').pop() || cdl.CATTParams.gaguid || ''
-            uawa && uawa.dimensions && (uawa.dimensions.dimension51 = {'gaguid' : cdl.CATTParams.gaguid || 'empty'}) || console.info('err', uawa)
+            if (typeof trc.plugins_ === 'undefined' || !/ec/i.test(trc.plugins_ && trc.plugins_.keys || '')) {trc.require && trc.require('ec', 'ec.js') || w.ga(trackerName+'require', 'ec', 'ec.js')};
+            cdl.CATTParams.gaguid =  /(.+)\./i.exec(trc.get('clientId') || '.').pop() || cdl.CATTParams.gaguid || '';
+            uawa && uawa.dimensions && (uawa.dimensions.dimension51 = {'gaguid' : cdl.CATTParams.gaguid || 'empty'}) || console.info('err', uawa);
 
             var sendSet = {};
             var ux = window.ECEOP || '';
@@ -50,7 +48,6 @@
                     jQ.each(vMet, function valMetrics(_, val){val && (sendSet[kMet]=val)})
                 })  
             };
-            sendSet['dimension52'] = window.userId || '';
             sendSet['page'] = uawa.page;            
             w.ga(trackerName+'send','pageview', sendSet);  
             
@@ -76,7 +73,7 @@
                         w.ga(trackerName+'send','event', 'viewAddImpression', (uaImp[0].list || "")
                             ,  (accoms && accoms.toString() || "")
                             , 1
-                            , {'page': /[^\?]+/.exec(uawa.page) || (cdurl.pathname || '/') || ''}
+                            , {'page': uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''}
                             , {'nonInteraction': true, 'location': uawa.location});
                     
                     };
@@ -95,14 +92,18 @@
                     , {'nonInteraction': gevt.noninteraction}));
             };
     
-            dl.push({'event': 'UATC SRP'});
+            var gatcDLcnt = 0; window.gatcDL.forEach(function(e){if(e.event === 'UATC SRP'){gatcDLcnt = gatcDLcnt + 1}})
+            dl.push({'event': 'UATC SRP', 'counter': gatcDLcnt});
+            window.gatcDL && gatcDL.push({'event': 'UATC SRP', 'counter': gatcDLcnt});
 
             if (ux) {window.ECEOP.pageview = []};
         });
     } catch(e) {
         cdl.error('GTM UK TC UATC SRP: '+e)
     } finally {
-        window.externalLayer && externalLayer.push({'event' : 'uapageview'+'|'+(cdl.CATTParams && cdl.CATTParams.pageid || 'home')+'|'+(cdl.CATTParams && cdl.CATTParams.urlparams && cdl.CATTParams.urlparams.pathname || '/')})
+        var counter = 0;
+        window.gatcDL && window.gatcDL.forEach(function(e){if(e.event === 'UATC SRP'){counter = e.counter || 0}});
+        window.externalLayer && externalLayer.push({'event' : 'uapageview'+'|'+(cdl.CATTParams && cdl.CATTParams.pageid || 'home')+'|'+(cdl.CATTParams && cdl.CATTParams.urlparams && cdl.CATTParams.urlparams.pathname || '/'), 'counter': counter});
     }
     return cdl && uadl
 }(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_uatc, window, document, window.dataLayer || []))
