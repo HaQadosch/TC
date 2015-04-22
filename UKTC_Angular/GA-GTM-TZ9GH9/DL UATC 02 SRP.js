@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_uatcdlSRP'>
 (function gtm_uatcdlSRP(jQ, dl, cdl, loc) {
     'use strict';
     if (jQ && cdl && cdl.CATTParams) try {
@@ -99,6 +99,9 @@
                         dimension35     : {'paxchild'                   : ''+(cdpm.paxchild || '0')},
                         dimension36     : {'paxinfant'                  : ''+(cdpm.paxinfant || '0')},  
                         dimension37     : {'paxtotal'                   : ''+(cdpm.paxtotal || '0')},
+                        dimension52     : {'anonymousid'                : window.userId || ''},
+                        dimension53     : {'myaccountuserid'            : cdpm.user && cdpm.user.id || ''},
+                        //dimension54     : {'myaccountaction'            : ''},                          
                         dimension64     : {'dreamcaptureid'             : cdpm.dreamcaptureid || ''},                    
                         dimension65     : {'pagetimestamp'              : cdl.gadate && cdl.gatime && cdl.gadate(cdpm.pagetimestamp || 0)+' '+cdl.gatime(cdpm.pagetimestamp || 0) || ''},
                         dimension67     : {'concepts'                   : cdfc.concepts && cdfc.concepts.toString() || ''},
