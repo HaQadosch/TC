@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_uatcAddPax'>
 (function gtm_uatcAddPax(jQ, cdl, uadl, w, d, dl){
     'use strict';
     if (cdl && uadl) try {
@@ -50,7 +50,6 @@
                 })  
             };
 
-            sendSet['dimension52'] = window.userId || '';
             sendSet['page'] = uawa.page;
             w.ga(trackerName+'send','pageview', sendSet);            
             //function gtm_uatcCustAddProduct(){
@@ -91,11 +90,15 @@
                     , {'nonInteraction': gevt.noninteraction}));
             };
         })
-        dl.push({'event': 'UATCECcheckout AddPax'});
+        var gatcDLcnt = 0; window.gatcDL.forEach(function(e){if(e.event === 'UATC AddPax'){gatcDLcnt = gatcDLcnt + 1}})
+        dl.push({'event': 'UATC AddPax', 'counter': gatcDLcnt});
+        window.gatcDL && gatcDL.push({'event': 'UATC AddPax', 'counter': gatcDLcnt});       
     } catch(e) {
         cdl.error('GTM UK TC UATC AddPax: '+e); 
     } finally {     
-        window.externalLayer && externalLayer.push({'event' : 'uapageview'+'|'+(cdl.CATTParams && cdl.CATTParams.pageid || 'home')+'|'+(cdl.CATTParams && cdl.CATTParams.urlparams && cdl.CATTParams.urlparams.pathname || '/')})
+        var counter = 0;
+        window.gatcDL && window.gatcDL.forEach(function(e){if(e.event === 'UATC AddPax'){counter = e.counter || 0}});           
+        window.externalLayer && externalLayer.push({'event' : 'uapageview'+'|'+(cdl.CATTParams && cdl.CATTParams.pageid || 'home')+'|'+(cdl.CATTParams && cdl.CATTParams.urlparams && cdl.CATTParams.urlparams.pathname || '/'), 'counter': counter});
     }
     return cdl && uadl
 }(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_uatc, window, document, window.dataLayer || []))
