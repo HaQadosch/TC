@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_uatcdlCust'>
 (function gtm_uatcdlCust(jQ, dl, cdl, loc){
     'use strict';
     if (jQ && cdl && cdl.CATTParams) try {
@@ -146,6 +146,9 @@
                     dimension36     : {'paxinfant'                  : ''+(cdpm.paxinfant || '0')},
                     dimension37     : {'paxtotal'                   : ''+(cdpm.paxtotal || '0')},
                     dimension51     : {'gaguid'                     : cdpm.gaguid || '0'},
+                    dimension52     : {'anonymousid'                : window.userId || ''},
+                    dimension53     : {'myaccountuserid'            : cdpm.user && cdpm.user.id || ''},
+                    //dimension54     : {'myaccountaction'            : ''},                          
                     dimension58     : {'accomguid'                  : cdpm.accomguid || 'empty'},
                     dimension59     : {'roomcode1'                  : cdpm.roomcodes && cdpm.roomcodes[0] || 'empty'},
                     dimension60     : {'roomcode2'                  : cdpm.roomcodes && cdpm.roomcodes[1] || ''},
