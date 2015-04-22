@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_uatcAccom'>
 (function gtm_uatcAccom(jQ, cdl, uadl, w, d, dl){
     'use strict';
     if (cdl && uadl) try {
@@ -83,7 +83,7 @@
 
             sendSet['page'] = uawa.page;
             w.ga(trackerName+'send','pageview', sendSet);            
-            sendSet['dimension52'] = window.userId || '';
+
             //function gtm_uatcAccomAddProductListView(){
                 w.ga(trackerName+'ec:addProduct', {
                     'id'        : uaprod.id || '',
@@ -144,12 +144,16 @@
             });
 
         });
-        dataLayer.push({'event': 'UATC Accom'});
+        var gatcDLcnt = 0; window.gatcDL.forEach(function(e){if(e.event === 'UATC Accom'){gatcDLcnt = gatcDLcnt + 1}})
+        dl.push({'event': 'UATC Accom', 'counter': gatcDLcnt});
+        window.gatcDL && gatcDL.push({'event': 'UATC Accom', 'counter': gatcDLcnt});
 
     } catch(e) {
         cdl.error('GTM UK TC UATC Accom: '+e);
-    } finally {     
-        window.externalLayer && externalLayer.push({'event' : 'uapageview'+'|'+(cdl.CATTParams && cdl.CATTParams.pageid || 'home')+'|'+(cdl.CATTParams && cdl.CATTParams.urlparams && cdl.CATTParams.urlparams.pathname || '/')})
+    } finally {
+        var counter = 0;
+        window.gatcDL && window.gatcDL.forEach(function(e){if(e.event === 'UATC Accom'){counter = e.counter || 0}});         
+        window.externalLayer && externalLayer.push({'event' : 'uapageview'+'|'+(cdl.CATTParams && cdl.CATTParams.pageid || 'home')+'|'+(cdl.CATTParams && cdl.CATTParams.urlparams && cdl.CATTParams.urlparams.pathname || '/'), 'counter': counter});
     }
     return cdl && uadl
 }(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_uatc, window, document, window.dataLayer || []))
