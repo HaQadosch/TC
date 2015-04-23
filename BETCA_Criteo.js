@@ -26,7 +26,7 @@
             itemacc     : (cdpm.departureairportsearched || cdpm.departureairportselected || '')+(cdpm.destinationairportsearched || cdpm.destinationairportselected || '')+(cdpm.flighttype===1?'-r':'-o'),
             itempax     : [{
                 id: (cdpm.departureairportsearched || cdpm.departureairportselected || '')+(cdpm.destinationairportsearched || cdpm.destinationairportselected || '')+(cdpm.flighttype===1?'-r':'-o'),
-                price: (cdpm.bookingvaluevat || cdpm.bookingvalue || '').replace(/(\d)?(\d?\d?\d\.\d?\d?)/, '$1,$2').replace(/^,(.*)/, '$1'),
+                price: (''+cdpm.bookingvalue).replace(/(\d+)\.\d+/, '$1'),
                 quantity: 1
             }],
             ref         : cdpm.bookingref || '',
@@ -187,7 +187,7 @@
             itemacc     : (cdpm.departureairportsearched || cdpm.departureairportselected || '')+(cdpm.destinationairportsearched || cdpm.destinationairportselected || '')+(cdpm.flighttype===1?'-r':'-o'),
             itempax     : [{
                 id: (cdpm.departureairportsearched || cdpm.departureairportselected || '')+(cdpm.destinationairportsearched || cdpm.destinationairportselected || '')+(cdpm.flighttype===1?'-r':'-o'),
-                price: (cdpm.bookingvaluevat || cdpm.bookingvalue || '').replace(/(\d)?(\d?\d?\d\.\d?\d?)/, '$1,$2').replace(/^,(.*)/, '$1'),
+                price: (''+cdpm.bookingvalue).replace(/(\d+)\.\d+/, '$1'),
                 quantity: 1
             }],
             ref         : cdpm.bookingref || '',
@@ -218,11 +218,13 @@
                 { event: "setAccount", account: ctdl.account },
                 { event: "setSiteType", type: ctdl.siteType },
                 { event: "setEmail", email: [ctdl.email]},
-                { event: ctdl.event, id: ctdl.ref, deduplication: ctdl.dedup, item: ctdl.itempax}
+                { event: ctdl.event, id: ctdl.ref, deduplication: ctdl.dedup, item: ctdl.itempax},
+                { event: "viewSearch", checkin_date:ctdl.cin, checkout_date:ctdl.cout}
             )} else {window.criteo_q.push(
                 { event: "setAccount", account: ctdl.account },
                 { event: "setSiteType", type: ctdl.siteType },
-                { event: ctdl.event, id: ctdl.ref, deduplication: ctdl.dedup, item: ctdl.itempax}
+                { event: ctdl.event, id: ctdl.ref, deduplication: ctdl.dedup, item: ctdl.itempax},
+                { event: "viewSearch", checkin_date:ctdl.cin, checkout_date:ctdl.cout}
             )}
             ctdl.script.status = 'fired';
         });
@@ -230,5 +232,5 @@
         cdl.error('GTM Criteo Conf: '+err);
     }
     return jQ && cdl && ctdl;
-}(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_criteo))
+}(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_criteo));
 //</script>
