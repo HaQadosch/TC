@@ -70,7 +70,8 @@
                     cdpm = window.CATTDL.CATTParams
                     cdpm.user = {};
                     cdpm.user.action = d && d.action || "";
-                    cdpm.user.msg = d && d.data && d.data.id || d.data && d.data.data || "";
+                    cdpm.user.msg = d && d.data && (d.data.id || d.data.data && d.data.data.message || d.data.statusText) || "";
+                    cdpm.user.id = d && d.data && d.data.id || "";
                     dataLayer.push({'event': 'updateUserData'+"_"+(d && d.action || '')});
                     gatcDL.push({'event': 'updateUserData'+"_"+(d && d.action || '')});
                 });
