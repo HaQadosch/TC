@@ -166,7 +166,9 @@
                                                                         ((/taxi transfer/i.test(curCost.title))?'taxitransfers':
                                                                             ((curCost.title == "Flexible terms")?'flexibleterms':
                                                                                 ((curCost.title == "Travel insurance")?'insurance':
-                                                                                    ((curCost.title == "Premium cabin")?'premiumcabin':('na'))
+                                                                                    ((curCost.title == "Premium cabin")?'premiumcabin':
+                                                                                        ((curCost.title == "Car hire")?'carhire':('na'))
+                                                                                    )
                                                                                 )
                                                                             )
                                                                         )
@@ -200,7 +202,7 @@
     } finally {
         dl.push({'event': 'pid_'+cdl.CATTParams.pageid});
         dl.push({'event': 'CATTDL AddPax'}) 
-        gatcDL.push({'event': 'CATTDL AddPax'})
+        window.gatcDL && window.gatcDL.push({'event': 'CATTDL AddPax'})
     }
     return cdl
 }(window.jQuery, window.dataLayer, window.CATTDL))
