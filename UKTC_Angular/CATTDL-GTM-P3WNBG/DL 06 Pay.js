@@ -1,5 +1,5 @@
 <script>
-(function gtm_cattdlPay(jQ, dl, cdl) {
+(function gtm_cattdlSecure(jQ, dl, cdl) {
     'use strict'
     if (jQ && jQ.extend && cdl) try {
         var cdpm = cdl.CATTParams
@@ -9,8 +9,15 @@
         cdpm.errors = {};
         var errorPM = {};       
 
-        var wgetData = window.getPageData && window.getPageData(cdpm.urlparams && cdpm.urlparams.pathname) || {}
+        var wgetData = window.getPageData && window.getPageData('/payment') || {}
         var wgdPkg = wgetData && wgetData.package || {}
+
+
+        /*window.sessionStorage && window.sessionStorage.setItem('gtm_errorPS', '1')*/
+        var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
+        params.errors = {};
+        params.errors.secure = 1
+        CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', '.thomascook.com');    
 
         cdpm.lob = "package"
         cdpm.holidaytype = "generic-angular"
@@ -194,31 +201,21 @@
                     }
             };
             jQ.extend(cdpm, newPM, keeps);
-        }}  
+        }}
 
         if (wgetData.response && wgetData.response.error){
             errorPM['errorcode'] = wgetData.response.error.code || "";
             errorPM['errormsg'] =  wgetData.response.error.description;
             jQ.extend(cdpm.errors, errorPM);
-        } else if (JSON.parse(CATTDL.ckget('gtm_params')) && JSON.parse(CATTDL.ckget('gtm_params')).errors && JSON.parse(CATTDL.ckget('gtm_params')).errors.secure)
-            /*window.sessionStorage && window.sessionStorage.getItem('gtm_errorPS')*/ 
-        {
-            var procpayPD = window.getPageData('/process-payment')
-            errorPM['errorcode'] = procpayPD.errorCode || ''
-            errorPM['errormsg'] =  procpayPD.message || ''
-            jQ.extend(cdpm.errors, errorPM)
-            /*window.sessionStorage.removeItem('gtm_errorPS')*/
-            var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
-            delete params.errors;
-            CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', '.thomascook.com');    
         }
+
         window.CATTDL.CATTParams = cdpm;
     } catch(e) {
-        cdl.error('GTM CATTDL Pay: '+e)
+        cdl.error('GTM CATTDL Secure: '+e)
     } finally {
         dl.push({'event': 'pid_'+cdl.CATTParams.pageid});
-        dl.push({'event': 'CATTDL Pay'})  
-        gatcDL.push({'event': 'CATTDL Pay'})
+        dl.push({'event': 'CATTDL Secure'})
+        gatcDL.push({'event': 'CATTDL Secure'})
     }
     return jQ && jQ.extend && cdl
 }(window.jQuery, window.dataLayer, window.CATTDL))
