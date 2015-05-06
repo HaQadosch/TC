@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_cattdlCust'>
 (function gtm_cattdlCust(jQ, dl, cdl) {
     'use strict'
     if (jQ && jQ.extend && cdl) try {
@@ -167,7 +167,9 @@
                                                                             ((curCost.title == "Flexible terms")?'flexibleterms':
                                                                                 ((curCost.title == "Travel insurance")?'insurance':
                                                                                     ((curCost.title == "Premium cabin")?'premiumcabin':
-                                                                                        ((curCost.title == "Car hire")?'carhire':('na'))
+                                                                                        ((curCost.title == "Car hire" && curCost.description !=='No Car - Own Arrangements')?'carhire':
+                                                                                            ((curCost.title == "Car hire" && curCost.description ==='No Car - Own Arrangements')?'carhire_ownarrangement':('na'))
+                                                                                        )
                                                                                     )
                                                                                 )
                                                                             )
@@ -182,9 +184,9 @@
                     newPM['extras'][selectedExtra] = {
                         selected    : true,
                         description : curCost.description || '',
-                        cost : curCost.unitCost || 0,
-                        addedcost : curCost.extendedCost || 0,
-                        quantity : curCost.quantity || 1
+                        cost        : curCost.unitCost || 0,
+                        addedcost   : curCost.extendedCost || 0,
+                        quantity    : curCost.quantity || 1
                     }
                 }
             };
