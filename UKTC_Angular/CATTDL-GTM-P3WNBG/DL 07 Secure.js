@@ -179,7 +179,11 @@
                                                                         ((/taxi transfer/i.test(curCost.title))?'taxitransfers':
                                                                             ((curCost.title == "Flexible terms")?'flexibleterms':
                                                                                 ((curCost.title == "Travel insurance")?'insurance':
-                                                                                    ((curCost.title == "Premium cabin")?'premiumcabin':('na'))
+                                                                                    ((curCost.title == "Premium cabin")?'premiumcabin':
+                                                                                        ((curCost.title == "Car hire" && curCost.description !=='No Car - Own Arrangements')?'carhire':
+                                                                                            ((curCost.title == "Car hire" && curCost.description ==='No Car - Own Arrangements')?'carhire_ownarrangement':('na'))
+                                                                                        )
+                                                                                    )
                                                                                 )
                                                                             )
                                                                         )
@@ -193,14 +197,14 @@
                     newPM['extras'][selectedExtra] = {
                         selected    : true,
                         description : curCost.description || '',
-                        cost : curCost.unitCost || 0,
-                        addedcost : curCost.extendedCost || 0,
-                        quantity : curCost.quantity || 1
+                        cost        : curCost.unitCost || 0,
+                        addedcost   : curCost.extendedCost || 0,
+                        quantity    : curCost.quantity || 1
                     }
+                }
             };
             jQ.extend(cdpm, newPM, keeps);
-        }}
-
+        }
         if (wgetData.response && wgetData.response.error){
             errorPM['errorcode'] = wgetData.response.error.code || "";
             errorPM['errormsg'] =  wgetData.response.error.description;
