@@ -47,7 +47,7 @@ try{
 } catch (e){if (typeof console != "undefined") console.log("DE NEC NetSociety: "+e)}
 
 
-<script id='gtm_NetSoc'>
+//<script id='gtm_NetSoc'>
 (function gtm_NetSocDL(cdl, jQ) {
     'use strict';
     if (cdl && jQ) try {
@@ -131,4 +131,4 @@ try{
     }
     return cdl && jQ && nsdl;
 }(window.CATTDL, window.jQuery, !window.CATTDL?!1:window.CATTDL.DL_netsoc))
-</script>
+//</script>
