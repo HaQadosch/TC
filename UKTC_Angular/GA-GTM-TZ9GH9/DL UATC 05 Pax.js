@@ -108,7 +108,8 @@
                     metric39        : {'taxitransfer'           : parseInt(cdpm.extras && cdpm.extras.taxitransfers && +cdpm.extras.taxitransfers.selected || 0)},
                     metric40        : {'taxitransfer value'     : +(cdpm.extras && cdpm.extras.taxitransfers && +cdpm.extras.taxitransfers.addedcost || 0)},
                     metric41        : {'carhire'                : parseInt(cdpm.extras && cdpm.extras.carhire && +cdpm.extras.carhire.selected || 0)},
-                    metric42        : {'carhire value'          : +(cdpm.extras && cdpm.extras.carhire && +cdpm.extras.carhire.addedcost || 0)}
+                    metric42        : {'carhire value'          : +(cdpm.extras && cdpm.extras.carhire && +cdpm.extras.carhire.addedcost || 0)},
+                    metric43        : {'carhire_ownarrangement'     : parseInt(cdpm.extras && cdpm.extras.carhire_ownarrangement && +cdpm.extras.carhire_ownarrangement.selected || 0)}                    
                 },
                 dimensions      : {
                     dimension1      : {'deptairport'                : cdpm.deptairport || 'empty'},
