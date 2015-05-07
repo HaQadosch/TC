@@ -94,8 +94,9 @@
                 });
 
                 w.ga(trackerName+'ec:setAction', 'detail');
-                w.ga(trackerName+'send','event', 'ECProductView', uaprod.id
-                        ,  ''+uaprod.position
+                w.ga(trackerName+'send','event', 'ECProductView'
+                        , uaprod.id || 'error'
+                        ,  ''+(uaprod.position || 0)
                         , 1
                         , {'page': uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
                                 ,'dimension51': cdpm.gaguid || 'empty'
@@ -107,7 +108,6 @@
                         , {'nonInteraction': true});
                 dl.push({'event': 'UATCEC productview'});
             //};
-
             
             for (evt in uawa.events) {
                 var gevt = uawa.events[evt]
@@ -121,7 +121,6 @@
                     }
                     , {'nonInteraction': gevt.noninteraction}));
             };
-            //console.info('ECEOP object: ', window.ECEOP.pageview);
             if (ux) {window.ECEOP.pageview = []};
 
             jQ('button.close').on('click',function(){
@@ -142,7 +141,42 @@
                 }
                 , {'noninteraction': true});
             });
-
+            if(!/gtm_uabound/i.test(jQ('#sendResetPassword').attr('class'))){
+                jQ('#sendResetPassword').addClass('gtm_uabound'); 
+                jQ('#sendResetPassword').on('click',function(e){ 
+                    w.ga(trackerName+'send','event'
+                        , 'MyAccount ResetPassword'
+                        , window.userId
+                        , cdurl.fullurl || document.URL || location.href || ''
+                        , 1
+                        , {'page': uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                            ,'dimension51': cdpm.gaguid || ''
+                            ,'dimension52' : window.userId || ''
+                            ,'dimension54' : jQ(this).attr('id') && jQ(this).attr('id').toString() || ''
+                            ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                            ,'dimension75': ''+(window.Date && window.Date.now() || 0)
+                        }
+                        , {'nonInteraction': true, 'location': uawa.location});
+                });
+            };
+            if(!/gtm_uabound/i.test(jQ('button.btn.btn-default.active.alertActBtn').attr('class'))){
+                jQ('button.btn.btn-default.active.alertActBtn').addClass('gtm_uabound'); 
+                jQ('button.btn.btn-default.active.alertActBtn').on('click',function(e){ 
+                    w.ga(trackerName+'send','event'
+                        , 'MyAccount ResendActivationEmail'
+                        , window.userId
+                        , cdurl.fullurl || document.URL || location.href || ''
+                        , 1
+                        , {'page': uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                            ,'dimension51': cdpm.gaguid || ''
+                            ,'dimension52' : window.userId || ''
+                            ,'dimension54' : jQ(this).attr('id') && jQ(this).attr('id').toString() || ''
+                            ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                            ,'dimension75': ''+(window.Date && window.Date.now() || 0)
+                        }
+                        , {'nonInteraction': true, 'location': uawa.location});
+                });
+            };
         });
         var gatcDLcnt = 0; window.gatcDL.forEach(function(e){if(e.event === 'UATC Accom'){gatcDLcnt = gatcDLcnt + 1}})
         dl.push({'event': 'UATC Accom', 'counter': gatcDLcnt});
