@@ -1,4 +1,4 @@
-<script id='gtm_cattdlCore'>
+//<script id='gtm_cattdlCore'>
 (function gtm_cattdlCore(jQ, d, w, dl) {
     'use strict';
     if ( jQ && dl && !dl.some(function(a){return /core_/i.test(a && a.event || '')}) ) try {
@@ -124,7 +124,7 @@
         cdpm['optimostcreative'] = window.opCreative
             || "";
 
-        cdpm['pageid'] = cdpm.pageid
+        cdpm['pageid'] = /package/i.test(cdpm.pageid)?'seo search':(/hotel/i.test(cdpm.pageid)?'seo accom':'')
             || (/^\/$|^\/pauschalreisen\/?$|^\/hotel\/?$|^\/flug\/?$|^\/staedtereisen\/?$|^\/lastminute\/?$|^\/top-reiseziele\/?$/i.test(location.pathname || '')?'home':'')
             || (/destinationRegions/i.test(location.pathname || '')?'subsrp':'')
             || (/accomResult/i.test(location.pathname || '')?'search':'')
@@ -141,7 +141,7 @@
 
         cdpm['roomtype'] = cdpm.roomtype
             || jQ('p i.icon.icon-uniE663').next().text()
-            || ''
+            || '';
 
         window.CATTDL.CATTParams = cdpm;
     } catch(e) {
@@ -150,8 +150,8 @@
         dl.push({'event': 'core_'+(w.CATTDL && w.CATTDL.CATTParams && w.CATTDL.CATTParams.pageid || '')});
     }
     return jQ && dl && w.CATTDL;
-}(window.jQuery, window.document, window, window.dataLayer))
-</script>
+}(window.jQuery, window.document, window, window.dataLayer));
+//</script>
 
 
 SubSRP  http://www.thomascook.de/search/destinationRegions.jsp?page_url_name=pauschalreisen&pageId=package&sort=recommend&pageurlname=pauschalreisen&search=destinationsearch&_requestid=22448

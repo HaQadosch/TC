@@ -59,7 +59,7 @@
 
         var pn = location.pathname || '';
         var dr = document.referrer || '';
-        var lh = location.href || '';
+        var lh = (location.href || '').replace(/\w?sessionid=[^&]*&/, '');
         if (/thomascook.com\/hotels\//i.test(dr) || /accom\/Results/i.test(pn)) {
             cdpm.lob = 'hotel';
             cdpm.holidaytype = 'hotel';
