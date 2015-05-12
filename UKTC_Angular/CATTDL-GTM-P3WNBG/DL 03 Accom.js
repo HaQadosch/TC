@@ -35,33 +35,34 @@
             if (wgdPrice) {
                 var flout = wgdPrice && wgdPrice.flights && wgdPrice.flights[0] && wgdPrice.flights[0].outbound && wgdPrice.flights[0].outbound.legs || '';
                 if (flout) {
-                        newPM['flightdetails'] = {};    
-                        var floutI = []
-                        for (var i = 0; i < (flout.length || 0); i++) {
+                        newPM['flightdetails'] = {};
+                        newPM['flightdetails'].outbound = [];                        
+                        var fltoutI = {};
+                        var fltoutlen = flout.length || 0;
+                        for (var i = 0; i < floutlen; i++) {
                             floutI = flout[i]
-                            newPM['flightdetails'].outbound = [];
                             newPM['flightdetails'].outbound.push({
                                 depart  : {
-                                    date            : floutI.departure && floutI.departure.time && +new Date(floutI.departure.time) || 0,
-                                    time            : floutI.departure && floutI.departure.time && +new Date(floutI.departure.time) || 0,
-                                    airportcode     : floutI.departure && floutI.departure.airportCode || "",
-                                    airport         : floutI.departure && floutI.departure.title
+                                    date            : fltoutI.departure && fltoutI.departure.time && +new Date(fltoutI.departure.time) || 0,
+                                    time            : fltoutI.departure && fltoutI.departure.time && +new Date(fltoutI.departure.time) || 0,
+                                    airportcode     : fltoutI.departure && fltoutI.departure.airportCode || "",
+                                    airport         : fltoutI.departure && fltoutI.departure.title
                                 },
                                 arrive  : {
-                                    date            : floutI.arrival && floutI.arrival.time && +new Date(floutI.arrival.time) || 0,
-                                    time            : floutI.arrival && floutI.arrival.time && +new Date(floutI.arrival.time) || 0,
-                                    airportcode     : floutI.arrival && floutI.arrival.airportCode || "",
-                                    airport         : floutI.arrival && floutI.arrival.title
+                                    date            : fltoutI.arrival && fltoutI.arrival.time && +new Date(floutI.arrival.time) || 0,
+                                    time            : fltoutI.arrival && fltoutI.arrival.time && +new Date(floutI.arrival.time) || 0,
+                                    airportcode     : fltoutI.arrival && fltoutI.arrival.airportCode || "",
+                                    airport         : fltoutI.arrival && fltoutI.arrival.title
                                 },
                                 carrier : {
-                                    code            :   floutI.airlineCode || "",
-                                    name            :   floutI.airline || ""
+                                    code            :   fltoutI.airlineCode || "",
+                                    name            :   fltoutI.airline || ""
                                 },
-                                flightno : floutI.flightCode || '',
-                                premium  : floutI.premium || false
+                                flightno : fltoutI.flightCode || '',
+                                premium  : fltoutI.premium || false
                             })
                         };
-                        var newPMflout = newPM.flightdetails && newPM.flightdetails.outbound[0];
+                        var newPMflout = newPM.flightdetails && newPM.flightdetails.outbound[fltoutlen-1];
                         newPM['carrier'] = []; 
                         newPM['carrier'].push ({ code : newPMflout.carrier.code
                                                 , name : newPMflout.carrier.name});
@@ -74,11 +75,11 @@
 
                 var flin = wgdPrice && wgdPrice.flights && wgdPrice.flights[0] && wgdPrice.flights[0].inbound && wgdPrice.flights[0].inbound.legs || '';
                 if (flin) {
-                    newPM['flightdetails'].inbound = []
-                    var fltinI = []
-                    for (var i = 0; i < (flin.length || 0); i++) {
+                    newPM['flightdetails'].inbound = [];
+                    var fltinI = {};
+                    var fltinlen = flin.length || 0;                    
+                    for (var i = 0; i < fltinlen; i++) {
                         fltinI = flin[i]
-                        newPM['flightdetails'].inbound = [];
                         newPM['flightdetails'].inbound.push({
                             depart  : {
                                 date                : fltinI.departure && fltinI.departure.time && +new Date(fltinI.departure.time) || 0,
@@ -100,10 +101,10 @@
                             premium  : fltinI.premium || false
                         })
                     };
-                    newPM['returndate'] = newPM.flightdetails.inbound[0].depart.time
+                    newPM['returndate'] = newPM.flightdetails.inbound[fltinlen-1].depart.time
                                         || +new Date(newPM.deptdate + (newPM.duration)*1000*60*60*24) 
                                         || 0
-                    newPM['returntime'] = newPM.flightdetails.inbound[0].depart.time            
+                    newPM['returntime'] = newPM.flightdetails.inbound[fltinlen-1].depart.time            
                 }
 
                 newPM['includedinpackage'] = []; for (var i = 0; i < (wgdPrice.whatsIncluded && wgdPrice.whatsIncluded.length || 0); newPM.includedinpackage.push(wgdPrice.whatsIncluded[i++].description));
