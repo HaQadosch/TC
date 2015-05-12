@@ -69,7 +69,26 @@
                     , {'nonInteraction': false});
             } catch(e) {
                 cdl.error('GTM UATC Events PrintBookingConfirmation: '+e)
-            } else if (/payment-submit/i.test(cdom.id)) try {
+            } else if (/confirmation-holiday_extras_link/i.test(cdom.id)) try {
+                var cdl = CATTDL || {};
+                var cdpm = window.CATTDL && CATTDL.CATTParams || {};
+                var cdurl = cdpm.urlparams || {};
+                    w.ga(trackerName+'send', 'event'
+                    , 'HolidayExtrasLink'
+                    , cdpm.bookingref || ''
+                    , cdpm.airlineref || ''
+                    , 1
+                    , { 'page'          : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                        ,'dimension51'  : cdpm.gaguid || 'empty'
+                        ,'dimension65'  : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                        ,'dimension75'  : ''+(window.Date && window.Date.now() || 0)
+                        ,'dimension118': (cdurl && cdurl.pathname || location.pathname || '')
+                        ,'dimension119': (cdurl && cdurl.paramstring || location.search || '') 
+                    }            
+                    , {'nonInteraction': false});
+            } catch(e) {
+                cdl.error('GTM UATC Events Holiday Essentials BookingConfirmation: '+e)
+            }else if (/payment-submit/i.test(cdom.id)) try {
                 var cdl = CATTDL || {};             
                 var cdpm = window.CATTDL && CATTDL.CATTParams || {};    
                 var cdurl = cdpm.urlparams || {};                     
