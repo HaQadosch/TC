@@ -5,12 +5,10 @@
         var cdpm = cdl.CATTParams
         var newPM = {};
         var keeps = {};
-
         cdpm.errors = {};
         var errorPM = {};       
-
-        var wgetData = window.getPageData && window.getPageData(cdpm.urlparams && cdpm.urlparams.pathname) || {}
-        var wgdPkg = wgetData && wgetData.package || {}
+        var wgD = window.getPageData && window.getPageData(cdpm.urlparams && cdpm.urlparams.pathname) || {}
+        var wgdPkg = wgD && wgD.package || {}
 
         cdpm.lob = "package"
         cdpm.holidaytype = "generic-angular"
@@ -19,7 +17,6 @@
 
         if (wgdPkg) {
             cdpm.holidaytype =  (/MULTICOM/i.test(wgdPkg.provider || '')) && (wgdPkg.brandCode == 'Z')?'flexitrips-angular':((/MULTICOM/i.test(wgdPkg.provider || '')) && (wgdPkg.brandCode !== 'Z')?'multi-angular':'package-angular')
-
             newPM['destination'] = wgdPkg.content && wgdPkg.content.geoPath || ""
             var wgdPath = newPM.destination && newPM.destination.split(",") || []
             newPM['accomcountry'] = wgdPath.length > 0 && (wgdPath[0] || "").trim() || ''
@@ -122,7 +119,6 @@
                     })
                 };
             }
-
             var arrpax = wgdPkg.accomodationList && wgdPkg.accomodationList[0] && wgdPkg.accomodationList[0].roomProfiles || [];
             newPM['paxadultperroom'] = [];
             newPM['paxchildperroom'] = [];
@@ -143,18 +139,18 @@
             newPM['paxtotal'] = newPM['paxadult']+newPM['paxchild']+newPM['paxinfant']
             newPM['rooms'] = newPM['paxadultperroom'].length
 
-            newPM['totalprice'] = wgetData.costSummary.grossAmount || 0;
+            newPM['totalprice'] = wgD.costSummary.grossAmount || 0;
             newPM['pricepp'] = newPM.totalprice/(newPM.paxtotal || 1) || 0  
-            newPM['discountvalue'] = Math.abs(wgetData.costSummary && wgetData.costSummary.discountAmount || 0);
+            newPM['discountvalue'] = Math.abs(wgD.costSummary && wgD.costSummary.discountAmount || 0);
             newPM['discountperc'] = Math.round(newPM.discountvalue*100 / Math.abs(newPM.totalprice || 1))
-            var wgdCost = wgetData && wgetData.costSummary.costingItem || {}
+            var wgdCost = wgD && wgD.costSummary.costingItem || {}
 
             //Payment
-            newPM['cardtype'] = wgetData.paymentDetails && wgetData.paymentDetails.cardDetails.cardType || ""
-            newPM['depositselected'] =  (wgetData.paymentDetails && wgetData.paymentDetails.paymentOptionId || "").toLowerCase()
-            newPM['depositvalue'] = wgetData.paymentDetails && wgetData.paymentDetails.transactionDetails && wgetData.paymentDetails.transactionDetails.amount || 0
-            newPM['paymentoption'] =  wgetData.paymentDetails && wgetData.paymentDetails.cardDetails.cardType && 'card' || ''
-            newPM['paymentfee'] = wgetData.paymentDetails && wgetData.paymentDetails.transactionDetails.fee || 0
+            newPM['cardtype'] = wgD.paymentDetails && wgD.paymentDetails.cardDetails.cardType || ""
+            newPM['depositselected'] =  (wgD.paymentDetails && wgD.paymentDetails.paymentOptionId || "").toLowerCase()
+            newPM['depositvalue'] = wgD.paymentDetails && wgD.paymentDetails.transactionDetails && wgD.paymentDetails.transactionDetails.amount || 0
+            newPM['paymentoption'] =  wgD.paymentDetails && wgD.paymentDetails.cardDetails.cardType && 'card' || ''
+            newPM['paymentfee'] = wgD.paymentDetails && wgD.paymentDetails.transactionDetails.fee || 0
 
             //Extras
             newPM['extras'] ={}
@@ -198,21 +194,28 @@
                 }
             };
             newPM['promotion'] = {
-                code : wgetData.promotion && wgetData.promotion.promoCode || "",
-                value : wgetData.promotion && wgetData.promotion.promoDiscount || ""
+                code : wgD.promotion && wgD.promotion.promoCode || "",
+                value : wgD.promotion && wgD.promotion.promoDiscount || ""
             }
-            newPM['bookingref'] = wgetData.bookingRef || "";
-            newPM['airlineref'] = wgetData.consultationRef || ""
-
+            newPM['bookingref'] = wgD.bookingRef || "";
+            newPM['airlineref'] = wgD.consultationRef || ""
+            
             jQ.extend(cdpm, newPM, keeps);
         }
-
-        if (wgetData.response && wgetData.response.error){
-            errorPM['errorcode'] = wgetData.response.error.code || "";
-            errorPM['errormsg'] =  wgetData.response.error.description;
+        var paramsbookingref = JSON.parse(cdl.ckget('gtm_bookingref') || '[]');
+        paramsbookingref.forEach(function(e){
+            if(cdpm.bookingref && e === cdpm.bookingref){ 
+                cdpm.pageid = 'refreshbookconf' 
+            } else if (cdpm.bookingref && cdpm.bookingref !== 'empty'  && e !== cdpm.bookingref) {
+                paramsbookingref.push(cdpm.bookingref);
+                cdl.ckset('gtm_bookingref', JSON.stringify(paramsbookingref), Infinity, '/', '.thomascook.com');
+            }
+        });
+        if (wgD.response && wgD.response.error){
+            errorPM['errorcode'] = wgD.response.error.code || "";
+            errorPM['errormsg'] =  wgD.response.error.description;
             jQ.extend(cdpm.errors, errorPM);
         }
-            
         window.CATTDL.CATTParams = cdpm;
     } catch(e) {
         cdl.error('GTM CATTDL Book: '+e)
