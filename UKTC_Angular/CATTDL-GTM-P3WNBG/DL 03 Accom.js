@@ -39,8 +39,8 @@
                         newPM['flightdetails'].outbound = [];                        
                         var fltoutI = {};
                         var fltoutlen = flout.length || 0;
-                        for (var i = 0; i < floutlen; i++) {
-                            floutI = flout[i]
+                        for (var i = 0; i < fltoutlen; i++) {
+                            fltoutI = flout[i]
                             newPM['flightdetails'].outbound.push({
                                 depart  : {
                                     date            : fltoutI.departure && fltoutI.departure.time && +new Date(fltoutI.departure.time) || 0,
@@ -49,8 +49,8 @@
                                     airport         : fltoutI.departure && fltoutI.departure.title
                                 },
                                 arrive  : {
-                                    date            : fltoutI.arrival && fltoutI.arrival.time && +new Date(floutI.arrival.time) || 0,
-                                    time            : fltoutI.arrival && fltoutI.arrival.time && +new Date(floutI.arrival.time) || 0,
+                                    date            : fltoutI.arrival && fltoutI.arrival.time && +new Date(fltoutI.arrival.time) || 0,
+                                    time            : fltoutI.arrival && fltoutI.arrival.time && +new Date(fltoutI.arrival.time) || 0,
                                     airportcode     : fltoutI.arrival && fltoutI.arrival.airportCode || "",
                                     airport         : fltoutI.arrival && fltoutI.arrival.title
                                 },
