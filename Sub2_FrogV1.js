@@ -1,13 +1,12 @@
-<script id='gtm3rd_Sub2'>
+//<script id='gtm3rd_Sub2'>
 (function gtm3rd_Sub2DL(cdl, dl) {
-    'use strict'
+    'use strict';
     if (cdl && dl) try {
-        var cdpm = cdl.CATTParams
-        var outB = cdpm.flightdetails && cdpm.flightdetails.outbound || ''
-        var inB = cdpm.flightdetails && cdpm.flightdetails.inbound || ''
+        var cdpm = cdl.CATTParams;
+        var outB = cdpm.flightdetails && cdpm.flightdetails.outbound || '';
+        var inB = cdpm.flightdetails && cdpm.flightdetails.inbound || '';
 
         cdl.DL_sub2 = {
-            poolTest : /Sub2Test/i.test(window.document.URL) || !((cdpm && cdpm.utmaguid || 1)%4) || 0,
             Title : cdpm.address && cdpm.address.title || '',
             Forename : cdpm.address && cdpm.address.name || '',
             Surname : cdpm.address && cdpm.address.surname || '',
@@ -47,22 +46,22 @@
                 status  : 'not fired',
                 src     : '//webservices.sub2tech.com/CodeBase/LIVE/Min/sub2.js?LICENSEKEY=24edfbd3-61e8-4661-84f0-59c37b83296f&trackPage=Y'
             }
-        }
+        };
     } catch(e){
-        cdl.error("GTM Sub2: "+e)
+        cdl.error("GTM Sub2: "+e);
     } finally {
         dl.push({event: 'DL Sub2'});
     }
-    return cdl && dl && cdl.DL_sub2
+    return cdl && dl && cdl.DL_sub2;
 }(window.CATTDL, window.externalDataLayer));
 
 (function gtm3rd_Sub2(jQ, cdl, s2dl) {
     'use strict';
-    if (jQ && cdl && s2dl && s2dl.poolTest) try {
-        var cdpm = cdl.CATTParams
+    if (jQ && cdl && s2dl) try {
+        var cdpm = cdl.CATTParams;
 
         jQ.ajaxSetup({cache: true});
-        var src = s2dl.script && s2dl.script.src || ''
+        var src = s2dl.script && s2dl.script.src || '';
         src && jQ.when(jQ.getScript(src)).done(function gtm_sub2Script(){
             window.__s2tQ = window.__s2tQ || [];
             s2dl.script.status = 'fired';
@@ -122,30 +121,13 @@
                     'Quantity' : s2dl.Quantity || '0'
                 }]);
             }
-            window._gaq && window._gaq.push(function gtm_sub2ControlTest() {
-                if (cdl.DL_gatc && cdl.DL_gatc.webanalytics && cdl.DL_gatc.webanalytics.customvars && cdl.DL_gatc.webanalytics.customvars) cdl.DL_gatc.webanalytics.customvars.custvar45 = {
-                    'index': 45,
-                    'name':'Sub2Test',
-                    'value':'PoolTest',
-                    'scope': 1
-                }
-                var tracker = window._gat._getTrackerByName && window._gat._getTrackerByName('CATTGATC');
-                tracker._setCustomVar(45, 'Sub2Test', 'PoolTest', 1);
-                tracker._trackEvent('Sub2', 'test', 'PoolTest', 1, true)
-            })
         });
     } catch(e) {
-        cdl.error('GTM Sub2: '+e)
+        cdl.error('GTM Sub2: '+e);
     }
-    if (!s2dl.poolTest) window._gaq && window._gaq.push(function gtm_sub2ControlTest() {
-       if (cdl.DL_gatc && cdl.DL_gatc.webanalytics && cdl.DL_gatc.webanalytics.customvars && cdl.DL_gatc.webanalytics.customvars) cdl.DL_gatc.webanalytics.customvars.custvar45 = {'index': 45,'name':'Sub2Test','value':'PoolControl','scope': 1}
-       var tracker = window._gat._getTrackerByName && window._gat._getTrackerByName('CATTGATC');
-       tracker._setCustomVar(45, 'Sub2Test', 'PoolControl', 1);
-       tracker._trackEvent('Sub2', 'test', 'PoolControl', 1, true)
-   })
-    return jQ && cdl && s2dl
+    return jQ && cdl && s2dl;
 }(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_sub2))
-</script>
+//</script>
 
 
 
