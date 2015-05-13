@@ -1,4 +1,4 @@
-<script id='gtm_cattdlCore'>
+//<script id='gtm_cattdlCore'>
 (function gtm_cattdlCore(jQ, d, w, dl) {
     'use strict';
     if ( jQ && dl && !dl.some(function(a){return /core_/i.test(a && a.event || '')}) ) try {
@@ -132,7 +132,7 @@
     }
     return jQ && dl && w.CATTDL;
 }(window.jQuery, window.document, window, window.dataLayer))
-</script>
+//</script>
 
 
 (function tmGTM_WB999C(){
@@ -176,7 +176,6 @@
     }
     return window.CATTParams;
 }())
-
 
 (function tmGTM_WB999C(){
     'use strict';

@@ -1,4 +1,4 @@
-<script id='gtm_blah'>
+//<script id='gtm_blah'>
 (function gtm_blahDL(jQ, dl, cdl, cdpm){
     'use strict';
     if (jQ && dl && cdl && cdpm) try {
@@ -30,17 +30,17 @@
         dl.push({'event':'Blah'});
     }
     return jQ && dl && cdl && bhdl;
-}(window.jQuery, window.dataLayer, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_blah))
-</script>
+}(window.jQuery, window.dataLayer, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_blah));
+//</script>
 
 
-<script id='gtm_kayak'>
-(function gtm_kayakDL(cdl, dl){
+//<script id='gtm_xx'>
+(function gtm_xxDL(cdl, dl){
     'use strict';
     if (cdl && dl) try {
         var cdpm = cdl.CATTParams || '';
 
-        cdl.DL_kayak = {
+        cdl.DL_xx = {
             type : 'pixeltracking',
             partnercode : 'HOTELS4UDOTCOM',
             price : cdpm.bookingvalue || '',
@@ -52,11 +52,11 @@
             }
         };
     } catch(e) {
-        cdl.error && cdl.error('GTM Kayak DL: '+e);
+        cdl.error && cdl.error('GTM xx DL: '+e);
     } finally {
-        dl.push({'event':'DL Kayak'});
+        dl.push({'event':'DL xx'});
     }
-    return cdl && dl && cdl.DL_kayak;
+    return cdl && dl && cdl.DL_xx;
 }(window.CATTDL, window.dataLayer));
 
 (function gtm_kayak(jQ, dl, cdl, kkdl){
@@ -71,7 +71,7 @@
             src : kkdl.img && kkdl.img.src || '',
             style : 'border-style:none;',
             alt : '',
-            id : 'KayakPixel',
+            id : 'xxPixel',
             width : 1,
             height : 1
         }));
@@ -80,10 +80,10 @@
             src : src
         }
     } catch(e) {
-        cdl.error && cdl.error('GTM Kayak: '+e);
+        cdl.error && cdl.error('GTM xx: '+e);
     } finally {
-        dl.push({'event':'kayak'});
+        dl.push({'event':'xx'});
     }
     return jQ && dl && cdl && kkdl;
-}(window.jQuery, window.dataLayer, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_kayak))
-</script>
+}(window.jQuery, window.dataLayer, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_xx))
+//</script>
