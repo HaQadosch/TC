@@ -71,11 +71,33 @@
         cdpm.utmbguid = cdpm.utmbguid || cdpm.cookies.__utmb || w.CATTDL.twdc(/_utmb=/i) && w.CATTDL.ewdc(/_utmb=([^;%=]*)/i) && w.CATTDL.ewdc(/_utmb=([^;%=]*)/i).pop() || "";
         cdpm.gaguid = cdpm.gaguid || cdpm.cookies && (/\.([^\.]*)\.\d*$/i.exec(cdpm.cookies._ga || '') || []).pop() || w.CATTDL.twdc(/_ga=/i) && (w.CATTDL.ewdc(/_ga=[^\.]*\.\d+\.([^\.]*)\.\d+/i) || []).pop() || "";
         cdpm.optimostcreative = window.opCreative || "";
-
+        cdpm.poolcontrol = !Boolean((cdpm.utmaguid || 1)%20);
         if (typeof w.CATTParams === 'undefined' && location.pathname === '/' || !cdpm.pageid ) cdpm.pageid = 'home';
         cdpm.errors = cdpm.errorcode || '';
         cdpm.device = (function(t){var n="desktop";var r=/mobile/i.test(t);var i=/android/i.test(t);var s=/phone/i.test(t);var o=i&&!/mobile/i.test(t);var u=/ipad/i.test(t);var a=/tablet/i.test(t);if(a||o||u)n="tablet";else if(r||i||s)n="mobile";return n;})(navigator.userAgent||"") || '';
         cdpm.pagetimestamp = (w.Date && +w.Date.now() || '0');
+
+        var ck_cdpm = JSON.parse && JSON.parse(w.CATTDL.ckget('gtm_cdpm') || '{}') || '';
+       var keeps = {};
+       keeps.attribution = ck_cdpm.attribution|| [];
+        if (ck_cdpm.trailingsteps && /\(/i.test(ck_cdpm.trailingsteps)){
+            var steps = ck_cdpm.trailingsteps.split(/([^\)]+\(\d+\))$/);
+            if (steps[0] === '') steps.shift();
+            if (steps[steps.length-1] === '') steps.pop();
+            var lastSteps = steps.pop();
+            lastSteps = /(.+)\((\d+)\)/.exec(lastSteps);
+            if (lastSteps[1] === cdpm.pageid)
+                lastSteps = lastSteps[1]+'('+(++lastSteps[2])+')';
+            else
+                lastSteps = lastSteps[1]+'('+lastSteps[2]+')'+cdpm.pageid+'(1)';
+            keeps.trailingsteps = steps.join('')+lastSteps;
+
+        } else keeps.trailingsteps = cdpm.pageid+'(1)';
+
+        cdpm.pageid = cdpm.pageid || 'booking';
+
+         jQ.extend(w.CATTDL.CATTParams, keeps);
+         w.CATTDL.ckset('gtm_cdpm', JSON.stringify(keeps), Infinity, '/', '.thomascook.com');
 
          window.CATTDL.CATTParams = cdpm;
     } catch(e) {

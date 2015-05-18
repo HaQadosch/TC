@@ -20,7 +20,7 @@ try {
         cdl.DL_sociomantic = {
             script : {
                 src : 'https://eu-sonar.sociomantic.com/js/2010-07-01/adpan/thomascook-de',
-                status: 'fired'
+                status: 'not fired'
             }
         };
     } catch(e) {
@@ -85,7 +85,7 @@ try {
             },
             script : {
                 src : 'https://eu-sonar.sociomantic.com/js/2010-07-01/adpan/thomascook-de',
-                status: 'fired'
+                status: 'not fired'
             }
         };
     } catch(e) {
@@ -177,7 +177,7 @@ try {
     })();
 } catch (e){if (typeof console != "undefined") console.log("DE TC Accom Product SocioMantic: "+e)}
 
-<script id='gtm_sociomantic'>
+//<script id='gtm_sociomantic'>
 (function gtm_sociomanticDL(jQ, dl, cdl, cdpm){
     'use strict';
     if (jQ && dl && cdl && cdpm) try {
@@ -187,12 +187,12 @@ try {
             product : {
                 identifier: (cdpm.accomcode || '')+'_'+(cdpm.deptdate || '')+'_'+(cdpm.retdate || '')+'_'+(cdpm.duration || '')+'_'+(cdpm.departureairportselected || ''),
                 fn: (cdpm.accomname || '').replace(/\+/g, ' '),
-price: priceAmount,
-amount: priceAmount,
+                price: cdpm.fromprice || '',
+                amount: cdpm.fromprice || '',
                 currency: 'EUR',
                 description: "Finde jetzt deine Traumreise nach " + cleanedResort +" bei thomascook.de" ,
                 url: '',
-photo: imagePreview,
+                photo: jQ('img#mainImage').attr('src') || '',
                 brand: (cdpm.destination || '')+' | '+cleanedResort+' | ab '+(jQ('#ID0>.colA>div>.regionInfoLink').text().replace(/\s*$/i, '').replace(/\s\(\w+\)/i, ''))+' | '+(/a|e/i.test(cdpm.duration || '')?cdpm.duration:(cdpm.duration+window.unescape('%20N%E4chte'))),
                 category : [cdpm.lob || '', cdpm.destination || '', cleanedResort, ymd[2], ymd[1]],
                 date : ''+(new Date((cdpm.deptdate || '').replace(/(\d\d)\/(\d\d)\/(\d\d\d\d)/, '$3 $2 $1')).getTime()/1000),
@@ -200,7 +200,7 @@ photo: imagePreview,
             },
             script : {
                 src : 'https://eu-sonar.sociomantic.com/js/2010-07-01/adpan/thomascook-de',
-                status: 'fired'
+                status: 'not fired'
             }
         };
     } catch(e) {
@@ -258,6 +258,51 @@ try {
     })();
 } catch (e){if (typeof console != "undefined") console.log("DE TC Basket SocioMantic: "+e)}
 
+//<script id='gtm_sociomantic'>
+(function gtm_sociomanticDL(jQ, dl, cdl, cdpm){
+    'use strict';
+    if (jQ && dl && cdl && cdpm) try {
+        cdl.DL_sociomantic = {
+            basket : {
+                product : [{
+                    identifier: (cdpm.accomcode || '')+'_'+(cdpm.deptdate || '')+'_'+(cdpm.retdate || '')+'_'+(cdpm.duration || '')+'_'+(cdpm.departureairportselected || ''),
+                    amount: cdpm.bookingvalue || '',
+                    currency: 'EUR',
+                    quantity : 1
+                }]
+            },
+            script : {
+                src : 'https://eu-sonar.sociomantic.com/js/2010-07-01/adpan/thomascook-de',
+                status: 'not fired'
+            }
+        };
+    } catch(e) {
+        cdl.error('GTM sociomantic: '+ e);
+    } finally {
+        dl.push({'event':'sociomanticDL'});
+    }
+    return jQ && dl && cdl && cdpm && cdl.DL_sociomantic;
+}(window.jQuery, window.dataLayer, window.CATTDL, !window.CATTDL?!1:window.CATTDL.CATTParams));
+
+(function gtm_sociomantic(jQ, dl, cdl, bhdl){
+    'use strict';
+    if (jQ && dl && cdl && bhdl) try {
+        window.basket = bhdl.basket;
+        jQ.getScript && jQ.getScript(bhdl.script && bhdl.script.src || '', function gtm_sociomanticScript(){
+            try {
+                bhdl.script && (bhdl.script.status = 'fired');
+            } catch(ee) {
+                cdl.error('GTM sociomanticScript: '+ ee);
+            }
+        });
+    } catch(e) {
+        cdl.error('GTM sociomantic:'+ e);
+    } finally {
+        dl.push({'event':'sociomantic'});
+    }
+    return jQ && dl && cdl && bhdl;
+}(window.jQuery, window.dataLayer, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_sociomantic));
+//</script>
 
 /*
  * Conf
@@ -295,3 +340,57 @@ try {
         }
     }
 } catch (e){if (typeof console != "undefined") console.log("DE TC Booking SocioMantic: "+e)}
+
+//<script id='gtm_sociomantic'>
+(function gtm_sociomanticDL(jQ, dl, cdl, cdpm){
+    'use strict';
+    if (jQ && dl && cdl && cdpm) try {
+        cdl.DL_sociomantic = {
+            sale : {confirmed : /sociomantic/i.test(cdpm.attribution && cdpm.attribution.src || '')},
+            basket : {
+                products : [{
+                    identifier: (cdpm.accomcode || '')+'_'+(cdpm.deptdate || '')+'_'+(cdpm.retdate || '')+'_'+(cdpm.duration || '')+'_'+(cdpm.departureairportselected || ''),
+                    amount: cdpm.bookingvalue || '',
+                    currency: 'EUR',
+                    quantity : 1
+                }],
+                transaction : cdpm.accomcode || '',
+                amount: cdpm.bookingvalue || '',
+                currency: 'EUR'
+            },
+            script : {
+                src : 'https://eu-sonar.sociomantic.com/js/2010-07-01/adpan/thomascook-de',
+                status: 'not fired'
+            }
+        };
+    } catch(e) {
+        cdl.error('GTM sociomantic: '+ e);
+    } finally {
+        dl.push({'event':'sociomanticDL'});
+    }
+    return jQ && dl && cdl && cdpm && cdl.DL_sociomantic;
+}(window.jQuery, window.dataLayer, window.CATTDL, !window.CATTDL?!1:window.CATTDL.CATTParams));
+
+(function gtm_sociomantic(jQ, dl, cdl, bhdl){
+    'use strict';
+    if (jQ && dl && cdl && bhdl) try {
+        window.basket = bhdl.basket;
+        jQ.getScript && jQ.getScript(bhdl.script && bhdl.script.src || '', function gtm_sociomanticScript(){
+            try {
+                bhdl.script && (bhdl.script.status = 'fired');
+                if (bhdl.sale && bhdl.sale.confirmed) {
+                    window.sale = bhdl.sale;
+                    window.sociomantic && window.sociomantic.sonar && window.sociomantic.sonar.adv["thomascook-de"] && window.sociomantic.sonar.adv["thomascook-de"].getConfirmed && window.sociomantic.sonar.adv["thomascook-de"].getConfirmed();
+                }
+            } catch(ee) {
+                cdl.error('GTM sociomanticScript: '+ ee);
+            }
+        });
+    } catch(e) {
+        cdl.error('GTM sociomantic:'+ e);
+    } finally {
+        dl.push({'event':'sociomantic'});
+    }
+    return jQ && dl && cdl && bhdl;
+}(window.jQuery, window.dataLayer, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_sociomantic));
+//</script>

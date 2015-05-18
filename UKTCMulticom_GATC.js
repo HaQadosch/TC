@@ -605,22 +605,22 @@
 (function gtm_gatcConf(jQ, cdl, gadl, w, d) {
     'use strict';
     if (cdl && gadl) try {
-        var tn = gadl.trackername+'.' || ''
-        var gawa = gadl.webanalytics || ''
-        var trdl = gawa && gawa.transaction || ''
-        var tpdl = trdl && trdl.transactionProducts && trdl.transactionProducts[0] || ''
-        w._gaq = w._gaq || []
+        var tn = gadl.trackername+'.' || '';
+        var gawa = gadl.webanalytics || '';
+        var trdl = gawa && gawa.transaction || '';
+        var tpdl = trdl && trdl.transactionProducts && trdl.transactionProducts[0] || '';
+        w._gaq = w._gaq || [];
         var wgp = function gtm_wgp(arr){ return w._gaq.push(arr)};
 
         wgp([tn+'_setAccount', gadl.profileid]);
         wgp([tn+'_setDomainName', gadl.cookiedomain]);
         wgp([tn+'_setAllowLinker', gadl.allowlinker]);
 
-        if (jQ && gadl.organicsearch) jQ.each(gadl.organicsearch, function gtm_organicSearch(domain, term){wgp([tn+'_addOrganic', domain, term])})
-        if (jQ && gawa.customvars) jQ.each(gawa.customvars, function gtm_customvars(_, custVar){if (custVar.value !== '') wgp([tn+'_setCustomVar', custVar.index, custVar.name, custVar.value, custVar.scope])})
+        if (jQ && gadl.organicsearch) jQ.each(gadl.organicsearch, function gtm_organicSearch(domain, term){wgp([tn+'_addOrganic', domain, term]);});
+        if (jQ && gawa.customvars) jQ.each(gawa.customvars, function gtm_customvars(_, custVar){if (custVar.value !== '') wgp([tn+'_setCustomVar', custVar.index, custVar.name, custVar.value, custVar.scope]);});
 
         for (var evt in gawa.events) {
-            var gevt = gawa.events[evt]
+            var gevt = gawa.events[evt];
             if (gevt.action) wgp([tn+'_trackEvent', gevt.category, gevt.action, gevt.label, gevt.value, gevt.noninteraction]);
         }
 
@@ -631,10 +631,10 @@
         wgp([tn+'_addItem', trdl.transactionId, tpdl.sku, tpdl.name, tpdl.category, tpdl.price, tpdl.quantity]);
         wgp([tn+'_trackTrans']);
 
-        (function gtm_callGAscript() {var ga = d.createElement('script'); ga.src = '//stats.g.doubleclick.net/dc.js'; var s = d.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s)}())
+        (function gtm_callGAscript() {var ga = d.createElement('script'); ga.src = '//stats.g.doubleclick.net/dc.js'; var s = d.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);}());
     } catch(e) {
-        cdl.error('GTM FR TC GATC Conf: '+e)
+        cdl.error('GTM FR TC GATC Conf: '+e);
     }
-    return (cdl && gadl)
-}(window.jQuery, window.CATTDL, !window.CATTDL?!1:(window.CATTDL.DL_gatc || {}), window, document))
+    return cdl && gadl;
+}(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_gatc, window, document));
 //</script>

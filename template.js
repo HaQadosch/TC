@@ -78,12 +78,12 @@
         kkdl.img = {
             status : 'fired',
             src : src
-        }
+        };
     } catch(e) {
         cdl.error && cdl.error('GTM xx: '+e);
     } finally {
         dl.push({'event':'xx'});
     }
     return jQ && dl && cdl && kkdl;
-}(window.jQuery, window.dataLayer, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_xx))
+}(window.jQuery, window.dataLayer, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_xx));
 //</script>
