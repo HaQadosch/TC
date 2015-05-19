@@ -1,7 +1,7 @@
 /*
  * HP
  */
-<script id='gtm_gatcLP'>
+//<script id='gtm_gatcLP'>
 (function gtm_gatc() {
 
     function setTrackPageViewOnce(ev) {
@@ -94,6 +94,30 @@ if (checkedErrorCode){
     window._gaq.push(['CATTGATC._trackEvent', 'Errors', errorLabel, window.document.referrer, 1, true]);
 }
 
+try {
+    $("a[href*='outboundcall']").click(function () {
+        var href = $(this).attr('href');
+        href = href.substring(href.indexOf('outboundcall='), href.length);
+        href = href.substring(0, href.indexOf('&')).replace('outboundcall=', '');
+        window._gaq.push(['CATTGATC._trackEvent', 'Outbound Campaign Click', href, window.location.href, 1, true]);
+    });
+} catch (e){if (typeof console != "undefined") console.log("DE TC Outbound Links: " + e)}
+
+
+var tables = $('div[class^=recentItemNew] table')
+for (var i = 0; i < tables.length; i++){
+    var iff = (/iff=(\d*)/i).exec($('div[class^=recentItemNew]>table:eq('+i+') a:first').attr('href'))[1]
+    var pageid = (/pageid=([^\&]*)/i).exec($('div[class^=recentItemNew]>table:eq('+i+') a:first').attr('href'))[1]
+    for (var j in [0,1,3] ) {
+        $('div[class^=recentItemNew]>table:eq('+i+') a:nth('+j+')').one('click', function(){
+            window._gaq.push(['CATTGATC._trackEvent', 'ZuletztGesehen', 'booking', pageid, iff])
+        });
+    };
+    $('div[class^=recentItemNew]>table:eq('+i+') a:nth(2)').one('click', function(){
+        window._gaq.push(['CATTGATC._trackEvent', 'ZuletztGesehen', 'hoteldetails', pageid, iff])
+    });
+}
+
 var as = document.getElementsByTagName("a");
 var inBound = new RegExp("^#$|^javascript:|"+document.location.host.match(/\w+\.\w+$|\w+\.co\.uk$/gi)[0].replace('.', '\\.')+"|vidado\\.com|thomascook\\.de|google-analytics\\.com|mailto:", "gi")
 for (var i=0; i<as.length; i++){
@@ -111,12 +135,12 @@ for (var i=0; i<as.length; i++){
         console.error('GTM GATC: '+ e);
     }
 }())
-</script>
+//</script>
 
 /*
  * SubSRP
  */
-<script id='gtm_gatcSubSRP'>
+//<script id='gtm_gatcSubSRP'>
 (function gtm_gatc() {
     try {
 
@@ -226,13 +250,13 @@ if (checkedErrorCode){
         console.error('GTM GATC: '+ e);
     }
 }())
-</script>
+//script>
 
 
 /*
  * SRP
  */
-<script id='gtm_gatcSRP'>
+//<script id='gtm_gatcSRP'>
 (function gtm_gatc() {
     try {
 
@@ -439,12 +463,12 @@ if (checkedErrorCode){
         console.error('GTM GATC: '+ e);
     }
 }())
-</script>
+//</script>
 
 /*
  * Accom
  */
-<script id='gtm_gatcAccom'>
+//<script id='gtm_gatcAccom'>
 (function gtm_gatc() {
     try {
 
@@ -521,7 +545,7 @@ try{
 if (typeof CATTParams.SearchHomepage != "undefined" && CATTParams.SearchHomepage != "" && !/null/i.test(CATTParams.SearchHomepage)) {
     window._gaq.push(['CATTGATC._trackEvent', 'SearchHomepage', CATTParams.SearchHomepage, VP, 1, true]);
 }
-
+window._gaq.push(['CATTGATC._trackEvent', 'accommodationDetail', window.CATTParams.LOB, window.CATTParams.AccomCode + '|' + window.CATTParams.AccomName + '|' + window.CATTParams.Destination + '|' + window.CATTParams.AccomResort, 1, true]);
 // Thorsten Heissel, DE Ecom-Team: 09.01.14: tracking for DaysToDepartuer and Videos
 
 (function() {
@@ -663,12 +687,12 @@ if (checkedErrorCode){
         console.error('GTM GATC: '+ e);
     }
 }())
-</script>
+//</script>
 
 /*
  * PaxPay
  */
-<script id='gtm_gatcPaxPay'>
+//<script id='gtm_gatcPaxPay'>
 (function gtm_gatc() {
     try {
 
@@ -777,13 +801,13 @@ if (checkedErrorCode){
         console.error('GTM GATC: '+ e);
     }
 }())
-</script>
+//</script>
 
 
 /*
  * Booking
  */
-<script id='gtm_gatcBooking'>
+//<script id='gtm_gatcBooking'>
 (function gtm_gatc() {
     try {
 
@@ -950,5 +974,4 @@ if (emptyParams) {
         console.error('GTM GATC: '+ e);
     }
 }())
-</script>
-
+//</script>
