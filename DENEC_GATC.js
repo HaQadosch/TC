@@ -1,4 +1,4 @@
-<script id='gtm_gatcLP'>
+//<script id='gtm_gatcLP'>
 (function gtm_gatc() {
 
     function setTrackPageViewOnce(ev) {
@@ -74,7 +74,7 @@
 
 
         /*** END _trackPageview *************************/
-
+ 
         (function() {
           var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
           ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
@@ -85,6 +85,13 @@
             var errorLabel= checkedErrorCode+'_SessionID='+checkedSessID+'_AppServer='+checkedAppServer;
             window._gaq.push(['CATTGATC._trackEvent', 'Errors', errorLabel, window.document.referrer, 1, true]);
         }
+
+        $("a[href*='outboundcall']").click(function () {
+            var href = $(this).attr('href');
+            href = href.substring(href.indexOf('outboundcall='), href.length);
+            href = href.substring(0, href.indexOf('&')).replace('outboundcall=', '');
+            window._gaq.push(['CATTGATC._trackEvent', 'Outbound Campaign Click', href, window.location.href, 1, true]);
+        });
 
         var as = document.getElementsByTagName("a");
         var inBound = new RegExp("^#$|^javascript:|"+document.location.host.match(/\w+\.\w+$|\w+\.co\.uk$/gi)[0].replace('.', '\\.')+"|vidado\\.com|neckermann-reisen\\.de|google-analytics\\.com|mailto:", "gi");
@@ -116,7 +123,7 @@
         console.error('GTM GATC: '+ e);
     }
 }())
-</script>
+//</script>
 
 /*****************************************************************************/
 
