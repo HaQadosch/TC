@@ -42,12 +42,11 @@
 
         cdl.DL_xx = {
             type : 'pixeltracking',
-            partnercode : 'HOTELS4UDOTCOM',
             price : cdpm.bookingvalue || '',
             currency : cdpm.searches && cdpm.searches.currency || cdpm.currency || 'GBP',
             linkid : cdpm.attribution && cdpm.attribution.utm_content || '',
             img : {
-                src : '//www.kayak.com/s/pixeltracking/_pc_?price=_p_&currency=_c_&linkid=_l_',
+                src : 'https//www.xx.com/s/pixeltracking/_pc_?price=_p_&currency=_c_&linkid=_l_',
                 status : 'not fired'
             }
         };
@@ -59,7 +58,7 @@
     return cdl && dl && cdl.DL_xx;
 }(window.CATTDL, window.dataLayer));
 
-(function gtm_kayak(jQ, dl, cdl, kkdl){
+(function gtm_xx(jQ, dl, cdl, kkdl){
     'use strict';
     if (jQ && dl && cdl && kkdl) try {
         var src = kkdl.img && kkdl.img.src
