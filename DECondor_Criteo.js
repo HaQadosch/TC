@@ -4,14 +4,14 @@
     var cdpm = '';
     if (cdl && dl && jQ) try {
         cdpm = cdl.CATTParams;
-        var tagType = /home|generic|subsearch|subsrch/.test(cdpm.pageid) && 'homepage'
-            || /search/.test(cdpm.pageid) && 'srp'
-            || /accom/.test(cdpm.pageid) && 'product'
-            || /pax|pay/.test(cdpm.pageid) && 'basket'
+        var tagType = /home|generic/.test(cdpm.pageid) && 'homepage'
+            || /select/.test(cdpm.pageid) && 'srp'
+            || /extras/.test(cdpm.pageid) && 'product'
+            || /contact|payment/.test(cdpm.pageid) && 'basket'
             || /confirm|booking/.test(cdpm.pageid) && 'purchase'
             || '';
         cdl.DL_criteo = {
-            account     : 14991,
+            account     : 19215,
             siteType     : 'd',
             event         : (function(tg) {
                 return (tg === 'homepage' && 'viewHome'
@@ -31,8 +31,8 @@
             }],
             ref         : cdpm.bookingref || '',
             dedup         : /criteo/i.test(cdpm.attribution && cdpm.attribution.utm_source || '')?1:0,
-            cin         : cdl.gadate && cdl.gadate(cdpm.deptdate || '').replace(/(\d\d)-?\/?(\d\d)-?\/?(\d\d\d\d)/, '$3-$2-$1') || '',
-            cout         : cdpm.retdate && cdl.gadate && cdl.gadate(cdpm.retdate || '').replace(/(\d\d)\/(\d\d)\/(\d\d\d\d)/, '$3-$2-$1') || '',
+            cin         : cdpm.deptdate || '',
+            cout         : cdpm.returndate|| '',
             email         : (jQ('input[type=hidden][name=email]').val() || '').replace(/\s*/g, '').toLowerCase() || jQ('a[href*=mailto]').filter(function(){return !/Contactez/i.test(jQ(this).text());}).text() || '',
             script         : {
                 status     : 'not fired',
@@ -45,7 +45,7 @@
         dl.push({event: 'DL_criteo '+cdpm.pageid});
     }
     return cdl && dl && jQ && cdl.DL_criteo;
-}(window.CATTDL, window.externaldataLayer, window.jQuery));
+}(window.CATTDL, window.dataLayer, window.jQuery));
 //</script>
 
 //<script id='gtm_Criteo'>
