@@ -1,79 +1,42 @@
-<script id='gtm_bookingdatalayer'>
-(function gtm_bookingDatalayer(cdl, dl){
+// Attribution
+
+//<scriptid='gtm_attribution'>
+(function gtm_attribution(cdl, dl) {
     'use strict';
-    if (dl) try {
-        var cdpm = cdl.CATTParams && cdl.CATTParams.length && cdl.CATTParams || window.CATTParams || '';
-        var product = {
-            'sku': cdpm.accomcode || cdpm.AccomCode || '',
-            'name': cdpm.accomname || cdpm.AccomName || '',
-            'category': cdpm.holidaytype || cdpm.HolidayType || '',
-            'price': cdpm.bookingvalue ||  cdpm.BookingValue || 0,
-            'quantity': 1
-        };
-        var transaction = {
-            'transactionId': cdpm.bookingref || cdpm.BookingRef || '',
-            'transactionTotal': cdpm.bookingvalue ||  cdpm.BookingValue || 0,
-            'transactionProducts': [product]
-        };
-        dl.push(transaction);
+    if (cdl && dl) try {
+        var lands = JSON.parse(cdl.ckget('gtm_attr') || '[]');
+        var paidChannels = /afflong|met|part|affdirect|ban|criteo|dis|email|newsletter|cp|ppc|gclid/i;
+        var validLand = lands.filter(function(e){return e[0] || paidChannels.test(e[1])}).filter(function(e){return new Date().setMonth(new Date(Date.now()).getMonth() - 1) < e[5];});
+
+        if (validLand.length) {
+            var vL = validLand.pop() || [];
+            cdl.CATTParams.attribution = {
+                gclid           : vL[0] || '',
+                utm_medium      : vL[1] || '',
+                utm_campaign    : vL[2] || '',
+                utm_content     : vL[3] || '',
+                utm_source      : vL[4] || '',
+                landing         : new Date(vL[5] || '') || '',
+                date            : vL[5] || ''
+            };
+            var winningCampaign = '';
+            var m = vL[1];
+            if ((/afflong/i).test(m)) winningCampaign = 'afflong';
+            else if ((/met/i).test(m)) winningCampaign = 'affmeta';
+            else if ((/affdirect|part/i).test(m)) winningCampaign = 'affdirect';
+            else if ((/ban|criteo|dis/i).test(m)) winningCampaign = 'display';
+            else if ((/email|newsletter/i).test(m)) winningCampaign = 'eCRM';
+            else if ((/cp|ppc|gclid/i).test(m)) winningCampaign = 'PPC';
+            else if ((/soc|twitter/i).test(m)) winningCampaign = 'social';
+
+            dl.push({event: 'Attribution '+winningCampaign});
+            cdl.ckset('gtm_attr', JSON.stringify([]), Infinity, '/', /tcsignature/i.test(window.location.hostname)?'.tcsignature.com':'.thomascook.com');
+        }
     } catch(e) {
-        cdl.error && cdl.error('GTM Booking Datalayer'+ e);
-    } finally {
-        dl.push({'event':'booking'});
+        cdl.error('GTM Attr: '+e);
     }
-    return cdl && dl;
+    return cdl && dl && cdl.CATTParams.attribution;
 }(window.CATTDL, window.dataLayer));
-</script>
-
-window.dataLayer = [{
-    'transactionId': '1234',
-    'transactionAffiliation': 'Acme Clothing',
-    'transactionTotal': 38.26,
-    'transactionTax': 1.29,
-    'transactionShipping': 5,
-    'transactionProducts': [{
-        'sku': 'DD44',
-        'name': 'T-Shirt',
-        'category': 'Apparel',
-        'price': 11.99,
-        'quantity': 1
-    },{
-        'sku': 'AA1243544',
-        'name': 'Socks',
-        'category': 'Apparel',
-        'price': 9.99,
-        'quantity': 2
-    }]
-}];
+//</script>
 
 
-AccomCode: "H4U|13320"
-AccomGEOLocation: "(25.2713,55.329)"
-AccomName: "Novotel Deira City Centre Hotel"
-AccomResort: "Deira"
-BoardBasis: "BED_AND_BREAKFAST"
-BookingRef: "TS3UKYX"
-BookingValue: "1892.06"
-CardType: "Visa Credit"
-DepartureAirportSelected: "LHR"
-DepositSelection: "0"
-DepositValue: "337.10"
-DeptDate: "21/09/2015"
-DestinationAirportSelected: "DXB"
-Duration: "7"
-HolidayType: "ePackage"
-InitialHolidayType: "ePackage"
-LOB: "package"
-LeadPAXPostCode: "EC1A 4HD"
-PageID: "booking"
-PaxAdult: "2"
-PaxChild: "0"
-PaxInfant: "0"
-PaxTotal: "2"
-PaymentOption: "CREDIT CARD"
-RetDate: "28/09/2015"
-Rooms: "1"
-SessID: "876055C6287A1BC092C4B68350DD38DC"
-StarRating: "4*"
-TLD: "uat7.thomascook.com"
-TourOperator: "Gold Medal Net fares"
