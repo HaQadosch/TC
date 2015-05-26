@@ -269,6 +269,33 @@
                             , {'noninteraction': true}]);                    
              } catch(e) {
                 cdl.error('GTM UATC Events AccomFacilities: '+e)
+            } else if (/srp-sort-results/i.test(cdom.id)) try {
+                var cdl = CATTDL || {};
+                var cdpm = window.CATTDL && CATTDL.CATTParams || {};
+                var cdurl = cdpm.urlparams || {};
+                //UA
+                    w.ga(trackerName+'send', 'event'
+                            , 'SRP SortOption'
+                            , cdom && cdom.data && cdom.data.val
+                            , cdpm && cdpm.lob+'|'+cdpm.holidaytype
+                            , 1
+                            , { 'page'          : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                                ,'dimension51'  : cdpm.gaguid || 'empty'
+                                ,'dimension65'  : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                                ,'dimension75'  : ''+(window.Date && window.Date.now() || 0)
+                                ,'dimension118': (cdurl && cdurl.pathname || location.pathname || '')
+                                ,'dimension119': (cdurl && cdurl.paramstring || location.search || '') 
+                            }              
+                            , {'nonInteraction': true});
+                //GA
+                    w._gaq.push([(cdl && cdl.DL_gatc && cdl.DL_gatc.trackername)+'._trackEvent'
+                            , 'SRP SortOption'
+                            , cdom && cdom.data && cdom.data.val
+                            , cdpm && cdpm.lob+'|'+cdpm.holidaytype
+                            , 1     
+                            , {'noninteraction': true}]);                    
+             } catch(e) {
+                cdl.error('GTM UATC Events SRP SortOption: '+e)
             }
         };
     } catch(e) {
