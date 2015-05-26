@@ -17,13 +17,13 @@
             cdpm.lob = "package"
             cdpm.holidaytype = wgdAccom?((wgdAccom.connectorCode == 1)?((wgdAccom.brand === "Z")?"flexitrips-angular":"package-angular"):((wgdAccom.connectorCode == 2)?"multi-angular":"generic-angular")):"generic-angular"
             cdpm.pagecontext = "angular"
-
-            var wgdPath = wgdAccom.geoPath && wgdAccom.geoPath.split("/") || []
+            
+            var wgdDetails = wgD.details || {};
+            var wgdPath = (wgdAccom.geoPath && wgdAccom.geoPath.split("/")) || (wgdDetails.geoPath && wgdDetails.geoPath && wgdDetails.geoPath.value.split("/")) ||  []
             newPM['accomcountry'] = wgdPath.length > 0 && wgdPath[0] || "";
             newPM['accomregion'] = wgdPath.length > 1 && wgdPath[1] || "";
             newPM['accomresort'] = wgdPath.length > 2 && wgdPath[2] || "";
             newPM['resort'] = newPM.accomresort;
-            var wgdDetails = wgD.details || {};
             newPM['accomconcept'] = (typeof wgdAccom.concepts == 'string') && wgdAccom.concepts || wgdDetails.concepts && wgdDetails.concepts[0] && wgdDetails.concepts[0].type || "";
             newPM['duration'] = +wgdAccom.duration || 0;
             newPM['accomvideo'] = ($('button.btn.btn-block.btn-default.src-accomHighlights-videoButton'))?'y':'n';
@@ -66,6 +66,7 @@
                         newPM['carrier'] = []; 
                         newPM['carrier'].push ({ code : newPMflout.carrier.code
                                                 , name : newPMflout.carrier.name});
+                        newPM['deptairport'] = wgdAccom.depAirport || newPMflout.depart.airportcode || "";
                         newPM['destairport'] = newPMflout.arrive.airportcode
                         newPM['arrivaltime'] = newPMflout.arrive.time
                         newPM['depttime'] = newPMflout.depart.time
@@ -144,8 +145,7 @@
                     || wgdPrice.rooms && wgdPrice.rooms[0] && wgdPrice.rooms[0].context && wgdPrice.rooms[0].context.hotelCode.replace('|','-')
                     || wgdAccom.hotelCode || wgdAccom.id || wgdAccom.hotelId || wgdDetails.productId || "";
             newPM['accomguid'] = wgdAccom.id || wgdAccom.hotelId || wgdDetails.productId || "";
-            newPM['deptairport'] = wgdAccom.depAirport || "";
-            newPM['destination'] = wgdAccom.geoPath && wgdAccom.geoPath || "";
+            newPM['destination'] = (wgdAccom.geoPath && wgdAccom.geoPath) || (wgdDetails.geoPath && wgdDetails.geoPath.value) || "";
 
             var arrpax = wgdAccom.room || ""
             if (typeof arrpax == "string"){
