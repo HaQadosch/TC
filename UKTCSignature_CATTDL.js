@@ -1,3 +1,36 @@
+// DL CATT
+//<script>
+(function gtm_dlpackage(dl, cdl, jQ){
+    'use strict';
+    if (dl && cdl && jQ) try {
+        var cdpm = cdl.CATTParams || '';
+        var newPM = {};
+
+        newPM.accomname = cdpm && cdpm.accomname || jQ('.basketPriceLine > span.Header').text() || "";
+        newPM.bookingref = cdpm && cdpm.bookingref || "";
+        newPM.bookingvalue = cdpm && cdpm.bookingvalue || (/[^£]+/.exec(jQ('td.price').eq(0).text()) || []).pop() || 0;
+        newPM.cardtype = cdpm.cardtype || jQ('#payHoliday .clearfix:eq(0) div') && (jQ('#payHoliday .clearfix:eq(0) div').text() || '').replace(/\scredit\scard$/i, '') || "" ;
+        newPM.deptairport = cdpm && cdpm.departureairportselected || "";
+        newPM.deptdate = cdpm && cdpm.retdate && +new Date(cdpm.deptdate.replace(/(\d+)\/(\d+)\/(\d+)/g, '$3-$2-$1')) || +new Date(jQ('table.CheckoutBasketTable span').eq(0).text()) || 0;
+        newPM.destination = jQ('.basketDetail.flightDetail:eq(1) > span:eq(0)').text() || "";
+        newPM.destairport =  cdpm && cdpm.destinationairportselected || jQ('.basketDetail.flightDetail:eq(1) > span:eq(0)').text() || "";
+        newPM.paxadult = cdpm && cdpm.paxadult || "";
+        newPM.paxchild = cdpm && cdpm.paxchild || "";
+        newPM.paxtotal = cdpm && cdpm.paxinfant || "";
+        newPM.returndate = cdpm && cdpm.retdate && +new Date(cdpm.retdate.replace(/(\d+)\/(\d+)\/(\d+)/g, '$3-$2-$1')) || +new Date(jQ('table.CheckoutBasketTable span').eq(1).text()) || 0;
+        newPM.rooms = cdpm && cdpm.rooms || '0';
+        newPM.starrating = cdpm && cdpm.starrating || '0';
+
+        jQ.extend(cdl.CATTParams, newPM);
+        dl.push({'event': 'DL Package'});
+    } catch(e) {
+        cdl.error && cdl.error('GTM DL Package: '+e);
+    }
+    return dl && cdl && jQ;
+}(window.dataLayer, window.CATTDL, window.jQuery));
+
+//</script>
+
 // Attribution
 
 //<scriptid='gtm_attribution'>
@@ -38,5 +71,3 @@
     return cdl && dl && cdl.CATTParams.attribution;
 }(window.CATTDL, window.dataLayer));
 //</script>
-
-
