@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_uatcLP'>
 (function gtm_uatcLP(jQ, cdl, uadl, w){
     'use strict';
     if (cdl && uadl) try{
@@ -10,9 +10,9 @@
         window.ga && window.ga(function gtm_useTracker() {
             var trc = ga.getByName(uadl.name)
             if (trc) {
-                console.info('trc', trc)
-                trc.plugins_ && console.info('plugins', trc.plugins_.keys) || console.info('no plugins') 
-                //console.info('clientID', trc.get('clientId'))
+                //console.info('trc', trc)
+                //trc.plugins_ && console.info('plugins', trc.plugins_.keys) || console.info('no plugins') 
+                console.info('clientID', trc.get('clientId'))
             } else {
                 console.info('no trc')
                 w.ga('create', uadl.profileid, uadl.cookiedomain, {'name': uadl.name})
@@ -33,7 +33,7 @@
                 jQ.each(uawa && uawa.metrics || [], function gtm_keyMetrics(kMet, vMet){
                     jQ.each(vMet, function valMetrics(_, val){val && (sendSet[kMet]=val)})
                 })  
-            }
+            };
 
             sendSet['page'] = uawa.page;
             sendSet['dimension31'] = window.userId || cdl.CATTParams.cookies && cdl.CATTParams.cookies.userId || '';
@@ -41,14 +41,19 @@
 
             for (evt in uawa.events) {
                 var gevt = uawa.events[evt]
-                if (gevt.action) (trc.send('event', gevt.category, gevt.action,  gevt.label, gevt.value, {'nonInteraction': gevt.noninteraction}));
-            }
+                var timestamp = +new Date(window.Date && window.Date.now() || 0);
+                if (gevt.action) {w.ga(trackerName+'send','event'
+                                            , gevt.category, gevt.action,  gevt.label, gevt.value
+                                            , { 'dimension30': cdpm.gaguid || 'empty'
+                                                ,'dimension119': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(timestamp)+' '+cdl.gatime(timestamp) || ''}
+                                            , {'nonInteraction': gevt.noninteraction})};
+            };
             dataLayer.push({'event': 'UATC LP'});
         })
     } catch(e) {
         cdl.error('GTM NL NEC UATC LP: '+e)
     } finally {
-    	window.externalLayer && externalLayer.push({'event' : 'uapageview'+'|'+'home'+'|'+(cdl.CATTParams && cdl.CATTParams.urlparams && cdl.CATTParams.urlparams.pathname || '')})
+        window.externalLayer && externalLayer.push({'event' : 'uapageview'+'|'+'home'+'|'+(cdl.CATTParams && cdl.CATTParams.urlparams && cdl.CATTParams.urlparams.pathname || '')})
     }
     return  
 }(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_uatc, window))
