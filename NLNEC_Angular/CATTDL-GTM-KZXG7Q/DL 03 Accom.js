@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_cattdlAccom'>
 (function gtm_cattdlAccom(jQ, dl, cdl) {
     'use strict'
     if (jQ && jQ.extend && cdl) try {
@@ -8,14 +8,15 @@
         cdpm.errors = {}
         var errorPM = {}
 
-        var wgD = window.getPageData && window.getPageData(cdpm.urlparams && cdpm.urlparams.pathname || "") || {}
-        var errParams = wgD.searchParams || {}
+        var wgD = window.getPageData && window.getPageData(cdpm.urlparams && cdpm.urlparams.pathname || "") || {};
+        var errParams = wgD.searchParams || {};
+        cdpm.lob = "generic";
+        cdpm.holidaytype = "generic";
+        cdpm.pagecontext = "angular";
+        var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
+        newPM['initialholidaytype'] = params && params.initialholidaytype || '';        
         
         if (wgD && wgD.details && wgD.matrix) {
-            cdpm.lob = "package"
-            cdpm.holidaytype = "package-angular"
-            cdpm.pagecontext = "angular"
-
             var wgdMatrix = wgD.matrix && wgD.matrix.data || {};
             var wgdAccom = wgdMatrix && wgdMatrix.links && wgdMatrix.links && wgdMatrix.links.self && wgdMatrix.links.self.context || {}
             var wgdParams = wgdMatrix && wgdMatrix.links && wgdMatrix.links && wgdMatrix.links.matrixSearch && wgdMatrix.links.matrixSearch.params
@@ -37,6 +38,33 @@
             newPM['destination'] = wgdAccom.geoPath && wgdAccom.geoPath || "";
 
             if (wgdPrice) {
+                newPM['brochure'] = wgdPrice.brochureName || "";
+                cdpm['holidaytype'] = ({
+                    'blank'             : 'package',
+                    'AANB'              : 'package',
+                    'BUNG'              : 'carholidays',
+                    'AZAU'              : 'carholidays',
+                    'NEAR'              : 'carholidays',
+                    'TENT'              : 'carholidays',
+                    'CAMP'              : 'carholidays',                    
+                    'CITY'              : 'citytrips',
+                    'ACIT'              : 'citytrips',
+                    'AUTO'              : 'ski',     
+                    'AAUT'              : 'ski',                    
+                    'VER'               : 'flights',
+                    'AVER'              : 'flights',                                        
+                    ''                  : 'package'
+                })[(/.*/i.exec(newPM.brochure) || ['']).pop()];
+                cdpm['lob'] =  (cdpm.holidaytype && cdpm.holidaytype!=='package')?'hotel':'package';                
+
+                newPM['includedinpackage'] = []; for (var i = 0; i < (wgdPrice.whatsIncluded && wgdPrice.whatsIncluded.length || 0); newPM.includedinpackage.push(wgdPrice.whatsIncluded[i++].description));
+                newPM['touroperator'] = wgdPrice.brandCode || "";
+                newPM['totalprice'] = wgdPrice.priceSummary && wgdPrice.priceSummary.totalAmount || 0;
+                newPM['pricepp'] = wgdPrice.priceSummary && wgdPrice.priceSummary.priceFrom || 0;
+                newPM['discountvalue'] = wgdPrice.priceSummary && wgdPrice.priceSummary.reductionAmount || 0;
+                newPM['discountperc'] = wgdPrice.priceSummary && wgdPrice.priceSummary.reductionPercentage || 0;
+                newPM['boardbasis'] = wgdPrice.boardTypeDesc || "";
+
                 var flout = wgdPrice && wgdPrice.flights && wgdPrice.flights[0] && wgdPrice.flights[0].outbound && wgdPrice.flights[0].outbound.legs || ''
                 newPM['flightdetails'] = {};
                 if (flout) {
@@ -109,15 +137,6 @@
                                         || 0
                     newPM['returntime'] = newPM.flightdetails.inbound[0].depart.time            
                 }
-
-                newPM['includedinpackage'] = []; for (var i = 0; i < (wgdPrice.whatsIncluded && wgdPrice.whatsIncluded.length || 0); newPM.includedinpackage.push(wgdPrice.whatsIncluded[i++].description));
-                newPM['touroperator'] = wgdPrice.brandCode || ""
-                newPM['totalprice'] = wgdPrice.priceSummary && wgdPrice.priceSummary.totalAmount || 0
-                newPM['pricepp'] = wgdPrice.priceSummary && wgdPrice.priceSummary.priceFrom || 0
-                newPM['discountvalue'] = wgdPrice.priceSummary && wgdPrice.priceSummary.reductionAmount || 0
-                newPM['discountperc'] = wgdPrice.priceSummary && wgdPrice.priceSummary.reductionPercentage || 0
-                newPM['boardbasis'] = wgdPrice.boardTypeDesc || ""
-                newPM['brochure'] = wgdPrice.brochureName || ""
             }
 
             var strdeptdate = wgdAccom.selectedDate || wgdAccom.startDate || 0;
@@ -166,10 +185,9 @@
             newPM['starrating'] = wgdPrice && wgdPrice.starRating || wgdDetails && wgdDetails.ratings && wgdDetails.ratings.starRating || "";
             newPM['searchapp'] = (wgdAccom.connectorCode == 1?"solr":"multicom");
             newPM['sessionid'] = window.sessionToken || ""
-
-            jQ.extend(cdpm, newPM, keeps);
         }
-        
+        jQ.extend(cdpm, newPM, keeps);        
+
         errorPM['errorcode'] = wgD.errorCode || "";
         errorPM['errormsg'] = (wgD.message || []).join(' ');
         jQ.extend(cdpm.errors, errorPM);
