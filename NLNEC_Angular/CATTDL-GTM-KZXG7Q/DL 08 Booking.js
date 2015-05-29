@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_cattdlBook'>
 (function gtm_cattdlBook(jQ, dl, cdl) {
     'use strict'
     if (jQ && jQ.extend && cdl) try{
@@ -12,14 +12,35 @@
         var wgD = window.getPageData && window.getPageData(cdpm.urlparams && cdpm.urlparams.pathname) || {}
         var wgdPkg = wgD && wgD.package || {}
 
-        cdpm.lob = "package"
-        cdpm.holidaytype = "generic-angular"
-        cdpm.pagecontext = "angular"
+        cdpm.lob = "generic";
+        cdpm.holidaytype = "generic";
+        cdpm.pagecontext = "angular";
         cdpm.sessionid = window.sessionToken || "";
 
         if (wgdPkg) {
             newPM['destination'] = wgdPkg.content && wgdPkg.content.geoPath || "";
             var wgdPath = newPM.destination && newPM.destination.split(",") || [];
+            newPM['accomguid'] = wgdPkg.productId || "";
+            newPM['accomtype'] = newPM.accomguid && newPM.accomguid.split('-')[3] || '';
+            newPM['brochure'] = newPM.accomguid && newPM.accomguid.split('-')[1] || '';
+            cdpm['holidaytype'] = ({
+                'blank'             : 'package',
+                'AANB'              : 'package',
+                'BUNG'              : 'carholidays',
+                'AZAU'              : 'carholidays',
+                'NEAR'              : 'carholidays',
+                'TENT'              : 'carholidays',
+                'CAMP'              : 'carholidays',                    
+                'CITY'              : 'citytrips',
+                'ACIT'              : 'citytrips',
+                'AUTO'              : 'ski',     
+                'AAUT'              : 'ski',                    
+                'VER'               : 'flights',
+                'AVER'              : 'flights',                                        
+                ''                  : 'package'
+            })[(/.*/i.exec(newPM.brochure) || ['']).pop()];
+            cdpm['lob'] =  (cdpm.holidaytype && cdpm.holidaytype!=='package')?'hotel':'package';
+                        
             newPM['accomcountry'] = wgdPath.length > 0 && (wgdPath[0] || "").trim() || '';
             newPM['accomregion'] = wgdPath.length > 1 && (wgdPath[1] || "").trim() || '';
             newPM['accomresort'] = wgdPath.length > 2 && (wgdPath[2] || "").trim() ||  wgdPkg.accomodationList && wgdPkg.accomodationList[0] && wgdPkg.accomodationList[0].resortName || '';
@@ -27,9 +48,6 @@
             newPM['touroperator'] = wgdPkg.brandCode || "";
             newPM['accomname'] = wgdPkg.content && wgdPkg.content.hotelName || wgdPkg.accomodationList && wgdPkg.accomodationList[0] && wgdPkg.accomodationList[0].hotelName || "";
             newPM['accomcode'] = (wgdPkg.accomodationList && wgdPkg.accomodationList[0] && (wgdPkg.accomodationList[0].hotelCode || "").replace("|","-")) || "";
-            newPM['accomguid'] = wgdPkg.productId || "";
-            newPM['accomtype'] = newPM.accomguid && newPM.accomguid.split('-')[3] || '';
-            newPM['brochure'] = newPM.accomguid && newPM.accomguid.split('-')[1] || '';
             newPM['boardbasis'] = wgdPkg.accomodationList && wgdPkg.accomodationList[0] && wgdPkg.accomodationList[0].roomProfiles && wgdPkg.accomodationList[0].roomProfiles[0] && wgdPkg.accomodationList[0].roomProfiles[0].mealPlan && wgdPkg.accomodationList[0].roomProfiles[0].mealPlan.description || "";
             newPM['duration'] = wgdPkg.dateRange && wgdPkg.dateRange.duration || 0;
             newPM['deptdate'] = +new Date(wgdPkg.dateRange && wgdPkg.dateRange.startDate || 0);
