@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_uatcAccom'>
 (function gtm_uatcAccom(jQ, cdl, uadl, w, d, dl){
     'use strict';
     if (cdl && uadl) try {
@@ -6,6 +6,8 @@
         var cdpm = cdl.CATTParams;
         var uawa = uadl.webanalytics || {};
         var cdurl = cdpm.urlparams || {};
+        var locpathname = cdurl && cdurl.pathname || ''
+        var locsearch = cdurl && cdurl.paramstring || ''
         var searchseo = ''; Object.getOwnPropertyNames(window.getPageData() || {}).forEach(function(val, idx, array) {if(/\/holidays\/.+\/.+/i.test(val) && window.getPageData(val)) {searchseo = val}});
         var wgdSrch = window.getPageData && window.getPageData('/search') || window.getPageData('searchresults-map') || window.getPageData(searchseo) || {};
 
@@ -15,8 +17,8 @@
             var trc = ga.getByName(uadl.name)
             if (trc) {
                 //console.info('trc', trc)
-                trc.plugins_ && console.info('plugins', trc.plugins_.keys) || console.info('no plugins') 
-                //console.info('clientID', trc.get('clientId'))
+                //trc.plugins_ && console.info('plugins', trc.plugins_.keys) || console.info('no plugins') 
+                console.info('clientID', trc.get('clientId'))
             } else {
                 //console.info('no trc')
                 w.ga('create', uadl.profileid, uadl.cookiedomain, {'name': uadl.name})
@@ -80,7 +82,13 @@
             
             for (evt in uawa.events) {
                 var gevt = uawa.events[evt]
-                if (gevt.action) (w.ga(trackerName+'send','event', gevt.category, gevt.action,  gevt.label, gevt.value, {'nonInteraction': gevt.noninteraction}));
+                var timestamp = +new Date(window.Date && window.Date.now() || 0);
+                if (gevt.action) {w.ga(trackerName+'send','event'
+                                            , gevt.category, gevt.action,  gevt.label, gevt.value
+                                            , { 'dimension30': cdpm.gaguid || 'empty'
+                                                ,'dimension115': (locpathname || '')                                            
+                                                ,'dimension119': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(timestamp)+' '+cdl.gatime(timestamp) || ''}
+                                            , {'nonInteraction': gevt.noninteraction})};
             };
 
             jQ('button.close').on('click',function(){
