@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_uatcdlSecure'>
 (function gtm_uatcdlSecure(jQ, dl, cdl, loc){
     'use strict';
     if (jQ && cdl && cdl.CATTParams) try {
@@ -6,16 +6,45 @@
         var twls = cdl.twls
         var ewls = cdl.ewls
         var cdpm = cdl.CATTParams
-        var cdurl = cdpm && cdpm.urlparams
-        var locpathname = cdurl && cdurl.pathname   
-        var locsearch = cdurl && cdurl.paramstring
-        var lochref = cdurl && cdurl.fullurl
+        var cdurl = cdpm && cdpm.urlparams || ''
+        var locpathname = cdurl && cdurl.pathname || ''
+        var locsearch = cdurl && cdurl.paramstring || ''
+        var lochref = cdurl && cdurl.fullurl || ''
+        var lochost = loc.hostname || loc.host || ''
 
         var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
         var srpsortlist = params.srplist || 'search';
         var srpsortoption = params.sortoption || '';
-        var accomposition = params.accomposition[cdpm.accomcode || ''] || '';
-        
+        var accomposition = params.accomposition && params.accomposition[cdpm.accomcode || ''] || '';
+
+        var vpagepath = '/vp/en/'+(cdpm.lob || 'angular')+'/'+(cdpm.holidaytype || 'angular')+'/'+(cdpm.pageid || 'angular');
+        var vpqsp_cat   = ('ss_cat='+ 
+                            (cdpm.lob || '')+'_'+
+                            (cdpm.pageid || '')
+                        ).toLowerCase();        
+        var vpqsp_st  = ('ss_st='+ 
+                            (cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'_'+
+                            (cdl.gadate(cdpm.deptdate) || '')+'_'+
+                            ((cdpm.searchresultstotal === '0'?'nResults':'yResults') || '')
+                        ).toLowerCase();
+        var vpqsp_p     = ( 
+                            'deptdate='+(cdl.gadate(cdpm.deptdate) || '')+
+                            '&depairport='+(cdpm.deptairport || '')+
+                            '&destairport='+(cdpm.destairport || '')+                            
+                            '&paxadult='+(cdpm.paxadult || '0')+
+                            '&paxchild='+(cdpm.paxchild || '0')+
+                            '&paxinfant='+(cdpm.paxinfant || '0')+
+                            '&boardbasis='+(cdpm.boardbasis || '')+
+                            '&destination='+(cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+
+                            '&accomcode='+(cdpm.accomcode || '')+
+                            '&accomguid='+(cdpm.accomguid || '')+                            
+                            '&accomname='+(cdpm.accomname || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+
+                            '&duration='+(cdpm.duration || '')+
+                            '&rooms='+(cdpm.rooms || '')+
+                            '&sessionid='+(cdpm.sessionid || '')                                                    
+                        ).toLowerCase(); 
+        var vppage = (vpagepath || '') + '?' + (vpqsp_cat || '') +'&'+ (vpqsp_st || '') +'&'+ (vpqsp_p || '');
+                
         cdl.DL_uatc = {
             profileid       : 'UA-27847231-2',
             cookiedomain    : twlh(/neckermann.io/i)?"neckermann.io":"neckermann.nl",
@@ -27,8 +56,11 @@
                 hostname    : loc && loc.hostname || ''
             },
             webanalytics    : {
-                page            : '/vp/en/'+(cdpm.lob || 'angulalr')+'/'+(cdpm.holidaytype || 'angulalr')+'/'+(cdpm.pageid || 'angulalr'),
-                location        : (locpathname || '/')+(locsearch || '') || '',
+                page            : vppage,
+                qsp_st          : vpqsp_st,
+                qsp_cat         : vpqsp_cat,
+                qsp_p           : vpqsp_p, 
+                location        : lochref,
                 addproduct      : {
                     id              : cdpm.accomcode || '',
                     name            : ((cdpm.accomname || '')+'|'+(cdpm.destairport || '')+'|'+(cdpm.accomcountry || '')+'|'+(cdpm.accomregion || '')+'|'+(cdpm.accomresort || '')).toLowerCase() || "",
@@ -102,6 +134,7 @@
                     dimension107    : {'departuretimeoutbound'      : cdl.gatime && cdpm.flightdetails && cdpm.flightdetails.outbound && cdpm.flightdetails.outbound[0] && cdpm.flightdetails.outbound[0].depart && cdl.gatime(cdpm.flightdetails && cdpm.flightdetails.outbound[0].depart.date) || ''},
                     dimension115    : {'realurl'                    : locpathname+locsearch || ''},
                     dimension119    : {'pagetimestamp'              : cdl.gadate(cdpm.pagetimestamp || 0)+' '+cdl.gatime(cdpm.pagetimestamp || 0) || ''},
+                    dimension122    : {'totalprice'                 : ''+(cdpm.totalprice || '0')},
                     dimension123    : {'discountperc'               : ''+(cdpm.discountperc || '0')},
                     dimension124    : {'discountvalue'              : ''+(cdpm.discountvalue || '0')},
                     dimension132    : {'errormessage'               : cdpm.errors && cdpm.errors.errormsg || ''},
@@ -109,7 +142,8 @@
                     dimension134    : {'zoovercount'                : cdpm.ratings && cdpm.ratings.zoover && cdpm.ratings.zoover.count || ''}   
                 },
                 events : {
-                internalcampaignid  : {'category': 'InternalCampaign', 'action': cdpm.internalcampaignid || '', 'label': lochref, 'value': 1, 'noninteraction': true}
+                internalcampaignid  : {'category': 'InternalCampaign', 'action': cdpm.internalcampaignid || '', 'label': lochost+locpathname, 'value': 1, 'noninteraction': true, 'page': vppage},
+                errorcode           : {'category': 'Errors', 'action': cdpm.errors && Object.keys(cdpm.errors) && (cdpm.errors.errorcode || '')+(cdpm.errors.errorcode && cdpm.errors.errormsg && ' ' || '')+(cdpm.errors.errormsg || '') || '', 'label': lochost+locpathname+'?destination='+(cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'&deptairport='+(cdpm.deptairport || '')+'&deptdate='+(cdpm.deptdate && cdl.gadate(cdpm.deptdate) || '')+'&duration='+(cdpm.duration || '')+'&destairport='+(cdpm.destairport || '')+'&accomcode='+(cdpm.accomcode || '')+'&accomguid='+(cdpm.accomguid || '')+(((/[\?].+/.exec(lochref)) || '').toString()).replace(/\?/, '&'), 'value': 1, 'noninteraction': true, 'page':vppage}
                 }
             }
         }
