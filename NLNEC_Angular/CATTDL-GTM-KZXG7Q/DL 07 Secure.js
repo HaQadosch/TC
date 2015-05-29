@@ -5,16 +5,15 @@
         var cdpm = cdl.CATTParams
         var newPM = {};
         var keeps = {};
-
         cdpm.errors = {};
         var errorPM = {};       
-
         var wgD = window.getPageData && window.getPageData('/payment') || {}
         var wgdPkg = wgD && wgD.package || {}
 
         var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
         params.errors = {};
         params.errors.secure = 1
+        newPM['initialholidaytype'] = params && params.initialholidaytype || '';
         CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', '.neckermann.nl');    
 
         cdpm.lob = "generic";
@@ -244,8 +243,8 @@
                         newPM.extras.travelinsurance.push(ins);
                     };
             };
-            jQ.extend(cdpm, newPM, keeps);
-        }
+        };
+        jQ.extend(cdpm, newPM, keeps);        
 
         if (wgD.response && wgD.response.error){
             errorPM['errorcode'] = wgD.response.error.code || "";
