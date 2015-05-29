@@ -5,9 +5,10 @@
         var twlh = cdl.twlh
         var cdpm = cdl.CATTParams || {};
         var cdurl = cdpm.urlparams || {};
-        var locpathname = cdurl && cdurl.pathname;
-        var locsearch = cdurl && cdurl.paramstring;
-        var lochref = cdurl && cdurl.fullurl;
+        var locpathname = cdurl && cdurl.pathname || '';
+        var locsearch = cdurl && cdurl.paramstring || '';
+        var lochref = cdurl && cdurl.fullurl || '';
+        var lochost = loc.hostname || loc.host || ''
         var cdpextr = cdpm.extras || {};           
 
         var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
