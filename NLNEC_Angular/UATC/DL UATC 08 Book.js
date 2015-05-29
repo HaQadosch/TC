@@ -152,6 +152,7 @@
                     dimension64     : {'roomcode2'                  : cdpm.roomcodes && cdpm.roomcodes[1] || ''},
                     dimension102    : {'pagecontext'                : cdpm.pagecontext || ''},
                     dimension103    : {'rooms'                      : ''+(cdpm.rooms || '0')},
+                    dimension105    : {'initialholidiaytype'        : cdpm.initialholidiaytype || ''},                    
                     dimension106    : {'arrivaltimeoutbound'        : cdl.gatime && cdpm.flightdetails && cdpm.flightdetails.outbound && cdpm.flightdetails.outbound[0] && cdpm.flightdetails.outbound[0].arrive && cdl.gatime(cdpm.flightdetails && cdpm.flightdetails.outbound[0].arrive.date) || ''},
                     dimension107    : {'departuretimeoutbound'      : cdl.gatime && cdpm.flightdetails && cdpm.flightdetails.outbound && cdpm.flightdetails.outbound[0] && cdpm.flightdetails.outbound[0].depart && cdl.gatime(cdpm.flightdetails && cdpm.flightdetails.outbound[0].depart.date) || ''},
                     dimension115    : {'realurl'                    : locpathname+locsearch || ''},
