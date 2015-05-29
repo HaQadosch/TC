@@ -147,7 +147,7 @@ try{
                 order         : cdpm.bookingref || '0',
                 voucher     : cdpm.voucher || '',
                 site         : 2555,
-                ref         : cdpm.attribution && cdpm.attribution.utm_source || ''
+                ref         : cdpm.attribution && cdpm.attribution.utm_campaign || ''
             };
         } else if (/flight/i.test(cdpm.lob || '')){
 
@@ -166,14 +166,14 @@ try{
                 order         : cdpm.bookingref || '0',
                 voucher     : cdpm.voucher || '',
                 site         : 2555,
-                ref         : cdpm.attribution && cdpm.attribution.utm_source || ''
+                ref         : cdpm.attribution && cdpm.attribution.utm_campaign || ''
             };
         } else {
 
             cdl.DL_attr_aff = {
                 articlenb     : cdpm.accomcode || "1",
                 productname : "Package booking for "+(cdpm.paxadult || '')+" Adults and "+(cdpm.paxchild || '')+" Children",
-                category     : 'Package > '+(cdpm.destinationairportselected || ''),
+                category     : cdpm.lob || '',
                 quantity     : 1,
                 singlePrice : cdpm.bookingvalue || '',
                 brand         : cdpm.touroperator || '',
@@ -185,7 +185,7 @@ try{
                 order         : cdpm.bookingref || '0',
                 voucher     : cdpm.voucher || '',
                 site         : 2555,
-                ref         : cdpm.attribution && cdpm.attribution.utm_source || ''
+                ref         : cdpm.attribution && cdpm.attribution.utm_campaign || ''
             };
         }
     } catch(e){
