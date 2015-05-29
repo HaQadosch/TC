@@ -1,11 +1,14 @@
-<script>
+<script id='gtm_uatcSRP'>
 (function gtm_uatcSRP(jQ, cdl, uadl, w, d, dl){
     'use strict';
     if (cdl && uadl) try {
         var trackerName = (uadl.name+".") || ""
         var uawa = uadl.webanalytics || {}
         var uaImp = uadl.webanalytics.addimpression || [];
-        var cdpm = CATTDL.CATTParams;
+        var cdpm = cdl.CATTParams || {};
+        var cdurl = cdpm.urlparams || {};
+        var locpathname = cdurl && cdurl.pathname || ''
+        var locsearch = cdurl && cdurl.paramstring || ''
 
         if(!w.ga) w = (function uatcGA(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m); return window})(w,d,'script','//www.google-analytics.com/analytics.js','ga')
 
@@ -13,8 +16,8 @@
             var trc = ga.getByName(uadl.name)
             if (trc) {
                 //console.info('trc', trc)
-                trc.plugins_ && console.info('plugins', trc.plugins_.keys) || console.info('no plugins') 
-                //console.info('clientID', trc.get('clientId'))
+                //trc.plugins_ && console.info('plugins', trc.plugins_.keys) || console.info('no plugins') 
+                console.info('clientID', trc.get('clientId'))
             } else {
                 //console.info('no trc')
                 w.ga('create', uadl.profileid, uadl.cookiedomain, {'name': uadl.name})
@@ -62,12 +65,18 @@
                     w.ga(trackerName+'ec:setAction', 'view', {'list': (uaImp[0] && uaImp[0].list || "")});      
                     w.ga(trackerName+'send','event', 'viewAddImpression', (uaImp[0].list || ""),  (accoms && accoms.toString() || ""), 1, {'nonInteraction': true, 'location': uawa.location});
                 }
-            }());
-            
+            }());   
+
             for (evt in uawa.events) {
                 var gevt = uawa.events[evt]
-                if (gevt.action) (w.ga(trackerName+'send','event', gevt.category, gevt.action,  gevt.label, gevt.value, {'nonInteraction': gevt.noninteraction}));
-            }
+                var timestamp = +new Date(window.Date && window.Date.now() || 0);
+                if (gevt.action) {w.ga(trackerName+'send','event'
+                                            , gevt.category, gevt.action,  gevt.label, gevt.value
+                                            , { 'dimension30': cdpm.gaguid || 'empty'
+                                                ,'dimension115': (locpathname || '')                                            
+                                                ,'dimension119': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(timestamp)+' '+cdl.gatime(timestamp) || ''}
+                                            , {'nonInteraction': gevt.noninteraction})};
+            };
             dl.push({'event': 'UATC SRP'});
         })
     } catch(e) {
