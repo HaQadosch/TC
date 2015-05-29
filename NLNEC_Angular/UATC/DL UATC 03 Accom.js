@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_uatcdlAccom'>
 (function gtm_uatcdlAccom(jQ, dl, cdl, loc) {
     'use strict';
     if (jQ && cdl && cdl.CATTParams) try {
@@ -9,9 +9,38 @@
         var cdurl = cdpm.urlparams;
         var searchseo = ''; Object.getOwnPropertyNames(window.getPageData() || {}).forEach(function(val, idx, array) {if(/\/holidays\/.+\/.+/i.test(val) && window.getPageData(val)) {searchseo = val}});
         var wgdSrch = window.getPageData && window.getPageData('/search') || window.getPageData('searchresults-map') || window.getPageData(searchseo) || {};
-        var locpathname = cdurl && cdurl.pathanme
-        var locsearch = cdurl && cdurl.paramstring
-        var lochref = cdurl && cdurl.fullurl
+        var locpathname = cdurl && cdurl.pathanme || ''
+        var locsearch = cdurl && cdurl.paramstring || ''
+        var lochref = cdurl && cdurl.fullurl || ''
+        var lochost = loc.hostname || loc.host || ''
+
+        var vpagepath = '/vp/en/'+(cdpm.lob || 'angular')+'/'+(cdpm.holidaytype || 'angular')+'/'+(cdpm.pageid || 'angular');
+        var vpqsp_cat   = ('ss_cat='+ 
+                            (cdpm.lob || '')+'_'+
+                            (cdpm.pageid || '')
+                        ).toLowerCase();        
+        var vpqsp_st  = ('ss_st='+ 
+                            (cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'_'+
+                            (cdpm.accomname || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'_'+
+                            (cdpm.accomcode || '')
+                        ).toLowerCase();
+        var vpqsp_p     = ( 
+                            'deptdate='+(cdl.gadate(cdpm.deptdate) || '')+
+                            '&depairport='+(cdpm.deptairport || '')+
+                            '&destairport='+(cdpm.destairport || '')+                         
+                            '&paxadult='+(cdpm.paxadult || '0')+
+                            '&paxchild='+(cdpm.paxchild || '0')+
+                            '&paxinfant='+(cdpm.paxinfant || '0')+
+                            '&boardbasis='+(cdpm.boardbasis || '')+
+                            '&destination='+(cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+
+                            '&accomcode='+(cdpm.accomcode || '')+
+                            '&accomguid='+(cdpm.accomguid || '')+             
+                            '&accomname='+(cdpm.accomname || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+
+                            '&duration='+(cdpm.duration || '')+
+                            '&rooms='+(cdpm.rooms || '')+
+                            '&sessionid='+(cdpm.sessionid || '')                                                     
+                        ).toLowerCase();        
+        var vppage = (vpagepath || '') + '?' + (vpqsp_cat || '') +'&'+ (vpqsp_st || '') +'&'+ (vpqsp_p || '');
 
         cdl.DL_uatc = {
             profileid       : 'UA-27847231-2',
@@ -24,7 +53,10 @@
                 hostname    : loc && loc.hostname || ''
             },
             webanalytics    : {
-                page            : '/vp/en/'+(cdpm.lob || 'angular')+'/'+(cdpm.holidaytype || 'angular')+'/'+(cdpm.pageid || 'angular'),
+                page            : vppage,
+                qsp_st          : vpqsp_st,
+                qsp_cat         : vpqsp_cat,
+                qsp_p           : vpqsp_p, 
                 location        : lochref,
                 metrics         : {
                     metric1         : {'paxadult'               : parseInt(cdpm.paxadult) || 0},
@@ -95,7 +127,8 @@
                     dimension134    : {'zoovercount'                : cdpm.ratings && cdpm.ratings.zoover && cdpm.ratings.zoover.count || ''}                    
                 },
                 events : {
-                internalcampaignid  : {'category': 'InternalCampaign', 'action': cdpm.internalcampaignid || '', 'label': lochref, 'value': 1, 'noninteraction': true}
+                internalcampaignid  : {'category': 'InternalCampaign', 'action': cdpm.internalcampaignid || '', 'label': lochost+locpathname, 'value': 1, 'noninteraction': true, 'page': vppage},
+                errorcode           : {'category': 'Errors', 'action': cdpm.errors && Object.keys(cdpm.errors) && (cdpm.errors.errorcode || '')+(cdpm.errors.errorcode && cdpm.errors.errormsg && ' ' || '')+(cdpm.errors.errormsg || '') || '', 'label': lochost+locpathname+'?destination='+(cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'&deptairport='+(cdpm.deptairport || '')+'&deptdate='+(cdpm.deptdate && cdl.gadate(cdpm.deptdate) || '')+'&duration='+(cdpm.duration || '')+'&destairport='+(cdpm.destairport || '')+'&accomcode='+(cdpm.accomcode || '')+'&accomguid='+(cdpm.accomguid || '')+(((/[\?].+/.exec(lochref)) || '').toString()).replace(/\?/, '&'), 'value': 1, 'noninteraction': true, 'page':vppage}
                 }
             }
         };
