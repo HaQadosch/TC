@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_cattdlSRP'>
 (function gtm_cattdlSRP(jQ, dl, cdl) {
     'use strict'
     if (jQ && jQ.extend && cdl) try {
@@ -7,6 +7,9 @@
         var keeps = {}
         var locpathname = cdpm.urlparams && cdpm.urlparams.pathname || ""
 
+        var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
+        newPM['initialholidaytype'] = params && params.initialholidaytype || '';
+
         if (window.getPageData && window.getPageData(locpathname)) {
             var wgD = window.getPageData && window.getPageData(locpathname) || {}
             var wgdItems = wgD.items || {}
@@ -14,9 +17,18 @@
             var wgdCurrent = (!/500|502|404/.test(wgD.status) && (!wgD.errorCode || wgD.errorCode !== null))?(wgD.links && wgD.links.search && wgD.links.search.context || {}):(wgD.searchParams || {})
 
             //Page Info
-            cdpm.lob = "package";
-            cdpm.holidaytype = wgdCurrent && (wgdCurrent && wgdCurrent.connectorCode == 1?"package-angular":"multi-angular") || "generic-angular"
-            cdpm.pagecontext = "angular"
+            cdpm['holidapagecontextytype'] = "angular"
+            cdpm['holidaytype'] = ({
+                'vliegvakanties'    : 'package',
+                'autovakanties'     : 'carholidays',
+                'stedentrips'       : 'citytrips',
+                'wintersport'       : 'ski',
+                'lastminute'        : 'lastminute',
+                'kortevakanties'    : 'shortholidays',
+                ''                  : 'package'
+            })[(/\/([^\/]*)/i.exec(locpathname) || ['']).pop()];
+            cdpm['lob'] =  (cdpm.holidaytype && cdpm.holidaytype!=='package')?'hotel':'package';
+
             var strdeptdate = ''
             newPM['deptdate'] = (strdeptdate = wgdCurrent.when && wgdCurrent.when._i || wgdCurrent.when || "19700101") && +new Date(strdeptdate.substring(0,4), strdeptdate.substring(4,6)-1, strdeptdate.substring(6,8)) || 0;
             var rngdeptdate = wgdCurrent && wgdCurrent.departureDate || '';
@@ -89,11 +101,11 @@
             var errorPM = {};
             errorPM['errorcode'] = wgD.errorCode || "";
             errorPM['errormsg'] = (wgD.message || []).join(' ');
-
-            jQ.extend(cdl.CATTParams, newPM ,keeps);
-            jQ.extend(cdl.CATTParams.srpfacets, facetPM);
-            jQ.extend(cdl.CATTParams.errors, errorPM);
         }   
+
+        jQ.extend(cdl.CATTParams, newPM ,keeps);
+        jQ.extend(cdl.CATTParams.srpfacets, facetPM);
+        jQ.extend(cdl.CATTParams.errors, errorPM);        
         window.CATTDL.CATTParams = cdpm;
     } catch(e) {
         cdl.error('GTM CATTDL SRP: '+e)
