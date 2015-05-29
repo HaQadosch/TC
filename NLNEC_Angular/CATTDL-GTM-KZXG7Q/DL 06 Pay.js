@@ -5,10 +5,8 @@
         var cdpm = cdl.CATTParams
         var newPM = {};
         var keeps = {};
-
         cdpm.errors = {};
         var errorPM = {};       
-
         var wgD = window.getPageData && window.getPageData(cdpm.urlparams && cdpm.urlparams.pathname) || {}
         var wgdPkg = wgD && wgD.package || {}
 
@@ -16,6 +14,8 @@
         cdpm.holidaytype = "generic";
         cdpm.pagecontext = "angular";
         cdpm.sessionid = window.sessionToken || "";
+        var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
+        newPM['initialholidaytype'] = params && params.initialholidaytype || '';        
 
         if (wgdPkg) {
             newPM['destination'] = wgdPkg.content && wgdPkg.content.geoPath || "";
@@ -239,8 +239,8 @@
                         newPM.extras.travelinsurance.push(ins);
                     };
             };
-            jQ.extend(cdpm, newPM, keeps);
-        }
+        };
+        jQ.extend(cdpm, newPM, keeps);        
 
         if (wgD.response && wgD.response.error){
             errorPM['errorcode'] = wgD.response.error.code || "";
