@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_uatcdlSRP'>
 (function gtm_uatcdlSRP(jQ, dl, cdl, loc) {
     'use strict';
     if (jQ && cdl && cdl.CATTParams) try {
@@ -7,14 +7,41 @@
         var cdsr = cdpm.srpresults || {};
         var cdfc = cdpm.srpfacets || {};
         var cdurl = cdpm.urlparams || {};
-        var locpathname = cdurl && cdurl.pathname
-        var locsearch = cdurl && cdurl.paramstring
-        var lochref = cdurl && cdurl.fullurl
-
+        var locpathname = cdurl && cdurl.pathname || ''
+        var locsearch = cdurl && cdurl.paramstring || ''
+        var lochost = loc.hostname || loc.host || ''
+        var lochref = cdurl && cdurl.fullurl || ''
         var wgetData = window.getPageData(locpathname) || {};
 
         var discfacets = ''; cdpm && cdpm.srpfacets && cdpm.srpfacets.discountperc && cdpm.srpfacets.discountperc.forEach(function(e) {if (discfacets) {discfacets = discfacets+'|'+e} else {discfacets = e}});
 
+        var vpagepath     = '/vp/en/'+(cdpm.lob || 'angular')+'/'+(cdpm.holidaytype || 'angular')+'/'+(cdpm.pageid || 'angular');
+        var vpqsp_cat   = ('ss_cat='+ 
+                            (cdpm.lob || '')+'_'+
+                            (cdpm.pageid || '')
+                        ).toLowerCase();        
+        var vpqsp_st  = ('ss_st='+ 
+                            (cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'_'+
+                            (cdl.gadate(cdpm.deptdate) || '')+'_'+
+                            ((cdpm.searchresultstotal === 0?'nResults':'yResults') || '')
+                        ).toLowerCase();
+        var vpqsp_p     = ( 
+                            'deptdate='+(cdl.gadate(cdpm.deptdate) || '')+
+                            '&depairport='+(cdpm.deptairport || '')+
+                            '&paxadult='+(cdpm.paxadult || '')+
+                            '&paxchild='+(cdpm.paxchild || '')+
+                            '&paxinfant='+(cdpm.paxinfant || '')+
+                            '&boardbasis='+(cdfc.boardbasis && cdfc.boardbasis.toString() || '')+
+                            '&destination='+(cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+
+                            '&srptop3='+(cdpm.searchresultstop3 || '')+
+                            '&srptot='+(cdpm.searchresultstotal || '')+
+                            '&duration='+(cdpm.duration || '')+
+                            '&sortoption='+(cdpm.sortoption || '')+
+                            '&rooms='+(cdpm.rooms || '')+                            
+                            '&sessionid='+(cdpm.sessionid || '')                            
+                        ).toLowerCase();
+        var vppage = (vpagepath || '') + '?' + (vpqsp_cat || '') +'&'+ (vpqsp_st || '') +'&'+ (vpqsp_p || '');
+        
         cdl.DL_uatc = {
             profileid       : 'UA-27847231-2',
             cookiedomain    : twlh(/neckermann.io/i)?"neckermann.io":"neckermann.nl",
@@ -26,7 +53,10 @@
                 hostname    : loc && (loc.hostname || '') || ''
             },
             webanalytics    :   {
-                page            : '/vp/en/'+(cdpm.lob || 'angular')+'/'+(cdpm.holidaytype || 'angular')+'/'+(cdpm.pageid || 'angular'),
+                page            : vppage,
+                qsp_st          : vpqsp_st,
+                qsp_cat         : vpqsp_cat,
+                qsp_p           : vpqsp_p,                
                 location        : lochref,
                 metrics         : {
                     metric1         : {'paxadult'                   : parseInt(cdpm.paxadult) || 0},
@@ -81,7 +111,8 @@
                     dimension134    : {'zoovercount'                : cdpm.ratings && cdpm.ratings.zoover && cdpm.ratings.zoover.count || ''}
                 },
                 events : {
-                internalcampaignid  : {'category': 'InternalCampaign', 'action': cdpm.internalcampaignid || '', 'label': lochref, 'value': 1, 'noninteraction': true}
+                internalcampaignid  : {'category': 'InternalCampaign', 'action': cdpm.internalcampaignid || '', 'label': lochost+locpathname, 'value': 1, 'noninteraction': true, 'page': vppage},
+                errorcode           : {'category': 'Errors', 'action': cdpm.errors && Object.keys(cdpm.errors) && (cdpm.errors.errorcode || '')+(cdpm.errors.errorcode && cdpm.errors.errormsg && ' ' || '')+(cdpm.errors.errormsg || '') || '', 'label': lochost+locpathname+'/?destination='+(cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'&deptairport='+(cdpm.deptairport || '')+'&deptdate='+(cdpm.deptdate && cdl.gadate(cdpm.deptdate) || '')+'&duration='+(cdpm.duration || '')+(((/[\?].+/.exec(lochref)) || '').toString()).replace(/\?/, '&'), 'value': 1, 'noninteraction': true, 'page':vppage}
                 }
             }
         };
