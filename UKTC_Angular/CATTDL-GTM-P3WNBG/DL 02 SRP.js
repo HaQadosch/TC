@@ -17,12 +17,14 @@
             cdpm.lob = "package";
             cdpm.holidaytype = wgdCurrent && (wgdCurrent && wgdCurrent.connectorCode == 1?"package-angular":"multi-angular") || "generic-angular"
             cdpm.pagecontext = "angular"
+            var strdeptdate = ''
+            var strdeptdatewhen = (strdeptdate = wgdCurrent.when && wgdCurrent.when._i || wgdCurrent.when || "19700101") && +new Date(strdeptdate.substring(0,4), strdeptdate.substring(4,6)-1, strdeptdate.substring(6,8)) || 0;
             var rngdeptdate = wgdCurrent && wgdCurrent.departureDate || '';
-            newPM['deptdatestart'] = +new Date(((rngdeptdate || '').split(',')[0] || '19700101').replace(/(\d\d\d\d)(\d\d)(\d\d)/, '$1-$2-$3'));
-            newPM['deptdateend'] = +new Date(((rngdeptdate  || '').split(',')[1] || (rngdeptdate  || '').split(',')[0] || '19700101').replace(/(\d\d\d\d)(\d\d)(\d\d)/, '$1-$2-$3'));
-            if ((rngdeptdate  || '').split(',')[1]) {newPM['deptdaterange'] = true; newPM['deptdate'] = 0} else {newPM['deptdaterange'] = false; newPM['deptdate'] = newPM.deptdatestart || 0};
-            //var strdeptdate = ''
-            //(strdeptdate = wgdCurrent.when && wgdCurrent.when._i || wgdCurrent.when || "19700101") && +new Date(strdeptdate.substring(0,4), strdeptdate.substring(4,6)-1, strdeptdate.substring(6,8)) || 0;
+            newPM['deptdatestart'] = +new Date(((rngdeptdate || '').split(',')[0]).replace(/(\d\d\d\d)(\d\d)(\d\d)/, '$1-$2-$3') || strdeptdatewhen || 0);
+            newPM['deptdateend'] = +new Date(((rngdeptdate  || '').split(',')[1] || (rngdeptdate  || '').split(',')[0]).replace(/(\d\d\d\d)(\d\d)(\d\d)/, '$1-$2-$3') || strdeptdatewhen || 0);
+            newPM['deptdate'] = newPM.deptdatestart || 0;
+            if ((rngdeptdate  || '').split(',')[1]) {newPM['deptdaterange'] = true} else {newPM['deptdaterange'] = false};
+
             newPM['deptairportsearched'] = wgdCurrent.origin || "";
             newPM['destinationsearched'] = wgdCurrent.goingTo || "";
             newPM['resortsearched'] = wgdCurrent.resortCode || "";
