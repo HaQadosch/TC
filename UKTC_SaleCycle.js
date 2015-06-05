@@ -8,7 +8,7 @@
         cdl.DL_salecycle = {
             script         : {
                 status  : 'not fired',
-                url     : '//d16fk4ms6rqz1v.cloudfront.net/capture/thomascook.js'
+                url     : '//d16fk4ms6rqz1v.cloudfront.net/capture/'+(/directholidays/i.test(window.location.hostname || '')?'directholidays.js':'thomascook.js')
             }
         };
     } catch(e) {
@@ -17,7 +17,7 @@
         dl.push({event: 'Salecycle'});
     }
     return cdl && dl && cdl.DL_salecycle;
-}(window.CATTDL, window.externalDataLayer));
+}(window.CATTDL, window.externalDataLayer || window.externalLayer));
 
 (function gtm_Salecycle(jQ, cdl, scdl){
     'use strict';
@@ -92,3 +92,5 @@
     return jQ && cdl && scdl && scdl.poolTest;
 }(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_salecycle));
 //</script>
+
+02074440984
