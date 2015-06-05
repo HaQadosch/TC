@@ -6,16 +6,27 @@
   <body>
     <input type='text' id='nameInput' placeholder='Name'>
     <input type='text' id='messageInput' placeholder='Message'>
+    <div id='messagesDiv'></div>
     <script>
-      var myDataRef = new Firebase('https://e45xlw8vuai.firebaseio-demo.com/');
-      $('#messageInput').keypress(function (e) {
-        if (e.keyCode == 13) {
-          var name = $('#nameInput').val();
-          var text = $('#messageInput').val();
-          myDataRef.push({'name': name, 'text': text, 'date':''+Date.now()}); //myDataRef.set({'name': name, 'text': text, 'date':''+Date.now()}); // myDataRef.set('User ' + name + ' says ' + text);
-          $('#messageInput').val('');
-        }
-      });
+        function displayChatMessage(name, text) {
+            $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
+            $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
+        };
+        var myDataRef = new Firebase('https://e45xlw8vuai.firebaseio-demo.com/');
+        $('#messageInput').keypress(function (e) {
+            if (e.keyCode == 13) {
+                var name = $('#nameInput').val();
+                var text = $('#messageInput').val();
+                // Push the message/data into the DB
+                myDataRef.push({'name': name, 'text': text, 'date':''+Date.now()}); //myDataRef.set({'name': name, 'text': text, 'date':''+Date.now()}); // myDataRef.set('User ' + name + ' says ' + text);
+                $('#messageInput').val('');
+            }
+            myDataRef.on('child_added', function(snapshot) {
+                console.info(snapshot);
+                var message = snapshot.val();
+                displayChatMessage && displayChatMessage(message.name, message.text) || console.info('no displayChatMessage');
+            });
+        });
     </script>
   </body>
 </html>
