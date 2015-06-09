@@ -38,11 +38,11 @@
             }(tagType)),
             requiresdom : 'yes',
             itemsrp     : (cdpm.searchresultstop3 || '').split(/-/g) || [],
-            itemacc     : cdpm.accomguid || (cdpm.accomcode || '').replace(/^.+\|/, '') || '',
+            itemacc     : (cdpm.departureairportsearched || cdpm.departureairportselected || '')+(cdpm.destinationairportsearched || cdpm.destinationairportselected || '')+(cdpm.flighttype===1?'-r':'-o'),
             itempax     : [{
-                id: cdpm.accomguid || (cdpm.accomcode || '').replace(/^.+\|/, '') || '',
-                price: cdpm.bookingvalue || '',
-                quantity: 1
+               id: (cdpm.departureairportsearched || cdpm.departureairportselected || '')+(cdpm.destinationairportsearched || cdpm.destinationairportselected || '')+(cdpm.flighttype===1?'-r':'-o'),
+               price: (''+cdpm.bookingvalue).replace(/(\d+)\.\d+/, '$1'),
+               quantity: 1
             }],
             ref         : cdpm.bookingref || '',
             dedup         : /criteo/i.test(cdpm.attribution && cdpm.attribution.utm_source || '')?1:0,
