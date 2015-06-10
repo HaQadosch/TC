@@ -211,7 +211,7 @@
                 cdpm.pageid = 'refreshbookconf' 
             } else if (cdpm.bookingref && cdpm.bookingref !== 'empty'  && e.toString() !== cdpm.bookingref) {
                 paramsbookingref.push(cdpm.bookingref);
-                cdl.ckset('gtm_bookingref', JSON.stringify(paramsbookingref), Infinity, '/', '.thomascook.com');
+                cdl.ckset('gtm_bookingref', JSON.stringify(paramsbookingref), Infinity, '/', cdl.DL_uatc && cdl.DL_uatc.cookiedomain || 'thomascook.com');
             }
         });
         if (wgD.response && wgD.response.error){
