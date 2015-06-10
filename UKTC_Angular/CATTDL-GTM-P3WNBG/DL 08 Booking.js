@@ -202,18 +202,21 @@
             
             jQ.extend(cdpm, newPM, keeps);
         }
+        var bkgrefcount = 0;
         var paramsbookingref = JSON.parse(cdl.ckget('gtm_bookingref') || '[]');
         if(!cdpm.bookingref){ 
             cdpm.pageid = 'refreshbookconf'
         };
         paramsbookingref.forEach(function(e){
             if(cdpm.bookingref && e.toString() === cdpm.bookingref){ 
-                cdpm.pageid = 'refreshbookconf' 
-            } else if (cdpm.bookingref && cdpm.bookingref !== 'empty'  && e.toString() !== cdpm.bookingref) {
-                paramsbookingref.push(cdpm.bookingref);
-                cdl.ckset('gtm_bookingref', JSON.stringify(paramsbookingref), Infinity, '/', '.'+(cdl.DL_uatc && cdl.DL_uatc.cookiedomain || 'thomascook.com'));
+                 bkgrefcount = bkgrefcount + 1
             }
         });
+        if (bkgrefcount > 0){cdpm.pageid = 'refreshbookconf'
+        } else {
+            paramsbookingref.push(cdpm.bookingref);
+            cdl.ckset('gtm_bookingref', JSON.stringify(paramsbookingref), Infinity, '/', '.'+(cdl.DL_uatc && cdl.DL_uatc.cookiedomain || 'thomascook.com'));
+        };
         if (wgD.response && wgD.response.error){
             errorPM['errorcode'] = wgD.response.error.code || "";
             errorPM['errormsg'] =  wgD.response.error.description;
