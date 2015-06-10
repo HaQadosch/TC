@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_cattdlBook'>
 (function gtm_cattdlBook(jQ, dl, cdl) {
     'use strict'
     if (jQ && jQ.extend && cdl) try{
@@ -203,10 +203,13 @@
             jQ.extend(cdpm, newPM, keeps);
         }
         var paramsbookingref = JSON.parse(cdl.ckget('gtm_bookingref') || '[]');
+        if(!cdpm.bookingref){ 
+            cdpm.pageid = 'refreshbookconf'
+        };
         paramsbookingref.forEach(function(e){
-            if(cdpm.bookingref && e === cdpm.bookingref){ 
+            if(cdpm.bookingref && e.toString() === cdpm.bookingref){ 
                 cdpm.pageid = 'refreshbookconf' 
-            } else if (cdpm.bookingref && cdpm.bookingref !== 'empty'  && e !== cdpm.bookingref) {
+            } else if (cdpm.bookingref && cdpm.bookingref !== 'empty'  && e.toString() !== cdpm.bookingref) {
                 paramsbookingref.push(cdpm.bookingref);
                 cdl.ckset('gtm_bookingref', JSON.stringify(paramsbookingref), Infinity, '/', '.thomascook.com');
             }
