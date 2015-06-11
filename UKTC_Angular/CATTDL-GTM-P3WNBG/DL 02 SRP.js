@@ -29,8 +29,8 @@
             newPM['destinationsearched'] = wgdCurrent.goingTo || "";
             newPM['resortsearched'] = wgdCurrent.resortCode || "";
             newPM['accomnamesearched'] = wgetData.hotelName && wgetData.hotelName.options && wgetData.hotelName.options[0] && (wgetData.hotelName.options[0].title || wgetData.hotelName.options[0].value) || "";
-            newPM['searchwidened'] = wgetData.widened || false;
-            newPM['searchwidenedselected'] = wgdCurrent.flexible || false;
+            newPM['searchwidened'] = ''+(wgetData.widened || false);
+            newPM['searchwidenedselected'] = ''+(wgdCurrent.flexible || false);
             newPM['sortoption'] = wgdCurrent.sort || "";
             newPM['duration'] = wgdCurrent.duration || "I dont mind";
             newPM['searchapp'] = (wgdCurrent.connectorCode && wgdCurrent.connectorCode == 1)?"solr":"multicom";
