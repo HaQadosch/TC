@@ -29,7 +29,8 @@
             newPM['destinationsearched'] = wgdCurrent.goingTo || "";
             newPM['resortsearched'] = wgdCurrent.resortCode || "";
             newPM['accomnamesearched'] = wgetData.hotelName && wgetData.hotelName.options && wgetData.hotelName.options[0] && (wgetData.hotelName.options[0].title || wgetData.hotelName.options[0].value) || "";
-            newPM['searchwidened'] = wgdCurrent.flexible || '';
+            newPM['searchwidened'] = wgetData.widened || false;
+            newPM['searchwidenedselected'] = wgdCurrent.flexible || false;
             newPM['sortoption'] = wgdCurrent.sort || "";
             newPM['duration'] = wgdCurrent.duration || "I dont mind";
             newPM['searchapp'] = (wgdCurrent.connectorCode && wgdCurrent.connectorCode == 1)?"solr":"multicom";
@@ -46,7 +47,7 @@
             var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
             params.sortoption = newPM['sortoption'] || '';
             params.srplist = (locpathname).replace(/^\/|\/$/g, '') || '';
-            CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', '.thomascook.com');
+            CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', '.'+(cdl.DL_uatc && cdl.DL_uatc.cookiedomain || 'thomascook.com'));
 
             cdpm.srpfacets = {}
             var facetPM = {}
