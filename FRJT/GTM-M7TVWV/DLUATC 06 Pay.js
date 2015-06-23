@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_uatcdlPay'>
 (function gtm_uatcdlPay(jQ, dl, cdl, loc){
     'use strict';
     if (jQ && cdl && cdl.CATTParams) try {
@@ -22,7 +22,7 @@
                 addproduct      : {
                     id              : cdpm.accomguid || cdpm.accomcode || '',
                     name            : ((cdpm.accomname || '')+'|'+(cdpm.destairport || cdpm.destinationairportselected || '')+'|'+(cdpm.accomcountry || cdpm.country || '')+'|'+(cdpm.accomregion || cdpm.region || '')+'|'+(cdpm.accomresort || cdpm.resortsearched || '')).toLowerCase() || "",
-                    category        : ('en|'+(cdpm.lob||"")+'|'+(cdpm.holidaytype||"")).toLowerCase() || "",
+                    category        : ('fr|'+(cdpm.lob||"")+'|'+(cdpm.holidaytype||"")).toLowerCase() || "",
                     brand           : (cdpm.touroperator || '').toLowerCase() || "",
                     variant         : ((cdpm.boardbasis||"")+'|'+(cdpm.deptairport||cdpm.departureairportselected||"")+'|'+(cdl.gadate && cdl.gadate(cdpm.deptdate || 0) || "")+'|'+(cdl.gadate && cdl.gadate(cdpm.returndate || cdpm.retdate || 0) || "")+'|'+(cdpm.paxtotal||"0")+'|'+(cdpm.paxadult|| cdpm.srchnbradults ||"0")+'|'+(cdpm.paxchild||"0")+'|'+(cdpm.paxinfant||"0")+'|'+(cdpm.pricepp||"0")).toLowerCase(),
                     list            : ('search|'+(cdpm.sortoption || cdpm.sortby || "")).toLowerCase(),
@@ -89,6 +89,7 @@
                     dimension38     : {'paymentoption'              : cdpm.paymentoption || ''},
                     dimension39     : {'cardtype'                   : cdpm.cardtype || ''},
                     dimension51     : {'gaguid'                     : cdpm.gaguid || ''},
+                    dimension53     : {'hittype'                    : 'page'},                       
                     dimension54     : {'intcmp'                     : cdpm.internalcampaignid || ''},
                     dimension55     : {'intcmpsession'              : cdpm.internalcampaignid || ''},
                     dimension59     : {'roomcode1'                  : cdpm.roomcodes && cdpm.roomcodes[0] || ''},
