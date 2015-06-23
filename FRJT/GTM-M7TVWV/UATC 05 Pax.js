@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_uatcPax'>
 (function gtm_uatcPax(jQ, cdl, uadl, w, d, dl) {
     'use strict';
     if (cdl && uadl) try {
@@ -48,7 +48,6 @@
             }());
 
             w.ga(trackerName+'send','event', 'ECProductView', uaprod.id, "1");
-
 
         })
         dl.push({'event': 'UATC Pax'});
