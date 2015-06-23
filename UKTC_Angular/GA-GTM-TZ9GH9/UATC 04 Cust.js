@@ -69,6 +69,7 @@
                         , 1
                         , {'page': uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
                             ,'dimension51': cdpm.gaguid || 'empty'
+                            ,'dimension55': 'event'
                             ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
                             ,'dimension75': ''+(window.Date && window.Date.now() || 0)
                             ,'dimension118': (locpathname || '')
@@ -84,6 +85,7 @@
                 if (gevt.action) (w.ga(trackerName+'send','event', gevt.category, gevt.action,  gevt.label, gevt.value
                     , {'page': gevt.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
                         ,'dimension51': cdpm.gaguid || 'empty'
+                        ,'dimension55': 'event'
                         ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
                         ,'dimension75': ''+(window.Date && window.Date.now() || 0)
                         ,'dimension118': (locpathname || '')
@@ -91,7 +93,6 @@
                     }
                     , {'nonInteraction': gevt.noninteraction}));
             };
-
         })
         var gatcDLcnt = 0; window.gatcDL.forEach(function(e){if(e.event === 'UATC Cust'){gatcDLcnt = gatcDLcnt + 1}})
         dl.push({'event': 'UATC Cust', 'counter': gatcDLcnt});
