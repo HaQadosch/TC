@@ -84,6 +84,7 @@
                 if (gevt.action) (w.ga(trackerName+'send','event', gevt.category, gevt.action,  gevt.label, gevt.value
                     , {'page': gevt.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
                         ,'dimension51': cdpm.gaguid || 'empty'
+                        ,'dimension55'  : 'event'
                         ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
                         ,'dimension75': ''+(window.Date && window.Date.now() || 0)
                         ,'dimension118': (locpathname || '')
@@ -97,6 +98,71 @@
             window.gatcDL && gatcDL.push({'event': 'UATC SRP', 'counter': gatcDLcnt});
 
             if (ux) {window.ECEOP.pageview = []};
+
+            if(!/gtm_uabound/i.test(jQ('#sendResetPassword').attr('class'))){
+                jQ('#sendResetPassword').addClass('gtm_uabound'); 
+                jQ('#sendResetPassword').on('click',function(e){ 
+                    w.ga(trackerName+'send','event'
+                        , 'MyAccount ResetPassword'
+                        , window.userId
+                        , cdurl.fullurl || document.URL || location.href || ''
+                        , 1
+                        , {'page': uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                            ,'dimension51': cdpm.gaguid || ''
+                            ,'dimension52' : window.userId || ''
+                            ,'dimension55'  : 'event'                            
+                            ,'dimension54' : jQ(this).attr('id') && jQ(this).attr('id').toString() || ''
+                            ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                            ,'dimension75': ''+(window.Date && window.Date.now() || 0)
+                        }
+                        , {'nonInteraction': true, 'location': uawa.location});
+                });
+            };
+            if(!/gtm_uabound/i.test(jQ('button.btn.btn-default.active.alertActBtn').attr('class'))){
+                jQ('button.btn.btn-default.active.alertActBtn').addClass('gtm_uabound'); 
+                jQ('button.btn.btn-default.active.alertActBtn').on('click',function(e){ 
+                    w.ga(trackerName+'send','event'
+                        , 'MyAccount ResendActivationEmail'
+                        , window.userId
+                        , cdurl.fullurl || document.URL || location.href || ''
+                        , 1
+                        , {'page': uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                            ,'dimension51': cdpm.gaguid || ''
+                            ,'dimension52' : window.userId || ''
+                            ,'dimension54' : jQ(this).attr('id') && jQ(this).attr('id').toString() || ''
+                            ,'dimension55'  : 'event'                            
+                            ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                            ,'dimension75': ''+(window.Date && window.Date.now() || 0)
+                        }
+                        , {'nonInteraction': true, 'location': uawa.location});
+                });
+            };
+            var hotelsearch = jQ('div.row.facetContainer[facet-key="hotelName"] ul.dropdown-menu')
+
+            if(!/gtm_uabound/i.test(hotelsearch.attr('class'))) {
+                if (!hotelsearch.parent().find('input').attr('analytics-data')) {
+                        jQ('div.row.facetContainer[facet-key="hotelName"] ul.dropdown-menu').addClass('gtm_uabound'); 
+                        jQ('div.row.facetContainer[facet-key="hotelName"] ul.dropdown-menu').on('click',function(e){ 
+                            if (jQ(this).parent().find('input').val()) {
+                            w.ga(trackerName+'send','event'
+                                , 'SRP Facets'
+                                , jQ('div.row.facetContainer[facet-key="hotelName"]').attr('facet-title')
+                                , jQ(this).parent().find('input').val()
+                                , 1
+                                , {'page': uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                                    ,'dimension51'  : cdpm.gaguid || ''
+                                    ,'dimension52'  : window.userId || ''
+                                    ,'dimension55'  : 'event'
+                                    ,'dimension65'  : cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                                    ,'dimension75'  : ''+(window.Date && window.Date.now() || 0)
+                                    ,'dimension118' : (locpathname || '')
+                                    ,'dimension119' : (locsearch || '')
+                                }
+                                , {'nonInteraction': false, 'location': uawa.location});
+                            }
+                        });
+                };
+            };
         });
     } catch(e) {
         cdl.error('GTM UK TC UATC SRP: '+e)
