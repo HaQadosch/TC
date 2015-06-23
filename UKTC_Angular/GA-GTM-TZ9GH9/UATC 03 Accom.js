@@ -72,6 +72,7 @@
                             , 1
                             , {'page': uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
                                 ,'dimension51': cdpm.gaguid || 'empty'
+                                ,'dimension55': 'event'
                                 ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
                                 ,'dimension75': ''+(window.Date && window.Date.now() || 0)
                                 ,'dimension118': (locpathname || '')
@@ -100,6 +101,7 @@
                         , 1
                         , {'page': uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
                                 ,'dimension51': cdpm.gaguid || 'empty'
+                                ,'dimension55': 'event'
                                 ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
                                 ,'dimension75': ''+(window.Date && window.Date.now() || 0)
                                 ,'dimension118': (locpathname || '')
@@ -114,6 +116,7 @@
                 if (gevt.action) (w.ga(trackerName+'send','event', gevt.category, gevt.action,  gevt.label, gevt.value
                     , {'page': gevt.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
                         ,'dimension51': cdpm.gaguid || 'empty'
+                        ,'dimension55': 'event'
                         ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
                         ,'dimension75': ''+(window.Date && window.Date.now() || 0)
                         ,'dimension118': (locpathname || '')
@@ -134,6 +137,7 @@
                 , 1
                 , {'page': uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
                     ,'dimension51': cdpm.gaguid || 'empty'
+                    ,'dimension55': 'event'
                     ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
                     ,'dimension75': ''+(window.Date && window.Date.now() || 0)
                     ,'dimension118': (locpathname || '')
@@ -151,8 +155,9 @@
                         , 1
                         , {'page': uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
                             ,'dimension51': cdpm.gaguid || ''
-                            ,'dimension52' : window.userId || ''
-                            ,'dimension54' : jQ(this).attr('id') && jQ(this).attr('id').toString() || ''
+                            ,'dimension52': window.userId || ''
+                            ,'dimension54': jQ(this).attr('id') && jQ(this).attr('id').toString() || ''
+                            ,'dimension55': 'event'
                             ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
                             ,'dimension75': ''+(window.Date && window.Date.now() || 0)
                         }
@@ -169,8 +174,9 @@
                         , 1
                         , {'page': uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
                             ,'dimension51': cdpm.gaguid || ''
-                            ,'dimension52' : window.userId || ''
-                            ,'dimension54' : jQ(this).attr('id') && jQ(this).attr('id').toString() || ''
+                            ,'dimension52': window.userId || ''
+                            ,'dimension54': jQ(this).attr('id') && jQ(this).attr('id').toString() || ''
+                            ,'dimension55': 'event'
                             ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
                             ,'dimension75': ''+(window.Date && window.Date.now() || 0)
                         }
