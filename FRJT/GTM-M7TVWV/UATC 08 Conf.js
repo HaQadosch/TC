@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_uatcBook'>
 (function gtm_uatcBook(jQ, cdl, uadl, w, d, dl) {
     'use strict';
     if (cdl && uadl) try {
@@ -37,6 +37,11 @@
             w.ga(trackerName+'send','pageview', sendSet);          
               
             (function gtm_uatcBookAddProduct(){
+                sendSetPurchase = {};
+                jQ.extend(sendSetPurchase, sendSet);
+                sendSetPurchase.dimension12 = 'purchase';
+                sendSetPurchase.dimension53 = 'event';
+                                
                 w.ga(trackerName+'ec:addProduct', {
                     'id'        : uaprod.id,
                     'name'      : uaprod.name,
@@ -55,7 +60,7 @@
                     'coupon'        : uapurch.coupon
                 });
             }());
-            w.ga(trackerName+'send','event', 'ECPurchase', uapurch.id, "1");
+            w.ga(trackerName+'send','event', 'ECPurchase', uapurch.id, 1, sendSetPurchase, {'nonInteraction': true});
 
         })
         dl.push({'event': 'UATC Book'});
