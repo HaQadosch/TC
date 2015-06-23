@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_uatcdlSubSRP'>
 (function gtm_uatcdlSubSRP(jQ, dl, cdl, loc) {
     'use strict';
     if (jQ && cdl && cdl.CATTParams) try {
@@ -45,7 +45,7 @@
                     dimension12     : {'pageid'                     : cdpm.pageid || ''},
                     dimension13     : {'resort'                     : cdpm.resort || ''},
                     dimension14     : {'sessionid'                  : cdpm.sessionid || 'empty'},
-                    dimension17		: {'accomname'					: params.accomnamesearched || ''},
+                    dimension17     : {'accomname'                  : params.accomnamesearched || ''},
                     dimension19     : {'errorcode'                  : cdpm.errorcode || ''},
                     dimension20     : {'touroperator'               : cdpm.touroperator || 'any'},
                     dimension21     : {'destination'                : cdpm.destination || cdpm.srchdestination || 'empty'},
@@ -64,11 +64,12 @@
                     dimension37     : {'paxtotal'                   : ''+(cdpm.paxtotal || '0')},
                     dimension51     : {'gaguid'                     : cdpm.gaguid || ''},
                     dimension52     : {'searchengine'               : cdpm.searchapp || ''},
+                    dimension53     : {'hittype'                    : 'page'},                      
                     dimension54     : {'intcmp'                     : cdpm.internalcampaignid || ''},
                     dimension55     : {'intcmpsession'              : cdpm.internalcampaignid || ''},
                     dimension59     : {'room1type'                  : params.roomtypesearched || ''},
-                    dimension65     : {'pagetimestamp'  			: cdl.gadate && cdl.gatime && cdl.gadate(cdpm.pagetimestamp || 0)+' '+cdl.gatime(cdpm.pagetimestamp || 0) || ''},
-                    dimension75     : {'unixtimestamp'  			: ''+(cdpm.pagetimestamp || 0) || ''},
+                    dimension65     : {'pagetimestamp'              : cdl.gadate && cdl.gatime && cdl.gadate(cdpm.pagetimestamp || 0)+' '+cdl.gatime(cdpm.pagetimestamp || 0) || ''},
+                    dimension75     : {'unixtimestamp'              : ''+(cdpm.pagetimestamp || 0) || ''},
                     dimension102    : {'pagecontext'                : cdpm.pagecontext || ''},
                     dimension115    : {'errormsg'                   : cdpm.errors || ''}                    
                 }
