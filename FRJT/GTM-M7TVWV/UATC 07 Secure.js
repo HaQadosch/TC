@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_uatcSecure'>
 (function gtm_uatcSecure(jQ, cdl, uadl, w, d, dl) {
     'use strict';
     if (cdl && uadl) try {
