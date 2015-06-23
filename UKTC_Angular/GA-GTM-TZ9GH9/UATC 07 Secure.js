@@ -68,6 +68,7 @@
                             , 1
                             , {'page': uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
                                 ,'dimension51': cdpm.gaguid || 'empty'
+                                ,'dimension55': 'event'
                                 ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
                                 ,'dimension75': ''+(window.Date && window.Date.now() || 0)
                                 ,'dimension118': (locpathname || '')
@@ -82,6 +83,7 @@
                 if (gevt.action) (w.ga(trackerName+'send','event', gevt.category, gevt.action,  gevt.label, gevt.value
                     , {'page': gevt.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
                         ,'dimension51': cdpm.gaguid || 'empty'
+                        ,'dimension55': 'event'
                         ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
                         ,'dimension75': ''+(window.Date && window.Date.now() || 0)
                         ,'dimension118': (locpathname || '')
@@ -97,7 +99,7 @@
         cdl.error('GTM UK TC UATC Secure: '+e); 
     } finally {     
         var counter = 0;
-        window.gatcDL && window.gatcDL.forEach(function(e){if(e.event === 'UATC Secure'){counter = e.counter || 0}});       	
+        window.gatcDL && window.gatcDL.forEach(function(e){if(e.event === 'UATC Secure'){counter = e.counter || 0}});           
         window.externalLayer && externalLayer.push({'event' : 'uapageview'+'|'+(cdl.CATTParams && cdl.CATTParams.pageid || 'home')+'|'+(cdl.CATTParams && cdl.CATTParams.urlparams && cdl.CATTParams.urlparams.pathname || '/'), 'counter': counter});
     }
     return cdl && uadl
