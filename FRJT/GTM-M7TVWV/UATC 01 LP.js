@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_uatcLP'>
 (function gtm_uatcLP(jQ, cdl, uadl, w) {
     'use strict';
     if (cdl && uadl) try {
@@ -30,15 +30,16 @@
             }
 
             sendSet['page'] = uawa.page;
-            trc.send('pageview', sendSet);
+            w.ga(trackerName+'send','pageview', sendSet);  
 
             if (/circuits-et-croisieres/i.test(location.pathname)) {
                 $('a.devis.blc-left.open-contact-form').on('click', function(){    
-                        trc.send('event', 'quote'
+                        w.ga(trackerName+'send','event', 'quote'
                                     , 'package|circuits'
                                     ,  'demande'
                                     , 1
                                     , { 'dimension51'   : cdpm.gaguid || 'empty'
+                                        ,'dimension53'  : 'event'
                                         ,'dimension65'  : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
                                         ,'dimension75'  : ''+(window.Date && window.Date.now() || 0)
                                         ,'dimension118' : location.pathname || ''
@@ -49,11 +50,12 @@
 
                 $('button[type="submit"]').on('click', function(){
                     if (($('div.errors').text()).length > 0) {
-                        trc.send('event', 'quote'
+                        w.ga(trackerName+'send','event', 'quote'
                                     , 'package|circuits'
                                     ,  'envoi'
                                     , 1
                                     , { 'dimension51'   : cdpm.gaguid || 'empty'
+                                        ,'dimension53'  : 'event'
                                         ,'dimension65'  : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
                                         ,'dimension75'  : ''+(window.Date && window.Date.now() || 0)
                                         ,'dimension118' : location.pathname || ''
