@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_uatcdlBook'>
 (function gtm_uatcdlSRP(jQ, dl, cdl, loc) {
     'use strict';
     if (jQ && cdl && cdl.CATTParams) try {
@@ -65,6 +65,7 @@
                     dimension37     : {'paxtotal'                   : ''+(cdpm.paxtotal || '0')},
                     dimension51     : {'gaguid'                     : cdpm.gaguid || ''},
                     dimension52     : {'searchengine'               : cdpm.searchapp || ''},
+                    dimension53     : {'hittype'                    : 'page'},                       
                     dimension54     : {'intcmp'                     : cdpm.internalcampaignid || ''},
                     dimension55     : {'intcmpsession'              : cdpm.internalcampaignid || ''},
                     dimension59     : {'room1type'                  : params.roomtypesearched || ''},
@@ -85,7 +86,7 @@
                 cdl.DL_uatc.webanalytics.addimpression.push({
                     id          : curCDSR.accomguid || "",
                     name        : ((curCDSR.accomname || "")+'|'+(curCDSR.arrivalairportcode || "")+'|'+(curCDSR.accomcountry || "")+'|'+(curCDSR.accomregion || "")+'|'+(curCDSR.accomresort || "")).toLowerCase(),
-                    category    : ('en|'+(cdpm.lob || "")+'|'+(cdpm.holidaytype || "")).toLowerCase(),
+                    category    : ('fr|'+(cdpm.lob || "")+'|'+(cdpm.holidaytype || "")).toLowerCase(),
                     brand       : curCDSR.touroperator || "",
                     variant     : ((curCDSR.boardbasis || "")+'|'+(curCDSR.deptairportcode || "")+'|'+(cdl.gadate && cdl.gadate(curCDSR.deptdate || 0) || '')+'|'+(cdl.gadate && cdl.gadate(curCDSR.retdate || 0) || '')+'|'+(cdpm.paxtotal || "0")+'|'+(cdpm.paxadult || cdpm.srchnbradults || "0")+'|'+(cdpm.paxchild || "0")+'|'+(cdpm.paxinfant || "0")+'|'+(curCDSR.totalprice || "")).toLowerCase(),
                     list        : ('search|'+(cdpm.sortoption || "")).toLowerCase(),
