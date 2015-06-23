@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_uatcLP'>
 (function gtm_uatcLP(jQ, cdl, uadl, w){
     'use strict';
     if (cdl && uadl) try{
@@ -48,21 +48,83 @@
 
             sendSet['page'] = uawa.page;
             sendSet['dimension52'] = window.userId || '';
-            trc.send('pageview', sendSet);
+            w.ga(trackerName+'send','pageview', sendSet);  
 
             for (evt in uawa.events) {
                 var gevt = uawa.events[evt]
                 var timestamp = +new Date(window.Date && window.Date.now() || 0);
                 if (gevt.action) {trc.send('event'
                                             , gevt.category, gevt.action,  gevt.label, gevt.value
-                                            , { 'dimension51': cdpm.gaguid || 'empty',
-                                                'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(timestamp)+' '+cdl.gatime(timestamp) || '',
-                                                'dimension75': ''+(timestamp || 0)}
+                                            , { 'dimension51': cdpm.gaguid || ''
+                                                ,'dimension55': 'event'
+                                                ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(timestamp)+' '+cdl.gatime(timestamp) || ''
+                                                ,'dimension75': ''+(timestamp || 0)}
                                             , {'nonInteraction': gevt.noninteraction})};
             };
 
             if (ux) {window.ECEOP.pageview = []};
-        })
+
+            if(!/gtm_uabound/i.test(jQ('#sendResetPassword').attr('class'))){
+                jQ('#sendResetPassword').addClass('gtm_uabound'); 
+                jQ('#sendResetPassword').on('click',function(e){ 
+                    w.ga(trackerName+'send','event'
+                        , 'MyAccount ResetPassword'
+                        , window.userId
+                        , cdurl.fullurl || document.URL || location.href || ''
+                        , 1
+                        , {'page': uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                            ,'dimension51': cdpm.gaguid || ''
+                            ,'dimension52' : window.userId || ''
+                            ,'dimension54' : jQ(this).attr('id') && jQ(this).attr('id').toString() || ''
+                            ,'dimension55': 'event'
+                            ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                            ,'dimension75': ''+(window.Date && window.Date.now() || 0)
+                        }
+                        , {'nonInteraction': true, 'location': uawa.location});
+                });
+            };
+            if(!/gtm_uabound/i.test(jQ('button.btn.btn-default.active.alertActBtn').attr('class'))){
+                jQ('button.btn.btn-default.active.alertActBtn').addClass('gtm_uabound'); 
+                jQ('button.btn.btn-default.active.alertActBtn').on('click',function(e){ 
+                    w.ga(trackerName+'send','event'
+                        , 'MyAccount ResendActivationEmail'
+                        , window.userId
+                        , cdurl.fullurl || document.URL || location.href || ''
+                        , 1
+                        , {'page': uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                            ,'dimension51': cdpm.gaguid || ''
+                            ,'dimension52' : window.userId || ''
+                            ,'dimension54' : jQ(this).attr('id') && jQ(this).attr('id').toString() || ''
+                            ,'dimension55': 'event'
+                            ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                            ,'dimension75': ''+(window.Date && window.Date.now() || 0)
+                        }
+                        , {'nonInteraction': true, 'location': uawa.location});
+                });
+            };
+            if(!/gtm_uabound/i.test(jQ('#idRemoveAccount').attr('class'))){
+                jQ('#idRemoveAccount').addClass('gtm_uabound'); 
+                jQ('#idRemoveAccount').on('click',function(e){ 
+                    w.ga(trackerName+'send','event'
+                        , 'MyAccount Deactivate'
+                        , window.userId
+                        , cdurl.fullurl || document.URL || location.href || ''
+                        , 1
+                        , {'page': uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                            ,'dimension51': cdpm.gaguid || ''
+                            ,'dimension52' : window.userId || ''
+                            ,'dimension54' : jQ(this).attr('id') && jQ(this).attr('id').toString() || ''
+                            ,'dimension55': 'event'
+                            ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                            ,'dimension75': ''+(window.Date && window.Date.now() || 0)
+                        }
+                        , {'nonInteraction': true, 'location': uawa.location});
+                });
+            };          
+        });
+        dataLayer.push({'event': 'UATC LP'});
+        window.gatcDL && gatcDL.push({'event': 'UATC LP'});
+        
     } catch(e) {
         cdl.error('GTM UK TC UATC LP: '+e)
     } finally {
