@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_uatcdlLP'>
 (function gtm_uatcdlLP(cdl, dl, loc) {
     'use strict'
     if (cdl && cdl.CATTParams) try {
@@ -25,6 +25,7 @@
                     dimension31     : {'utmbguid'       : cdpm.utmbguid || ''},
                     dimension32     : {'emailguid'      : cdpm.emailguid || ''},
                     dimension51     : {'gaguid'         : cdpm.gaguid || ''},
+                    dimension53     : {'hittype'        : 'page'},                       
                     dimension54     : {'intcmp'         : cdpm.internalcampaignid || ''},
                     dimension55     : {'intcmpsession'  : cdpm.internalcampaignid || ''},
                     dimension65     : {'pagetimestamp'  : cdl.gadate && cdl.gatime && cdl.gadate(cdpm.pagetimestamp || 0)+' '+cdl.gatime(cdpm.pagetimestamp || 0) || ''},
