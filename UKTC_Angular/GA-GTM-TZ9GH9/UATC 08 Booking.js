@@ -88,7 +88,7 @@
                 w.ga(trackerName+'send','event', 'ECPurchase', uaprod.id
                             ,  ''+uaprod.position
                             , 1
-                            , sendSet
+                            , sendSetPurchase
                             , {'nonInteraction': true});
             };
             //};
