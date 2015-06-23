@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_uatcPay'>
 (function gtm_uatcPay(jQ, cdl, uadl, w, d, dl) {
     'use strict';
     if (cdl && uadl) try {
@@ -59,10 +59,11 @@
                                                             , (cdpm.lob || 'lob')+'|'+(cdpm.holidaytype || 'holidaytype')
                                                             ,  params.paymentoption || ''
                                                             , 1
-                                                            , { 'dimension39': cardtype,
-                                                                'dimension51': cdpm.gaguid || 'empty',
-                                                                'dimension65': cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || '',
-                                                                'dimension75': ''+(window.Date && window.Date.now() || 0)}   
+                                                            , { 'dimension39': cardtype
+                                                                ,'dimension51': cdpm.gaguid || 'empty'
+                                                                ,'dimension53': 'event'
+                                                                ,'dimension65': cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                                                                ,'dimension75': ''+(window.Date && window.Date.now() || 0)}   
                                                             , {'nonInteraction': true});
                                             })
         })
