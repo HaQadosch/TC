@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_uatcSubSRP'>
 (function gtm_uatcSubSRP(jQ, cdl, uadl, w, d, dl) {
     'use strict';
     if (cdl && uadl) try {
@@ -29,7 +29,7 @@
                 })  
             }
             sendSet['page'] = uawa.page;
-            trc.send('pageview', sendSet);
+            w.ga(trackerName+'send','pageview', sendSet); 
         })
         dataLayer.push({'event': 'UATC SubSRP'})
     } catch(e) {
