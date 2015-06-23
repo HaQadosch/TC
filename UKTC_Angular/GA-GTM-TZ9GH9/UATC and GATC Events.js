@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_uatcevents'>
 (function gtm_uatcevents(jQ, cdl, uadl, w){
         'use strict';
     if (cdl && uadl) try {
@@ -19,10 +19,11 @@
                     , ((/[^_]+/.exec(cdom.id) || []).pop() || "")
                     , ((/[_](.+)/.exec(cdom.id) || []).pop() || "")
                     , 1
-                    , { 'page'          : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
-                        ,'dimension51'  : cdpm.gaguid || 'empty'
-                        ,'dimension65'  : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
-                        ,'dimension75'  : ''+(window.Date && window.Date.now() || 0)
+                    , { 'page'        : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                        ,'dimension51': cdpm.gaguid || 'empty'
+                        ,'dimension55': 'event'
+                        ,'dimension65': cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                        ,'dimension75': ''+(window.Date && window.Date.now() || 0)
                         ,'dimension118': (cdurl && cdurl.pathname || location.pathname || '')
                         ,'dimension119': (cdurl && cdurl.paramstring || location.search || '') 
                     }               
@@ -39,10 +40,11 @@
                     , cdom.data && typeof cdom.data == 'string' && cdom.data || ''
                     , /invalid/i.test(cdom.rawEvent.currentTarget.className)?'PromoCode invalid':'PromoCode Valid'
                     , parseInt(wgetData.promotion && wgetData.promotion.promoDiscount) || 0
-                    , { 'page'          : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
-                        ,'dimension51'  : cdpm.gaguid || 'empty'
-                        ,'dimension65'  : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
-                        ,'dimension75'  : ''+(window.Date && window.Date.now() || 0)
+                    , { 'page'         : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                        ,'dimension51' : cdpm.gaguid || 'empty'
+                        ,'dimension55' : 'event'
+                        ,'dimension65' : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                        ,'dimension75' : ''+(window.Date && window.Date.now() || 0)
                         ,'dimension118': (cdurl && cdurl.pathname || location.pathname || '')
                         ,'dimension119': (cdurl && cdurl.paramstring || location.search || '') 
                     }  
@@ -59,10 +61,11 @@
                     , cdpm.bookingref || ''
                     , cdpm.airlineref || ''
                     , 1
-                    , { 'page'          : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
-                        ,'dimension51'  : cdpm.gaguid || 'empty'
-                        ,'dimension65'  : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
-                        ,'dimension75'  : ''+(window.Date && window.Date.now() || 0)
+                    , { 'page'         : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                        ,'dimension51' : cdpm.gaguid || 'empty'
+                        ,'dimension55' : 'event'
+                        ,'dimension65' : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                        ,'dimension75' : ''+(window.Date && window.Date.now() || 0)
                         ,'dimension118': (cdurl && cdurl.pathname || location.pathname || '')
                         ,'dimension119': (cdurl && cdurl.paramstring || location.search || '') 
                     }            
@@ -78,10 +81,11 @@
                     , cdpm.bookingref || ''
                     , cdpm.airlineref || ''
                     , 1
-                    , { 'page'          : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
-                        ,'dimension51'  : cdpm.gaguid || 'empty'
-                        ,'dimension65'  : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
-                        ,'dimension75'  : ''+(window.Date && window.Date.now() || 0)
+                    , { 'page'         : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                        ,'dimension51' : cdpm.gaguid || 'empty'
+                        ,'dimension55' : 'event'
+                        ,'dimension65' : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                        ,'dimension75' : ''+(window.Date && window.Date.now() || 0)
                         ,'dimension118': (cdurl && cdurl.pathname || location.pathname || '')
                         ,'dimension119': (cdurl && cdurl.paramstring || location.search || '') 
                     }            
@@ -99,10 +103,11 @@
                     , 1
                     , { 'page'          : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
                         ,'dimension51'  : cdpm.gaguid || 'empty'
+                        ,'dimension55'  : 'event'
                         ,'dimension65'  : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
                         ,'dimension75'  : ''+(window.Date && window.Date.now() || 0)
-                        ,'dimension118': (cdurl && cdurl.pathname || location.pathname || '')
-                        ,'dimension119': (cdurl && cdurl.paramstring || location.search || '') 
+                        ,'dimension118' : (cdurl && cdurl.pathname || location.pathname || '')
+                        ,'dimension119' : (cdurl && cdurl.paramstring || location.search || '') 
                     }             
                     , {'nonInteraction': false});
             } catch(e) {
@@ -117,10 +122,11 @@
                             , 'Hotelvideo'
                             , lobholidaytypepageid
                             , 1
-                            , { 'page'          : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
-                                ,'dimension51'  : cdpm.gaguid || 'empty'
-                                ,'dimension65'  : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
-                                ,'dimension75'  : ''+(window.Date && window.Date.now() || 0)
+                            , { 'page'         : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                                ,'dimension51' : cdpm.gaguid || 'empty'
+                                ,'dimension55' : 'event'
+                                ,'dimension65' : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                                ,'dimension75' : ''+(window.Date && window.Date.now() || 0)
                                 ,'dimension118': (cdurl && cdurl.pathname || location.pathname || '')
                                 ,'dimension119': (cdurl && cdurl.paramstring || location.search || '') 
                             }                           
@@ -143,10 +149,11 @@
                             , 'FromOurCustomers'
                             , lobholidaytypepageid
                             , 1
-                            , { 'page'          : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
-                                ,'dimension51'  : cdpm.gaguid || 'empty'
-                                ,'dimension65'  : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
-                                ,'dimension75'  : ''+(window.Date && window.Date.now() || 0)
+                            , { 'page'         : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                                ,'dimension51' : cdpm.gaguid || 'empty'
+                                ,'dimension55' : 'event'
+                                ,'dimension65' : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                                ,'dimension75' : ''+(window.Date && window.Date.now() || 0)
                                 ,'dimension118': (cdurl && cdurl.pathname || location.pathname || '')
                                 ,'dimension119': (cdurl && cdurl.paramstring || location.search || '') 
                             }                          
@@ -170,10 +177,11 @@
                             , 'Navigate'
                             , lobholidaytypepageid
                             , 1
-                            , { 'page'          : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
-                                ,'dimension51'  : cdpm.gaguid || 'empty'
-                                ,'dimension65'  : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
-                                ,'dimension75'  : ''+(window.Date && window.Date.now() || 0)
+                            , { 'page'         : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                                ,'dimension51' : cdpm.gaguid || 'empty'
+                                ,'dimension55' : 'event'
+                                ,'dimension65' : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                                ,'dimension75' : ''+(window.Date && window.Date.now() || 0)
                                 ,'dimension118': (cdurl && cdurl.pathname || location.pathname || '')
                                 ,'dimension119': (cdurl && cdurl.paramstring || location.search || '') 
                             }                           
@@ -199,10 +207,11 @@
                             , 1
                             , { 'page'          : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
                                 ,'dimension51'  : cdpm.gaguid || 'empty'
+                                ,'dimension55'  : 'event'
                                 ,'dimension65'  : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
                                 ,'dimension75'  : ''+(window.Date && window.Date.now() || 0)
-                                ,'dimension118': (cdurl && cdurl.pathname || location.pathname || '')
-                                ,'dimension119': (cdurl && cdurl.paramstring || location.search || '') 
+                                ,'dimension118' : (cdurl && cdurl.pathname || location.pathname || '')
+                                ,'dimension119' : (cdurl && cdurl.paramstring || location.search || '') 
                             }                
                             , {'nonInteraction': true});
                 //GA
@@ -227,10 +236,11 @@
                             , 1
                             , { 'page'          : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
                                 ,'dimension51'  : cdpm.gaguid || 'empty'
+                                ,'dimension55'  : 'event'
                                 ,'dimension65'  : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
                                 ,'dimension75'  : ''+(window.Date && window.Date.now() || 0)
-                                ,'dimension118': (cdurl && cdurl.pathname || location.pathname || '')
-                                ,'dimension119': (cdurl && cdurl.paramstring || location.search || '') 
+                                ,'dimension118' : (cdurl && cdurl.pathname || location.pathname || '')
+                                ,'dimension119' : (cdurl && cdurl.paramstring || location.search || '') 
                             }              
                             , {'nonInteraction': true});
                 //GA
@@ -252,10 +262,11 @@
                             , 'Navigate'
                             , lobholidaytypepageid
                             , 1
-                            , { 'page'          : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
-                                ,'dimension51'  : cdpm.gaguid || 'empty'
-                                ,'dimension65'  : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
-                                ,'dimension75'  : ''+(window.Date && window.Date.now() || 0)
+                            , { 'page'         : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                                ,'dimension51' : cdpm.gaguid || 'empty'
+                                ,'dimension55' : 'event'
+                                ,'dimension65' : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                                ,'dimension75' : ''+(window.Date && window.Date.now() || 0)
                                 ,'dimension118': (cdurl && cdurl.pathname || location.pathname || '')
                                 ,'dimension119': (cdurl && cdurl.paramstring || location.search || '') 
                             }              
@@ -279,10 +290,11 @@
                             , cdom && cdom.data && cdom.data.val
                             , cdpm && cdpm.lob+'|'+cdpm.holidaytype
                             , 1
-                            , { 'page'          : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
-                                ,'dimension51'  : cdpm.gaguid || 'empty'
-                                ,'dimension65'  : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
-                                ,'dimension75'  : ''+(window.Date && window.Date.now() || 0)
+                            , { 'page'         : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                                ,'dimension51' : cdpm.gaguid || 'empty'
+                                ,'dimension55' : 'event'
+                                ,'dimension65' : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                                ,'dimension75' : ''+(window.Date && window.Date.now() || 0)
                                 ,'dimension118': (cdurl && cdurl.pathname || location.pathname || '')
                                 ,'dimension119': (cdurl && cdurl.paramstring || location.search || '') 
                             }              
