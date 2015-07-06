@@ -17,9 +17,9 @@
 (function gtm_CriteoDL(cdl, dl, jQ) {
     'use strict';
     var cdpm = '';
-    if (cdl && dl && jQ) try {
+    if (cdl && dl && jQ && /test=criteo/.test(document.cookie)) try {
         cdpm = cdl.CATTParams;
-        var tagType = /home|generic/.test(cdpm.pageid) && 'homepage'
+        var tagType = /home|generic|offerlist/.test(cdpm.pageid) && 'homepage'
             || /select/.test(cdpm.pageid) && 'srp'
             || /extras/.test(cdpm.pageid) && 'product'
             || /contact|payment/.test(cdpm.pageid) && 'basket'
@@ -37,7 +37,7 @@
                     || '');
             }(tagType)),
             requiresdom : 'yes',
-            itemsrp     : (cdpm.searchresultstop3 || '').split(/-/g) || [],
+            itemsrp     : [(cdpm.departureairportsearched || cdpm.departureairportselected || '')+(cdpm.destinationairportsearched || cdpm.destinationairportselected || '')+(cdpm.flighttype===1?'-r':'-o')] || [],
             itemacc     : (cdpm.departureairportsearched || cdpm.departureairportselected || '')+(cdpm.destinationairportsearched || cdpm.destinationairportselected || '')+(cdpm.flighttype===1?'-r':'-o'),
             itempax     : [{
                id: (cdpm.departureairportsearched || cdpm.departureairportselected || '')+(cdpm.destinationairportsearched || cdpm.destinationairportselected || '')+(cdpm.flighttype===1?'-r':'-o'),
@@ -46,8 +46,8 @@
             }],
             ref         : cdpm.bookingref || '',
             dedup         : /criteo/i.test(cdpm.attribution && cdpm.attribution.utm_source || '')?1:0,
-            cin         : cdpm.deptdate || '',
-            cout         : cdpm.returndate|| '',
+            cin         : cdpm.deptdate || cdpm.deptdateselected || '',
+            cout         : cdpm.returndate|| cdpm.returndateselected || '',
             email         : (jQ('input[type=hidden][name=email]').val() || '').replace(/\s*/g, '').toLowerCase() || jQ('a[href*=mailto]').filter(function(){return !/Contactez/i.test(jQ(this).text());}).text() || '',
             script         : {
                 status     : 'not fired',
