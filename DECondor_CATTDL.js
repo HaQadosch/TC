@@ -39,8 +39,10 @@
                 return regKey.test(document.cookie) && (regKey.exec(document.cookie) || ['']).pop();
             },
             info    : function info(msg) {console && ((console.info)?console.info(msg):console.log(msg)); return msg;},
-            error   : function error(msg) {console && ((console.error)?console.error(msg):console.log(msg)); return msg;}
+            error   : function error(msg) {console && ((console.error)?console.error(msg):console.log(msg)); return msg;},
+            insertJS : function insertJS(e,t){return e&&t&&function(e,t,r,n,a,s){e[n]&&(e[n]["DL_"+a]={start:(new Date()).getTime(),script:s});var c=t.getElementsByTagName(r)[0],i=t.createElement(r);return i.async=!0,i.src=s,c.parentNode.insertBefore(i,c),e[n]}(w,d,"script","CATTDL",e,t)}
         };
+
         w.CATTParams && jQ.each(w.CATTParams, function gtm_eachCATTParam(pP){
             var pp = pP.toLowerCase();
             var checked = "";
