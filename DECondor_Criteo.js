@@ -13,189 +13,236 @@
 }(window.CATTDL, window.dataLayer));
 //</script>
 
-//<script id='gtm_CriteoDL'>
-(function gtm_CriteoDL(cdl, dl, jQ) {
+/* Homepage.
+<script type="text/javascript" src="//static.criteo.net/js/ld/ld.js" async="true"></script>
+<script type="text/javascript">
+window.criteo_q= window.criteo_q|| [];
+window.criteo_q.push(
+    { event: "setAccount", account: 19215 },
+    { event: "setCustomerId", id: "Client User ID" },
+    { event: "setSiteType", type: "d" },
+    { event: "viewHome" }
+);
+</script>
+*/
+//<script id='gtm_criteo'>
+(function gtm_criteo(jQ, cdl, cdpm, dl){
     'use strict';
-    var cdpm = '';
-    if (cdl && dl && jQ && /test=criteo/.test(document.cookie)) try {
-        cdpm = cdl.CATTParams;
-        var tagType = /home|generic|offerlist/.test(cdpm.pageid) && 'homepage'
-            || /select/.test(cdpm.pageid) && 'srp'
-            || /extras/.test(cdpm.pageid) && 'product'
-            || /contact|payment/.test(cdpm.pageid) && 'basket'
-            || /confirm|booking/.test(cdpm.pageid) && 'purchase'
-            || '';
-        cdl.DL_criteo = {
-            account     : 19215,
-            siteType     : 'd',
-            event         : (function(tg) {
-                return (tg === 'homepage' && 'viewHome'
-                    || tg === 'srp' && 'viewList'
-                    || tg === 'product' && 'viewItem'
-                    || tg === 'basket' && 'viewBasket'
-                    || tg === 'purchase' && 'trackTransaction'
-                    || '');
-            }(tagType)),
-            requiresdom : 'yes',
-            itemsrp     : [(cdpm.departureairportsearched || cdpm.departureairportselected || '')+(cdpm.destinationairportsearched || cdpm.destinationairportselected || '')+(cdpm.flighttype===1?'-r':'-o')] || [],
-            itemacc     : (cdpm.departureairportsearched || cdpm.departureairportselected || '')+(cdpm.destinationairportsearched || cdpm.destinationairportselected || '')+(cdpm.flighttype===1?'-r':'-o'),
-            itempax     : [{
-               id: (cdpm.departureairportsearched || cdpm.departureairportselected || '')+(cdpm.destinationairportsearched || cdpm.destinationairportselected || '')+(cdpm.flighttype===1?'-r':'-o'),
-               price: (''+cdpm.bookingvalue).replace(/(\d+)\.\d+/, '$1'),
-               quantity: 1
-            }],
-            ref         : cdpm.bookingref || '',
-            dedup         : /criteo/i.test(cdpm.attribution && cdpm.attribution.utm_source || '')?1:0,
-            cin         : cdpm.deptdate || cdpm.deptdateselected || '',
-            cout         : cdpm.returndate|| cdpm.returndateselected || '',
-            email         : (jQ('input[type=hidden][name=email]').val() || '').replace(/\s*/g, '').toLowerCase() || jQ('a[href*=mailto]').filter(function(){return !/Contactez/i.test(jQ(this).text());}).text() || '',
-            script         : {
-                status     : 'not fired',
-                url     : '//static.criteo.net/js/ld/ld.js'
-            }
-        };
+    if (jQ && cdl && cdpm && dl && cdl.twdc(/test=criteo/)) try {
+        var dlcriteo = {
+           'DL_criteo' : {
+               'start' : new Date().getTime(),
+               'script' : {
+                   'src' : 'https://static.criteo.net/js/ld/ld.js'
+               },
+               'event' : 'viewHome',
+               'account' : '19215',
+               'type' : 'd',
+               'id' : cdpm.utmaguid || '',
+               'requiresdom' : 'yes'
+           }
+       };
+       cdl.assign && cdl.assign(cdl, dlcriteo);
+       var oldCache = jQ.ajaxSetup().cache;
+       cdl.assign && dl.push && jQ.getScript && jQ.when && jQ.when(
+           jQ.getScript(dlcriteo.DL_criteo.script.src, function gtm_criteoScript(){
+               window.criteo_q = window.criteo_q || [];
+               window.criteo_q.push(
+                   { event: "setAccount", account: dlcriteo.DL_criteo.account },
+                   { event: "setCustomerId", id:  dlcriteo.DL_criteo.id },
+                   { event: "setSiteType", type: dlcriteo.DL_criteo.type },
+                   { event: dlcriteo.DL_criteo.event, requiresDOM : dlcriteo.DL_criteo.requiresdom }
+               );
+           })
+        ).done(function gtm_criteoDone() {
+            jQ.ajaxSetup({cache: oldCache});
+            dl.push(cdl.assign({}, {'event': 'criteo'}, dlcriteo));
+        });
     } catch(e) {
-        cdl.error("GTM DL_criteo: "+e);
-    } finally {
-        dl.push({event: 'DL_criteo '+cdpm.pageid});
+        cdl.error && cdl.error('GTM Criteo : '+e);
     }
-    return cdl && dl && jQ && cdl.DL_criteo;
-}(window.CATTDL, window.dataLayer, window.jQuery));
+    return jQ && cdl && cdpm;
+}(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.CATTParams, window.dataLayer));
 //</script>
 
-//<script id='gtm_Criteo'>
-(function gtm_criteoLP(jQ, cdl, ctdl){
+/* Product.
+<script type="text/javascript" src="//static.criteo.net/js/ld/ld.js" async="true"></script>
+<script type="text/javascript">
+window.criteo_q= window.criteo_q|| [];
+window.criteo_q.push(
+    { event: "setAccount", account: 19215 },
+    { event: "setCustomerId", id: "Client User ID" },
+    { event: "setSiteType", type: "d" },
+    { event: "viewItem", item: "Your item id" },
+    { event: "viewSearch", checkin_date:"date_in", checkout_date:"date_out" }
+);
+</script>
+*/
+//<script id='gtm_criteo'>
+(function gtm_criteo(jQ, cdl, cdpm, dl){
     'use strict';
-    if (jQ && cdl && ctdl) try {
-        jQ.ajaxSetup({cache: true});
-        jQ.getScript && jQ.getScript(ctdl.script.url, function gtm_criteoScript(){
-            window.criteo_q = window.criteo_q || [];
-            if (ctdl.email) {window.criteo_q.push(
-                { event: "setAccount", account: ctdl.account },
-                { event: "setSiteType", type: ctdl.siteType },
-                { event: "setEmail", email: [ctdl.email]},
-                { event: ctdl.event }
-            )} else {window.criteo_q.push(
-                { event: "setAccount", account: ctdl.account },
-                { event: "setSiteType", type: ctdl.siteType },
-                { event: ctdl.event }
-            )}
-        ctdl.script.status = 'fired';
+    if (jQ && cdl && cdpm && dl && cdl.twdc(/test=criteo/)) try {
+        var dlcriteo = {
+           'DL_criteo' : {
+               'start' : new Date().getTime(),
+               'script' : {
+                   'src' : 'https://static.criteo.net/js/ld/ld.js'
+               },
+               'event' : 'viewItem',
+               'account' : '19215',
+               'type' : 'd',
+               'id' : cdpm.utmaguid || '',
+               'requiresdom' : 'yes',
+               'item' : (cdpm.departureairportsearched || cdpm.departureairportselected || '')+(cdpm.destinationairportsearched || cdpm.destinationairportselected || '')+(cdpm.flighttype===1?'-r':'-o'),
+               'cin' : cdpm.deptdate || cdpm.deptdateselected || '',
+               'cout' : cdpm.returndate|| cdpm.returndateselected || ''
+           }
+       };
+       cdl.assign && cdl.assign(cdl, dlcriteo);
+       var oldCache = jQ.ajaxSetup().cache;
+       cdl.assign && dl.push && jQ.getScript && jQ.when && jQ.when(
+           jQ.getScript(dlcriteo.DL_criteo.script.src, function gtm_criteoScript(){
+               window.criteo_q = window.criteo_q || [];
+               window.criteo_q.push(
+                    { event: "setAccount", account: dlcriteo.DL_criteo.account },
+                    { event: "setCustomerId", id:  dlcriteo.DL_criteo.id },
+                    { event: "setSiteType", type: dlcriteo.DL_criteo.type },
+                    { event: dlcriteo.DL_criteo.event, item: dlcriteo.DL_criteo.item, requiresDOM : dlcriteo.DL_criteo.requiresdom },
+                    { event: "viewSearch", checkin_date: dlcriteo.DL_criteo.cin, checkout_date: dlcriteo.DL_criteo.cout }
+               );
+           })
+        ).done(function gtm_criteoDone() {
+            jQ.ajaxSetup({cache: oldCache});
+            dl.push(cdl.assign({}, {'event': 'criteo'}, dlcriteo));
         });
-    } catch(err) {
-        cdl.error('GTM Criteo LP: '+err);
+    } catch(e) {
+        cdl.error && cdl.error('GTM Criteo : '+e);
     }
-    return jQ && cdl && ctdl;
-}(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_criteo));
+    return jQ && cdl && cdpm;
+}(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.CATTParams, window.dataLayer));
 //</script>
 
-//<script id='gtm_Criteo'>
-(function gtm_criteoSRP(jQ, cdl, ctdl){
+/* Basket.
+<script type="text/javascript" src="//static.criteo.net/js/ld/ld.js" async="true"></script>
+<script type="text/javascript">
+window.criteo_q= window.criteo_q|| [];
+window.criteo_q.push(
+    { event: "setAccount", account: 19215 },
+    { event: "setCustomerId", id: "Client User ID" },
+    { event: "setSiteType", type: "d" },
+    { event: "viewBasket", item: [
+        { id: "Your item id", price: Your item unit price, quantity: 1 }
+    ]},
+    { event: "viewSearch", checkin_date:"date_in", checkout_date:"date_out" }
+);
+</script>
+*/
+//<script id='gtm_criteo'>
+(function gtm_criteo(jQ, cdl, cdpm, dl){
     'use strict';
-    if (jQ && cdl && ctdl) try{
-        jQ.ajaxSetup({cache: true});
-        jQ.getScript && jQ.getScript(ctdl.script.url, function gtm_criteoScript(){
-            window.criteo_q = window.criteo_q || [];
-            if (ctdl.email)  { window.criteo_q.push(
-                { event: "setAccount", account: ctdl.account },
-                { event: "setSiteType", type: ctdl.siteType },
-                { event: "setEmail", email: [ctdl.email]},
-                { event: ctdl.event, item: ctdl.itemsrp},
-                { event: "viewSearch", checkin_date:ctdl.cin, checkout_date:ctdl.cout}
-            )} else { window.criteo_q.push(
-                { event: "setAccount", account: ctdl.account },
-                { event: "setSiteType", type: ctdl.siteType },
-                { event: ctdl.event, item: ctdl.itemsrp},
-                { event: "viewSearch", checkin_date:ctdl.cin, checkout_date:ctdl.cout}
-            )}
-            ctdl.script.status = 'fired';
+    if (jQ && cdl && cdpm && dl && cdl.twdc(/test=criteo/)) try {
+        var dlcriteo = {
+           'DL_criteo' : {
+               'start' : new Date().getTime(),
+               'script' : {
+                   'src' : 'https://static.criteo.net/js/ld/ld.js'
+               },
+               'event' : 'viewBasket',
+               'account' : '19215',
+               'type' : 'd',
+               'id' : cdpm.utmaguid || '',
+               'requiresdom' : 'yes',
+               'item' : [{
+                  id: (cdpm.departureairportsearched || cdpm.departureairportselected || '')+(cdpm.destinationairportsearched || cdpm.destinationairportselected || '')+(cdpm.flighttype===1?'-r':'-o'),
+                  price: (''+cdpm.bookingvalue).replace(/(\d+)\.\d+/, '$1'),
+                  quantity: 1
+               }],
+               'cin' : cdpm.deptdate || cdpm.deptdateselected || '',
+               'cout' : cdpm.returndate|| cdpm.returndateselected || ''
+           }
+       };
+       cdl.assign && cdl.assign(cdl, dlcriteo);
+       var oldCache = jQ.ajaxSetup().cache;
+       cdl.assign && dl.push && jQ.getScript && jQ.when && jQ.when(
+           jQ.getScript(dlcriteo.DL_criteo.script.src, function gtm_criteoScript(){
+               window.criteo_q = window.criteo_q || [];
+               window.criteo_q.push(
+                    { event: "setAccount", account: dlcriteo.DL_criteo.account },
+                    { event: "setCustomerId", id:  dlcriteo.DL_criteo.id },
+                    { event: "setSiteType", type: dlcriteo.DL_criteo.type },
+                    { event: dlcriteo.DL_criteo.event, item: dlcriteo.DL_criteo.item, requiresDOM : dlcriteo.DL_criteo.requiresdom },
+                    { event: "viewSearch", checkin_date: dlcriteo.DL_criteo.cin, checkout_date: dlcriteo.DL_criteo.cout }
+               );
+           })
+        ).done(function gtm_criteoDone() {
+            jQ.ajaxSetup({cache: oldCache});
+            dl.push(cdl.assign({}, {'event': 'criteo'}, dlcriteo));
         });
-    } catch(err) {
-        cdl.error('GTM Criteo SRP: '+err);
+    } catch(e) {
+        cdl.error && cdl.error('GTM Criteo : '+e);
     }
-    return jQ && cdl && ctdl;
-}(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_criteo));
+    return jQ && cdl && cdpm;
+}(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.CATTParams, window.dataLayer));
 //</script>
 
 
-//<script id='gtm_Criteo'>
-(function gtm_criteoAccom(jQ, cdl, ctdl) {
+/* Transaction.
+<script type="text/javascript" src="//static.criteo.net/js/ld/ld.js" async="true"></script>
+<script type="text/javascript">
+window.criteo_q= window.criteo_q|| [];
+window.criteo_q.push(
+    { event: "setAccount", account: 19215 },
+    { event: "setCustomerId", id: "Client User ID" },
+    { event: "setSiteType", type: "d" },
+    { event: "trackTransaction" , id: "Transaction Id", item: [
+        { id: "First item id", price: First item unit price, quantity: 1 }
+    ]}
+);
+</script>
+*/
+//<script id='gtm_criteo'>
+(function gtm_criteo(jQ, cdl, cdpm, dl){
     'use strict';
-    if (jQ && cdl && ctdl) try {
-        jQ.ajaxSetup({cache: true});
-        jQ.getScript && jQ.getScript(ctdl.script.url, function gtm_criteoScript(){
-            window.criteo_q = window.criteo_q || [];
-            if (ctdl.email) { window.criteo_q.push(
-                { event: "setAccount", account: ctdl.account },
-                { event: "setSiteType", type: ctdl.siteType },
-                { event: "setEmail", email: [ctdl.email]},
-                { event: ctdl.event, item: ctdl.itemacc, requiresDOM: ctdl.requiresdom},
-                { event: "viewSearch", checkin_date:ctdl.cin, checkout_date:ctdl.cout}
-            )} else { window.criteo_q.push(
-                { event: "setAccount", account: ctdl.account },
-                { event: "setSiteType", type: ctdl.siteType },
-                { event: ctdl.event, item: ctdl.itemacc, requiresDOM: ctdl.requiresdom},
-                { event: "viewSearch", checkin_date:ctdl.cin, checkout_date:ctdl.cout}
-            )}
-            ctdl.script.status = 'fired';
+    if (jQ && cdl && cdpm && dl && cdl.twdc(/test=criteo/)) try {
+        var dlcriteo = {
+           'DL_criteo' : {
+               'start' : new Date().getTime(),
+               'script' : {
+                   'src' : 'https://static.criteo.net/js/ld/ld.js'
+               },
+               'event' : 'trackTransaction',
+               'account' : '19215',
+               'type' : 'd',
+               'id' : cdpm.utmaguid || '',
+               'requiresdom' : 'yes',
+               'ref'         : cdpm.bookingref || '',
+               'dedup'       : /criteo/i.test(cdpm.attribution && cdpm.attribution.utm_source || '')?1:0,
+               'item' : [{
+                  id: (cdpm.departureairportsearched || cdpm.departureairportselected || '')+(cdpm.destinationairportsearched || cdpm.destinationairportselected || '')+(cdpm.flighttype===1?'-r':'-o'),
+                  price: (''+cdpm.bookingvalue).replace(/(\d+)\.\d+/, '$1'),
+                  quantity: 1
+               }]
+           }
+       };
+       cdl.assign && cdl.assign(cdl, dlcriteo);
+       var oldCache = jQ.ajaxSetup().cache;
+       cdl.assign && dl.push && jQ.getScript && jQ.when && jQ.when(
+           jQ.getScript(dlcriteo.DL_criteo.script.src, function gtm_criteoScript(){
+               window.criteo_q = window.criteo_q || [];
+               window.criteo_q.push(
+                    { event: "setAccount", account: dlcriteo.DL_criteo.account },
+                    { event: "setCustomerId", id:  dlcriteo.DL_criteo.id },
+                    { event: "setSiteType", type: dlcriteo.DL_criteo.type },
+                    { event: dlcriteo.DL_criteo.event, deduplication: dlcriteo.DL_criteo.dedup, id: dlcriteo.DL_criteo.ref, item: dlcriteo.DL_criteo.item, requiresDOM : dlcriteo.DL_criteo.requiresdom }
+               );
+           })
+        ).done(function gtm_criteoDone() {
+            jQ.ajaxSetup({cache: oldCache});
+            dl.push(cdl.assign({}, {'event': 'criteo'}, dlcriteo));
         });
-    } catch(err) {
-        cdl.error('GTM Criteo Accom: '+err);
+    } catch(e) {
+        cdl.error && cdl.error('GTM Criteo : '+e);
     }
-    return jQ && cdl && ctdl;
-}(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_criteo));
-//</script>
-
-//<script id='gtm_Criteo'>
-(function gtm_criteoPaxPay(jQ, cdl, ctdl) {
-    'use strict';
-    if (jQ && cdl && ctdl) try {
-        jQ.ajaxSetup({cache: true});
-        jQ.getScript && jQ.getScript(ctdl.script.url, function gtm_criteoScript(){
-            window.criteo_q = window.criteo_q || [];
-            if (ctdl.email)  {window.criteo_q.push(
-                { event: "setAccount", account: ctdl.account },
-                { event: "setSiteType", type: ctdl.siteType },
-                { event: "setEmail", email: [ctdl.email]},
-                { event: ctdl.event, item: ctdl.itempax},
-                { event: "viewSearch", checkin_date:ctdl.cin, checkout_date:ctdl.cout}
-            )} else {window.criteo_q.push(
-                { event: "setAccount", account: ctdl.account },
-                { event: "setSiteType", type: ctdl.siteType },
-                { event: ctdl.event, item: ctdl.itempax},
-                { event: "viewSearch", checkin_date:ctdl.cin, checkout_date:ctdl.cout}
-            )}
-        ctdl.script.status = 'fired';
-        });
-    } catch(err) {
-        cdl.error('GTM Criteo PaxPay: '+err);
-    }
-    return jQ && cdl && ctdl;
-}(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_criteo));
-//</script>
-
-//<script id='gtm_Criteo'>
-(function gtm_criteoConf(jQ, cdl, ctdl) {
-    'use strict';
-    if (jQ && cdl && ctdl) try {
-        jQ.ajaxSetup({cache: true});
-        jQ.getScript && jQ.getScript(ctdl.script.url, function gtm_criteoScript(){
-            window.criteo_q = window.criteo_q || [];
-            if (ctdl.email) {window.criteo_q.push(
-                { event: "setAccount", account: ctdl.account },
-                { event: "setSiteType", type: ctdl.siteType },
-                { event: "setEmail", email: [ctdl.email]},
-                { event: ctdl.event, id: ctdl.ref, deduplication: ctdl.dedup, item: ctdl.itempax}
-            )} else {window.criteo_q.push(
-                { event: "setAccount", account: ctdl.account },
-                { event: "setSiteType", type: ctdl.siteType },
-                { event: ctdl.event, id: ctdl.ref, deduplication: ctdl.dedup, item: ctdl.itempax}
-            )}
-            ctdl.script.status = 'fired';
-        });
-    } catch(err) {
-        cdl.error('GTM Criteo Conf: '+err);
-    }
-    return jQ && cdl && ctdl;
-}(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_criteo));
+    return jQ && cdl && cdpm;
+}(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.CATTParams, window.dataLayer));
 //</script>
