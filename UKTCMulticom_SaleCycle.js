@@ -35,8 +35,8 @@
 // With insertJS
 //<script id='gtm_salecycle'>
 (function gtm_salecycle(cdl, dl){
-    if (dl && cdl) try {
-        cdl.insertJS && cdl.insertJS('salecycle', 'https://d16fk4ms6rqz1v.cloudfront.net/capture/directholidays.js');
+    if (dl && cdl && cdl.twlh(/directholidays/) && cdl.twdc(/test=salecycleDH/)) try {
+        cdl.insertJS('salecycle', 'https://d16fk4ms6rqz1v.cloudfront.net/capture/UAT/directholidays.js');
     } catch(e) {
         cdl.error && cdl.error('GTM SaleCycle: '+e);
     }
