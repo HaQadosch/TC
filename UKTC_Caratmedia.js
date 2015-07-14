@@ -1,14 +1,9 @@
-//<script id='gtm_salecycle'>
-(function gtm_salecycle(cdl, dl){
-    if (dl && cdl && cdl.twlh(/directholidays/) && cdl.twdc(/test=salecycleDH/)) try {
-        cdl.insertJS('salecycle', 'https://d16fk4ms6rqz1v.cloudfront.net/capture/UAT/directholidays.js');
-    } catch(e) {
-        cdl.error && cdl.error('GTM SaleCycle: '+e);
-    }
-    return dl && cdl;
-}(window.CATTDL, window.dataLayer));
+//<script id='gtm3rd_iProspectSelect'>
+(function gtm3rd_iProspectSelect(edl, cdl){
+    'use strict';
+    if (edl && cdl) edl.push({'event':cdl.twdc(/test=iprospect/i)?'iProspect':'CaratMedia'});
+}(window.externalDataLayer || window.externalLayer, window.CATTDL));
 //</script>
-
 
 /*
  * LP
@@ -37,79 +32,78 @@ document.write('<iframe src="https://1870474.fls.doubleclick.net/activityi;src=1
 <iframe src="https://1870474.fls.doubleclick.net/activityi;src=1870474;type=count205;cat=100ho0;u1=[Device Type];u2=[URL];u7=[Logged In Y/N];ord=1;num=1?" width="1" height="1" frameborder="0" style="display:none"></iframe>
 </noscript>
 <!-- End of DoubleClick Floodlight Tag: Please do not remove -->
+
+<iframe src="https://1870474.fls.doubleclick.net/activityi;src=1870474;type=count205;cat=101se0;
+u1=[Device Type];
+u2=[URL];
+u5=[Product];
+u7=[Logged In Y/N];
+u8=[Departure Date];
+u9=[Return Date];
+u11=[No of Adults];
+u12=[No of Children];
+u13=[Destination Location];
+u14=[Departure Location];
+u16=[Board Basis | Star Rating | Flight Class];ord=1;num=1?" width="1" height="1" frameborder="0" style="display:none"></iframe>
+
  */
-//<script id='gtm_iprospect'>
-(function gtm_iprospectDL(cdl, dl){
-    'use strict';
-    if (cdl && dl) try {
-        var cdpm = cdl.CATTParams || '';
 
-        cdl.DL_iprospect = {
-            src : '1870474',
-            type : 'count205',
-            cat : '100ho0',
-            u1 : 'Device Type',
-            u2 : 'URL',
-            u3 : 'Promo Code',
-            u4 : 'Price',
-            u5 : 'Product',
-            u6 : 'Product ID',
-            u7 : 'Logged In Y/N',
-            u8 : 'Departure Date/Check In Date',
-            u9 : 'Return Date',
-            u10 : 'Brand',
-            u11 : 'No of Adults',
-            u12 : 'No of Children',
-            u13 : 'Destination Location',
-            u14 : 'Departure Location',
-            u15 : 'Newsletter Y/N',
-            u16 : 'Board Basis | Star Rating | Flight Class',
-            u17 : 'Age',
-            u18 : 'Title',
-            u19 : 'Insurance',
-            u20 : 'Postcode',
-            prd : 'Product Listing Details',
-            ord : '',
-            num : '',
-            iFrame : {
-                src : 'https//www.xx.com/s/pixeltracking/_pc_?price=_p_&currency=_c_&linkid=_l_',
-                status : 'not fired'
-            }
-        };
-    } catch(e) {
-        cdl.error && cdl.error('GTM iprospect DL: '+e);
-    } finally {
-        dl.push({'event':'DL iprospect'});
-    }
-    return cdl && dl && cdl.DL_iprospect;
-}(window.CATTDL, window.dataLayer));
+//<script id='GTM-K83N5Q_iprospect'>
+(function gtm3rd_iprospect(cdl, cdpm, dl){
+    if (dl && cdl && cdpm) try {
+        var pid = cdpm.pageid;
+        var params = {
+            src     : '1870474',
+            type    : (/booking/i.test(pid))?'sales481':'count205',
+            cat     : (/home|generic/i.test(pid))?'100ho0':((/search/i.test(pid))?'101se0':((/accom/i.test(pid))?'50pro262':((/cust|quote/i.test(pid))?'20ord020':((/pax/i.test(pid))?'21ord021':((/pay/i.test(pid))?'22ord022':((/booking/i.test(pid))?'03con579':'01hom743')))))),
+            u1      : cdpm.device || '1',
+            u2      : window.location && window.location.host || window.location.hostname || '1',
+            u3      : cdpm.voucher || cdpm.promocode || '1',
+            u4      : cdpm.bookingprice || '1',
+            u5      : cdpm.lob || '1',
+            u6      : cdpm.accomcode || '1',
+            u7      : cdpm.loggedin || '1',
+            u8      : cdpm.deptdate || '1', //13/4/2015
+            u9      : cdpm.retdate || '1',
+            u10     : cdpm.touroperatore || cdpm.brand || '1',
+            u11     : cdpm.paxadult || '1',
+            u12     : cdpm.paxchild || '1',
+            u13     : cdpm.destination || '1', //cityname
+            u14     : cdpm.departure || '1', //cityname
+            u15     : cdpm.newsletter || '1',
+            u16     : cdpm.boardbasis+'|'+cdpm.starrating+'|'+cdpm.flightclass || '1',
+            u17     : cdpm.age || '1',
+            u18     : cdpm.title || '1',
+            u19     : cdpm.insurance || '1',
+            u20     : cdpm.postcode || '1',
+            qty     : '1',
+            cost    : cdpm.bookingvalue || '1',
+            ord     : cdpm.bookingref || '1',
+            num     : (Math.random()*10000000000000).toString(),
+            prd     : 'i1:'+(cdpm.accomcode || '')+'|p1:'+(cdpm.bookingprice || '')+'|q1:1'
+         };
+         var source = 'https://{src}.fls.doubleclick.net/activityi;src={src};type={type};cat={cat};u1={u1};u2={u2};'+
+            (/search/i.test(pid)?'u5={u5};u7={u7};u8={u8};u9={u9};u11={u11};u12={u12};u13={u13};u14={u14};u16={u16};':'')+
+            (/accom/i.test(pid)?'u4={u4};u5={u5};u6={u6};u7={u7};u8={u8};u9={u9};u10={u10};u11={u11};u12={u12};u13={u13};u14={u14};u16={u16};':'')+
+            (/cust|quote/i.test(pid)?'u4={u4};u5={u5};u6={u6};u7={u7};u8={u8};u9={u9};u10={u10};u11={u11};u12={u12};u13={u13};u14={u14};u16={u16};u17={u17};u18={u18};u20={u20}':'')+
+            (/pax/i.test(pid)?'u4={u4};u5={u5};u6={u6};u7={u7};u8={u8};u9={u9};u10={u10};u11={u11};u12={u12};u13={u13};u14={u14};u15={u15};u16={u16};u17={u17};u18={u18};u20={u20}':'')+
+            (/pay/i.test(pid)?'u4={u4};u5={u5};u6={u6};u7={u7};u8={u8};u9={u9};u10={u10};u11={u11};u12={u12};u13={u13};u14={u14};u15={u15};u16={u16};u17={u17};u18={u18};u20={u20}':'')+
+            (/booking/i.test(pid)?'u3={u3};u4={u4};u5={u5};u6={u6};u7={u7};u8={u8};u9={u9};u10={u10};u11={u11};u12={u12};u13={u13};u14={u14};u15={u15};u16={u16};u17={u17};u18={u18};u19={u19};u20={u20};qty={qty};cost={cost}':'')+
+            'ord={ord};num={num}?';
 
-(function gtm_iprospect(jQ, dl, cdl, ipdl){
-    'use strict';
-    if (jQ && dl && cdl && ipdl) try {
-        var src = ipdl.iFrame && ipdl.iFrame.src
-            .replace(/_pc_/, ipdl.partnercode || '')
-            .replace(/_p_/, ipdl.price || '')
-            .replace(/_c_/, ipdl.currency || '')
-            .replace(/_l_/, ipdl.linkid || '');
-        jQ().append && jQ('body').append(jQ('<iframe>', {
-            src : ipdl.iFrame && ipdl.iFrame.src || '',
-            style : 'display:none;',
-            alt : '',
-            frameborder : 0,
-            id : 'iProspectiFrame',
-            width : 1,
-            height : 1
-        }));
-        ipdl.iFrame = {
-            status : 'fired',
-            src : src
-        };
+        cdl.insertIFrame('iprospect', source, params);
+        dl.push({'event': 'DL_iprospect'});
     } catch(e) {
-        cdl.error && cdl.error('GTM iprospect: '+e);
-    } finally {
-        dl.push({'event':'iprospect'});
+        cdl.error && cdl.error('GTM iProspect: '+e);
     }
-    return jQ && dl && cdl && ipdl;
-}(window.jQuery, window.dataLayer, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_iprospect));
+    return dl && cdl;
+}(window.CATTDL, !window.CATTDL?!1:window.CATTDL.CATTParams, window.externalDataLayer));
 //</script>
+
+// 207. Wish List    u1, u2, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, u14, u16, u17, u18, u20
+// 208. Destination    u1, u2
+// 209. Deals    u1, u2
+// 210. Customer Services    u1, u2
+// 211. Email Sign Up Confirmation    u1, u2
+// 212. Store Locator Form    u1, u2
+// 213. Store Locator Results    u1, u2, u20
