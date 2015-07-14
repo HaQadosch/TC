@@ -1,55 +1,14 @@
-//<script id='gtm_iprospect'>
-(function gtm_iprospectDL(cdl, dl){
-    'use strict';
-    if (cdl && dl) try {
-        var cdpm = cdl.CATTParams || '';
-
-        cdl.DL_iprospect = {
-            type : 'pixeltracking',
-            price : cdpm.bookingvalue || '',
-            currency : cdpm.searches && cdpm.searches.currency || cdpm.currency || 'GBP',
-            linkid : cdpm.attribution && cdpm.attribution.utm_content || '',
-            iFrame : {
-                src : 'https//www.xx.com/s/pixeltracking/_pc_?price=_p_&currency=_c_&linkid=_l_',
-                status : 'not fired'
-            }
-        };
+//<script id='gtm_salecycle'>
+(function gtm_salecycle(cdl, dl){
+    if (dl && cdl && cdl.twlh(/directholidays/) && cdl.twdc(/test=salecycleDH/)) try {
+        cdl.insertJS('salecycle', 'https://d16fk4ms6rqz1v.cloudfront.net/capture/UAT/directholidays.js');
     } catch(e) {
-        cdl.error && cdl.error('GTM iprospect DL: '+e);
-    } finally {
-        dl.push({'event':'DL iprospect'});
+        cdl.error && cdl.error('GTM SaleCycle: '+e);
     }
-    return cdl && dl && cdl.DL_iprospect;
+    return dl && cdl;
 }(window.CATTDL, window.dataLayer));
-
-(function gtm_iprospect(jQ, dl, cdl, ipdl){
-    'use strict';
-    if (jQ && dl && cdl && ipdl) try {
-        var src = ipdl.iFrame && ipdl.iFrame.src
-            .replace(/_pc_/, ipdl.partnercode || '')
-            .replace(/_p_/, ipdl.price || '')
-            .replace(/_c_/, ipdl.currency || '')
-            .replace(/_l_/, ipdl.linkid || '');
-        jQ().append && jQ('body').append(jQ('<iframe>', {
-            src : ipdl.iFrame && ipdl.iFrame.src || '',
-            style : 'border-style:none;',
-            alt : '',
-            id : 'iProspectiFrame',
-            width : 1,
-            height : 1
-        }));
-        ipdl.iFrame = {
-            status : 'fired',
-            src : src
-        };
-    } catch(e) {
-        cdl.error && cdl.error('GTM iprospect: '+e);
-    } finally {
-        dl.push({'event':'iprospect'});
-    }
-    return jQ && dl && cdl && ipdl;
-}(window.jQuery, window.dataLayer, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_iprospect));
 //</script>
+
 
 /*
  * LP

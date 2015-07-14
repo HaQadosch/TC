@@ -43,6 +43,7 @@
             };
 
         w.CATTDL.insertJS = function insertJS(e,t,r){return e&&t&&function(e,t,r,n,s,a,c){e[n]&&(e[n]["DL_"+s]={start:(new Date()).getTime(),script:e[n].transpose(a,c)});var i=t.getElementsByTagName(r)[0],o=t.createElement(r);return o.async=!0,o.src=a,i.parentNode.insertBefore(o,i),e[n]}(w,d,"script","CATTDL",e,t,r)};
+        w.CATTDL.insertIFrame = function insertIFrame(e,r,t){return e&&r&&function(e,r,t,a,n,i){if(r[t]){var d=r[t].transpose(n,i)||"";r[t]["DL_"+a]={start:(new Date()).getTime(),iFrame:d},e().append&&e("body").append(e("<iframe>",{src:d,style:"display:none;",alt:"",frameborder:0,id:a+"iFrame",width:1,height:1}))}return r[t]}(jQ,w,"CATTDL",e,r,t)};
 
         w.CATTParams && jQ.each(w.CATTParams, function gtm_eachCATTParam(pP){
             var pp = pP.toLowerCase();
