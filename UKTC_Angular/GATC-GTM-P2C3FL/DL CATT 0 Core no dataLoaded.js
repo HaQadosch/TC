@@ -86,18 +86,6 @@
             cdpm.user.id = ''+(x.responseJSON && x.responseJSON.id || '');
         });
 
-        if (jQ.subscribe){
-            jQ.subscribe('updateUserData', function gtm_updateUserData(d){
-                    if (/test=test/i.test(document.cookie)) console.info('GTM updateUserData updated', '\n', d /*, '\n', Object.keys(window.getPageData()).join('|'), '\n', window.getPageData()*/);
-                    cdpm = window.CATTDL && window.CATTDL.CATTParams || {};
-                    cdpm.user = {};
-                    cdpm.user.action = d && d.action || "";
-                    cdpm.user.msg = d && d.data && (d.data.id || d.data.data && d.data.data.message || d.data && d.data.statusText) || "";
-                    cdpm.user.id = d && d.data && d.data.id || "";
-                    dl.push({'event': 'updateUserData'+"_"+(d && d.action || '')});
-                    window.gatcDL && window.gatcDL.push({'event': 'updateUserData'+"_"+(d && d.action || '')});
-                });
-        }
         //UA call
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
@@ -106,5 +94,5 @@
         var msg = 'GTM CATTDL Core: '+e; console && ((console.error)?console.error(msg):console.log(msg));
     }
     return w.CATTDL;
-}(window.jQuery, window.document, window, window.dataLayer, window.CATTDL))
+}(window.jQuery, window.document, window, window.dataLayer, window.CATTDL));
 //</script>
