@@ -15,6 +15,9 @@
         var srpsortlist = params && params.srplist || 'search';
         var srpsortoption = params && params.sortoption || '';
         var accomposition = params && params.accomposition && params.accomposition[cdpm.accomguid || ''] || '';
+        var fltoutbound = cdpm.flightdetails && cdpm.flightdetails.outbound;
+        var fltinbound = cdpm.flightdetails && cdpm.flightdetails.inbound;
+        var flttype = (fltoutbound && fltoutbound.length && fltoutbound.length > 1)?'indirect':'direct';        
 
         var vpagepath = '/vp/en/'+(cdpm.lob || 'angular')+'/'+(cdpm.holidaytype || 'angular')+'/'+(cdpm.pageid || 'angular');        
         var vpqsp_cat   = ('ss_cat='+ 
@@ -179,14 +182,15 @@
                     dimension70     : {'airlinebkgref'              : cdpm.airlineref || 'empty'},
                     dimension71     : {'promocode'                  : cdpm.promotion && cdpm.promotion.code || ''},
                     dimension72     : {'promocodevalue'             : cdpm.promotion && cdpm.promotion.value || ''},
-                    dimension75     : {'unixtimestamp'              : ''+(cdpm.pagetimestamp || 0) || ''},                                    
+                    dimension75     : {'unixtimestamp'              : ''+(cdpm.pagetimestamp || 0) || ''},
+                    dimension79     : {'flighttype'                 : flttype || ''},                                                      
                     dimension101    : {'depositselected'            : cdpm.depositselected || 'empty'},
                     dimension103    : {'rooms'                      : ''+(cdpm.rooms || '')},
-                    dimension106    : {'arrtimeoutbound'            : cdl.gatime && cdpm.flightdetails && cdpm.flightdetails.outbound && cdpm.flightdetails.outbound[0] && cdpm.flightdetails.outbound[0].arrive && cdl.gatime(cdpm.flightdetails && cdpm.flightdetails.outbound[0].arrive.date) || ''},
-                    dimension107    : {'depttitmeoutbound'          : cdl.gatime && cdpm.flightdetails && cdpm.flightdetails.outbound && cdpm.flightdetails.outbound[0] && cdpm.flightdetails.outbound[0].depart && cdl.gatime(cdpm.flightdetails && cdpm.flightdetails.outbound[0].depart.date) || ''},
+                    dimension106    : {'arrivaltimeoutbound'        : cdl.gatime && fltoutbound && fltoutbound[0] && fltoutbound[0].arrive && cdl.gatime(fltoutbound[0].arrive.date) || ''},
+                    dimension107    : {'departuretimeoutbound'      : cdl.gatime && fltoutbound && fltoutbound[0] && fltoutbound[0].depart && cdl.gatime(fltoutbound[0].depart.date) || ''},
                     dimension108    : {'returndate'                 : cdl.gadate && cdl.gadate(cdpm.returndate || 0) || ''},
-                    dimension109    : {'arrtimeinbound'             : cdl.gatime && cdpm.flightdetails && cdpm.flightdetails.inbound && cdpm.flightdetails.inbound[0] && cdpm.flightdetails.inbound[0].arrive && cdl.gatime(cdpm.flightdetails && cdpm.flightdetails.inbound[0].arrive.date) || ''},
-                    dimension110    : {'depttimeinbound'            : cdl.gatime && cdpm.flightdetails && cdpm.flightdetails.inbound && cdpm.flightdetails.inbound[0] && cdpm.flightdetails.inbound[0].depart && cdl.gatime(cdpm.flightdetails && cdpm.flightdetails.inbound[0].depart.date) || ''},
+                    dimension109    : {'arrivaltimeinbound'         : cdl.gatime && fltinbound && fltinbound[0] && fltinbound[0].arrive && cdl.gatime(fltinbound[0].arrive.date) || ''},
+                    dimension110    : {'departuretimeinbound'       : cdl.gatime && fltinbound && fltinbound[0] && fltinbound[0].depart && cdl.gatime(fltinbound[0].depart.date) || ''},
                     dimension111    : {'totalprice'                 : ''+(cdpm.totalprice || '0')},
                     dimension112    : {'destinationcountry'         : cdpm.accomcountry || 'empty'},
                     dimension113    : {'destinationregion'          : cdpm.accomregion || 'empty'},
