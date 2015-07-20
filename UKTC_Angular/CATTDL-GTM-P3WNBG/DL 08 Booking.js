@@ -14,6 +14,7 @@
         cdpm.holidaytype = "generic-angular"
         cdpm.pagecontext = "angular"
         cdpm.sessionid = window.sessionToken || "";
+        cdpm.tc_basket_id = JSON.parse(cdl.ckget('tc_basket_id')) || '';        
 
         if (wgdPkg) {
             cdpm.holidaytype =  (/MULTICOM/i.test(wgdPkg.provider || '')) && (wgdPkg.brandCode == 'Z')?'flexitrips-angular':((/MULTICOM/i.test(wgdPkg.provider || '')) && (wgdPkg.brandCode !== 'Z')?'multi-angular':'package-angular')
