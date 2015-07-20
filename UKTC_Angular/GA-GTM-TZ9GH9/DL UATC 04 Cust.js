@@ -167,7 +167,7 @@
                     dimension69     : {'discountperc'               : ''+(cdpm.discountperc || 0)},                 
                     dimension75     : {'unixtimestamp'              : ''+(cdpm.pagetimestamp || 0) || ''},
                     dimension79     : {'flighttype'                 : flttype || ''},
-                    dimension80     : {'basketid'                 	: cdpm.basketid || ''},
+                    dimension80     : {'basketid'                   : cdpm.tc_basket_id || ''},
                     dimension103    : {'rooms'                      : cdpm.rooms && ''+cdpm.rooms || '0'},
                     dimension106    : {'arrivaltimeoutbound'        : cdl.gatime && fltoutbound && fltoutbound[0] && fltoutbound[0].arrive && cdl.gatime(fltoutbound[0].arrive.date) || ''},
                     dimension107    : {'departuretimeoutbound'      : cdl.gatime && fltoutbound && fltoutbound[0] && fltoutbound[0].depart && cdl.gatime(fltoutbound[0].depart.date) || ''},
