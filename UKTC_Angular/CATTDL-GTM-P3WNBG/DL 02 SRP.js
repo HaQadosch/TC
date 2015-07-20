@@ -17,12 +17,13 @@
             cdpm.lob = "package";
             cdpm.holidaytype = wgdCurrent && (wgdCurrent && wgdCurrent.connectorCode == 1?"package-angular":"multi-angular") || "generic-angular"
             cdpm.pagecontext = "angular"
+            cdpm.tc_basket_id = JSON.parse(cdl.ckget('tc_basket_id')) || '';
             var strdeptdate = ''
             var strdeptdatewhen = (strdeptdate = wgdCurrent.when && wgdCurrent.when._i || wgdCurrent.when || "19700101") && +new Date(strdeptdate.substring(0,4), strdeptdate.substring(4,6)-1, strdeptdate.substring(6,8)) || 0;
             var rngdeptdate = wgdCurrent && wgdCurrent.departureDate || '';
             newPM['deptdatestart'] = +new Date(((rngdeptdate || '').split(',')[0]).replace(/(\d\d\d\d)(\d\d)(\d\d)/, '$1-$2-$3') || strdeptdatewhen || 0);
             newPM['deptdateend'] = +new Date(((rngdeptdate  || '').split(',')[1] || (rngdeptdate  || '').split(',')[0]).replace(/(\d\d\d\d)(\d\d)(\d\d)/, '$1-$2-$3') || strdeptdatewhen || 0);
-            newPM['deptdate'] = newPM.deptdatestart || 0;
+            newPM['deptdate'] = strdeptdatewhen || newPM.deptdatestart || 0;
             if ((rngdeptdate  || '').split(',')[1]) {newPM['deptdaterange'] = true} else {newPM['deptdaterange'] = false};
 
             newPM['deptairportsearched'] = wgdCurrent.origin || "";
