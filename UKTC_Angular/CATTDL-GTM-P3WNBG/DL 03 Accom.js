@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_cattdlAccom'>
 (function gtm_cattdlAccom(jQ, dl, cdl) {
     'use strict'
     if (jQ && jQ.extend && cdl) try {
@@ -16,7 +16,8 @@
         if (wgD && wgD.details && wgD.matrix) {
             cdpm.lob = "package"
             cdpm.holidaytype = wgdAccom?((wgdAccom.connectorCode == 1)?((wgdAccom.brand === "Z")?"flexitrips-angular":"package-angular"):((wgdAccom.connectorCode == 2)?"multi-angular":"generic-angular")):"generic-angular"
-            cdpm.pagecontext = "angular"
+            cdpm.pagecontext = "angular";
+            cdpm.tc_basket_id = JSON.parse(cdl.ckget('tc_basket_id')) || '';           
             
             var wgdDetails = wgD.details || {};
             var wgdPath = (wgdAccom.geoPath && wgdAccom.geoPath.split("/")) || (wgdDetails.geoPath && wgdDetails.geoPath && wgdDetails.geoPath.value.split("/")) ||  []
@@ -29,7 +30,6 @@
             newPM['accomvideo'] = ($('button.btn.btn-block.btn-default.src-accomHighlights-videoButton'))?'y':'n';
             var wgdAF = wgD.matrix && wgD.matrix.data && wgD.matrix.data.alternativeFlights;
             newPM['premiumcabinvisible'] = false; for (var i=0;i<(wgdAF && wgdAF.length);i++){if(wgdAF[i] && wgdAF[i].flights[0] && wgdAF[i].flights[0].inbound && wgdAF[i].flights[0].inbound.premium && wgdAF[i].flights[0].inbound.premium === true) {newPM.premiumcabinvisible = true}}
-
 
             var wgdPrice = wgD.matrix && wgD.matrix.data && wgD.matrix.data.priceList && wgD.matrix.data.priceList[0] || !1
             if (wgdPrice) {
