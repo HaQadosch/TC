@@ -83,6 +83,7 @@
                 'process-payment'     : 'secure',
                 ''                    : 'home'
             })[(/\/([^\/]*)/i.exec(locpathname) || ['']).pop()];
+            if(wgetData && wgetData.source === 'calendar') {cdpm.pageid = 'accomcalendar'};
 
             //journey steps path
             var ck_cdpm = JSON.parse(cdl.ckget('gtm_cdpm') || '{}')
