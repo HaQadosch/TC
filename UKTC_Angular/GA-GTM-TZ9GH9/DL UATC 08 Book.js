@@ -218,7 +218,7 @@
         cdl.error('GTM UK TC UATCDL Book: '+e)
     } finally {
         dl.push({'event': 'UATCDL Book'})
-        window.gatcDL && gatcDL.push({'event': 'UATCDL Book'})
+        window.dataLayer_TZ9GH9 && window.dataLayer_TZ9GH9.push({'event': 'UATCDL Book'})
     }
     return jQ && cdl && cdl.CATTParams && cdl.DL_uatc
 }(window.jQuery, window.dataLayer || [], window.CATTDL, window.location))
