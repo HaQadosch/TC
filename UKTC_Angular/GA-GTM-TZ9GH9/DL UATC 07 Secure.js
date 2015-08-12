@@ -196,7 +196,7 @@
         cdl.error('GTM UK TC UATCDL Secure: '+e)
     } finally {
         dl.push({'event': 'UATCDL Secure'})
-        window.gatcDL && gatcDL.push({'event': 'UATCDL Secure'})
+        window.dataLayer_TZ9GH9 && window.dataLayer_TZ9GH9.push({'event': 'UATCDL Secure'})
     }
     return cdl.DL_uatc
 }(window.jQuery, window.dataLayer || [], window.CATTDL, window.location))
