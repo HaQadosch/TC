@@ -23,11 +23,8 @@
                 window.ga && window.ga(function gtm_useTracker() {
                     var trc = ga.getByName(uadl.name)
                     if (!trc) {
-                        // console.info('no trc')
                         w.ga('create', uadl.profileid, uadl.cookiedomain, {'name': uadl.name})
                         trc = ga.getByName(uadl.name)
-                        // console.info('trc', trc)
-                        // console.info('clientID', trc.get('clientId'))
                     }
                     var sendSet = {};
                    
@@ -104,8 +101,6 @@
                         //     , 0
                         //     , sendSet
                         //     , {'nonInteraction': false})
-                        console.log('Facet rawEvent',cdom.rawEvent && cdom.rawEvent.target && cdom.rawEvent.target.value);
-                        console.log('Facet data',cdom.data);
                         }
                     } else {
                         window.ga(trackerName+'send','event'
@@ -121,7 +116,7 @@
         //};
 
             dl.push({'event': 'UATC facet event'});
-            window.gatcDL && gatcDL.push({'event': 'UATC facet event'});
+            window.dataLayer_TZ9GH9 && window.dataLayer_TZ9GH9.push({'event': 'UATC facet event'});
 
     } catch(e) {
         cdl.error('GTM UK TC UATC facet event: '+e)
