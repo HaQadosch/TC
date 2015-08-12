@@ -17,21 +17,15 @@
         window.ga && window.ga(function gtm_useTracker() {
             var trc = ga.getByName(uadl.name)
             if (trc) {
-                // console.info('trc', trc)
-                // trc.plugins_ && console.info('plugins', trc.plugins_.keys) || console.info('no plugins') 
-                 // console.info('clientID', trc.get('clientId'))
             } else {
-                // console.info('no trc')
                 w.ga('create', uadl.profileid, uadl.cookiedomain, {'name': uadl.name})
                 trc = ga.getByName(uadl.name)
-                // console.info('trc', trc)
-                // console.info('clientID', trc.get('clientId'))
             }
             for (var setOption in uadl.set) trc.set(setOption, uadl.set[setOption]);
             if (typeof trc.plugins_ === 'undefined' || !/displayfeatures/i.test(trc.plugins_ && trc.plugins_.keys || '')) {trc.require && trc.require('displayfeatures') || w.ga(trackerName+'require', 'displayfeatures')};
             if (typeof trc.plugins_ === 'undefined' || !/ec/i.test(trc.plugins_ && trc.plugins_.keys || '')) {trc.require && trc.require('ec', 'ec.js') || w.ga(trackerName+'require', 'ec', 'ec.js')};
             cdl.CATTParams.gaguid =  /(.+)\./i.exec(trc.get('clientId') || '.').pop() || cdl.CATTParams.gaguid || '';
-            uawa && uawa.dimensions && (uawa.dimensions.dimension51 = {'gaguid' : cdl.CATTParams.gaguid || 'empty'}) || console.info('err', uawa);
+            uawa && uawa.dimensions && (uawa.dimensions.dimension51 = {'gaguid' : cdl.CATTParams.gaguid || 'empty'});
 
             var sendSet = {};
             var ux = window.ECEOP || '';
@@ -48,9 +42,15 @@
                     jQ.each(vMet, function valMetrics(_, val){val && (sendSet[kMet]=val)})
                 })  
             };
-            sendSet['page'] = uawa.page;            
+            sendSet['page'] = uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || ''));
+
             w.ga(trackerName+'send','pageview', sendSet);  
-            
+
+            eventsendSet = {};
+            jQ.extend(eventsendSet, sendSet);
+            delete eventsendSet.dimension12;
+            eventsendSet.dimension55 = 'event';
+
             var accoms = [];
             (function gtm_uatcSRPAddImpressions(){
                 var curUAImp = {}
@@ -73,26 +73,17 @@
                         w.ga(trackerName+'send','event', 'viewAddImpression', (uaImp[0].list || "")
                             ,  (accoms && accoms.toString() || "")
                             , 1
-                            , {'page': uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''}
+                            , eventsendSet
                             , {'nonInteraction': true, 'location': uawa.location});
                     
                     };
             }());
-            
             for (evt in uawa.events) {
                 var gevt = uawa.events[evt]
                 if (gevt.action) (w.ga(trackerName+'send','event', gevt.category, gevt.action,  gevt.label, gevt.value
-                    , {'page': gevt.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
-                        ,'dimension51': cdpm.gaguid || 'empty'
-                        ,'dimension55'  : 'event'
-                        ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
-                        ,'dimension75': ''+(window.Date && window.Date.now() || 0)
-                        ,'dimension118': (locpathname || '')
-                        ,'dimension119': (locsearch || '')
-                    }
+                    , eventsendSet
                     , {'nonInteraction': gevt.noninteraction}));
             };
-    
             var gatcDLcnt = 0; window.gatcDL.forEach(function(e){if(e.event === 'UATC SRP'){gatcDLcnt = gatcDLcnt + 1}})
             dl.push({'event': 'UATC SRP', 'counter': gatcDLcnt});
             window.gatcDL && gatcDL.push({'event': 'UATC SRP', 'counter': gatcDLcnt});
@@ -168,7 +159,7 @@
         cdl.error('GTM UK TC UATC SRP: '+e)
     } finally {
         var counter = 0;
-        window.gatcDL && window.gatcDL.forEach(function(e){if(e.event === 'UATC SRP'){counter = e.counter || 0}});
+        window.dataLayer_TZ9GH9 && window.dataLayer_TZ9GH9.forEach(function(e){if(e.event === 'UATC SRP'){counter = e.counter || 0}});
         window.externalLayer && externalLayer.push({'event' : 'uapageview'+'|'+(cdl.CATTParams && cdl.CATTParams.pageid || 'home')+'|'+(cdl.CATTParams && cdl.CATTParams.urlparams && cdl.CATTParams.urlparams.pathname || '/'), 'counter': counter});
     }
     return cdl && uadl
