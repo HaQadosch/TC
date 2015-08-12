@@ -1,44 +1,61 @@
-<script>
-(function gtm_uamyaccountLogin(jQ, cdl, uadl, w){
-		'use strict';
-	if (cdl && uadl) try{	
+<script id='gtm_uamyaccountSignUp'>
+(function gtm_uamyaccountSignUp(jQ, cdl, uadl, w){
+        'use strict';
+    if (cdl && uadl) try{   
 
-	var cdpm = cdl.CATTParams || [];
-	var trackerName = (uadl.name+".") || "";
-	var uawa = uadl.webanalytics || {};
+    var cdpm = cdl.CATTParams || [];
+    var trackerName = (uadl.name+".") || "";
+    var uawa = uadl.webanalytics || {};
 
-	//var myaccountid = (w.getPageData('user') && w.getPageData('user').data.id) || (w.getPageData('user') && w.getPageData('user').data.data) || "";
+    //var myaccountid = (w.getPageData('user') && w.getPageData('user').data.id) || (w.getPageData('user') && w.getPageData('user').data.data) || "";
 
     w.ga(trackerName+'send', 'event'
-			, 'MyAccountLogin'
-			, (cdpm.user && cdpm.user.action || "")
-			, (cdpm.user && cdpm.user.msg || "")
-			, 1
-			, { 'dimension51': cdpm.gaguid || 'empty',
-			    'dimension65': cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || '',
-			    'dimension75': ''+(window.Date && window.Date.now() || 0)}                          
-			, {'nonInteraction': true});
-	}
-	catch(e){cdl.error('GTM UATC MyAccountSignUp: '+e)}
+            , 'MyAccountSignUp'
+            , (cdpm.user && cdpm.user.action || "")
+            , (cdpm.user && cdpm.user.msg || "")
+            , 1
+            , { 'dimension51': cdpm.gaguid || ''
+                ,'dimension52': window.userId || '' //my account anonymous id
+                ,'dimension53': (cdpm.user && cdpm.user.msg || "") || '' //my account userid
+                ,'dimension54': (cdpm.user && cdpm.user.action || "") || '' // action
+                ,'dimension65': cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                ,'dimension75': ''+(window.Date && window.Date.now() || 0)}                          
+            , {'nonInteraction': true});
+    }
+    catch(e){cdl.error('GTM UATC MyAccountSignUp: '+e)}
 }(!window.jQuery?!1:window.jQuery, !window.CATTDL?!1:window.CATTDL, !window.CATTDL.DL_uatc?!1:window.CATTDL.DL_uatc, window))
 </script>
 
-<script>
-(function gtm_gamyaccountLogin(jQ, cdl, gadl, w){
-		'use strict';
-	if (cdl && gadl) try{	
+<script id='gtm_gamyaccountSignUp'>
+(function gtm_gamyaccountSignUp(jQ, cdl, gadl, w){
+        'use strict';
+    if (cdl && gadl) try{   
 
-	var cdpm = cdl.CATTParams || [];
-	var trackerName = (gadl.trackername+".") || "";
-	var uawa = uadl.webanalytics || {};
-	
+    var cdpm = cdl.CATTParams || [];
+    var trackerName = (gadl.trackername+".") || "";
+    if(cdpm.user && cdpm.user.msg){
+    w._gaq.push([trackerName+'_setCustomVar'
+              , 33                 
+              , 'MyAccountUserID'      
+              , cdpm.user.msg
+              , 3                    
+             ]);
+    }   
+    if(window.userId){
+    w._gaq.push([trackerName+'_setCustomVar'
+              , 34                   
+              , 'MyAccountAnonymousID'      
+              , window.userId
+              , 3                    
+             ]);
+    }  
     w._gaq.push([trackerName+'_trackEvent'
             , 'MyAccountSignUp'
             , (cdpm.user && cdpm.user.action || "")
             , (cdpm.user && cdpm.user.msg || "")
             , 1     
             , {'noninteraction': true}]);  
-	}
-	catch(e){cdl.error('GTM GATC MyAccountSignUp: '+e)}
+    }
+    catch(e){cdl.error('GTM GATC MyAccountSignUp: '+e)}
 }(!window.jQuery?!1:window.jQuery, !window.CATTDL?!1:window.CATTDL, !window.CATTDL.DL_gatc?!1:window.CATTDL.DL_gatc, window))
 </script>
