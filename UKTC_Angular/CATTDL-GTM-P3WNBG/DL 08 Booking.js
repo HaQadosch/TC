@@ -229,7 +229,7 @@
     } finally {
         dl.push({'event': 'pid_'+cdl.CATTParams.pageid});
         dl.push({'event': 'CATTDL Book'})
-        gatcDL.push({'event': 'CATTDL Book'})
+        window.dataLayer_TZ9GH9 && window.dataLayer_TZ9GH9.push({'event': 'CATTDL Book'})
     }
     return cdl
 }(window.jQuery, window.dataLayer, window.CATTDL))
