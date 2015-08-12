@@ -196,7 +196,7 @@
         cdl.error('GTM UK TC UATCDL Pay: '+e)
     } finally {
         dl.push({'event': 'UATCDL Pay'})
-        window.gatcDL && gatcDL.push({'event': 'UATCDL Pay'})
+        window.dataLayer_TZ9GH9 && window.dataLayer_TZ9GH9.push({'event': 'UATCDL Pay'})
     }
     return cdl.DL_uatc
 }(window.jQuery, window.dataLayer || [], window.CATTDL, window.location))
