@@ -193,7 +193,7 @@
         cdl.error('GTM UK TC UATCDL AddPax: '+e)
     } finally {
         dl.push({'event': 'UATCDL AddPax'})
-        window.gatcDL && gatcDL.push({'event': 'UATCDL AddPax'})
+        window.dataLayer_TZ9GH9 && window.dataLayer_TZ9GH9.push({'event': 'UATCDL AddPax'})
     }
     return cdl.DL_uatc
 }(window.jQuery, window.dataLayer || [], window.CATTDL, window.location))
