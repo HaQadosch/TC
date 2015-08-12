@@ -45,8 +45,13 @@
                 })  
             };
             
-            var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
+            sendSet['page'] = uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || ''));
+            eventsendSet = {};
+            jQ.extend(eventsendSet, sendSet);
+            delete eventsendSet.dimension12;
+            eventsendSet.dimension55 = 'event';
 
+            var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
             var uaprod = uadl.webanalytics.addproductlist || {};
             if (wgdSrch && params && params.previouspageid && (params.previouspageid === 'search' || params.previouspageid === 'searchmap' || params.previouspageid === 'searchseo')) { 
                 /*w.sessionStorage.getItem('gtm_previouspageid') === 'search' && wgdSrch*/    
@@ -64,20 +69,11 @@
                 w.ga(trackerName+'send','event', 'ECProductListClick', uaprod.id
                             ,  ''+uaprod.position
                             , 1
-                            , {'page': uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
-                                ,'dimension51': cdpm.gaguid || 'empty'
-                                ,'dimension55': 'event'
-                                ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
-                                ,'dimension75': ''+(window.Date && window.Date.now() || 0)
-                                ,'dimension118': (locpathname || '')
-                                ,'dimension119': (locsearch || '')
-                            }
+                            , eventsendSet
                             , {'nonInteraction': true});
                 dl.push({'event': 'UATCEC productclick'})
             };
-
-            sendSet['page'] = uawa.page;
-            w.ga(trackerName+'send','pageview', sendSet);            
+            w.ga(trackerName+'send','pageview', sendSet);     
 
             //function gtm_uatcAccomAddProductListView(){
             if(cdpm.pageid !== 'accomcalendar'){
@@ -94,51 +90,36 @@
                         , uaprod.id || 'error'
                         ,  ''+(uaprod.position || 0)
                         , 1
-                        , {'page': uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
-                                ,'dimension51': cdpm.gaguid || 'empty'
-                                ,'dimension55': 'event'
-                                ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
-                                ,'dimension75': ''+(window.Date && window.Date.now() || 0)
-                                ,'dimension118': (locpathname || '')
-                                ,'dimension119': (locsearch || '')
-                            }
+                        , eventsendSet
                         , {'nonInteraction': true});
                 dl.push({'event': 'UATCEC productview'});
             };
-            
             for (evt in uawa.events) {
                 var gevt = uawa.events[evt]
                 if (gevt.action) (w.ga(trackerName+'send','event', gevt.category, gevt.action,  gevt.label, gevt.value
-                    , {'page': gevt.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
-                        ,'dimension51': cdpm.gaguid || 'empty'
-                        ,'dimension55': 'event'
-                        ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
-                        ,'dimension75': ''+(window.Date && window.Date.now() || 0)
-                        ,'dimension118': (locpathname || '')
-                        ,'dimension119': (locsearch || '') 
-                    }
+                    , eventsendSet
                     , {'nonInteraction': gevt.noninteraction}));
             };
             if (ux) {window.ECEOP.pageview = []};
 
             jQ('button.close').on('click',function(){
-            var cdl = window.CATTDL || {};
-            var cdpm = cdl && cdl.CATTParams || {};
-            var trackerName = (cdl.DL_uatc && cdl.DL_uatc.name+".") || "";
-            w.ga(trackerName+'send','event'
-                , 'Videoclosed'
-                , 'Hotelvideo'
-                , (cdpm.lob || '')+'|'+(cdpm.holidaytype || '')+'|'+(cdpm.pageid || '')+'|'+(cdpm.accomguid || 'accomguid')
-                , 1
-                , {'page': uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
-                    ,'dimension51': cdpm.gaguid || 'empty'
-                    ,'dimension55': 'event'
-                    ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
-                    ,'dimension75': ''+(window.Date && window.Date.now() || 0)
-                    ,'dimension118': (locpathname || '')
-                    ,'dimension119': (locsearch || '')                    
-                }
-                , {'noninteraction': true});
+                var cdl = window.CATTDL || {};
+                var cdpm = cdl && cdl.CATTParams || {};
+                var trackerName = (cdl.DL_uatc && cdl.DL_uatc.name+".") || "";
+                w.ga(trackerName+'send','event'
+                    , 'Videoclosed'
+                    , 'Hotelvideo'
+                    , (cdpm.lob || '')+'|'+(cdpm.holidaytype || '')+'|'+(cdpm.pageid || '')+'|'+(cdpm.accomguid || 'accomguid')
+                    , 1
+                    , {'page': uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                        ,'dimension51': cdpm.gaguid || 'empty'
+                        ,'dimension55': 'event'
+                        ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                        ,'dimension75': ''+(window.Date && window.Date.now() || 0)
+                        ,'dimension118': (locpathname || '')
+                        ,'dimension119': (locsearch || '')                    
+                    }
+                    , {'noninteraction': true});
             });
             if(!/gtm_uabound/i.test(jQ('#sendResetPassword').attr('class'))){
                 jQ('#sendResetPassword').addClass('gtm_uabound'); 
@@ -179,15 +160,15 @@
                 });
             };
         });
-        var gatcDLcnt = 0; window.gatcDL.forEach(function(e){if(e.event === 'UATC Accom'){gatcDLcnt = gatcDLcnt + 1}})
-        dl.push({'event': 'UATC Accom', 'counter': gatcDLcnt});
-        window.gatcDL && gatcDL.push({'event': 'UATC Accom', 'counter': gatcDLcnt});
+        var cntTZ9GH9 = 0; window.cntTZ9GH9.forEach(function(e){if(e.event === 'UATC Accom'){cntTZ9GH9 = cntTZ9GH9 + 1}})
+        dl.push({'event': 'UATC Accom', 'counter': cntTZ9GH9});
+        window.dataLayer_TZ9GH9 && window.dataLayer_TZ9GH9.push({'event': 'UATC Accom', 'counter': cntTZ9GH9});
 
     } catch(e) {
         cdl.error('GTM UK TC UATC Accom: '+e);
     } finally {
         var counter = 0;
-        window.gatcDL && window.gatcDL.forEach(function(e){if(e.event === 'UATC Accom'){counter = e.counter || 0}});         
+        window.dataLayer_TZ9GH9 && window.dataLayer_TZ9GH9.forEach(function(e){if(e.event === 'UATC Accom'){counter = e.counter || 0}});         
         window.externalLayer && externalLayer.push({'event' : 'uapageview'+'|'+(cdl.CATTParams && cdl.CATTParams.pageid || 'home')+'|'+(cdl.CATTParams && cdl.CATTParams.urlparams && cdl.CATTParams.urlparams.pathname || '/'), 'counter': counter});
     }
     return cdl && uadl
