@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_uatcAddtoWishlist'>
 (function gtm_uatcAddtoWishlist(jQ, cdl, uadl, gadl, w, d, dl){
     'use strict';
     if (cdl && uadl && gadl) try {
@@ -15,21 +15,16 @@
     window.ga && window.ga(function gtm_useTracker() {
             var trc = ga.getByName(uadl.name)
             if (trc) {
-                //console.info('trc', trc)
-                trc.plugins_ && console.info('plugins', trc.plugins_.keys) || console.info('no plugins') 
-                //console.info('clientID', trc.get('clientId'))
             } else {
-                //console.info('no trc')
+
                 w.ga('create', uadl.profileid, uadl.cookiedomain, {'name': uadl.name})
                 trc = ga.getByName(uadl.name)
-                //console.info('trc', trc)
-                //console.info('clientID', trc.get('clientId'))
             }
             for (var setOption in uadl.set) trc.set(setOption, uadl.set[setOption]);
             if (typeof trc.plugins_ === 'undefined' || !/displayfeatures/i.test(trc.plugins_ && trc.plugins_.keys || '')) trc.require && trc.require('displayfeatures') || w.ga(trackerName+'require', 'displayfeatures');
             if (typeof trc.plugins_ === 'undefined' || !/ec/i.test(trc.plugins_ && trc.plugins_.keys || '')) trc.require && trc.require('ec', 'ec.js') || w.ga(trackerName+'require', 'ec', 'ec.js');
             cdl.CATTParams.gaguid =  /(.+)\./i.exec(trc.get('clientId') || '.').pop() || cdl.CATTParams.gaguid || ''
-            uawa && uawa.dimensions && (uawa.dimensions.dimension51 = {'gaguid' : cdl.CATTParams.gaguid || 'empty'}) || console.info('err', uawa)
+            uawa && uawa.dimensions && (uawa.dimensions.dimension51 = {'gaguid' : cdl.CATTParams.gaguid || 'empty'})
 
             var srpItems = cdpm.srpresults
             for (i = 0; i < cdpm.srpresults.length; i++)
