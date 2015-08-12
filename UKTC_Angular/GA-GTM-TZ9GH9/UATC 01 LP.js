@@ -12,23 +12,18 @@
         window.ga && window.ga(function gtm_useTracker() {
             var trc = ga.getByName(uadl.name);
       if (trc) {
-        console.info('trc', trc) 
-        trc.plugins_ && console.info('plugins', trc.plugins_.keys) || console.info('no plugins') 
-        console.info('clientID', trc.get('clientId'))
+
       } else {
-        console.info('no trc') 
         w.ga('create', uadl.profileid, uadl.cookiedomain, {
           'name': uadl.name
         }) 
         trc = ga.getByName(uadl.name) 
-        console.info('trc', trc) 
-        console.info('clientID', trc.get('clientId')) 
         for (var setOption in uadl.set) trc.set(setOption, uadl.set[setOption]);
       }
             if (typeof trc.plugins_ === 'undefined' || !/displayfeatures/i.test(trc.plugins_ && trc.plugins_.keys || '')) trc.require && trc.require('displayfeatures') || w.ga(trackerName+'require', 'displayfeatures');
             cdl.CATTParams.gaguid =  /(.+)\./i.exec(trc.get('clientId') || '.').pop() || cdl.CATTParams.gaguid || '';
             cdl.CATTParams.gaclientid =  trc.get('clientId')  || cdl.CATTParams.gaclientid || '';
-            uawa && uawa.dimensions && (uawa.dimensions.dimension51 = {'gaguid' : cdl.CATTParams.gaguid || 'empty'}) || console.info('err', uawa);
+            uawa && uawa.dimensions && (uawa.dimensions.dimension51 = {'gaguid' : cdl.CATTParams.gaguid || 'empty'});
 
             var sendSet = {};
             var ux = window.ECEOP || '';
@@ -54,12 +49,12 @@
                 var gevt = uawa.events[evt]
                 var timestamp = +new Date(window.Date && window.Date.now() || 0);
                 if (gevt.action) {trc.send('event'
-                                            , gevt.category, gevt.action,  gevt.label, gevt.value
-                                            , { 'dimension51': cdpm.gaguid || ''
-                                                ,'dimension55': 'event'
-                                                ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(timestamp)+' '+cdl.gatime(timestamp) || ''
-                                                ,'dimension75': ''+(timestamp || 0)}
-                                            , {'nonInteraction': gevt.noninteraction})};
+                    , gevt.category, gevt.action,  gevt.label, gevt.value
+                    , { 'dimension51': cdpm.gaguid || ''
+                        ,'dimension55': 'event'
+                        ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(timestamp)+' '+cdl.gatime(timestamp) || ''
+                        ,'dimension75': ''+(timestamp || 0)}
+                    , {'nonInteraction': gevt.noninteraction})};
             };
 
             if (ux) {window.ECEOP.pageview = []};
@@ -123,7 +118,7 @@
             };          
         });
         dataLayer.push({'event': 'UATC LP'});
-        window.gatcDL && gatcDL.push({'event': 'UATC LP'});
+        window.dataLayer_TZ9GH9 && window.dataLayer_TZ9GH9.push({'event': 'UATC LP'});
         
     } catch(e) {
         cdl.error('GTM UK TC UATC LP: '+e)
