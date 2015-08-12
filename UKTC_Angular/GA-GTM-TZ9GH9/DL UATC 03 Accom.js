@@ -186,7 +186,7 @@
         cdl.error('GTM UK TC UATCDL Accom: '+e)
     } finally {
         dl.push({'event': 'UATCDL Accom'})
-        window.gatcDL && gatcDL.push({'event': 'UATCDL Accom'})
+        window.dataLayer_TZ9GH9 && window.dataLayer_TZ9GH9.push({'event': 'UATCDL Accom'})
     }
     return jQ && cdl && cdl.CATTParams && cdl.DL_uatc
 }(window.jQuery, window.dataLayer || [], window.CATTDL, window.location))
