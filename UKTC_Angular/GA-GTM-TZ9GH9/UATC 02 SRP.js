@@ -84,9 +84,6 @@
                     , eventsendSet
                     , {'nonInteraction': gevt.noninteraction}));
             };
-            var gatcDLcnt = 0; window.gatcDL.forEach(function(e){if(e.event === 'UATC SRP'){gatcDLcnt = gatcDLcnt + 1}})
-            dl.push({'event': 'UATC SRP', 'counter': gatcDLcnt});
-            window.gatcDL && gatcDL.push({'event': 'UATC SRP', 'counter': gatcDLcnt});
 
             if (ux) {window.ECEOP.pageview = []};
 
@@ -155,6 +152,9 @@
                 };
             };
         });
+        var cntTZ9GH9 = 0; window.dataLayer_TZ9GH9.forEach(function(e){if(e.event === 'UATC SRP'){cntTZ9GH9 = cntTZ9GH9 + 1}})
+        dl.push({'event': 'UATC SRP', 'counter': cntTZ9GH9});
+        window.dataLayer_TZ9GH9 && window.dataLayer_TZ9GH9.push({'event': 'UATC SRP', 'counter': cntTZ9GH9});
     } catch(e) {
         cdl.error('GTM UK TC UATC SRP: '+e)
     } finally {
