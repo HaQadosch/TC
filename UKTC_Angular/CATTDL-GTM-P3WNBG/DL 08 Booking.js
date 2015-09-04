@@ -1,4 +1,4 @@
-<script id='gtm_cattdlBook'>
+<script id='GTM-P3WNBG_cattdlBook'>
 (function gtm_cattdlBook(jQ, dl, cdl) {
     'use strict'
     if (jQ && jQ.extend && cdl) try{
@@ -217,6 +217,17 @@
         } else {
             paramsbookingref.push(cdpm.bookingref);
             cdl.ckset('gtm_bookingref', JSON.stringify(paramsbookingref), Infinity, '/', '.'+(cdl.DL_uatc && cdl.DL_uatc.cookiedomain || 'thomascook.com'));
+        };
+        var userId = cdpm.user && cdpm.user.id || '';
+        if (!userId) {
+            if(location.host === 'www.thomascook.com') { 
+                $.ajax('https://www.thomascook.com/api/users/session').success(function(data, textStatus, jqXHR){
+                    if (data && data.id && jqXHR.status === 200) {
+                        cdpm['user'] = {};
+                        cdpm.user.id = data.id || '';
+                    }
+                })
+            }
         };
         if (wgD.response && wgD.response.error){
             errorPM['errorcode'] = wgD.response.error.code || "";
