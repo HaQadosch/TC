@@ -1,11 +1,10 @@
-<script>
+<script id='GTM-P3WNBG_cattdlPay'>
 (function gtm_cattdlPay(jQ, dl, cdl) {
     'use strict'
     if (jQ && jQ.extend && cdl) try {
         var cdpm = cdl.CATTParams
         var newPM = {};
         var keeps = {};
-
         cdpm.errors = {};
         var errorPM = {};       
 
@@ -16,10 +15,10 @@
         cdpm.holidaytype = "generic-angular"
         cdpm.pagecontext = "angular"
         cdpm.sessionid = window.sessionToken || "";
-
+        cdpm.tc_basket_id = JSON.parse(cdl.ckget('tc_basket_id')) || '';
+        
         if (wgdPkg) {
             cdpm.holidaytype =  (/MULTICOM/i.test(wgdPkg.provider || '')) && (wgdPkg.brandCode == 'Z')?'flexitrips-angular':((/MULTICOM/i.test(wgdPkg.provider || '')) && (wgdPkg.brandCode !== 'Z')?'multi-angular':'package-angular')
-
             newPM['destination'] = wgdPkg.content && wgdPkg.content.geoPath || ""
             var wgdPath = newPM.destination && newPM.destination.split(",") || []
             newPM['accomcountry'] = wgdPath.length > 0 && (wgdPath[0] || "").trim() || ''
@@ -198,7 +197,17 @@
             };
             jQ.extend(cdpm, newPM, keeps);
         }
-
+        var userId = cdpm.user && cdpm.user.id || '';
+        if (!userId) {
+            if(location.host === 'www.thomascook.com') { 
+                $.ajax('https://www.thomascook.com/api/users/session').success(function(data, textStatus, jqXHR){
+                    if (data && data.id && jqXHR.status === 200) {
+                        cdpm['user'] = {};
+                        cdpm.user.id = data.id || '';
+                    }
+                })
+            }
+        };
         if (wgetData.response && wgetData.response.error){
             errorPM['errorcode'] = wgetData.response.error.code || "";
             errorPM['errormsg'] =  wgetData.response.error.description;
@@ -221,7 +230,7 @@
     } finally {
         dl.push({'event': 'pid_'+cdl.CATTParams.pageid});
         dl.push({'event': 'CATTDL Pay'})  
-        gatcDL.push({'event': 'CATTDL Pay'})
+        window.dataLayer_TZ9GH9 && window.dataLayer_TZ9GH9.push({'event': 'CATTDL Pay'})
     }
     return jQ && jQ.extend && cdl
 }(window.jQuery, window.dataLayer, window.CATTDL))
