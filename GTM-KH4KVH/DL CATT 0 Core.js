@@ -105,7 +105,6 @@
                     } finally {
                         stampEpoch = +new Date();
                         dl.push({'event': 'core_'+(cdpm.pageid || ''), 'timestamp': stampEpoch, 'since gtm.start': stampEpoch - window.dataLayer[0]['gtm.start']})
-                        dl.push({'event':'CATTDL'});
                     }
                     return jQ && dl && w.CATTDL;
                 }(window.jQuery, d, w, dl, w.CATTDL));
