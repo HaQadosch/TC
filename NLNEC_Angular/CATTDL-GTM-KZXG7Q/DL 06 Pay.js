@@ -1,4 +1,4 @@
-<script id='gtm_cattdlPay'>
+<script id='GTM-KZXG7Q_cattdlPay'>
 (function gtm_cattdlPay(jQ, dl, cdl) {
     'use strict'
     if (jQ && jQ.extend && cdl) try {
@@ -262,7 +262,7 @@
     } finally {
         dl.push({'event': 'pid_'+cdl.CATTParams.pageid});
         dl.push({'event': 'CATTDL Pay'})  
-        gatcDL.push({'event': 'CATTDL Pay'})
+        window.dataLayer_557RZS && dataLayer_557RZS.push({'event': 'CATTDL Pay'})
     }
     return jQ && jQ.extend && cdl
 }(window.jQuery, window.dataLayer, window.CATTDL))
