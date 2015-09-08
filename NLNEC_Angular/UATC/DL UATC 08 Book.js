@@ -1,4 +1,4 @@
-<script id='gtm_uatcdlBook'>
+<script id='GTM-557RZS_uatcdlBook'>
 (function gtm_uatcdlBook(jQ, dl, cdl, loc) {
     'use strict'
     if (jQ && cdl && cdl.CATTParams) try {
@@ -175,7 +175,7 @@
         cdl.error('GTM NL NEC UATCDL Book: '+e)
     } finally {
         dl.push({'event': 'UATCDL Book'})
-        gatcDL.push({'event': 'UATCDL Book'})
+        window.dataLayer_557RZS && dataLayer_557RZS.push({'event': 'UATCDL Book'})
     }
     return jQ && cdl && cdl.CATTParams && cdl.DL_uatc
 }(window.jQuery, window.dataLayer || [], window.CATTDL, window.location))
