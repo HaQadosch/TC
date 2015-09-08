@@ -1,4 +1,4 @@
-<script id='gtm_cattdlBook'>
+<script id='GTM-KZXG7Q_cattdlBook'>
 (function gtm_cattdlBook(jQ, dl, cdl) {
     'use strict'
     if (jQ && jQ.extend && cdl) try{
@@ -254,7 +254,7 @@
     } finally {
         dl.push({'event': 'pid_'+cdl.CATTParams.pageid});
         dl.push({'event': 'CATTDL Book'})
-        gatcDL.push({'event': 'CATTDL Book'})
+        window.dataLayer_557RZS && dataLayer_557RZS.push({'event': 'CATTDL Book'})
     }
     return cdl
 }(window.jQuery, window.dataLayer, window.CATTDL))
