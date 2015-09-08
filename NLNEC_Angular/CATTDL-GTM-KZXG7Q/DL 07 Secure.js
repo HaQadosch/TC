@@ -1,4 +1,4 @@
-<script id='gtm_cattdlSecure'>
+<script id='GTM-KZXG7Q_cattdlSecure'>
 (function gtm_cattdlSecure(jQ, dl, cdl) {
     'use strict'
     if (jQ && jQ.extend && cdl) try {
@@ -258,7 +258,7 @@
     } finally {
         dl.push({'event': 'pid_'+cdl.CATTParams.pageid});
         dl.push({'event': 'CATTDL Secure'})
-        gatcDL.push({'event': 'CATTDL Secure'})
+        window.dataLayer_557RZS && dataLayer_557RZS.push({'event': 'CATTDL Secure'})
     }
     return jQ && jQ.extend && cdl
 }(window.jQuery, window.dataLayer, window.CATTDL))
