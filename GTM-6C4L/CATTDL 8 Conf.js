@@ -1,5 +1,5 @@
 <script id='GTM-6C4L_cattdlConf'>
-  (function gtm_cattdlConf(jQ, dl, cdl){
+  (function gtm_cattdlConf(dl, cdl){
     'use strict';
     if (cdl && !dl.some(function(a){return /CATTDL Conf/i.test(a && a.event || '');}) ) try {
 

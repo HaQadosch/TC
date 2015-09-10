@@ -28,7 +28,7 @@
         , 'params'   : {
             'src'  : '5040727'
           , 'type' : /itinerary.aspx/i.test(dlp)?'tc-sales':'tc-count'
-          , 'cat'  : /select.aspx/i.test(dlp)?'tcschres':/extras.aspx/i.test(dlp)?'tcextras':/seatmap.aspx/i.test(dlp)?'tcseatmp':/details.aspx/i.test(dlp)?'tccontdt':/payment.aspx/i.test(dlp)?'tcpaydt':/itinerary.aspx/i.test(dlp)?'tcslconf':'tcschres'
+          , 'cat'  : /select.aspx/i.test(dlp)?'tcschres':/extras.aspx/i.test(dlp)?'tcextras':/seats.aspx/i.test(dlp)?'tcseatmp':/details.aspx/i.test(dlp)?'tccontdt':/payment.aspx/i.test(dlp)?'tcpaydt':/itinerary.aspx/i.test(dlp)?'tcslconf':'tcschres'
           , 'bkg'  : bkgParams
           , 'ord'  : /itinerary.aspx/i.test(dlp)?(cdpm.bookingref || 'na'):'1'
         }
