@@ -2,8 +2,11 @@
   (function gtm_doubleclick(cdl, dl){
     'use strict';
     var cdpm = cdl && cdl.CATTParams || '';
-    if (cdl && dl) try {
-      var dlp = document.location.pathname
+    var lands = JSON.parse(cdl.ckget('gtm_attr') || '[]');
+    var lastLand = lands[lands.length-1];
+    var ppcSession = Boolean(lastLand[0] || /ppc/i.test(lastLand[1]));
+    if (cdl && dl && ppcSession) try {
+      var dlp = document.location.pathname;
       var bkgParams = cdl.transpose(';num={num}', {
         'num'  : Number(Math.random() * 10000000000000).toString()
       });
