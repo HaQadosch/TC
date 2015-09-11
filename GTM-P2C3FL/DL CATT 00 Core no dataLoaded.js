@@ -1,7 +1,7 @@
-//<script id='gtm_cattdlMyAccount'>
-(function gtm_cattdlMyAccount(jQ, d, w, dl){
+<script id='GTM-P2C3FL_cattdlCorenodataloaded'>
+(function gtm_cattdlCorenodataloaded(jQ, d, w, dl){
     'use strict';
-    if (jQ && dl && !dl.some(function(a){return /core_my-account/i.test(a && a.event || '')})) try{
+    if (jQ && dl && !dl.some(function(a){return /core_/i.test(a && a.event || '')})) try {
         w.CATTDL = w.CATTDL || {};
         var cdpm = w.CATTDL.CATTParams || {};
         if(!String.prototype.trim){String.prototype.trim=function(){return this.replace(/^\s+|\s+$/g,"")}}
@@ -43,7 +43,8 @@
             };
 
         w.CATTDL.insertJS = function insertJS(e,t,r){return e&&t&&function(e,t,r,n,s,a,c){e[n]&&(e[n]["DL_"+s]={start:(new Date()).getTime(),script:e[n].transpose(a,c)});var i=t.getElementsByTagName(r)[0],o=t.createElement(r);return o.async=!0,o.src=a,i.parentNode.insertBefore(o,i),e[n]}(w,d,"script","CATTDL",e,t,r)};
-        w.CATTDL.insertIFrame = function insertIFrame(e,r,t){return e&&r&&function(e,r,t,a,n,i){if(r[t]){var d=r[t].transpose(n,i)||"";r[t]["DL_"+a]={start:(new Date()).getTime(),iFrame:d},e().append&&e("body").append(e("<iframe>",{src:d,style:"display:none;",alt:"",frameborder:0,id:a+"iFrame",width:1,height:1}))}return r[t]}(jQ,w,"CATTDL",e,r,t)};
+            w.CATTDL.insertIFrame = function insertIFrame(e,r,t){return e&&r&&function(e,r,t,a,n,i){if(r[t]){var d=r[t].transpose(n,i)||"";r[t]["DL_"+a]={start:(new Date()).getTime(),iFrame:d},e().append&&e("body").append(e("<iframe>",{src:d,style:"display:none;",alt:"",frameborder:0,id:a+"iFrame",width:1,height:1}))}return r[t]}(jQ,w,"CATTDL",e,r,t)};
+
 
         w.CATTParams && jQ.each(w.CATTParams, function gtm_eachCATTParam(pP){
             var pp = pP.toLowerCase();
@@ -83,17 +84,11 @@
         cdpm.device = (function(t){var n="desktop";var r=/mobile/i.test(t);var i=/android/i.test(t);var s=/phone/i.test(t);var o=i&&!/mobile/i.test(t);var u=/ipad/i.test(t);var a=/tablet/i.test(t);if(a||o||u)n="tablet";else if(r||i||s)n="mobile";return n})(navigator.userAgent||"") || '';
         cdpm.pagetimestamp = Date.now();
         cdpm.user = cdpm.user || {};
-        jQ.when(jQ.ajax('/api/users/session')).done(function(a, b, x){
-            cdpm.user.id = ''+(x.responseJSON && x.responseJSON.id || '');
-        });
-
-        //UA call
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
         window.CATTDL.CATTParams = cdpm;
     } catch(e) {
-        var msg = 'GTM CATTDL Core MyAccount: '+e; console && ((console.error)?console.error(msg):console.log(msg));
+        var msg = 'GTM CATTDL CoreNoDataloaded: '+e; console && ((console.error)?console.error(msg):console.log(msg));
     }
     return w.CATTDL;
-}(window.jQuery, window.document, window, window.dataLayer, window.CATTDL))
-//</script>
+}(window.jQuery, window.document, window, window.dataLayer, window.CATTDL));
+</script>

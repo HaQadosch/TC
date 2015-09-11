@@ -1,4 +1,4 @@
-<script id='gtm_uatcdlLP'>
+<script id='GTM-P2C3FL_uatcdlLP'>
 (function gtm_uatcdlLP(cdl, dl, loc) {
     'use strict';
     if (cdl && cdl.CATTParams) try {
@@ -9,16 +9,11 @@
         var lochref = loc.href || document.URL || '';
         var lochost = location.hostname || location.host || '';
 
-
-        if (!window.ga || window.ga.length < 1)  {
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m); return window})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        };
-
         var myaccountactivation = /\/myaccount\/activate/.test(location.pathname)?'User_Activation':'';
 
         cdl.DL_uatc = {
             profileid       : 'UA-33036832-7',
-            cookiedomain    : twlh(/airtours/i)?"airtours.co.uk":(twlh(/club18-30/i)?"club18-30.com":(twlh(/directholidays/i)?"directholidays.co.uk":"thomascook.com")),
+            cookiedomain    : twlh(/airtours/i)?"airtours.co.uk":(twlh(/club18-30/i)?"club18-30.com":(twlh(/directholidays/i)?"directholidays.co.uk":(twlh(/staging.eceit/i)?"staging.eceit.net":(twlh(/thomascook.io/i)?"thomascook.io":"thomascook.com")))),
             location        : loc && loc.href || '',
             name            : 'CATTUATC',
             set             : {
@@ -33,6 +28,7 @@
                 dimensions      : {
                     dimension6      : {'appserver'          : cdpm.appserver || ''},
                     dimension12     : {'pageid'             : cdpm.pageid || ''},
+                    dimension14     : {'sessid'             : cdpm.sessionid || 'empty'},
                     dimension19     : {'errorcode'          : cdpm.errors || ""},
                     dimension30     : {'utmaguid'           : cdpm.utmaguid || ''},
                     dimension31     : {'utmbguid'           : cdpm.utmbguid || ''},
