@@ -127,7 +127,7 @@
                     dimension11     : {'holidaytype'                : cdpm.holidaytype || ''},
                     dimension12     : {'pageid'                     : cdpm.pageid || ''},
                     dimension13     : {'resortsearched'             : cdpm.srpparams && cdpm.srpparams.resort || ''},
-                    dimension14     : {'sessid'                     : cdpm.sessid || 'empty'},
+                    dimension14     : {'sessid'                     : cdpm.sessionid || 'empty'},
                     dimension15     : {'starrating'                 : cdpm.starrating || 'empty'},
                     dimension16     : {'accomcode'                  : cdpm.accomcode || 'empty'},
                     dimension17     : {'accomname'                  : cdpm.accomname || 'empty'},

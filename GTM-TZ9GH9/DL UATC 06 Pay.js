@@ -1,12 +1,12 @@
-<script id='gtm_uatcdlPax'>
-(function gtm_uatcdlPax(jQ, dl, cdl, loc){
+<script id='gtm_uatcdlPay'>
+(function gtm_uatcdlPay(jQ, dl, cdl, loc){
     'use strict';
-    if (jQ && cdl && cdl.CATTParams) try{
+    if (jQ && cdl && cdl.CATTParams) try {
         var twlh = cdl.twlh
         var twls = cdl.twls
         var ewls = cdl.ewls
         var cdpm = cdl.CATTParams
-        var cdurl = cdpm.urlparams;
+        var cdurl = cdpm && cdpm.urlparams
         var locpathname = cdurl && cdurl.pathname || loc.pathname || '';
         var locsearch = cdurl && cdurl.paramstring || loc.search || '';
         var lochref = cdurl && cdurl.fullurl || loc.href || '';
@@ -20,7 +20,7 @@
         var fltinbound = cdpm.flightdetails && cdpm.flightdetails.inbound;
         var flttype = (fltoutbound && fltoutbound.length && fltoutbound.length > 1)?'indirect':'direct';        
 
-        var vpagepath = '/vp/en/'+(cdpm.lob || 'angular')+'/'+(cdpm.holidaytype || 'angular')+'/'+(cdpm.pageid || 'angular');        
+        var vpagepath = '/vp/en/'+(cdpm.lob || 'angular')+'/'+(cdpm.holidaytype || 'angular')+'/'+(cdpm.pageid || 'angular');
         var vpqsp_cat   = ('ss_cat='+ 
                             (cdpm.lob || '')+'_'+
                             (cdpm.pageid || '')
@@ -44,9 +44,9 @@
                             '&accomname='+(cdpm.accomname || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+
                             '&duration='+(cdpm.duration || '')+
                             '&rooms='+(cdpm.rooms || '')+
-                            '&sessionid='+(cdpm.sessionid || '')                                                      
-                        ).toLowerCase();  
-        var vppage = (vpagepath || '') + '?' + (vpqsp_cat || '') +'&'+ (vpqsp_st || '') +'&'+ (vpqsp_p || '');
+                            '&sessionid='+(cdpm.sessionid || '')                                                    
+                        ).toLowerCase();          
+        var vppage = (vpagepath || '') + '?' + (vpqsp_cat || '') +'&'+ (vpqsp_st || '') +'&'+ (vpqsp_p || '');        
         cdl.DL_uatc = {
             profileid       : 'UA-33036832-7',
             cookiedomain    : twlh(/thomascook.io/i)?"thomascook.io":"thomascook.com",
@@ -61,7 +61,7 @@
                 page            : vppage,
                 qsp_st          : vpqsp_st,
                 qsp_cat         : vpqsp_cat,
-                qsp_p           : vpqsp_p,                 
+                qsp_p           : vpqsp_p, 
                 location        : lochref,
                 addproduct      : {
                     id              : cdpm.accomguid || '',
@@ -127,12 +127,12 @@
                     dimension11     : {'holidaytype'                : cdpm.holidaytype || ''},
                     dimension12     : {'pageid'                     : cdpm.pageid || ''},
                     dimension13     : {'resortsearched'             : cdpm.srpparams && cdpm.srpparams.resort || ''},
-                    dimension14     : {'sessid'                     : cdpm.sessid || 'empty'},
+                    dimension14     : {'sessid'                     : cdpm.sessionid || 'empty'},
                     dimension15     : {'starrating'                 : cdpm.starrating || 'empty'},
                     dimension16     : {'accomcode'                  : cdpm.accomcode || 'empty'},
                     dimension17     : {'accomname'                  : cdpm.accomname || 'empty'},
                     dimension18     : {'accomresort'                : cdpm.accomresort || 'empty'},
-                    dimension19     : {'errorcode'                  : ''+(cdpm.errors && cdpm.errors.errorcode || '')},
+                    dimension19     : {'errorcode'                  : ''+(cdpm.errors && cdpm.errors.errormsg && cdpm.errors.errormsg.length > 0 && (cdpm.errors.errorcode || "unknown") || "")},
                     dimension20     : {'touroperator'               : cdpm.touroperator || 'empty'},
                     dimension21     : {'destinationsearched'        : cdpm.srpparams && cdpm.srpparams.destination || ''},
                     dimension22     : {'destairport'                : cdpm.destairport || 'empty'},
@@ -150,7 +150,9 @@
                     dimension35     : {'paxchild'                   : ''+(cdpm.paxchild || '0')},
                     dimension36     : {'paxinfant'                  : ''+(cdpm.paxinfant || '0')},
                     dimension37     : {'paxtotal'                   : ''+(cdpm.paxtotal || '0')},
-                    dimension51     : {'gaguid'                     : cdpm.gaguid || '0'},
+                    dimension38     : {'paymentoption'              : cdpm.paymentoption || 'empty'},
+                    dimension39     : {'cardtype'                   : cdpm.cardtype || 'empty'},
+                    dimension51     : {'gaguid'                     : cdpm.gaguid || 'empty'},
                     dimension52     : {'anonymousid'                : window.userId || ''},
                     dimension53     : {'myaccountuserid'            : cdpm.user && cdpm.user.id || ''},
                     dimension55     : {'hittype'                    : 'page'},
@@ -160,13 +162,14 @@
                     dimension61     : {'roomcode3'                  : cdpm.roomcodes && cdpm.roomcodes[2] || ''},
                     dimension62     : {'roomcode4'                  : cdpm.roomcodes && cdpm.roomcodes[3] || ''},
                     dimension63     : {'roomcode5'                  : cdpm.roomcodes && cdpm.roomcodes[4] || ''},
-                    dimension64     : {'dreamcaptureid'             : cdpm.dreamcaptureid || ''}, 
-                    dimension65     : {'pagetimestamp'              : cdl.gadate(cdpm.pagetimestamp || 0)+' '+cdl.gatime(cdpm.pagetimestamp || 0) || ''},
+                    dimension64     : {'dreamcaptureid'             : cdpm.dreamcaptureid || ''},                    
+                    dimension65     : {'pagetimestamp'              : cdl.gadate && cdl.gatime && (cdl.gadate(cdpm.pagetimestamp || 0)+' '+cdl.gatime(cdpm.pagetimestamp || 0) || '')},
                     dimension68     : {'discountvalue'              : ''+(cdpm.discountvalue || 0)},
                     dimension69     : {'discountperc'               : ''+(cdpm.discountperc || 0)},                    
                     dimension75     : {'unixtimestamp'              : ''+(cdpm.pagetimestamp || 0) || ''},
                     dimension79     : {'flighttype'                 : flttype || ''},
                     dimension80     : {'basketid'                   : cdpm.tc_basket_id || ''},
+                    dimension101    : {'depositselected'            : cdpm.depositselected || 'empty'},                 
                     dimension103    : {'rooms'                      : cdpm.rooms && ''+cdpm.rooms || '0'},
                     dimension106    : {'arrivaltimeoutbound'        : cdl.gatime && fltoutbound && fltoutbound[0] && fltoutbound[0].arrive && cdl.gatime(fltoutbound[0].arrive.date) || ''},
                     dimension107    : {'departuretimeoutbound'      : cdl.gatime && fltoutbound && fltoutbound[0] && fltoutbound[0].depart && cdl.gatime(fltoutbound[0].depart.date) || ''},
@@ -190,10 +193,10 @@
             }
         }
     } catch(e) {
-        cdl.error('GTM UK TC UATCDL Pax: '+e)
+        cdl.error('GTM UK TC UATCDL Pay: '+e)
     } finally {
-        dl.push({'event': 'UATCDL Pax'})
-        window.dataLayer_TZ9GH9 && window.dataLayer_TZ9GH9.push({'event': 'UATCDL Pax'})
+        dl.push({'event': 'UATCDL Pay'})
+        window.dataLayer_TZ9GH9 && window.dataLayer_TZ9GH9.push({'event': 'UATCDL Pay'})
     }
     return cdl.DL_uatc
 }(window.jQuery, window.dataLayer || [], window.CATTDL, window.location))
