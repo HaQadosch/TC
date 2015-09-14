@@ -3,8 +3,8 @@
         'use strict';
         if (dl && cdl && cdpm) try {
             setTimeout(function() {
-                var mmb = /PaidItinerary/.test(cdpm.pageid || '')?"MMB_":"";
-                var mmbBookRef = /PaidItinerary/.test(cdpm.pageid || '')?("_MMB_"+new Date().toUTCString()):"";
+                var mmb = /PaidItinerary/i.test(cdpm.pageid || '')?"MMB_":"";
+                var mmbBookRef = /PaidItinerary/i.test(cdpm.pageid || '')?("_MMB_"+new Date().toUTCString()):"";
                 dl.push({
                     'transactionId': (cdpm.bookingref || '')+mmbBookRef,
                     'transactionDate': new Date().toUTCString(),
