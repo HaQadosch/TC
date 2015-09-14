@@ -49,7 +49,7 @@
           }).toLowerCase()
           , qsp_p : cdl.transpose('deptdate={dd}&depairport={dp}&paxadult={pa}&paxchild={pc}&boardbasis={bb}&destination={dt}&accomcode={ac}&accomname={an}&rooms={rm}&appserver={as}', {
               'dd': deptdate
-            , 'dp': cdpm.departureairportSelected || ''
+            , 'dp': cdpm.departureairportselected || ''
             , 'pa': cdpm.paxadult || ''
             , 'pc': cdpm.paxchild || ''
             , 'bb': boardbasis
