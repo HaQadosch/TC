@@ -2,9 +2,14 @@
   (function gtm_doubleclick(cdl, dl){
     'use strict';
     var cdpm = cdl && cdl.CATTParams || '';
-    var lands = JSON.parse(cdl.ckget('gtm_attr') || '[]');
-    var lastLand = lands[lands.length-1];
-    var ppcSession = Boolean(lastLand[0] || /ppc/i.test(lastLand[1]));
+    var ppcSession = false;
+    if (/itinerary.aspx/i.test(dlp)) {
+      ppcSession = cdpm.attribution && Boolean(cdpm.attribution.gclid || cdpm.attribution.utm_medium);
+    } else {
+      var lands = JSON.parse(cdl.ckget('gtm_attr') || '[]');
+      var lastLand = lands[lands.length-1];
+      ppcSession = lastLand && Boolean(lastLand[0] || /ppc/i.test(lastLand[1]));      
+    }
     if (cdl && dl && ppcSession) try {
       var dlp = document.location.pathname;
       var bkgParams = cdl.transpose(';num={num}', {
@@ -16,7 +21,7 @@
           , 'cost': cdpm.bookingvalue || 0
           , 'u1' : cdpm.departureairportselected || 'na'
           , 'u2' : cdpm.destinationairportselected || 'na'
-          , 'u3' : cdl.gadate(cdpm.deptdate || 0)
+          , 'u3' : cdl.gadate(cdpm.deptdateselected || 0)
           , 'u4' : cdl.gadate(cdpm.retdate || 0)
           , 'u5' : cdpm.basketcontent || '0'
           , 'u6' : cdpm.paxadult || '0'
