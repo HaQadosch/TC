@@ -1,4 +1,4 @@
-<script id='GTM-TGBQS9_dlcitybreaks'>
+<script id='GTM-TGBQS9_dlCityBreaks'>
     (function gtm_dlcitybreaks(cdl, jQ, dl){
         'use strict';
         if (jQ && cdl && !dl.some(function(a){return /CATTDL CityBreak/i.test(a && a.event || '');})  ) try{

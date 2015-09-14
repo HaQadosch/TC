@@ -85,6 +85,7 @@
                 , accomcode         : cdpm.accomcode || jQ('.basketPriceLine > .Header').text() || ""
                 , deptdate          : cdpm.deptdate || jQ(".CheckoutBasketTable th span:eq(0)").text() || ""
                 , retdate           : cdpm.retdate || jQ(".CheckoutBasketTable th span:eq(1)").text() || ""
+                , timestart         : timeStart
               });
 
               var paxInfo = jQ(".PassengerInfoTable tbody tr");
@@ -111,7 +112,7 @@
               cons && ((cons.error)?cons.error(msg):cons.log(msg));
             } finally {
               stampEpoch = +new Date();
-              dl.push({'event': 'core_'+(cdpm.pageid || ''), 'timestamp': stampEpoch, 'since gtm.start': stampEpoch - timeStart});
+              dl.push({'event': 'core_'+(cdpm.lob || ''), 'timestamp': stampEpoch, 'since gtm.start': stampEpoch - timeStart});
             }
             return jQ && dl && w.CATTDL;
           }(window.jQuery, d, w, dl, w.CATTDL));
