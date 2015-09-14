@@ -28,7 +28,7 @@
                         'paxtotal' : cdpm.paxtotal || '',
                         'paxadult' : cdpm.paxadult || '',
                         'paxchild' : cdpm.paxchild || '',
-                        'deptdate' : cdpm.deptdateselected || '',
+                        'deptdate' : cdl.gadate(cdpm.deptdateselected || 0),
                         'duration' : cdpm.durationselected || '',
                         'paymentoption' : cdpm.paymentoption || '',
                         'flighttype' : cdpm.flighttype || '',
@@ -37,7 +37,7 @@
                     'sku': cdl.transpose('{deptairport}|{destairport}|{deptdate}|{carrier}', {
                         'deptairport' : cdpm.departureairportselected || '',
                         'destairport' : cdpm.destinationairportselected || '',
-                        'deptdate' : cdpm.deptdateselected || '',
+                        'deptdate' : cdl.gadate(cdpm.deptdateselected || 0),
                         'carrier' : cdpm.carrier || ''
                     }),
                     'category': cdl.transpose('{mmb}{lob}|{holidaytype}', {
