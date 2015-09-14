@@ -6,7 +6,7 @@
       var timeStart = window.dataLayer
         .filter(function dlFilter(evt) {return evt['gtm.start'] || !1; })
         .map(function dlMap(evt) {return evt['gtm.start']; }) || 0;
-      if ( w && dl && !dl.some(function(a){return /lo dash/i.test(a && a.event || '');}) ) try {
+      if ( w && dl && !dl.some(function(a){return /lodash/i.test(a && a.event || '');}) ) try {
           w.CATTDL = w.CATTDL || {};
           var s = d.createElement('script'); s.async = true; s.src = 'https://cdnjs.cloudflare.com/ajax/libs/lodash-compat/3.10.0/lodash.min.js';
           var e = d.getElementsByTagName('script')[0]; e.parentNode.insertBefore(s, e);
