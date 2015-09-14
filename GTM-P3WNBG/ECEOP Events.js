@@ -1,4 +1,4 @@
-<script>
+<script id='gtm_eceopevts'>
 (function gtm_eceopevts(jQ, w, dl, loc) {
 	'use strict';
 		if (jQ) try{
