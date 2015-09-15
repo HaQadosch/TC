@@ -36,7 +36,7 @@
         var evtnoninteraction = false;
         var evtcategory = '';
 
-        if (/accom-flight-changeMonth/.test(cdom.id)) { evtcategory = 'Accom_Change_Month'}
+        if (/accom-flight-(changeMonth|nextMonth|previousMonth)/.test(cdom.id)) { evtcategory = 'Accom_Change_Month'}
         else if (/accom-flight-changeDestination/.test(cdom.id)) { evtcategory = 'Accom_Change_DeptAirport' }
         else if (/accom-flight-changeDuration/.test(cdom.id)) { evtcategory = 'Accom_Change_Duration' }
 
