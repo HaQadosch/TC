@@ -1,7 +1,7 @@
 <script id='GTM-KMVZTD_UATCConfirmationImp'>
   (function gtm_uatcConfirmationImp(jQ, cdl, uadl, w, d, dl){
     'use strict';
-    if (cdl && uadl && !dl.some(function(a){return /UATC ConfirmationImp/i.test(a && a.event || '');}) ) try {
+    if (cdl && uadl) try {
       var cdpm = cdl.CATTParams
       var ld = cdl._
       var trackerName = (uadl.name+".") || ""

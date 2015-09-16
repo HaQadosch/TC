@@ -1,7 +1,7 @@
 <script id='GTM-KMVZTD_UATCDLOffer'>
   (function gtm_uatcdlOffer(cdl, loc, dl){
     'use strict';
-    if (cdl && cdl.CATTParams && !dl.some(function(a){return /UATCDL Offer/i.test(a && a.event || '');}) ) try {
+    if (cdl && cdl.CATTParams) try {
       var ld = cdl._
       var cdpm = cdl.CATTParams || {}
       var locpathname = location.pathname || ''

@@ -1,7 +1,7 @@
 <script id='GTM-KMVZTD_UATCDLAccom'>
   (function gtm_uatcdAccom(cdl, loc, dl){
     'use strict';
-    if (cdl && cdl.CATTParams && !dl.some(function(a){return /UATCDL Accom/i.test(a && a.event || '');}) ) try {
+    if (cdl && cdl.CATTParams) try {
       var twlh = cdl.twlh
       var twls = cdl.twls
       var ewls = cdl.ewls

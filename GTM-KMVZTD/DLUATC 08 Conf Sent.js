@@ -1,7 +1,7 @@
 <script id='GTM-KMVZTD_UATCDLConfirmationSent'>
   (function gtm_uatcdlConfirmationSent(cdl, loc, dl){
     'use strict';
-    if (cdl && cdl.CATTParams && !dl.some(function(a){return /UATCDL ConfirmationSent/i.test(a && a.event || '');}) ) try {
+    if (cdl && cdl.CATTParams) try {
       var twlh = cdl.twlh
       var twls = cdl.twls
       var ewls = cdl.ewls
@@ -102,7 +102,7 @@
             , dimension40     : {'bookingref'                 : cdpm.bookingref || 'empty'}
             , dimension51     : {'gaguid'                     : cdpm.gaguid || 'empty'}
             , dimension55     : {'hittype'                    : 'page'}
-            , dimension56     : {'codeagence'                 : cdpm.codeagence || ''}
+            , dimension56     : {'codeagence'                 : cdpm.agencyname || ''}
             , dimension58     : {'accomguid'                  : cdpm.accomguid || 'empty'}
             , dimension71     : {'promocode'                  : cdpm.promotion && cdpm.promotion.code || ''}
             , dimension72     : {'promocode value'            : cdpm.promotion && cdpm.promotion.value || ''}
