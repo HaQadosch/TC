@@ -2,15 +2,15 @@
   (function gtm_uatcdlConfirmationSent(cdl, loc, dl){
     'use strict';
     if (cdl && cdl.CATTParams) try {
-      var twlh = cdl.twlh
-      var twls = cdl.twls
-      var ewls = cdl.ewls
-      var ld = cdl._
-      var cdpm = cdl.CATTParams || {}
-      var locpathname = location.pathname || ''
+      var twlh = cdl.twlh;
+      var twls = cdl.twls;
+      var ewls = cdl.ewls;
+      var ld = cdl._;
+      var cdpm = cdl.CATTParams || {};
+      var locpathname = location.pathname || '';
       var locsearch = location.search || '';
-      cdl.DL_uatc = {}
-      cdl.DL_uatc.webanalytics = {}
+      cdl.DL_uatc = {};
+      cdl.DL_uatc.webanalytics = {};
 
       ld.assign(cdl.DL_uatc, {
           profileid       : 'UA-65261977-1'
@@ -31,7 +31,7 @@
             , category        : ('en|'+(cdpm.lob || '')+'|'+(cdpm.holidaytype || '')).toLowerCase() || ""
             , brand           : (cdpm.touroperator || '').toLowerCase() || ""
             , variant         : ((cdpm.boardbasis || "")
-                                 +'|'+(cdpm.departureairportselected || "")
+                                 +'|'+(cdpm.departureairport || "")
                                  +'|'+(cdl.gadate && cdpm.deptdate && cdl.gadate(cdpm.deptdate) || "")
                                  +'|'+(cdl.gadate && cdpm.retdate && cdl.gadate(cdpm.retdate) || "")
                                  +'|'+(""+cdpm.paxtotal || "0")
@@ -71,7 +71,7 @@
             , metric45        : {'attractions_value'      : parseInt(cdpm.extras && cdpm.extras.attractions && +cdpm.extras.attractions.addedcost) || 0}
           }
           , dimensions      : {
-              dimension1      : {'deptairport'                : cdpm.departureairportselected || 'empty'}
+              dimension1      : {'deptairport'                : cdpm.departureairport || 'empty'}
             , dimension2      : {'destination'                : cdpm.destination || 'empty'}
             , dimension5      : {'deptdate'                   : cdl.gadate && cdpm.deptdate && cdl.gadate(cdpm.deptdate) || 'empty'}
             , dimension6      : {'appserver'                  : cdpm.appserver || 'empty'}
@@ -124,11 +124,11 @@
       })
 
     } catch(e) {
-      cdl.error('GTM FR TC MultiTO UATCDL ConfirmationSent: '+e)
+      cdl.error('GTM FR TC MultiTO UATCDL ConfirmationSent: '+e);
     } finally {
       var stampEpoch = +new Date();
-      dl.push({'event': 'UATCDL Confirmation Sent', 'pid': (cdpm.pageid || ''), 'timestamp': stampEpoch, 'since gtm.start': stampEpoch - window.dataLayer[0]['gtm.start']})
+      dl.push({'event': 'UATCDL Confirmation Sent', 'pid': cdpm.pageid || '', 'timestamp': stampEpoch, 'since gtm.start': stampEpoch - window.dataLayer[0]['gtm.start']})
     }
-    return cdl.DL_uatc
-   }(window.CATTDL, window.location, window.dataLayer))
+    return cdl.DL_uatc;
+   }(window.CATTDL, window.location, window.dataLayer));
 </script>
