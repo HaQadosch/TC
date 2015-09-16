@@ -1,16 +1,16 @@
 <script id='GTM-KMVZTD_UATCDLAccom'>
   (function gtm_uatcdAccom(cdl, loc, dl){
     'use strict';
-    if (cdl && cdl.CATTParams && !dl.some(function(a){return /UATCDL Accom/i.test(a && a.event || '');}) ) try {
-      var twlh = cdl.twlh
-      var twls = cdl.twls
-      var ewls = cdl.ewls
-      var ld = cdl._
-      var cdpm = cdl.CATTParams || {}
-      var locpathname = location.pathname || ''
-      var locsearch = location.search || ''
-      cdl.DL_uatc = {}
-      cdl.DL_uatc.webanalytics = {}
+    if (cdl && cdl.CATTParams) try {
+      var twlh = cdl.twlh;
+      var twls = cdl.twls;
+      var ewls = cdl.ewls;
+      var ld = cdl._;
+      var cdpm = cdl.CATTParams || {};
+      var locpathname = location.pathname || '';
+      var locsearch = location.search || '';
+      cdl.DL_uatc = {};
+      cdl.DL_uatc.webanalytics = {};
 
       ld.assign(cdl.DL_uatc, {
           profileid       : 'UA-65261977-1'
@@ -40,7 +40,7 @@
             , metric15        : {'hitcount'               : 1}
           }
           , dimensions      : {
-              dimension1      : {'deptairport'                : cdpm.departureairportselected || 'empty'}
+              dimension1      : {'deptairport'                : cdpm.departureairport || 'empty'}
             , dimension2      : {'destination'                : cdpm.destination || 'empty'}
             , dimension4      : {'searchresultstop3'          : cdpm.searchresultstop3 || 'empty'}
             , dimension5      : {'deptdate'                   : cdl.gadate && cdpm.deptdate && cdl.gadate(cdpm.deptdate) || 'empty'}
@@ -82,11 +82,11 @@
       })
 
     } catch(e) {
-      cdl.error('GTM FR TC MultiTO UATCDL Accom: '+e)
+      cdl.error('GTM FR TC MultiTO UATCDL Accom: '+e);
     } finally {
       var stampEpoch = +new Date();
-      dl.push({'event': 'UATCDL Accom', 'pid': (cdpm.pageid || ''), 'timestamp': stampEpoch, 'since gtm.start': stampEpoch - window.dataLayer[0]['gtm.start']})
+      dl.push({'event': 'UATCDL Accom', 'pid': cdpm.pageid || '', 'timestamp': stampEpoch, 'since gtm.start': stampEpoch - window.dataLayer[0]['gtm.start']})
     }
-    return cdl.DL_uatc
-   }(window.CATTDL, window.location, window.dataLayer))
+    return cdl.DL_uatc;
+   }(window.CATTDL, window.location, window.dataLayer));
 </script>

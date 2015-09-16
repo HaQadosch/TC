@@ -1,7 +1,7 @@
 <script id='GTM-KMVZTD_UATCOffer'>
   (function gtm_uatcOffer(jQ, cdl, uadl, w, d, dl){
     'use strict';
-    if (cdl && uadl && !dl.some(function(a){return /UATC Offer/i.test(a && a.event || '');}) ) try {
+    if (cdl && uadl) try {
       var cdpm = cdl.CATTParams
       var ld = cdl._
       var trackerName = (uadl.name+".") || ""
