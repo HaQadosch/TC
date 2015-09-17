@@ -18,10 +18,6 @@
         var fltinbound = cdpm.flightdetails && cdpm.flightdetails.inbound;
         var flttype = (fltoutbound && fltoutbound.length && fltoutbound.length > 1)?'indirect':'direct';
 
-        var alldates = jQ('div.body.calendar-body.animate-show #CalendarBody div.Event.hasEvent').length || 0;
-        var altdates = jQ('div.body.calendar-body.animate-show #CalendarBody div.Event.unavailableRoom').length || 0;
-        var seldate = jQ('div.body.calendar-body.animate-show #CalendarBody span.icon.airplaneE').length || 0;
-
         var vpagepath = '/vp/en/'+(cdpm.lob || 'angular')+'/'+(cdpm.holidaytype || 'angular')+'/'+(cdpm.pageid || 'angular');
         var vpqsp_cat   = ('ss_cat='+ 
                             (cdpm.lob || '')+'_'+
@@ -80,10 +76,7 @@
                     metric11        : {'depositvalue'           : parseInt(cdpm.depositvalue) || 0},
                     metric12        : {'discountvalue'          : parseInt(cdpm.discountvalue) || 0},
                     metric15        : {'hitcount'               : 1},
-                    metric29        : {'premiumcabin'           : parseInt(+cdpm.premiumcabin || 0)},
-                    metric51        : {'availabledates'         : alldates || 0},
-                    metric52        : {'alternativedates'       : altdates || 0},
-                    metric53        : {'selecteddates'          : seldate || 0}
+                    metric29        : {'premiumcabin'           : parseInt(+cdpm.premiumcabin || 0)}
                 },
                 dimensions      : {
                     dimension1      : {'deptairport'                : cdpm.deptairport || 'empty'},
