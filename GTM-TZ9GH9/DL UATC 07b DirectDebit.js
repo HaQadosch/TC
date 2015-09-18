@@ -1,5 +1,5 @@
-<script id='GTM-TZ9GH9_uatcdlSecure'>
-(function gtm_uatcdlSecure(jQ, dl, cdl, loc) {
+<script id='GTM-TZ9GH9_uatcdlDirectDebit'>
+(function gtm_uatcdlDirectDebit(jQ, dl, cdl, loc) {
     'use strict';
     if (jQ && cdl && cdl.CATTParams) try {
         var twlh = cdl.twlh
@@ -208,10 +208,10 @@
             }
         }
     } catch(e) {
-        cdl.error('GTM UK TC UATCDL Secure: '+e)
+        cdl.error('GTM UK TC UATCDL DirectDebit: '+e)
     } finally {
-        dl.push({'event': 'UATCDL Secure'})
-        window.dataLayer_TZ9GH9 && window.dataLayer_TZ9GH9.push({'event': 'UATCDL Secure'})
+        dl.push({'event': 'UATCDL DirectDebit'})
+        window.dataLayer_TZ9GH9 && window.dataLayer_TZ9GH9.push({'event': 'UATCDL DirectDebit'})
     }
     return cdl.DL_uatc
 }(window.jQuery, window.dataLayer || [], window.CATTDL, window.location))

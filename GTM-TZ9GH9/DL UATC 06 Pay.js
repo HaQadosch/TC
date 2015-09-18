@@ -1,4 +1,4 @@
-<script id='gtm_uatcdlPay'>
+<script id='GTM-TZ9GH9_uatcdlPay'>
 (function gtm_uatcdlPay(jQ, dl, cdl, loc){
     'use strict';
     if (jQ && cdl && cdl.CATTParams) try {
@@ -19,6 +19,15 @@
         var fltoutbound = cdpm.flightdetails && cdpm.flightdetails.outbound;
         var fltinbound = cdpm.flightdetails && cdpm.flightdetails.inbound;
         var flttype = (fltoutbound && fltoutbound.length && fltoutbound.length > 1)?'indirect':'direct';        
+        var installmentsnum = 0; var firstinstallmentdate = ""; var lastinstallmentdate = ""; var firstinstallmentval = 0; var lastinstallmentval = 0;
+        if (cdpm.paymentinstallments && cdpm.paymentinstallments.length > 0) {
+            var ins = cdpm.paymentinstallments || [];
+            installmentsnum = ins.length-1;
+            firstinstallmentdate = ins[1].duedate || '';
+            lastinstallmentdate = ins[ins.length].duedate || '';
+            firstinstallmentval = ins[1].value || '';
+            lastinstallmentval = ins[ins.length].value || '';
+        };
 
         var vpagepath = '/vp/en/'+(cdpm.lob || 'angular')+'/'+(cdpm.holidaytype || 'angular')+'/'+(cdpm.pageid || 'angular');
         var vpqsp_cat   = ('ss_cat='+ 
@@ -112,7 +121,11 @@
                     metric40        : {'taxitransfer value'     : +(cdpm.extras && cdpm.extras.taxitransfers && +cdpm.extras.taxitransfers.addedcost || 0)},
                     metric41        : {'carhire'                : parseInt(cdpm.extras && cdpm.extras.carhire && +cdpm.extras.carhire.selected || 0)},
                     metric42        : {'carhire value'          : +(cdpm.extras && cdpm.extras.carhire && +cdpm.extras.carhire.addedcost || 0)},
-                    metric43        : {'carhire_ownarrangement'     : parseInt(cdpm.extras && cdpm.extras.carhire_ownarrangement && +cdpm.extras.carhire_ownarrangement.selected || 0)}                    
+                    metric43        : {'carhire_ownarrangement'     : parseInt(cdpm.extras && cdpm.extras.carhire_ownarrangement && +cdpm.extras.carhire_ownarrangement.selected || 0)},
+                    metric55        : {'firstinstallmentvalue'      : +firstinstallmentval || 0},
+                    metric56        : {'lastinstallmentvalue'       : +lastinstallmentvalue || 0},
+                    metric57        : {'totalvaluedue'              : +lastinstallmentvalue || 0},
+                    metric58        : {'totalinstallments'          : +installmentsnum || 0}
                 },
                 dimensions      : {
                     dimension1      : {'deptairport'                : cdpm.deptairport || 'empty'},
@@ -169,6 +182,8 @@
                     dimension75     : {'unixtimestamp'              : ''+(cdpm.pagetimestamp || 0) || ''},
                     dimension79     : {'flighttype'                 : flttype || ''},
                     dimension80     : {'basketid'                   : cdpm.tc_basket_id || ''},
+                    dimension81     : {'firstinstallmentdate'       : cdl.gadate(firstinstallmentdate || 0) || ''},
+                    dimension82     : {'lastinstallmentdate'        : cdl.gadate(lasstinstallmentdate || 0) || ''},
                     dimension101    : {'depositselected'            : cdpm.depositselected || 'empty'},                 
                     dimension103    : {'rooms'                      : cdpm.rooms && ''+cdpm.rooms || '0'},
                     dimension106    : {'arrivaltimeoutbound'        : cdl.gatime && fltoutbound && fltoutbound[0] && fltoutbound[0].arrive && cdl.gatime(fltoutbound[0].arrive.date) || ''},

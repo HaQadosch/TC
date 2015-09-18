@@ -1,4 +1,4 @@
-<script id='gtm_cattdlDirectDebit'>
+<script id='GTM-P3WNBG_cattdlDirectDebit'>
 (function gtm_cattdlDirectDebit(jQ, dl, cdl) {
     'use strict'
     if (jQ && jQ.extend && cdl) try {
@@ -150,13 +150,16 @@
             var wgdItems = wgdSum.costingItem || {}
 
             //Payment
-            newPM['depositselected'] = wgD.selectedPaymentOption && wgD.selectedPaymentOption.id || "";
+            newPM['depositselected'] = (wgD.selectedPaymentOption && wgD.selectedPaymentOption.id || "").toLowerCase();
             newPM['depositvalue'] = wgD.selectedPaymentOption.paymentPortion[0] && wgD.selectedPaymentOption.paymentPortion[0].originalPrice || 0;
             newPM['paymentoption'] = wgD.selectedCard && wgD.selectedCard.name || "";
             newPM['paymentfee'] = wgD.selectedCard && wgD.selectedCard.fee && wgD.selectedCard.fee.actualValue || 0;
             newPM['paymentinstallments'] = wgdSum.paymentOptionsObj && wgdSum.paymentOptionsObj.paymentPortion && wgdSum.paymentOptionsObj.paymentPortion.map(function(e){return {'name': e.name, 'duedate': +new Date(e.dueDate), 'value': e.originalPrice} })
                 || wgD.selectedPaymentOption && wgD.selectedPaymentOption && wgD.selectedPaymentOption.paymentPortion && wgD.selectedPaymentOption.paymentPortion.map(function(e){return {'name': e.name, 'duedate': +new Date(e.dueDate), 'value': e.originalPrice} })
                 || [];
+            newPM['remainingbalance'] = wgdSum.paymentOptionsObj && wgdSum.paymentOptionsObj.remainingBalance 
+                || wgD.selectedPaymentOption && wgD.selectedPaymentOption.remainingBalance
+                || 0;
 
             //Extras
             newPM['extras'] = {};

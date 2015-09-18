@@ -136,8 +136,8 @@
                     metric42        : {'carhire value'              : +(cdpm.extras && cdpm.extras.carhire && +cdpm.extras.carhire.addedcost || 0)},
                     metric43        : {'carhire_ownarrangement'     : parseInt(cdpm.extras && cdpm.extras.carhire_ownarrangement && +cdpm.extras.carhire_ownarrangement.selected || 0)},
                     metric55        : {'firstinstallmentvalue'      : +firstinstallmentval || 0},
-                    metric56        : {'lastinstallmentvalue'       : +lastinstallmentvalue || 0},
-                    metric57        : {'totalvaluedue'              : +lastinstallmentvalue || 0},
+                    metric56        : {'lastinstallmentvalue'       : +lastinstallmentval || 0},
+                    metric57        : {'totalvaluedue'              : +totalvaluedue || 0},
                     metric58        : {'totalinstallments'          : +installmentsnum || 0}
                 },
                 dimensions      : {
