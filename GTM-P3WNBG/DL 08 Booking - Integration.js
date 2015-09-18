@@ -155,7 +155,8 @@
             newPM['paymentfee'] = wgD.paymentDetails && wgD.paymentDetails.transactionDetails.fee || 0;
             newPM['paymentinstallments'] = wgdSum.paymentOptionsObj && wgdSum.paymentOptionsObj.paymentPortion && wgdSum.paymentOptionsObj.paymentPortion.map(function(e){return {'name': e.name, 'duedate': +new Date(e.dueDate), 'value': e.originalPrice} })
                 || wgD.selectedPaymentOption && wgD.selectedPaymentOption && wgD.selectedPaymentOption.paymentPortion && wgD.selectedPaymentOption.paymentPortion.map(function(e){return {'name': e.name, 'duedate': +new Date(e.dueDate), 'value': e.originalPrice} })
-                || []
+                || [];
+                
             //Extras
             newPM['extras'] = {};
             wgdItems.forEach(function(e){

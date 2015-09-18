@@ -1,30 +1,22 @@
-<script id='gtm_cattdlSecure'>
-(function gtm_cattdlSecure(jQ, dl, cdl) {
+<script id='GTM-P3WNBG_cattdlPax'>
+(function gtm_cattdlPax(jQ, dl, cdl) {
     'use strict'
     if (jQ && jQ.extend && cdl) try {
         var cdpm = cdl.CATTParams
         var newPM = {};
         var keeps = {};
-
         cdpm.errors = {};
         var errorPM = {};       
 
-        var wgetData = window.getPageData && window.getPageData('/payment') || {}
-        var wgdPkg = wgetData && wgetData.package || {}
-
-
-        /*window.sessionStorage && window.sessionStorage.setItem('gtm_errorPS', '1')*/
-        var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
-        params.errors = {};
-        params.errors.secure = 1
-        CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', '.thomascook.com');    
+        var wgD = window.getPageData && window.getPageData(cdpm.urlparams && cdpm.urlparams.pathname) || {}
+        var wgdPkg = wgD && wgD.package || {}
+        var wgdSum = wgD.costSummary || {};
 
         cdpm.lob = "package"
         cdpm.holidaytype = "generic-angular"
         cdpm.pagecontext = "angular"
         cdpm.sessionid = window.sessionToken || "";
-        cdpm.tc_basket_id = JSON.parse(cdl.ckget('tc_basket_id')) || '';
-        
+
         if (wgdPkg) {
             cdpm.holidaytype =  (/MULTICOM/i.test(wgdPkg.provider || '')) && (wgdPkg.brandCode == 'Z')?'flexitrips-angular':((/MULTICOM/i.test(wgdPkg.provider || '')) && (wgdPkg.brandCode !== 'Z')?'multi-angular':'package-angular')
 
@@ -33,7 +25,7 @@
             newPM['accomcountry'] = wgdPath.length > 0 && (wgdPath[0] || "").trim() || ''
             newPM['accomregion'] = wgdPath.length > 1 && (wgdPath[1] || "").trim() || ''
             newPM['accomresort'] = wgdPath.length > 2 && (wgdPath[2] || "").trim() ||  wgdPkg.accomodationList && wgdPkg.accomodationList[0] && wgdPkg.accomodationList[0].resortName || ''
-            newPM['starrating'] = wgdPkg.content.starRating || ""
+            newPM['starrating'] = wgdPkg.content && wgdPkg.content.starRating || ""
             newPM['touroperator'] = wgdPkg.brandCode || ""
             newPM['accomname'] = wgdPkg.content && wgdPkg.content.hotelName || wgdPkg.accomodationList && wgdPkg.accomodationList[0] && wgdPkg.accomodationList[0].hotelName || ""
             newPM['accomcode'] = ((/tosCode=([^&]+)/.exec(wgdPkg.contentUrl || '') || ['']).pop()) || (wgdPkg.accomodationList && wgdPkg.accomodationList[0] && (wgdPkg.accomodationList[0].hotelCode || "").replace("|","-"))|| ""
@@ -151,75 +143,58 @@
             newPM['paxtotal'] = newPM['paxadult']+newPM['paxchild']+newPM['paxinfant']
             newPM['rooms'] = newPM['paxadultperroom'].length
 
-            newPM['totalprice'] = wgetData.costSummary.grossAmount || 0;
+            newPM['totalprice'] = wgdSum.grossAmount || 0;
             newPM['pricepp'] = newPM.totalprice/(newPM.paxtotal || 1) || 0  
-            newPM['discountvalue'] = Math.abs(wgetData.costSummary && wgetData.costSummary.discountAmount || 0);
+            newPM['discountvalue'] = Math.abs(wgdSum.discountAmount || 0);
             newPM['discountperc'] = Math.round(newPM.discountvalue*100 / Math.abs(newPM.totalprice || 1))
-            var wgdCost = wgetData && wgetData.costSummary.costingItem || {}
-
-            //Payment
-            newPM['depositselected'] = wgetData.selectedPaymentOption && wgetData.selectedPaymentOption.id || "";
-            newPM['depositvalue'] = wgetData.selectedPaymentOption.paymentPortion[0] && wgetData.selectedPaymentOption.paymentPortion[0].originalPrice || 0;
-            newPM['paymentoption'] = wgetData.selectedCard && wgetData.selectedCard.name || "";
-            newPM['paymentfee'] = wgetData.selectedCard && wgetData.selectedCard.fee && wgetData.selectedCard.fee.actualValue || 0;
+            var wgdItems = wgdSum.costingItem || {}
 
             //Extras
-            newPM['extras'] ={}
-            var curCost = []
-            for (var i = 0; i < wgdCost.length; i++) {
-                curCost = wgdCost[i]
-                if (curCost.title) {
-                    var selectedExtra = (curCost.title == "Charitable donation")?'donation':
-                                            ((/luggage allowance/i.test(curCost.title))?'luggage':
-                                                ((curCost.title == "Late Booking Fee")?'latefees':
-                                                    ((curCost.title == "Infant Flight")?'infantflight':
-                                                        ((curCost.title == "In-flight meals")?'inflightmeals':
-                                                            ((curCost.title == "Choose your seat")?'seats':
-                                                                ((curCost.title == "3 for the price of 2")?'promo3for2':
-                                                                    ((/airport transfer/i.test(curCost.title))?'transfers':
-                                                                        ((/taxi transfer/i.test(curCost.title))?'taxitransfers':
-                                                                            ((curCost.title == "Flexible terms")?'flexibleterms':
-                                                                                ((curCost.title == "Travel insurance")?'insurance':
-                                                                                    ((curCost.title == "Premium cabin")?'premiumcabin':
-                                                                                        ((curCost.title == "Car hire" && curCost.description !=='No Car - Own Arrangements')?'carhire':
-                                                                                            ((curCost.title == "Car hire" && curCost.description ==='No Car - Own Arrangements')?'carhire_ownarrangement':('na'))
-                                                                                        )
-                                                                                    )
-                                                                                )
-                                                                            )
-                                                                        )
-                                                                    )
-                                                                )
-                                                            )
-                                                        )
-                                                    )
-                                                )
-                                            )
+            newPM['extras'] = {};
+            wgdItems.forEach(function(e){
+                if (e.title) {
+                    var selectedExtra = ({
+                                        "Charitable donation"           : "donation"
+                                        ,"Late Booking Fee"             : "latefees"
+                                        ,"Infant Flight"                : "infantflight"
+                                        ,"In-flight meals"              : "inflightmeals"
+                                        ,"Choose your seat"             : "seats"
+                                        ,"3 for the price of 2"         : "promo3for2"
+                                        ,"Private taxi transfer"        : "taxitransfers"
+                                        ,"Standard airport transfers"   : "transfers"
+                                        ,"Flexible terms"               : "flexibleterms"
+                                        ,"Travel insurance"             : "insurance"
+                                        ,"Premium cabin"                : "premiumcabin"
+                                        ,"Car hire"                     : "carhire"
+                                        ,"Extra luggage allowance"      : "luggage"
+                                        ,"Luggage allowance"            : "luggage"
+                                    })[e.title]
+                    if (selectedExtra === 'carhire' && e.description ==='No Car - Own Arrangements'){ selectedExtra = 'carhire_ownarrangement' }
                     newPM['extras'][selectedExtra] = {
                         selected    : true,
-                        description : curCost.description || '',
-                        cost        : curCost.unitCost || 0,
-                        addedcost   : curCost.extendedCost || 0,
-                        quantity    : curCost.quantity || 1
+                        description : e.description || '',
+                        cost        : e.unitCost || 0,
+                        addedcost   : e.extendedCost || 0,
+                        quantity    : e.quantity || 1
                     }
                 }
-            };
+            });
             jQ.extend(cdpm, newPM, keeps);
         }
-        if (wgetData.response && wgetData.response.error){
-            errorPM['errorcode'] = wgetData.response.error.code || "";
-            errorPM['errormsg'] =  wgetData.response.error.description;
+        if (wgD.response && wgD.response.error){
+            errorPM['errorcode'] = wgD.response.error.code || "";
+            errorPM['errormsg'] =  wgD.response.error.description;
             jQ.extend(cdpm.errors, errorPM);
         }
 
         window.CATTDL.CATTParams = cdpm;
     } catch(e) {
-        cdl.error('GTM CATTDL Secure: '+e)
+        cdl.error('GTM CATTDL Pax: '+e)
     } finally {
         dl.push({'event': 'pid_'+cdl.CATTParams.pageid});
-        dl.push({'event': 'CATTDL Secure'})
-        window.dataLayer_TZ9GH9 && window.dataLayer_TZ9GH9.push({'event': 'CATTDL Secure'})
+        dl.push({'event': 'CATTDL Pax'})
+        gatcDL.push({'event': 'CATTDL Pax'})
     }
-    return jQ && jQ.extend && cdl
+    return cdl
 }(window.jQuery, window.dataLayer, window.CATTDL))
 </script>
