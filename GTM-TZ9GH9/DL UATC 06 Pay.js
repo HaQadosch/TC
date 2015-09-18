@@ -20,7 +20,7 @@
         var fltinbound = cdpm.flightdetails && cdpm.flightdetails.inbound;
         var flttype = (fltoutbound && fltoutbound.length && fltoutbound.length > 1)?'indirect':'direct';        
         var installmentsnum = 0; var firstinstallmentdate = ""; var lastinstallmentdate = ""; var firstinstallmentval = 0; var lastinstallmentval = 0;
-        if (cdpm.paymentinstallments && cdpm.paymentinstallments.length > 0) {
+        if (cdpm.paymentinstallments && cdpm.paymentinstallments.length > 1) {
             var ins = cdpm.paymentinstallments || [];
             installmentsnum = ins.length-1;
             firstinstallmentdate = ins[1].duedate || '';
