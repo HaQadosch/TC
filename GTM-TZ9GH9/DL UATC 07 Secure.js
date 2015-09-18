@@ -24,9 +24,9 @@
             var ins = cdpm.paymentinstallments || [];
             installmentsnum = ins.length-1;
             firstinstallmentdate = ins[1].duedate || '';
-            lastinstallmentdate = ins[ins.length].duedate || '';
+            lastinstallmentdate = ins[installmentsnum].duedate || '';
             firstinstallmentval = ins[1].value || '';
-            lastinstallmentval = ins[ins.length].value || '';
+            lastinstallmentval = ins[installmentsnum].value || '';
         };
 
         var vpagepath = '/vp/en/'+(cdpm.lob || 'angular')+'/'+(cdpm.holidaytype || 'angular')+'/'+(cdpm.pageid || 'angular');
@@ -122,10 +122,10 @@
                     metric41        : {'carhire'                    : parseInt(cdpm.extras && cdpm.extras.carhire && +cdpm.extras.carhire.selected || 0)},
                     metric42        : {'carhire value'              : +(cdpm.extras && cdpm.extras.carhire && +cdpm.extras.carhire.addedcost || 0)},
                     metric43        : {'carhire_ownarrangement'     : parseInt(cdpm.extras && cdpm.extras.carhire_ownarrangement && +cdpm.extras.carhire_ownarrangement.selected || 0)},
-                    metric55        : {'firstinstallmentvalue'      : +firstinstallmentval || 0},
-                    metric56        : {'lastinstallmentvalue'       : +lastinstallmentvalue || 0},
-                    metric57        : {'totalvaluedue'              : +lastinstallmentvalue || 0},
-                    metric58        : {'totalinstallments'          : +installmentsnum || 0}
+                    metric55        : {'firstinstallmentvalue'      : +(firstinstallmentval || 0)},
+                    metric56        : {'lastinstallmentvalue'       : +(lastinstallmentval || 0)},
+                    metric57        : {'totalvaluedue'              : +(cdpm.remainingbalance || 0)},
+                    metric58        : {'totalinstallments'          : +(installmentsnum || 0)}
                 },
                 dimensions      : {
                     dimension1      : {'deptairport'                : cdpm.deptairport || 'empty'},
@@ -182,8 +182,8 @@
                     dimension75     : {'unixtimestamp'              : ''+(cdpm.pagetimestamp || 0) || ''},
                     dimension79     : {'flighttype'                 : flttype || ''},
                     dimension80     : {'basketid'                   : cdpm.tc_basket_id || ''},
-                    dimension81     : {'firstinstallmentdate'       : cdl.gadate(firstinstallmentdate || 0) || ''},
-                    dimension82     : {'lastinstallmentdate'        : cdl.gadate(lasstinstallmentdate || 0) || ''},
+                    dimension81     : {'firstinstallmentdate'       : firstinstallmentdate && cdl.gadate(firstinstallmentdate) || ''},
+                    dimension82     : {'lastinstallmentdate'        : lastinstallmentdate && cdl.gadate(lastinstallmentdate) || ''},
                     dimension101    : {'depositselected'            : cdpm.depositselected || 'empty'},                 
                     dimension103    : {'rooms'                      : cdpm.rooms && ''+cdpm.rooms || '0'},
                     dimension106    : {'arrivaltimeoutbound'        : cdl.gatime && fltoutbound && fltoutbound[0] && fltoutbound[0].arrive && cdl.gatime(fltoutbound[0].arrive.date) || ''},
