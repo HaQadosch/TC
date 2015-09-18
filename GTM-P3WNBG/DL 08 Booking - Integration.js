@@ -24,7 +24,7 @@
             newPM['accomcountry'] = wgdPath.length > 0 && (wgdPath[0] || "").trim() || ''
             newPM['accomregion'] = wgdPath.length > 1 && (wgdPath[1] || "").trim() || ''
             newPM['accomresort'] = wgdPath.length > 2 && (wgdPath[2] || "").trim() ||  wgdPkg.accomodationList && wgdPkg.accomodationList[0] && wgdPkg.accomodationList[0].resortName || ''
-            newPM['starrating'] = wgdPkg.content.starRating || ""
+            newPM['starrating'] = wgdPkg.content && wgdPkg.content.starRating || ""
             newPM['touroperator'] = wgdPkg.brandCode || ""
             newPM['accomname'] = wgdPkg.content && wgdPkg.content.hotelName || wgdPkg.accomodationList && wgdPkg.accomodationList[0] && wgdPkg.accomodationList[0].hotelName || ""
             newPM['accomcode'] = ((/tosCode=([^&]+)/.exec(wgdPkg.contentUrl || '') || ['']).pop()) || (wgdPkg.accomodationList && wgdPkg.accomodationList[0] && (wgdPkg.accomodationList[0].hotelCode || "").replace("|","-"))|| ""
@@ -153,8 +153,9 @@
             newPM['depositvalue'] = wgD.paymentDetails && wgD.paymentDetails.transactionDetails && wgD.paymentDetails.transactionDetails.amount || 0;
             newPM['paymentoption'] =  wgD.paymentDetails && wgD.paymentDetails.cardDetails.cardType && 'card' || '';
             newPM['paymentfee'] = wgD.paymentDetails && wgD.paymentDetails.transactionDetails.fee || 0;
-            newPM['paymentinstallments'] = wgdSum.paymentOptionsObj && wgdSum.paymentOptionsObj.paymentPortion && wgdSum.paymentOptionsObj.paymentPortion.map(function(e){return {'name': e.name, 'due_date': +new Date(e.dueDate), 'value': e.originalPrice} })
-            
+            newPM['paymentinstallments'] = wgdSum.paymentOptionsObj && wgdSum.paymentOptionsObj.paymentPortion && wgdSum.paymentOptionsObj.paymentPortion.map(function(e){return {'name': e.name, 'duedate': +new Date(e.dueDate), 'value': e.originalPrice} })
+                || wgD.selectedPaymentOption && wgD.selectedPaymentOption && wgD.selectedPaymentOption.paymentPortion && wgD.selectedPaymentOption.paymentPortion.map(function(e){return {'name': e.name, 'duedate': +new Date(e.dueDate), 'value': e.originalPrice} })
+                || []
             //Extras
             newPM['extras'] = {};
             wgdItems.forEach(function(e){
@@ -167,7 +168,6 @@
                                         ,"Choose your seat"             : "seats"
                                         ,"3 for the price of 2"         : "promo3for2"
                                         ,"Private taxi transfer"        : "taxitransfers"
-                                        ,"airport transfer"             : "transfers"
                                         ,"Standard airport transfers"   : "transfers"
                                         ,"Flexible terms"               : "flexibleterms"
                                         ,"Travel insurance"             : "insurance"

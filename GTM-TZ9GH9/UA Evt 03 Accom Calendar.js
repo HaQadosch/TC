@@ -41,12 +41,6 @@
         else if (/accom-flight-changeDuration/.test(cdom.id)) { evtcategory = 'Accom_Change_Duration' }
 
         setTimeout(function CallGA(){
-            var alldates = jQ('div.body.calendar-body.animate-show #CalendarBody div.Event.hasEvent').length || 0;
-            var altdates = jQ('div.body.calendar-body.animate-show #CalendarBody div.Event.unavailableRoom').length || 0;
-            var seldate = jQ('div.body.calendar-body.animate-show #CalendarBody span.icon.airplaneE').length || 0;
-            // var depairport = jQ('[analytics-id*=accom-flight-changeDestination] option[selected="selected"]').attr('label') || '';
-            // var depmonth = jQ('[analytics-id*=accom-flight-changeMonth] option[selected="selected"]').attr('label') || '';
-            // var duration = jQ('[analytics-id*=accom-flight-changeDuration] option[selected="selected"]').attr('label') || '';
             var options = { 
                     'page'           : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
                     , 'dimension1'   : cdpm.deptairport || ''
@@ -65,9 +59,6 @@
                     , 'dimension118' : (cdurl && cdurl.pathname || location.pathname || '')
                     , 'dimension119' : (cdurl && cdurl.paramstring || location.search || '')
                     , 'metric15'     : 1
-                    , 'metric51'     : alldates || 0
-                    , 'metric52'     : altdates || 0
-                    , 'metric53'     : seldate || 0
             };
 
             if (evtcategory == 'Accom_Change_DeptAirport') {options.dimension1 = evtaction};
@@ -76,7 +67,7 @@
                 GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
             }
         
-        }(),1000);
+        }(),200);
 
     } catch(e) {
         cdl.error('GTM Evt 03 Accom Calender: '+e)
