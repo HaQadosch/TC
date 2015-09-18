@@ -77,12 +77,16 @@
                 , evtlabel
                 , 1
                 , { 'page'          : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                    ,'dimension10'  : cdpm.lob || ''
+                    ,'dimension11'  : cdpm.holidaytype || ''
+                    ,'dimension12'  : cdpm.pageid || ''
                     ,'dimension51'  : cdpm.gaguid || 'empty'
                     ,'dimension55'  : 'event'
                     ,'dimension65'  : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
                     ,'dimension75'  : ''+(window.Date && window.Date.now() || 0)
                     ,'dimension118' : (cdurl && cdurl.pathname || location.pathname || '')
                     ,'dimension119' : (cdurl && cdurl.paramstring || location.search || '')
+                    ,'metric15'     : 1
                     ,'metric51'     : alldates || 0
                     ,'metric52'     : altdates || 0
                     ,'metric53'     : seldate || 0
