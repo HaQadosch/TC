@@ -119,7 +119,11 @@
         }
       });
     } catch(e) {
+<<<<<<< HEAD
+      cdl.error('GTM DLGATC DH Conf: '+e);
+=======
       cdl.error('GTM DLGATC Club1830 Conf: '+e);
+>>>>>>> master
     } finally {
       stampEpoch = +new Date();
       dl.push({'event': 'GATCDL Conf', 'pid': cdpm.pageid || '', 'timestamp': stampEpoch, 'since gtm.start': stampEpoch - timeStart});
