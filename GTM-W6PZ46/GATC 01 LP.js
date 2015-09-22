@@ -1,4 +1,4 @@
-<script id='GTM-T2F7Z5_GATCLP'>
+<script id='GTM-W6PZ46_GATCLP'>
   (function gtm_gatcLP(dl, jQ, cdl, gadl, w, d) {
     'use strict';
     var timeStart = window.dataLayer
@@ -39,11 +39,11 @@
         as[i].onclick=function extClick(){wgp([tn+"_trackEvent","outbound link","click",this.href.split("//")[1],1,true]);aOnClick();};
       }
     } catch(e) {
-      cdl.error('GTM UK DH GATC LP: '+e);
+      cdl.error('GTM UK Airtours GATC LP: '+e);
     } finally {
       stampEpoch = +new Date();
       dl.push({'event': 'GATC LP', 'pid': cdpm.pageid || '', 'timestamp': stampEpoch, 'since gtm.start': stampEpoch - timeStart});
     }
     return cdl && gadl;
-  }(window.dataLayer_T2F7Z5, window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_gatc, window, document));
+  }(window.dataLayer_W6PZ46, window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_gatc, window, document));
 </script>
