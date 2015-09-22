@@ -1,9 +1,15 @@
 <script id='GTM-T2F7Z5_GATCDLConf'>
   (function gtm_gatcdlConf(cdl, dl, loc){
-    'use strict'
+    'use strict';
+    var timeStart = window.dataLayer
+    .filter(function dlFilter(evt) {return evt['gtm.start'] || !1; })
+    .map(function dlMap(evt) {return evt['gtm.start']; })
+    .pop() || 0;
+    var stampEpoch = +new Date();    
+    var cdpm = {};
     if (cdl && cdl.CATTParams && !dl.some(function(a){return /GATCDL Conf/i.test(a && a.event || '');}) ) try {
       var ld = cdl._;
-      var cdpm = cdl.CATTParams || {};
+      cdpm = cdl.CATTParams || {};
       cdl.DL_gatc = cdl.DL_gatc || {};
       cdl.DL_gatc.webanalytics = cdl.DL_gatc.webanalytics || {};
 
@@ -103,11 +109,11 @@
             , country       : ''
           }
           , additem  : {
-              transactionid   : (cdpm.bookingref || '')
+              transactionid   : cdpm.bookingref || ''
             , productsku      : (cdpm.destination || '')+'|'+(cdpm.destairport || '')+'|'+(cdpm.accomresort || '')+'|'+(cdpm.touroperator   || '')
             , productname     : (cdpm.accomname || '')+'|'+(cdpm.accomcode || '')+'|'+(cdpm.deptairport || '')+'|'+(cdpm.paxtotal || '')+'|'+(cdpm.paxadult || '')+'|'+(cdpm.paxchild || '')+'|'+(cdpm.deptdate && cdl.gadate(cdpm.deptdate) || '')+'|'+(cdpm.duration || '')+'|'+(cdpm.paymentoption || '')
             , productcategory : (cdpm.lob || '')+'|'+(cdpm.holidaytype || '')
-            , unitprice       : (cdpm.bookingvalue || 0)
+            , unitprice       : cdpm.bookingvalue || 0
             , quantity        : '1'
           }
         }
@@ -115,8 +121,8 @@
     } catch(e) {
       cdl.error('GTM DLGATC DH Conf: '+e);
     } finally {
-      var stampEpoch = +new Date();
-      dl.push({'event': 'GATCDL Conf', 'pid': (cdpm.pageid || ''), 'timestamp': stampEpoch, 'since gtm.start': stampEpoch - window.dataLayer[0]['gtm.start']});
+      stampEpoch = +new Date();
+      dl.push({'event': 'GATCDL Conf', 'pid': cdpm.pageid || '', 'timestamp': stampEpoch, 'since gtm.start': stampEpoch - timeStart});
     }
     return window.DL_gatc;
   }(window.CATTDL, window.dataLayer_T2F7Z5, document.location));

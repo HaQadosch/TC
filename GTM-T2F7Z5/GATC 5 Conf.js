@@ -1,8 +1,14 @@
 <script id='GTM-T2F7Z5_GATCConf'>
   (function gtm_gatcConf(dl, jQ, cdl, gadl, w, d){
     'use strict';
+    var timeStart = window.dataLayer
+    .filter(function dlFilter(evt) {return evt['gtm.start'] || !1; })
+    .map(function dlMap(evt) {return evt['gtm.start']; })
+    .pop() || 0;
+    var stampEpoch = +new Date();
+    var cdpm = {};
     if (cdl && gadl && !dl.some(function(a){return /GATC Conf/i.test(a && a.event || '');}) ) try {
-      var cdpm = cdl.CATTParams || {};
+      cdpm = cdl.CATTParams || {};
       var tn = gadl.trackername+'.' || '';
       var gawa = gadl.webanalytics || {};
       w._gaq = w._gaq || [];
@@ -42,8 +48,8 @@
     } catch(e) {
       cdl.error('GTM UK DH GATC Conf: '+e);
     } finally {
-      var stampEpoch = +new Date();
-      dl.push({'event': 'GATC Conf', 'pid': (cdpm.pageid || ''), 'timestamp': stampEpoch, 'since gtm.start': stampEpoch - window.dataLayer[0]['gtm.start']});
+      stampEpoch = +new Date();
+      dl.push({'event': 'GATC Conf', 'pid': (cdpm.pageid || ''), 'timestamp': stampEpoch, 'since gtm.start': stampEpoch - timeStart});
     }
     return cdl && gadl;
   }(window.dataLayer_T2F7Z5, window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_gatc, window, document));

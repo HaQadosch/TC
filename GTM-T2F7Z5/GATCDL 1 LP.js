@@ -1,9 +1,15 @@
 <script id='GTM-T2F7Z5_GATCDLLP'>
   (function gtm_gatcdlLP(cdl, dl, loc) {
     'use strict';
+    var timeStart = window.dataLayer
+    .filter(function dlFilter(evt) {return evt['gtm.start'] || !1; })
+    .map(function dlMap(evt) {return evt['gtm.start']; })
+    .pop() || 0;
+    var stampEpoch = +new Date();
+    var cdpm = {};
     if (cdl && !dl.some(function(a){return /GATCDL LP/i.test(a && a.event || '');}) ) try {
       var ld = cdl._;
-      var cdpm = cdl.CATTParams || {};
+      cdpm = cdl.CATTParams || {};
       cdl.DL_gatc = cdl.DL_gatc || {};
       cdl.DL_gatc.webanalytics = cdl.DL_gatc.webanalytics || {};
 
@@ -13,10 +19,10 @@
       var boardbasis = (cdpm.boardbasis || '').replace(/\&amp;/g, '-').replace(/\&/g, '-');
 
       var cdpmVP = cdl.transpose('/vp/{lob}/{hlt}/{pid}', {
-              'lob': cdpm.lob || ''
-            , 'hlt': cdpm.holidaytype || ''
-            , 'pid': cdpm.pageid || ''
-          }).toLowerCase();
+          'lob': cdpm.lob || ''
+        , 'hlt': cdpm.holidaytype || ''
+        , 'pid': cdpm.pageid || ''
+      }).toLowerCase();
 
       ld.assign(cdl.DL_gatc, {
           profileid     : 'UA-33029666-1'
@@ -60,10 +66,10 @@
             , 'as': cdpm.appserver || ''
           }).toLowerCase()
           , customvars : {
-              custvar02 : {'index': 2,  'name':'AppServer',        'value':(cdpm.appserver || ''),          'scope': 3}
-            , custvar04 : {'index': 4,  'name':'InternalCampaign', 'value':(cdpm.internalcampaignid || ''), 'scope': 3}
-            , custvar30 : {'index': 30, 'name':'UtmaGuid',         'value':(cdpm.utmaguid || ''),           'scope': 1}
-            , custvar35 : {'index': 35, 'name':'UtmbGuid',         'value':(cdpm.utmbguid || ''),           'scope': 2}
+              custvar02 : {'index': 2,  'name':'AppServer',        'value':cdpm.appserver || '',          'scope': 3}
+            , custvar04 : {'index': 4,  'name':'InternalCampaign', 'value':cdpm.internalcampaignid || '', 'scope': 3}
+            , custvar30 : {'index': 30, 'name':'UtmaGuid',         'value':cdpm.utmaguid || '',           'scope': 1}
+            , custvar35 : {'index': 35, 'name':'UtmbGuid',         'value':cdpm.utmbguid || '',           'scope': 2}
           }
           , events : {
               internalcampaignid : {'category': 'InternalCampaign', 'action': cdpm.internalcampaignid || '', 'label': cdpmVP+'_'+loc.host, 'value': 1, 'noninteraction': true}
@@ -75,8 +81,8 @@
     } catch(e) {
       cdl.error('GTM UK DH GATCDL LP: '+e);
     } finally {
-      var stampEpoch = +new Date();
-      dl.push({'event': 'GATCDL LP', 'pid': (cdpm.pageid || ''), 'timestamp': stampEpoch, 'since gtm.start': stampEpoch - window.dataLayer[0]['gtm.start']});
+      stampEpoch = +new Date();
+      dl.push({'event': 'GATCDL LP', 'pid': cdpm.pageid || '', 'timestamp': stampEpoch, 'since gtm.start': stampEpoch - timeStart});
     }
     return cdl.DL_gatc;
   }(window.CATTDL, window.dataLayer_T2F7Z5, document.location));
