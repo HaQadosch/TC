@@ -1,7 +1,7 @@
 <script id='GTM-P2C3FL_uatcdlLP'>
-(function gtm_uatcdlLP(cdl, dl, loc) {
+(function gtm_uatcdlLP(cdl, dl, loc, jQ) {
     'use strict';
-    if (cdl && cdl.CATTParams) try {
+    if (cdl && cdl.CATTParams && jQ) try {
         var twlh = cdl.twlh;
         var cdpm = cdl.CATTParams;
         var locpathname = loc.pathname || '';
@@ -23,7 +23,8 @@
                 page            : loc && ((locpathname || '/')+(locsearch || '')) || '',
                 location        : loc && loc.href || '',
                 metrics         : {
-                    metric15        : {'hitcount'       : 1}
+                    metric15        : {'hitcount'           : 1},
+                    metric61        : {'cms_accomlist'      : (jQ('.destinationLatestDealsBlock').length > 0)?1:0}
                 },
                 dimensions      : {
                     dimension6      : {'appserver'          : cdpm.appserver || ''},
@@ -56,5 +57,5 @@
         dl.push({'event': 'UATCDL LP'});
     }
     return cdl.DL_uatc;
-}(window.CATTDL, window.dataLayer || [], window.location))
+}(window.CATTDL, window.dataLayer || [], window.location, window.jQuery))
 </script>
