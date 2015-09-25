@@ -14,7 +14,7 @@ fby.push(['showTab', {id: '9953', position: 'right', color: '#FFA500'}]);
   (function gtm3rd_Feedbackify(cdl, dl){
     'use strict';
     var fbdl = {};
-    if (dl && cdl && cdl.twdc(/test=feedbackify/) && /\/search|\/packages|\/customize|\/pax|\/pay/i.test(document.location.pathname)) try {
+    if (dl && cdl && cdl.twdc(/test=feedbackify/)) try {
       window.fby = cdl._.union(window.fby, []);
       window.fby.push(['showTab', {id: '9953', position: 'right', color: '#FFA500'}]);
       fbdl = cdl.insertJS({
