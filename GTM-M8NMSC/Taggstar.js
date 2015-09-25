@@ -1,5 +1,5 @@
 <script id='GTM-M8NMSC_taggstar' class='taggJS'>
-  (function gtm3rd_taggstarDL(cdl, dl){
+  (function gtm3rd_taggstar(cdl, dl){
     'use strict';
     var tgdl = {};
     if (dl && cdl && /\/search|\/packages|\/customize|\/pax|\/pay|\/confirmation/i.test(document.location.pathname)) try {
@@ -11,8 +11,8 @@
         , 'params' : {
             sitekey : 'thomascookcom'
           , tstp    : t
-        },
-        'dataLayer' : window.dataLayer_M8NMSC
+        }
+        , 'dataLayer' : window.dataLayer_M8NMSC
       });
     } catch(e) {
       cdl.error && cdl.error('GTM taggstar: '+e);
