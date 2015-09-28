@@ -2,7 +2,7 @@
   (function gtm_gatcConf(dl, jQ, cdl, gadl, w, d){
     'use strict';
     var timeStart = cdl.CATTParams?cdl.CATTParams.timestart:0;
-    if (cdl && gadl && !dl.some(function(a){return /GATC Conf/i.test(a && a.event || '');}) ) try {
+    if (cdl && gadl && !dl.some(function(a){return /^GATC Conf$/i.test(a && a.event || '');}) ) try {
       var tn = gadl.trackername+'.' || '';
       var gawa = gadl.webanalytics || {};
       w._gaq = w._gaq || [];

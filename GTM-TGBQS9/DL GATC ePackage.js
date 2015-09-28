@@ -29,8 +29,8 @@
       });
 
       ld.assign(cdl.DL_gatc, {
-          profileid     : 'UA-33029666-1'
-        , cookiedomain  : "directholidays.co.uk"
+          profileid     : 'UA-33036832-1'
+        , cookiedomain  : "thomascook.com"
         , trackername   : 'CATTGATC'
         , anonymizeip   : true
         , allowlinker   : true
@@ -118,7 +118,7 @@
       cdl.error('GTM DLGATC UK TC Multicom Conf: '+e);
     } finally {
       var stampEpoch = +new Date();
-      dl.push({'event': 'GATCDL Conf', 'pid': cdl.CATTParams.pageid, 'timestamp': stampEpoch, 'since gtm.start': stampEpoch - timeStart});
+      dl.push({'event': 'DLGATC Conf', 'pid': cdl.CATTParams.pageid, 'timestamp': stampEpoch, 'since gtm.start': stampEpoch - timeStart});
     }
     return window.DL_gatc;
   }(window.CATTDL, window.dataLayer, document.location));
