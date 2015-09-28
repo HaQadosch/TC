@@ -52,7 +52,7 @@
         cdl.error('GTM CATTDL SRP: '+e);
       } finally {
         var stampEpoch = +new Date();
-        dl.push({'event': 'CATTDL SRP', 'pid': cdl.CATTParams.pageid, 'timestamp': stampEpoch, 'since gtm.start': stampEpoch - timeStart});
+        dl.push({'event': 'CATTDL SRP', 'lob': cdl.CATTParams.lob || '', 'pid': cdl.CATTParams.pageid || '', 'timestamp': stampEpoch, 'since gtm.start': stampEpoch - timeStart});
       }
       return jQ && cdl;
     }(window.jQuery, window.dataLayer, window.CATTDL));
