@@ -1,4 +1,4 @@
-<script id='gtm_cattdlNewView'>
+<script id='GTM-KZXG7Q_cattdlNewView'>
 (function gtm_cattdlNewView(jQ, w, dl, cdl, loc) {
     'use strict';
     setTimeout(function cattNewView() {
@@ -11,7 +11,7 @@
             //Set previous pageid       
             var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
             params.previouspageid = cdpm.pageid || '';
-            CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', '.neckermann.nl');    
+            CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', cdpm.cookiedomain);    
 
             //Not keeping all params from the previous view. Refreshing CATTParams.
             var refreshparams = [
@@ -25,6 +25,7 @@
                 , "utmbguid"
                 , "urlparams"
                 , "domevents"
+                , "cookiedomain"
             ]
             var cdpmkeys = Object.keys(cdpm);
             
@@ -64,6 +65,7 @@
                 'searchresults-map' : 'searchmap',
                 'holidays'          : 'searchseo',
                 'packages'          : 'accom',
+                'accommodatie'      : 'accomseo',
                 'customize'         : 'cust',
                 'pax'               : 'pax',
                 'payment'           : 'pay',
@@ -71,6 +73,7 @@
                 'process-payment'   : 'secure',
                 ''                  : 'home'
             })[(/\/([^\/]*)/i.exec(locpathname) || ['']).pop()];
+            if (wgetData && wgetData.source === 'calendar') {cdpm.pageid = 'accomcalendar'};
 
             if (!cdpm.pageid) {
                 if(/\/.+\/search$/.test(locpathname)) {cdpm.pageid = 'search'}
@@ -89,8 +92,6 @@
                 keeps['trailingsteps'] = (/home/i.test(cdpm.pageid) && steps.join('') || '')+lastSteps
             } else keeps['trailingsteps'] = cdpm.pageid+'(1)';
 
-            var domainName = ({'neckermann':'.neckermann.nl'
-            })[((/([^\.]*).io|([^\.]*).com|([^\.]*).nl|([^\.]*).net/i.exec(location.hostname) || []).filter(function hostname(e){return e}) || ['neckermann']).pop()];
 
             if (cdurl) {
             cdpm['internalcampaignid'] = cdurl.intcmp || (w.CATTDL.ewls(/intcmp=([^&|\s|\?]*)/i) || []).pop() || ""
@@ -102,7 +103,7 @@
             cdpm['consultantref'] =  cdurl.consultantRef || (w.CATTDL.ewls(/consultantRef=([^&|\s|\?]*)/i) || []).pop() || ""
             cdpm['qsearchedkeyword'] = cdurl.q || w.CATTDL.ewls(/[&\?]q=([^&|\s|\?]*)/i) && w.CATTDL.ewls(/[&\?]q=([^&|\s|\?]*)/i).pop() || ""
             }
-            cdl.ckset('gtm_cdpm', JSON.stringify(keeps), Infinity, '/', domainName);
+            cdl.ckset('gtm_cdpm', JSON.stringify(keeps), Infinity, '/', cdpm.cookiedomain);
             jQ.extend(cdl.CATTParams, keeps);
             cdpm.pageid = cdpm.pageid || 'home';
             

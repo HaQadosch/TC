@@ -49,7 +49,7 @@
             newPM['accomname'] = wgdPkg.content && wgdPkg.content.hotelName || wgdPkg.accomodationList && wgdPkg.accomodationList[0] && wgdPkg.accomodationList[0].hotelName || "";
             newPM['accomcode'] = (wgdPkg.accomodationList && wgdPkg.accomodationList[0] && (wgdPkg.accomodationList[0].hotelCode || "").replace("|","-")) || "";
             newPM['boardbasis'] = wgdPkg.accomodationList && wgdPkg.accomodationList[0] && wgdPkg.accomodationList[0].roomProfiles && wgdPkg.accomodationList[0].roomProfiles[0] && wgdPkg.accomodationList[0].roomProfiles[0].mealPlan && wgdPkg.accomodationList[0].roomProfiles[0].mealPlan.description || "";
-            newPM['duration'] = wgdPkg.dateRange && wgdPkg.dateRange.duration || 0;
+            newPM['duration'] = +(wgdPkg.dateRange && wgdPkg.dateRange.durationInDays || 0);
             newPM['deptdate'] = +new Date(wgdPkg.dateRange && wgdPkg.dateRange.startDate || 0);
             newPM['returndate'] = +new Date(wgdPkg.dateRange && wgdPkg.dateRange.endDate || 0);
             newPM['returntime'] = +new Date(wgdPkg.flightList && wgdPkg.flightList[1] && wgdPkg.flightList[1].departureDateTime || 0);
@@ -227,7 +227,7 @@
     } finally {
         dl.push({'event': 'pid_'+cdl.CATTParams.pageid});
         dl.push({'event': 'CATTDL AddPax'}) 
-        gatcDL.push({'event': 'CATTDL AddPax'})
+        window.dataLayer_557RZS && dataLayer_557RZS.push({'event': 'CATTDL AddPax'})
     }
     return cdl
 }(window.jQuery, window.dataLayer, window.CATTDL))

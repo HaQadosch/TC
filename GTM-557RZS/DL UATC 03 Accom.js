@@ -1,4 +1,4 @@
-<script id='gtm_uatcdlAccom'>
+<script id='GTM-557RZS_uatcdlAccom'>
 (function gtm_uatcdlAccom(jQ, dl, cdl, loc) {
     'use strict';
     if (jQ && cdl && cdl.CATTParams) try {
@@ -70,9 +70,8 @@
                     metric9         : {'searchresultstotal'     : parseInt(cdpm.srpparams && cdpm.srpparams.searchresultstotal) || ''},
                     metric10        : {'bookingvalue'           : parseInt(cdpm.totalprice) || 0},
                     metric11        : {'depositvalue'           : parseInt(cdpm.depositvalue) || 0},
-                    metric12        : {'discountvalue'          : parseInt(cdpm.discountvalue) || 0}
-                    //metric15        : {'hitcount'               : 1},
-                    //metric29        : {'premiumcabin'           : parseInt(+cdpm.premiumcabin || 0)}
+                    metric12        : {'discountvalue'          : parseInt(cdpm.discountvalue) || 0},
+                    metric26        : {'hitcount'               : 1}
                 },
                 dimensions      : {
                     dimension1      : {'deptairport'                : cdpm.deptairport || 'empty'},
@@ -113,8 +112,10 @@
                     dimension56     : {'seasoncode'                 : cdpm.seasoncode || ''},
                     dimension63     : {'roomcode1'                  : cdpm.roomcodes && cdpm.roomcodes[0] || 'empty'},
                     dimension64     : {'roomcode2'                  : cdpm.roomcodes && cdpm.roomcodes[1] || ''},
+                    dimension100    : {'hittype'                    : 'page'},
                     dimension102    : {'pagecontext'                : cdpm.pagecontext || ''},
                     dimension103    : {'rooms'                      : ''+(cdpm.rooms || '0')},
+                    dimension105    : {'initialholidaytype'         : cdpm.initialholidaytype || ''},
                     dimension106    : {'arrivaltimeoutbound'        : cdl.gatime && cdpm.flightdetails && cdpm.flightdetails.outbound && cdpm.flightdetails.outbound[0] && cdpm.flightdetails.outbound[0].arrive && cdl.gatime(cdpm.flightdetails && cdpm.flightdetails.outbound[0].arrive.date) || ''},
                     dimension107    : {'departuretimeoutbound'      : cdl.gatime && cdpm.flightdetails && cdpm.flightdetails.outbound && cdpm.flightdetails.outbound[0] && cdpm.flightdetails.outbound[0].depart && cdl.gatime(cdpm.flightdetails && cdpm.flightdetails.outbound[0].depart.date) || ''},
                     dimension115    : {'realurl'                    : locpathname+locsearch || ''},
@@ -122,7 +123,7 @@
                     dimension122    : {'totalprice'                 : ''+(cdpm.totalprice || '0')},
                     dimension123    : {'discountperc'               : ''+(cdpm.discountperc || '0')},
                     dimension124    : {'discountvalue'              : ''+(cdpm.discountvalue || '0')},
-                    dimension132    : {'errormessage'               : cdpm.errors && cdpm.errors.errormsg || ''},
+                    dimension132    : {'errormessage'               : cdpm.errors && cdpm.errors.errormsg && cdpm.errors.errormsg.length > 0 && (cdpm.errors.errorcode+' '+cdpm.errors.errormsg || cdpm.errorcode || "unknown") || ""},
                     dimension133    : {'zooverrating'               : cdpm.ratings && cdpm.ratings.zoover && cdpm.ratings.zoover.avgrating || ''},
                     dimension134    : {'zoovercount'                : cdpm.ratings && cdpm.ratings.zoover && cdpm.ratings.zoover.count || ''}                    
                 },
@@ -165,7 +166,7 @@
         cdl.error('GTM NL NEC UATCDL Accom: '+e)
     } finally {
         dl.push({'event': 'UATCDL Accom'})
-        gatcDL.push({'event': 'UATCDL Accom'})
+        window.dataLayer_557RZS && dataLayer_557RZS.push({'event': 'UATCDL Accom'})
     }
     return jQ && cdl && cdl.CATTParams && cdl.DL_uatc
 }(window.jQuery, window.dataLayer || [], window.CATTDL, window.location))

@@ -1,4 +1,4 @@
-<script id='gtm_uatcdlPay'>
+<script id='GTM-557RZS_uatcdlPay'>
 (function gtm_uatcdlPay(jQ, dl, cdl, loc){
     'use strict';
     if (jQ && cdl && cdl.CATTParams) try {
@@ -73,22 +73,25 @@
                     quantity        : 1
                 },
                 metrics         : {
-                    metric1         : {'paxadult'               : parseInt(cdpm.paxadult) || 0},
-                    metric2         : {'paxchild'               : parseInt(cdpm.paxchild) || 0},
-                    metric3         : {'paxinfant'              : parseInt(cdpm.paxinfant) || 0},
-                    metric4         : {'paxtotal'               : parseInt(cdpm.paxtotal) || 0},
-                    metric5         : {'rooms'                  : parseInt(cdpm.rooms) || 0},
-                    metric6         : {'searchresultspagenbr'   : parseInt(cdpm.srpparams && cdpm.srpparams.searchresultspagenbr) || ''},
-                    metric7         : {'searchresultspages'     : parseInt(cdpm.srpparams && cdpm.srpparams.searchresultspages) || ''},
-                    metric8         : {'searchresultsperpage'   : parseInt(cdpm.srpparams && cdpm.srpparams.searchresultsperpage) || ''},
-                    metric9         : {'searchresultstotal'     : parseInt(cdpm.srpparams && cdpm.srpparams.searchresultstotal) || ''},
-                    metric10        : {'bookingvalue'           : parseInt(cdpm.totalprice) || 0},
-                    metric11        : {'depositvalue'           : parseInt(cdpm.depositvalue) || 0},
-                    metric12        : {'discountvalue'          : parseInt(cdpm.discountvalue) || 0},
-                    //metric15        : {'hitcount'               : 1},
-                    //metric29        : {'premiumcabin'           : parseInt(+cdpm.premiumcabin || 0)},
-                    metric16        : {'cancelinsurancevalue'   : +(cdpm.extras && cdpm.extras.cancellationinsurance && cdpm.extras.cancellationinsurance.addedcost || 0)},
-                    metric21        : {'cancelinsurance'             : parseInt(cdpm.extras && cdpm.extras.cancellationinsurance && +cdpm.extras.cancellationinsurance.selected) || 0}           
+                    metric1         : {'paxadult'                   : parseInt(cdpm.paxadult) || 0},
+                    metric2         : {'paxchild'                   : parseInt(cdpm.paxchild) || 0},
+                    metric3         : {'paxinfant'                  : parseInt(cdpm.paxinfant) || 0},
+                    metric4         : {'paxtotal'                   : parseInt(cdpm.paxtotal) || 0},
+                    metric5         : {'rooms'                      : parseInt(cdpm.rooms) || 0},
+                    metric6         : {'searchresultspagenbr'       : parseInt(cdpm.srpparams && cdpm.srpparams.searchresultspagenbr) || ''},
+                    metric7         : {'searchresultspages'         : parseInt(cdpm.srpparams && cdpm.srpparams.searchresultspages) || ''},
+                    metric8         : {'searchresultsperpage'       : parseInt(cdpm.srpparams && cdpm.srpparams.searchresultsperpage) || ''},
+                    metric9         : {'searchresultstotal'         : parseInt(cdpm.srpparams && cdpm.srpparams.searchresultstotal) || ''},
+                    metric10        : {'bookingvalue'               : +(cdpm.totalprice) || 0},
+                    metric11        : {'depositvalue'               : parseInt(cdpm.depositvalue) || 0},
+                    metric12        : {'discountvalue'              : parseInt(cdpm.discountvalue) || 0},
+                    metric13        : {'travelinsurancepolicy'      : parseInt(cdpm.extras && cdpm.extras.travelinsurancepolicy && +cdpm.extras.travelinsurancepolicy.quantity) || 0},
+                    metric15        : {'travelinsurancevalue'       : +(cdpm.extras && cdpm.extras.travelinsurance && cdpm.extras.travelinsurance.reduce(function(a,b){ return (a.addedcost+b.addedcost) || 0}) || 0)},
+                    metric16        : {'cancelinsurancevalue'       : +(cdpm.extras && cdpm.extras.cancellationinsurance && cdpm.extras.cancellationinsurance.addedcost || 0)},
+                    metric20        : {'travelinsurance'            : parseInt(cdpm.extras && cdpm.extras.travelinsurance && cdpm.extras.travelinsurance.reduce(function(a,b){ return (a.quantity+b.quantity) || 0}) || 0)},
+                    metric21        : {'cancelinsurance'            : parseInt(cdpm.extras && cdpm.extras.cancellationinsurance && +cdpm.extras.cancellationinsurance.quantity) || 0},
+                    metric25        : {'travelinsurancepolicyval'   : +(cdpm.extras && cdpm.extras.travelinsurancepolicy && +cdpm.extras.travelinsurancepolicy.addedcost) || 0},
+                    metric26        : {'hitcount'                   : 1}           
                 },
                 dimensions      : {
                     dimension1      : {'deptairport'                : cdpm.deptairport || 'empty'},
@@ -128,8 +131,10 @@
                     dimension56     : {'seasoncode'                 : cdpm.seasoncode || ''},
                     dimension63     : {'roomcode1'                  : cdpm.roomcodes && cdpm.roomcodes[0] || 'empty'},
                     dimension64     : {'roomcode2'                  : cdpm.roomcodes && cdpm.roomcodes[1] || ''},
+                    dimension100    : {'hittype'                    : 'page'},
                     dimension102    : {'pagecontext'                : cdpm.pagecontext || ''},
                     dimension103    : {'rooms'                      : ''+(cdpm.rooms || '0')},
+                    dimension105    : {'initialholidaytype'         : cdpm.initialholidaytype || ''},
                     dimension106    : {'arrivaltimeoutbound'        : cdl.gatime && cdpm.flightdetails && cdpm.flightdetails.outbound && cdpm.flightdetails.outbound[0] && cdpm.flightdetails.outbound[0].arrive && cdl.gatime(cdpm.flightdetails && cdpm.flightdetails.outbound[0].arrive.date) || ''},
                     dimension107    : {'departuretimeoutbound'      : cdl.gatime && cdpm.flightdetails && cdpm.flightdetails.outbound && cdpm.flightdetails.outbound[0] && cdpm.flightdetails.outbound[0].depart && cdl.gatime(cdpm.flightdetails && cdpm.flightdetails.outbound[0].depart.date) || ''},
                     dimension115    : {'realurl'                    : locpathname+locsearch || ''},
@@ -137,7 +142,7 @@
                     dimension122    : {'totalprice'                 : ''+(cdpm.totalprice || '0')},
                     dimension123    : {'discountperc'               : ''+(cdpm.discountperc || '0')},
                     dimension124    : {'discountvalue'              : ''+(cdpm.discountvalue || '0')},
-                    dimension132    : {'errormessage'               : cdpm.errors && cdpm.errors.errormsg || ''},
+                    dimension132    : {'errormessage'               : cdpm.errors && cdpm.errors.errormsg && cdpm.errors.errormsg.length > 0 && (cdpm.errors.errorcode+' '+cdpm.errors.errormsg || cdpm.errorcode || "unknown") || ""},
                     dimension133    : {'zooverrating'               : cdpm.ratings && cdpm.ratings.zoover && cdpm.ratings.zoover.avgrating || ''},
                     dimension134    : {'zoovercount'                : cdpm.ratings && cdpm.ratings.zoover && cdpm.ratings.zoover.count || ''}   
                 },
@@ -151,7 +156,7 @@
         cdl.error('GTM NL NEC UATCDL Pay: '+e)
     } finally {
         dl.push({'event': 'UATCDL Pay'})
-        gatcDL.push({'event': 'UATCDL Pay'})
+        window.dataLayer_557RZS && dataLayer_557RZS.push({'event': 'UATCDL Pay'})
     }
     return cdl.DL_uatc
 }(window.jQuery, window.dataLayer || [], window.CATTDL, window.location))

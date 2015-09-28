@@ -1,4 +1,4 @@
-<script id='gtm_uatcdlLP'>
+<script id='GTM-557RZS_uatcdlLP'>
 (function gtm_uatcdlLP(cdl, dl, loc) {
     'use strict'
     if (cdl && cdl.CATTParams) try {
@@ -20,18 +20,19 @@
                 page            : loc && ((locpathname || '/')+(locsearch || '')) || '',
                 location        : lochref,
                 metrics         : {
-                    metric15        : {'hitcount'       : 1}
+                    metric26        : {'hitcount'       : 1}
                 },
                 dimensions      : {
                     dimension6      : {'appserver'      : cdpm.appserver || ''},
                     dimension12     : {'pageid'         : cdpm.pageid || ''},
                     dimension14     : {'sessionid'      : cdpm.sessionid || 'empty'},
-                    dimension19     : {'errorcode'      : cdpm.errors && cdpm.errors.errormsg && cdpm.errors.errormsg.length > 0 && (cdpm.errors.errorcode+' '+cdpm.errors.errormsg || "unknown") || ""},
+                    dimension19     : {'errorcode'      : cdpm.errors && cdpm.errors.errormsg && cdpm.errors.errormsg.length > 0 && (cdpm.errors.errorcode || "unknown") || cdpm.errorcode || ""},
                     dimension30     : {'gaguid'         : cdpm.gaguid || ''},
                     dimension32     : {'emailguid'      : cdpm.emailguid || ''},
+                    dimension100    : {'hittype'        : 'page'},
                     dimension102    : {'pagecontext'    : cdpm.pagecontext || ''},
-                    dimension119    : {'pagetimestamp'  : cdl.gadate(cdpm.pagetimestamp || 0)+' '+cdl.gatime(cdpm.pagetimestamp || 0) || ''}
-                    //dimension132  : {'errormessage'   : cdpm.errors && cdpm.errors.errormsg || ''}                                        
+                    dimension119    : {'pagetimestamp'  : cdl.gadate(cdpm.pagetimestamp || 0)+' '+cdl.gatime(cdpm.pagetimestamp || 0) || ''},
+                    dimension132    : {'errormessage'   : cdpm.errors && cdpm.errors.errormsg && cdpm.errors.errormsg.length > 0 && (cdpm.errors.errorcode+' '+cdpm.errors.errormsg || cdpm.errorcode || "unknown") || ""}
                 },
                 events : {
                 internalcampaignid  : {'category': 'InternalCampaign', 'action': cdpm.internalcampaignid || '', 'label': lochref, 'value': 1, 'noninteraction': true},
@@ -43,7 +44,7 @@
         cdl.error('GTM NL NEC UATCDL LP: '+e)
     } finally {
         dl.push({'event': 'UATCDL LP'})
-        gatcDL.push({'event': 'UATCDL LP'})
+        window.dataLayer_557RZS && window.dataLayer_557RZS.push({'event': 'UATCDL LP'})
     }
     return cdl.DL_uatc
 }(window.CATTDL, window.dataLayer || [], window.location))

@@ -49,7 +49,7 @@
             newPM['accomname'] = wgdPkg.content && wgdPkg.content.hotelName || wgdPkg.accomodationList && wgdPkg.accomodationList[0] && wgdPkg.accomodationList[0].hotelName || "";
             newPM['accomcode'] = (wgdPkg.accomodationList && wgdPkg.accomodationList[0] && (wgdPkg.accomodationList[0].hotelCode || "").replace("|","-")) || "";
             newPM['boardbasis'] = wgdPkg.accomodationList && wgdPkg.accomodationList[0] && wgdPkg.accomodationList[0].roomProfiles && wgdPkg.accomodationList[0].roomProfiles[0] && wgdPkg.accomodationList[0].roomProfiles[0].mealPlan && wgdPkg.accomodationList[0].roomProfiles[0].mealPlan.description || "";
-            newPM['duration'] = wgdPkg.dateRange && wgdPkg.dateRange.duration || 0;
+            newPM['duration'] = +(wgdPkg.dateRange && wgdPkg.dateRange.durationInDays || 0);
             newPM['deptdate'] = +new Date(wgdPkg.dateRange && wgdPkg.dateRange.startDate || 0);
             newPM['returndate'] = +new Date(wgdPkg.dateRange && wgdPkg.dateRange.endDate || 0);
             newPM['returntime'] = +new Date(wgdPkg.flightList && wgdPkg.flightList[1] && wgdPkg.flightList[1].departureDateTime || 0);
@@ -254,7 +254,7 @@
             jQ.extend(cdpm.errors, errorPM)
             var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
             delete params.errors;
-            CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', '.neckermann.nl');    
+            CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', cdpm.cookiedomain);    
         }
         window.CATTDL.CATTParams = cdpm;
     } catch(e) {

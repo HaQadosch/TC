@@ -1,4 +1,4 @@
-<script id='gtm_uatcBook'>
+<script id='GTM-557RZS_uatcBook'>
 (function gtm_uatcBook(jQ, cdl, uadl, w, d, dl) {
     'use strict';
     if (cdl && uadl) try {
@@ -15,15 +15,10 @@
         window.ga && window.ga(function gtm_useTracker() {
             var trc = ga.getByName(uadl.name)
             if (trc) {
-                // console.info('trc', trc)
-                // trc.plugins_ && console.info('plugins', trc.plugins_.keys) || console.info('no plugins') 
                 console.info('clientID', trc.get('clientId'))
             } else {
-                // console.info('no trc')
                 w.ga('create', uadl.profileid, uadl.cookiedomain, {'name': uadl.name})
                 trc = ga.getByName(uadl.name)
-                // console.info('trc', trc)
-                // console.info('clientID', trc.get('clientId'))
             }
             for (var setOption in uadl.set) trc.set(setOption, uadl.set[setOption]);
             trc.set('location', uawa.location);
@@ -62,18 +57,20 @@
             sendSet['page'] = uawa.page;
             w.ga(trackerName+'send','pageview', sendSet);
 
-            (function gtm_uatcBookAddProduct(){
-                w.ga(trackerName+'ec:addProduct', prodDimMet);
-                w.ga(trackerName+'ec:setAction','purchase', {
-                    'id'            : uapurch.id,
-                    'affiliation'   : uapurch.affiliation,
-                    'revenue'       : uapurch.revenue,
-                    'tax'           : uapurch.tax,
-                    'shipping'      : uapurch.shipping,
-                    'coupon'        : uapurch.coupon
-                });
-                w.ga(trackerName+'send','event', 'ECPurchase', uaprod.id,  ''+uaprod.position, 1, {'nonInteraction': true});
-            }());
+            if(cdpm.pageid === 'booking') {
+                (function gtm_uatcBookAddProduct(){
+                    w.ga(trackerName+'ec:addProduct', prodDimMet);
+                    w.ga(trackerName+'ec:setAction','purchase', {
+                        'id'            : uapurch.id,
+                        'affiliation'   : uapurch.affiliation,
+                        'revenue'       : uapurch.revenue,
+                        'tax'           : uapurch.tax,
+                        'shipping'      : uapurch.shipping,
+                        'coupon'        : uapurch.coupon
+                    });
+                    w.ga(trackerName+'send','event', 'ECPurchase', uaprod.id,  ''+uaprod.position, 1, {'nonInteraction': true});
+                }());
+            };
 
             for (evt in uawa.events) {
                 var gevt = uawa.events[evt]
@@ -86,11 +83,11 @@
                                             , {'nonInteraction': gevt.noninteraction})};
             };
         })
-        dl.push({'event': 'UATC Book'});
     } catch(e) {
         cdl.error('GTM NL NEC UATC Book: '+e);
     } finally {     
-        window.externalLayer && externalLayer.push({'event' : 'uapageview'+'|'+(cdl.CATTParams && cdl.CATTParams.pageid || 'home')+'|'+(cdl.CATTParams && cdl.CATTParams.urlparams && cdl.CATTParams.urlparams.pathname || '/')})
+        window.dataLayer && dataLayer.push({'event' : 'UATC Book'})
+        window.dataLayer_557RZS && dataLayer_557RZS.push({'event' : 'UATC Book'})
     }
     return cdl && uadl
 }(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_uatc, window, document, window.dataLayer || []))

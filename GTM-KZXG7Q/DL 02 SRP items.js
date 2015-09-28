@@ -1,4 +1,4 @@
-<script>
+<script id='GTM-KZXG7Q_cattdlSRPitems'>
 (function gtm_cattdlSRPitems(jQ, dl, cdl) {
     'use strict'
     if (jQ && jQ.extend && cdl) try {
@@ -11,20 +11,31 @@
         if (Object.keys(wgetDataSrch).length !== 0) {
             var srpPM = {};
             var wgdSrch = (!/500|502|404/.test(wgD.status) && (!wgD.errorCode || wgD.errorCode !== null))?(wgD.links && wgD.links.search && wgD.links.search.context || {}):(wgD.searchParams || {})
-            srpPM['deptairportsearched'] = wgdSrch.origin || "";
-            srpPM['destinationsearched'] = wgdSrch.goingTo || "";
+
             srpPM['duration'] = wgdSrch.duration || "I dont mind";
-            srpPM['resortsearched'] = wgdSrch.resortCode || "";
             srpPM['searchwidened'] = wgdSrch.flexible || '';
             srpPM['sortoption'] = wgdSrch.sort || "";
 
-            var destination = ''; wgetDataSrch.commercialDestination && (wgetDataSrch.commercialDestination.options || []).filter(function(e){return e && e.selected}).forEach(function(e){destination=(e.title)});
-            var resort = ''; wgetDataSrch.resortCategory && (wgetDataSrch.resortCategory.options || []).filter(function(e){return e && e.selected}).forEach(function(e){resort=(e.title)});
-            var deptairport = ''; wgetDataSrch.depAirport && (wgetDataSrch.depAirport.options || []).filter(function(e){return e && e.selected}).forEach(function(e){deptairport=(e.title)});
+            srpPM['deptairportsearched'] = wgdSrch.origin || "";
+            srpPM['destinationsearched'] = wgdSrch.goingTo || "";
+            srpPM['regionsearched'] = "";
+            srpPM['resortsearched'] = "";
+            srpPM['countrysearched'] = "";
+            if (!wgdSrch.resortCategory && !wgdSrch.regionCategory) {
+                srpPM['countrysearched'] = (!wgdSrch.destinationCategory)?(wgdSrch.goingTo || ""):((typeof wgdSrch.destinationCategory == "string")?(wgdSrch.destinationCategory || ""):(wgdSrch.resortCategory[0] || ''));
+            } else if (wgdSrch.regionCategory && !wgdSrch.resortCategory) {
+                srpPM['regionsearched'] = (typeof wgdSrch.regionCategory == "string")?(wgdSrch.regionCategory || ''):(wgdSrch.regionCategory[0] || '');
+            } else if (wgdSrch.resortCategory) {
+                srpPM['resortsearched'] = (typeof wgdSrch.resortCategory == "string")?(wgdSrch.resortCategory || ''):(wgdSrch.resortCategory[0] || '');
+                srpPM['regionsearched'] = (wgdSrch.goingTo && wgdSrch.goingTo.split(',') || ['',''])[1].trim();
+                srpPM['countrysearched'] = (wgdSrch.goingTo && wgdSrch.goingTo.split(',') || ['','',''])[2].trim();
+            };
 
             srpPM['destination'] = ''; if (!srpPM['destination']){srpPM['destination']=srpPM['destinationsearched']} else {srpPM['destination']=srpPM['destination']};
-            srpPM['resort'] = ''; if (!srpPM['resort']){srpPM['resort']=srpPM['resortsearched']} else {srpPM['resort']=srpPM['resort']};
             srpPM['deptairport'] = ''; if (!srpPM['deptairport']){srpPM['deptairport']=srpPM['deptairportsearched']} else {srpPM['deptairport']=srpPM['deptairport']};
+            srpPM['country'] = srpPM.countrysearched;
+            srpPM['region'] = srpPM.regionsearched;
+            srpPM['resort'] = srpPM.resortsearched;
 
             var strdeptdate = ''
             srpPM['deptdate'] = (strdeptdate = wgdSrch.when && wgdSrch.when._i || wgdSrch.when || "19700101") && +new Date(strdeptdate.substring(0,4), strdeptdate.substring(4,6)-1, strdeptdate.substring(6,8)) || 0;
@@ -161,7 +172,7 @@
         cdl.error('GTM CATTDL SRP items: '+e)
     } finally {
         dataLayer.push({'event': 'CATTDL SRP items'+'|'+(cdl.CATTParams && cdl.CATTParams.pageid)});
-        gatcDL.push({'event': 'CATTDL SRP items'+'|'+(cdl.CATTParams && cdl.CATTParams.pageid || '')});
+        window.dataLayer_557RZS && dataLayer_557RZS.push({'event': 'CATTDL SRP items'+'|'+(cdl.CATTParams && cdl.CATTParams.pageid || '')});
     }
     return jQ && jQ.extend && cdl
 }(window.jQuery, window.dataLayer, window.CATTDL))

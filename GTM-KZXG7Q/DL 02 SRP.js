@@ -1,4 +1,4 @@
-<script id='gtm_cattdlSRP'>
+<script id='GTM-KZXG7Q_cattdlSRP'>
 (function gtm_cattdlSRP(jQ, dl, cdl) {
     'use strict'
     if (jQ && jQ.extend && cdl) try {
@@ -17,7 +17,7 @@
             var wgdCurrent = (!/500|502|404/.test(wgD.status) && (!wgD.errorCode || wgD.errorCode !== null))?(wgD.links && wgD.links.search && wgD.links.search.context || {}):(wgD.searchParams || {})
 
             //Page Info
-            cdpm['holidapagecontextytype'] = "angular"
+            cdpm['holidaypagecontextytype'] = "angular"
             cdpm['holidaytype'] = ({
                 'vliegvakanties'    : 'package',
                 'autovakanties'     : 'carholidays',
@@ -25,19 +25,21 @@
                 'wintersport'       : 'ski',
                 'lastminute'        : 'lastminute',
                 'kortevakanties'    : 'shortholidays',
-                ''                  : 'package'
+                'search'            : 'general',
+                'searchresults-map' : 'general'
             })[(/\/([^\/]*)/i.exec(locpathname) || ['']).pop()];
             cdpm['lob'] =  (cdpm.holidaytype && cdpm.holidaytype!=='package')?'hotel':'package';
 
             var strdeptdate = ''
-            newPM['deptdate'] = (strdeptdate = wgdCurrent.when && wgdCurrent.when._i || wgdCurrent.when || "19700101") && +new Date(strdeptdate.substring(0,4), strdeptdate.substring(4,6)-1, strdeptdate.substring(6,8)) || 0;
+            var strdeptdatewhen = (strdeptdate = wgdCurrent.when && wgdCurrent.when._i || wgdCurrent.when || "19700101") && +new Date(strdeptdate.substring(0,4), strdeptdate.substring(4,6)-1, strdeptdate.substring(6,8)) || 0;
             var rngdeptdate = wgdCurrent && wgdCurrent.departureDate || '';
-            newPM['deptdatestart'] = +new Date(((wgdCurrent && wgdCurrent.departureDate || '').split(',')[0] || '19700101').replace(/(\d\d\d\d)(\d\d)(\d\d)/, '$1-$2-$3'));
-            newPM['deptdateend'] = +new Date(((rngdeptdate  || '').split(',')[1] || (rngdeptdate  || '').split(',')[0] || '19700101').replace(/(\d\d\d\d)(\d\d)(\d\d)/, '$1-$2-$3'));            
-            newPM['deptairportsearched'] = wgdCurrent.origin || "";
-            newPM['destinationsearched'] = wgdCurrent.goingTo || "";
-            newPM['resortsearched'] = wgdCurrent.resortCode || "";
-            newPM['searchwidened'] = wgdCurrent.flexible || '';
+            newPM['deptdatestart'] = +new Date(((rngdeptdate || '').split(',')[0]).replace(/(\d\d\d\d)(\d\d)(\d\d)/, '$1-$2-$3') || strdeptdatewhen || 0);
+            newPM['deptdateend'] = +new Date(((rngdeptdate  || '').split(',')[1] || (rngdeptdate  || '').split(',')[0]).replace(/(\d\d\d\d)(\d\d)(\d\d)/, '$1-$2-$3') || strdeptdatewhen || 0);
+            newPM['deptdate'] = strdeptdatewhen || newPM.deptdatestart || 0;
+            if ((rngdeptdate  || '').split(',')[1]) {newPM['deptdaterange'] = true} else {newPM['deptdaterange'] = false};
+            
+            newPM['searchwidened'] = ''+(wgD.widened || false);
+            newPM['searchwidenedselected'] = ''+(wgdCurrent.flexible || false);
             newPM['sortoption'] = wgdCurrent.sort || "";
             newPM['duration'] = wgdCurrent.duration || "Geen Voorkeu";
             newPM['searchapp'] = (wgdCurrent.connectorCode == 3?"solr":"unknown");
@@ -49,28 +51,67 @@
             newPM['sessionid'] = window.sessionToken || "";
             newPM['searchlist'] = wgdItems && wgdItems.length || 0;
 
+            newPM['deptairportsearched'] = wgdCurrent.origin || "";
+            newPM['destinationsearched'] = wgdCurrent.goingTo || "";
+            newPM['regionsearched'] = "";
+            newPM['resortsearched'] = "";
+            newPM['countrysearched'] = "";
+            if (!wgdCurrent.resortCategory && !wgdCurrent.regionCategory) {
+                newPM['countrysearched'] = (!wgdCurrent.destinationCategory)?(wgdCurrent.goingTo || ""):((typeof wgdCurrent.destinationCategory == "string")?(wgdCurrent.destinationCategory || ""):(wgdCurrent.resortCategory[0] || ''));
+            } else if (wgdCurrent.regionCategory && !wgdCurrent.resortCategory) {
+                newPM['regionsearched'] = (typeof wgdCurrent.regionCategory == "string")?(wgdCurrent.regionCategory || ''):(wgdCurrent.regionCategory[0] || '');
+            } else if (wgdCurrent.resortCategory) {
+                newPM['resortsearched'] = (typeof wgdCurrent.resortCategory == "string")?(wgdCurrent.resortCategory || ''):(wgdCurrent.resortCategory[0] || '');
+                newPM['regionsearched'] = (wgdCurrent.goingTo && wgdCurrent.goingTo.split(',') || ['',''])[1].trim();
+                newPM['countrysearched'] = (wgdCurrent.goingTo && wgdCurrent.goingTo.split(',') || ['','',''])[2].trim();
+            }
             //window.sessionStorage.setItem('gtm_srpsortoption',newPM['sortoption']);
             //window.sessionStorage.setItem('gtm_srplist',(locpathname).replace(/^\/|\/$/g, ''));
             var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
             params.sortoption = newPM['sortoption'] || '';
             params.srplist = (locpathname).replace(/^\/|\/$/g, '') || '';
-            CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', '.neckermann.nl');
+            CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', cdpm.cookiedomain);
 
-            cdpm.srpfacets = {}
-            var facetPM = {}
-            facetPM['accomtype'] = []; wgD.accommodationType && (wgD.accommodationType.options || []).filter(function(e){return e.selected}).forEach(function(e){facetPM['accomtype'].push(e.title)});            
-            facetPM['destination'] = ''; wgD.commercialDestination && (wgD.commercialDestination.options || []).filter(function(e){return e && e.selected}).forEach(function(e){facetPM['destination']=(e.title)});
-            facetPM['resort'] = ''; wgD.resortCategory && (wgD.resortCategory.options || []).filter(function(e){return e && e.selected}).forEach(function(e){facetPM['resort']=(e.title)});
-            facetPM['deptairport'] = ''; wgD.depAirport && (wgD.depAirport.options || []).filter(function(e){return e && e.selected}).forEach(function(e){facetPM['deptairport']=(e.title)});
-            facetPM['boardbasis'] = []; wgD.boardType && (wgD.boardType.options || []).filter(function(e){return e.selected}).forEach(function(e){facetPM['boardbasis'].push(e.title)});
-            facetPM['concepts'] = []; wgD.concept && (wgD.concept.options || []).filter(function(e){return e.selected}).forEach(function(e){facetPM['concepts'].push(e.title)});
-            facetPM['discountperc'] = []; wgD.discount && (wgD.discount.options || []).filter(function(e){return e.selected}).forEach(function(e){facetPM['discountperc'].push(e.title)});
-            facetPM['discountvalue'] = []; wgD.savings && (wgD.savings.options || []).filter(function(e){return e.selected}).forEach(function(e){facetPM['discountvalue'].push(e.title)});
-            facetPM['facilities'] = []; wgD.facilities && (wgD.facilities.options || []).filter(function(e){return e.selected}).forEach(function(e){facetPM['facilities'].push(e.title)});            
-            facetPM['pricerange'] = []; wgD.priceRange && (wgD.priceRange.options || []).filter(function(e){return e.selected}).forEach(function(e){facetPM['pricerange'].push(e.title)})
-            facetPM['starrating'] = []; wgD.stars && (wgD.stars.options || []).filter(function(e){return e.selected}).forEach(function(e){facetPM['starrating'].push(e.title)});
-            facetPM['touroperator'] = []; wgD.brand && (wgD.brand.options || []).filter(function(e){return e.selected}).forEach(function(e){facetPM['touroperator'].push(e.title)});
-            facetPM['freechild'] = wgD.freeChildFlag && wgD.freeChildFlag.options && wgD.freeChildFlag.options[0]&& wgD.freeChildFlag.options[0].selected == true;
+            cdpm.srpfacets = {};
+            var facetPM = {};
+
+            facetPM['destination'] = jQ('[analytics-id="srp-facet-destinationCategory"] :selected') && jQ('[analytics-id="srp-facet-destinationCategory"] :selected').attr('label') && jQ('[analytics-id="srp-facet-destinationCategory"] :selected').attr('label').replace(/(.*)\s\(\d+\)/,'$1') || '';
+            facetPM['deptairport'] = jQ('[analytics-id="srp-facet-depAirport"] :selected') && jQ('[analytics-id="srp-facet-depAirport"] :selected').attr('label') && jQ('[analytics-id="srp-facet-depAirport"] :selected').attr('label').replace(/(.*)\s\(\d+\)/,'$1') || '';
+            facetPM['pricerange'] = [];
+            if(jQ('[analytics-id="srp-facet-priceRange"]')) {
+            jQ('[analytics-id="srp-facet-priceRange"]').each(function(e,d){ 
+                if(jQ(this) && jQ(this).is(':checked') && jQ(this).next().text()){ facetPM['pricerange'].push(jQ(this).next().text() || '') }
+            })};
+            facetPM['accomtype'] = [];
+            if(jQ('[analytics-id="srp-facet-accommodationType"]')) {
+            jQ('[analytics-id="srp-facet-accommodationType"]').each(function(e,d){ 
+                if(jQ(this) && jQ(this).is(':checked') && jQ(this).next().text()){ facetPM['accomtype'].push(jQ(this).next().text() || '') }
+            })};
+            facetPM['zooverrating'] = [];
+            if(jQ('[analytics-id="srp-facet-zoover"]')) {
+            jQ('[analytics-id="srp-facet-zoover"]').each(function(e,d){ 
+                if(jQ(this) && jQ(this).is(':checked') && jQ(this).next().text()){ facetPM['zooverrating'].push(jQ(this).next().text() || '') }
+            })} 
+            facetPM['starrating'] = [];
+            if(jQ('[analytics-id="srp-facet-stars"]')) {
+            jQ('[analytics-id="srp-facet-stars"]').each(function(e,d){ 
+                if(jQ(this) && jQ(this).is(':checked') && jQ(this).next().text()) { facetPM['starrating'].push(jQ(this).next().text().replace(/\((\d+)\)/g,'$1 stars') || '') }
+            })}
+            facetPM['boardbasis'] = [];
+            if(jQ('[analytics-id="srp-facet-boardType"]')) {
+            jQ('[analytics-id="srp-facet-boardType"]').each(function(e,d){ 
+                if(jQ(this) && jQ(this).is(':checked') && jQ(this).next().text()){ facetPM['boardbasis'].push(jQ(this).next().text() || '') }
+            })} 
+            facetPM['facilities'] = [];
+            if(jQ('[analytics-id="srp-facet-facilities"]')) {
+            jQ('[analytics-id="srp-facet-facilities"]').each(function(e,d){ 
+                if(jQ(this) && jQ(this).is(':checked') && jQ(this).next().text()){ facetPM['facilities'].push(jQ(this).next().text() || '') }
+            })};
+            facetPM['brochure'] = [];
+            if(jQ('[analytics-id="srp-facet-brochureName"]')) {
+            jQ('[analytics-id="srp-facet-brochureName"]').each(function(e,d){ 
+                if(jQ(this) && jQ(this).is(':checked') && jQ(this).next().text()){ facetPM['brochure'].push(jQ(this).next().text() || '') }
+            })};
 
             var arrpax = wgdCurrent && wgdCurrent.occupation || ""; //'2' or [2]  or ['2, 3'] or ["2,1,2", "1,6"] 
             newPM['paxadultperroom'] = []
@@ -94,8 +135,10 @@
             newPM['paxtotal'] = newPM['paxadult']+newPM['paxchild']+newPM['paxinfant'];
             newPM['rooms'] = newPM['paxadultperroom'].length;
             newPM['destination'] = ''; if (!facetPM['destination']){newPM['destination']=newPM['destinationsearched']} else {newPM['destination']=facetPM['destination']};
-            newPM['resort'] = ''; if (!facetPM['resort']){newPM['resort']=newPM['resortsearched']} else {newPM['resort']=facetPM['resort']};
             newPM['deptairport'] = ''; if (!facetPM['deptairport']){newPM['deptairport']=newPM['deptairportsearched']} else {newPM['deptairport']=facetPM['deptairport']};
+            newPM['country'] = newPM.countrysearched;
+            newPM['region'] = newPM.regionsearched;
+            newPM['resort'] = newPM.resortsearched
 
             cdpm.errors = {}
             var errorPM = {};
@@ -112,7 +155,7 @@
     } finally {
         dl.push({'event': 'pid_'+cdl.CATTParams.pageid});
         dl.push({'event': (window.getPageData && window.getPageData(cdpm.urlparams && cdpm.urlparams.pathname)?'CATTDL SRP':'CATTDL LP')})
-        gatcDL.push({'event': (window.getPageData && window.getPageData(cdpm.urlparams && cdpm.urlparams.pathname)?'CATTDL SRP':'CATTDL LP')})
+        window.dataLayer_557RZS && dataLayer_557RZS.push({'event': (window.getPageData && window.getPageData(cdpm.urlparams && cdpm.urlparams.pathname)?'CATTDL SRP':'CATTDL LP')})
     }
     return jQ && jQ.extend && cdl
 }(window.jQuery, window.dataLayer, window.CATTDL))

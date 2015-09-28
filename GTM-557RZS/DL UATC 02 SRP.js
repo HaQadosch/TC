@@ -1,4 +1,4 @@
-<script id='gtm_uatcdlSRP'>
+<script id='GTM-557RZS_uatcdlSRP'>
 (function gtm_uatcdlSRP(jQ, dl, cdl, loc) {
     'use strict';
     if (jQ && cdl && cdl.CATTParams) try {
@@ -67,14 +67,14 @@
                     metric6         : {'searchresultspagenbr'       : parseInt(cdpm.searchresultspagenbr) || 0},
                     metric7         : {'searchresultspages'         : parseInt(cdpm.searchresultspages) || 0},
                     metric8         : {'searchresultsperpage'       : parseInt(cdpm.searchresultsperpage) || 0},
-                    metric9         : {'searchresultstotal'         : parseInt(cdpm.searchresultstotal) || 0}
-                    //metric15        : {'hitcount'       : 1}
+                    metric9         : {'searchresultstotal'         : parseInt(cdpm.searchresultstotal) || 0},
+                    metric26        : {'hitcount'       : 1}
                 },
                 dimensions      : {
                     dimension1      : {'deptairport'                : cdpm.deptairport || 'any'},
                     dimension2      : {'destination'                : cdpm.destination || 'any'},
                     dimension4      : {'searchresultstop3'          : cdpm.searchresultstop3 || 'empty'},
-                    dimension5      : {'deptdate'                   : cdl.gadate && cdl.gadate(cdpm.deptdate || 0) || 'empty'},
+                    dimension5      : {'deptdate'                   : cdl.gadate && cdl.gadate(cdpm.deptdate || 0) || '01/01/1970'},
                     dimension6      : {'appserver'                  : cdpm.appserver || 'empty'},
                     dimension7      : {'boardbasis'                 : cdfc.boardbasis && cdfc.boardbasis.toString() || 'any'},
                     dimension8      : {'budget'                     : cdfc.pricerange && cdfc.pricerange.toString() || 'any'},
@@ -82,8 +82,9 @@
                     dimension10     : {'lob'                        : cdpm.lob || ''},
                     dimension11     : {'holidaytype'                : cdpm.holidaytype || ''},
                     dimension12     : {'pageid'                     : cdpm.pageid || ''},
-                    dimension13     : {'resortsearched'             : cdpm.resort || 'empty'},
+                    dimension13     : {'resortsearched'             : cdpm.resort || 'any'},
                     dimension14     : {'sessionid'                  : cdpm.sessionid || 'empty'},
+                    dimension18     : {'accomresort'                : cdpm.resort || 'any'},
                     dimension19     : {'errorcode'                  : cdpm.errors && cdpm.errors.errormsg && cdpm.errors.errormsg.length > 0 && (cdpm.errors.errorcode || "unknown") || ""},
                     dimension20     : {'touroperator'               : cdfc.touroperator && cdfc.touroperator.toString() || 'any'},
                     dimension21     : {'destinationsession'         : cdpm.destination || 'empty'},
@@ -99,14 +100,17 @@
                     dimension35     : {'paxchild'                   : ''+(cdpm.paxchild || '0')},
                     dimension36     : {'paxinfant'                  : ''+(cdpm.paxinfant || '0')},  
                     dimension37     : {'paxtotal'                   : ''+(cdpm.paxtotal || '0')},
+                    dimension51     : {'region'                     : cdpm.region || ''},
                     dimension56     : {'seasoncode'                 : cdpm.seasoncode || ''},
                     dimension66     : {'facet discountperc'         : discfacets || ''},
+                    dimension100    : {'hittype'                    : 'page'},
                     dimension102    : {'pagecontext'                : cdpm.pagecontext || ''},
+                    dimension105    : {'initialholidaytype'         : cdpm.initialholidaytype || ''},                
                     dimension115    : {'realurl'                    : locpathname+locsearch || ''},               
                     dimension119    : {'pagetimestamp'              : cdl.gadate(cdpm.pagetimestamp || 0)+' '+cdl.gatime(cdpm.pagetimestamp || 0) || ''},
                     dimension123    : {'discountperc'               : ''+(cdfc.discountperc && cdfc.discountperc[0] || '')},
                     dimension124    : {'discountvalue'              : ''+(cdfc.discountvalue && cdfc.discountvalue[0] || '')},                    
-                    dimension132    : {'errormessage'               : cdpm.errors && cdpm.errors.errormsg || ''},
+                    dimension132    : {'errormessage'               : cdpm.errors && cdpm.errors.errormsg && cdpm.errors.errormsg.length > 0 && (cdpm.errors.errorcode+' '+cdpm.errors.errormsg || cdpm.errorcode || "unknown") || ""},
                     dimension133    : {'zooverrating'               : cdpm.ratings && cdpm.ratings.zoover && cdpm.ratings.zoover.avgrating || ''},
                     dimension134    : {'zoovercount'                : cdpm.ratings && cdpm.ratings.zoover && cdpm.ratings.zoover.count || ''}
                 },
@@ -145,7 +149,7 @@
         cdl.error('GTM NL NEC UATCDL SRP: '+e)
     } finally {
         dl.push({'event': 'UATCDL SRP'})
-        gatcDL.push({'event': 'UATCDL SRP'})
+        window.dataLayer_557RZS && dataLayer_557RZS.push({'event': 'UATCDL SRP'})
     }   
     return  cdl.DL_uatc
 }(window.jQuery, window.dataLayer || [], window.CATTDL, window.location))

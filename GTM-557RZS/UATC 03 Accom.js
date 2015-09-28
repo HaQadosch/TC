@@ -1,4 +1,4 @@
-<script id='gtm_uatcAccom'>
+<script id='GTM-557RZS_uatcAccom'>
 (function gtm_uatcAccom(jQ, cdl, uadl, w, d, dl){
     'use strict';
     if (cdl && uadl) try {
@@ -103,12 +103,11 @@
                 , {'noninteraction': true});
             });
         });
-        dataLayer.push({'event': 'UATC Accom'});
-
     } catch(e) {
         cdl.error('GTM NL NEC UATC Accom: '+e);
     } finally {     
-        window.externalLayer && externalLayer.push({'event' : 'uapageview'+'|'+(cdl.CATTParams && cdl.CATTParams.pageid || 'home')+'|'+(cdl.CATTParams && cdl.CATTParams.urlparams && cdl.CATTParams.urlparams.pathname || '/')})
+        window.dataLayer && dataLayer.push({'event' : 'UATC Accom'})
+        window.dataLayer_557RZS && dataLayer_557RZS.push({'event' : 'UATC Accom'})
     }
     return cdl && uadl
 }(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_uatc, window, document, window.dataLayer || []))

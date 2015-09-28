@@ -49,7 +49,7 @@
             newPM['accomname'] = wgdPkg.content && wgdPkg.content.hotelName || wgdPkg.accomodationList && wgdPkg.accomodationList[0] && wgdPkg.accomodationList[0].hotelName || "";
             newPM['accomcode'] = (wgdPkg.accomodationList && wgdPkg.accomodationList[0] && (wgdPkg.accomodationList[0].hotelCode || "").replace("|","-")) || "";
             newPM['boardbasis'] = wgdPkg.accomodationList && wgdPkg.accomodationList[0] && wgdPkg.accomodationList[0].roomProfiles && wgdPkg.accomodationList[0].roomProfiles[0] && wgdPkg.accomodationList[0].roomProfiles[0].mealPlan && wgdPkg.accomodationList[0].roomProfiles[0].mealPlan.description || "";
-            newPM['duration'] = wgdPkg.dateRange && wgdPkg.dateRange.duration || 0;
+            newPM['duration'] = +(wgdPkg.dateRange && wgdPkg.dateRange.durationInDays || 0);
             newPM['deptdate'] = +new Date(wgdPkg.dateRange && wgdPkg.dateRange.startDate || 0);
             newPM['returndate'] = +new Date(wgdPkg.dateRange && wgdPkg.dateRange.endDate || 0);
             newPM['returntime'] = +new Date(wgdPkg.flightList && wgdPkg.flightList[1] && wgdPkg.flightList[1].departureDateTime || 0);
@@ -172,21 +172,22 @@
             var wgdPayO = wgD && wgD.paymentOptionList || {};
            var wgdmethod = parseInt(wgdPayD && wgdPayD.paymentMethodId || '');
 
-            newPM['depositselected'] =  (wgdPayD && wgdPayD.paymentOptionId || "").toLowerCase();
-            newPM['depositvalue'] = wgdPayD && wgdPayD.transactionDetails && wgdPayD.transactionDetails.amount || 0
+            newPM['depositselected'] =  (wgD.selectedPaymentOption && wgD.selectedPaymentOption.id || wgdPayD.paymentOptionId || '').toLowerCase()
+            newPM['depositvalue'] = wgD.costSummary && wgD.costSummary.depositAmount || 0;
             newPM['paymentfee'] = wgdPayD && wgdPayD.transactionDetails.fee || 0
-            //newPM['cardtype'] = wgD.paymentDetails && wgD.paymentDetails.cardDetails.cardType || ""
-            newPM['cardtype'] = '';
-            newPM['paymentoption'] = '' ; wgdPayO.forEach(function(e){
-                                if (e.id == wgdPayD.paymentOptionId) {
-                                    var payD = e.paymentPortion 
-                                        && e.paymentPortion[0] && e.paymentPortion[0].paymentOption 
-                                        && e.paymentPortion[0].paymentOption[wgdPayD.paymentMethodId] 
-                                        && e.paymentPortion[0].paymentOption[wgdPayD.paymentMethodId] || {};
-                                    newPM.paymentoption = (payD && payD.paymentMethod && payD.paymentMethod.name).toLowerCase() || '';
-                                    newPM.cardtype = payD && payD.bankCard && payD.bankCard.code || '';
-                                }
-                            });
+            newPM['cardtype'] = wgD.paymentDetails && wgD.paymentDetails.cardDetails && wgD.paymentDetails.cardDetails.cardType || ""
+            //newPM['cardtype'] = '';
+            newPM['paymentoption'] = '';
+            wgdPayO.forEach(function(e){
+                if (e.id == wgdPayD.paymentOptionId) {
+                    var payD = e.paymentPortion 
+                        && e.paymentPortion[0] && e.paymentPortion[0].paymentOption 
+                        && e.paymentPortion[0].paymentOption[wgdPayD.paymentMethodId] 
+                        && e.paymentPortion[0].paymentOption[wgdPayD.paymentMethodId] || {};
+                    newPM.paymentoption = (payD && payD.paymentMethod && payD.paymentMethod.name).toLowerCase() || '';
+                    newPM.cardtype = payD && payD.bankCard && payD.bankCard.code || '';
+                }
+            });
 
             //Extras
             var wgdExtras = wgD && wgD._embedded && wgD._embedded['docs:selectedExtras'] || [];
@@ -240,7 +241,23 @@
             newPM['bookingref'] = wgD.bookingRef || "";
             newPM['airlineref'] = wgD.consultationRef || ""
         };
-        jQ.extend(cdpm, newPM, keeps);        
+        jQ.extend(cdpm, newPM, keeps);
+
+        var bkgrefcount = 0;
+        var paramsbookingref = JSON.parse(cdl.ckget('gtm_bookingref') || '[]');
+        if(!cdpm.bookingref){ 
+            cdpm.pageid = 'refreshbookconf'
+        };
+        paramsbookingref.forEach(function(e){
+            if(cdpm.bookingref && e.toString() === cdpm.bookingref){ 
+                 bkgrefcount = bkgrefcount + 1
+            }
+        });
+        if (bkgrefcount > 0){cdpm.pageid = 'refreshbookconf'
+        } else {
+            paramsbookingref.push(cdpm.bookingref);
+            cdl.ckset('gtm_bookingref', JSON.stringify(paramsbookingref), Infinity, '/', (cdpm.cookiedomain || '.neckermann.nl'));
+        };
 
         if (wgD.response && wgD.response.error){
             errorPM['errorcode'] = wgD.response.error.code || "";

@@ -1,4 +1,4 @@
-<script id='gtm_uatcLP'>
+<script id='GTM-557RZS_uatcLP'>
 (function gtm_uatcLP(jQ, cdl, uadl, w){
     'use strict';
     if (cdl && uadl) try{
@@ -11,15 +11,11 @@
         window.ga && window.ga(function gtm_useTracker() {
             var trc = ga.getByName(uadl.name)
             if (trc) {
-                //console.info('trc', trc)
-                //trc.plugins_ && console.info('plugins', trc.plugins_.keys) || console.info('no plugins') 
                 console.info('clientID', trc.get('clientId'))
             } else {
                 console.info('no trc')
                 w.ga('create', uadl.profileid, uadl.cookiedomain, {'name': uadl.name})
                 trc = ga.getByName(uadl.name)
-                //console.info('trc', trc)
-                //console.info('clientID', trc.get('clientId'))
                 for (var setOption in uadl.set) trc.set(setOption, uadl.set[setOption]);
             }
             if (typeof trc.plugins_ === 'undefined' || !/displayfeatures/i.test(trc.plugins_ && trc.plugins_.keys || '')) trc.require && trc.require('displayfeatures') || w.ga(trackerName+'require', 'displayfeatures');
@@ -54,7 +50,8 @@
     } catch(e) {
         cdl.error('GTM NL NEC UATC LP: '+e)
     } finally {
-        window.externalLayer && externalLayer.push({'event' : 'uapageview'+'|'+'home'+'|'+(cdl.CATTParams && cdl.CATTParams.urlparams && cdl.CATTParams.urlparams.pathname || '')})
+        window.dataLayer && dataLayer({'event' : 'UATC LP'})
+        window.dataLayer_557RZS && dataLayer_557RZS({'event' : 'UATC LP'})
     }
     return  
 }(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_uatc, window))

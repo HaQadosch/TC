@@ -1,4 +1,4 @@
-<script id='gtm_cattdlLP'>
+<script id='GTM-KZXG7Q_cattdlLP'>
 (function gtm_cattdlLP(jQ, dl, cdl) {
     'use strict'
     if (jQ && jQ.extend && cdl) try {
@@ -31,7 +31,7 @@
         cdl.error('GTM CATTDL LP: '+e)
     } finally {
         dl.push({'event': 'pid_'+cdl.CATTParams.pageid});
-        gatcDL.push({'event': 'CATTDL LP'})
+        window.dataLayer_557RZS && dataLayer_557RZS.push({'event': 'CATTDL LP'})
     }
     return jQ && jQ.extend && cdl
 }(window.jQuery, window.dataLayer, window.CATTDL))
