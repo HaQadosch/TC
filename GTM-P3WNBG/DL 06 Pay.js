@@ -218,7 +218,7 @@
             /*window.sessionStorage.removeItem('gtm_errorPS')*/
             var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
             delete params.errors;
-            CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', '.thomascook.com');    
+            CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', '.'+(cdpm.cookiedomain || 'thomascook.com'));
         }
         window.CATTDL.CATTParams = cdpm;
     } catch(e) {

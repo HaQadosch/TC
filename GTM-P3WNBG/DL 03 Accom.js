@@ -1,4 +1,4 @@
-<script id='gtm_cattdlAccom'>
+<script id='GTM-P3WNBG_cattdlAccom'>
 (function gtm_cattdlAccom(jQ, dl, cdl) {
     'use strict'
     if (jQ && jQ.extend && cdl) try {
@@ -17,7 +17,7 @@
             cdpm.lob = "package"
             cdpm.holidaytype = wgdAccom?((wgdAccom.connectorCode == 1)?((wgdAccom.brand === "Z")?"flexitrips-angular":"package-angular"):((wgdAccom.connectorCode == 2)?"multi-angular":"generic-angular")):"generic-angular"
             cdpm.pagecontext = "angular";
-            cdpm.tc_basket_id = JSON.parse(cdl.ckget('tc_basket_id')) || '';           
+            cdpm.tc_basket_id = JSON.parse(cdl.ckget('tc_basket_id')) || '';            
             
             var wgdDetails = wgD.details || {};
             var wgdPath = (wgdAccom.geoPath && wgdAccom.geoPath.split("/")) || (wgdDetails.geoPath && wgdDetails.geoPath && wgdDetails.geoPath.value.split("/")) ||  []
@@ -171,18 +171,30 @@
 
             jQ.extend(cdpm, newPM, keeps);
         }
+
+        var userId = cdpm.user && cdpm.user.id || '';
+        if (!userId) {
+            if(location.host === 'www.thomascook.com') { 
+                $.ajax('https://www.thomascook.com/api/users/session').success(function(data, textStatus, jqXHR){
+                    if (data && data.id && jqXHR.status === 200) {
+                        cdpm['user'] = {};
+                        cdpm.user.id = data.id || '';
+                    }
+                })
+            }
+        };
         
         errorPM['errorcode'] = wgD.errorCode || "";
-        errorPM['errormsg'] = (wgD.message || []).join(' ');
+        errorPM['errormsg'] = (typeof wgD.message === "string")?wgD.message:((wgD.message || []).join(' '));
         jQ.extend(cdpm.errors, errorPM);
 
         window.CATTDL.CATTParams = cdpm;
     } catch(e) {
         cdl.error('GTM CATTDL Accom: '+e)
     } finally {
-        dataLayer.push({'event': 'pid_'+cdl.CATTParams.pageid});
-        dataLayer.push({'event': (window.getPageData?'CATTDL Accom':'CATTDL LP')})
-        gatcDL.push({'event': (window.getPageData?'CATTDL Accom':'CATTDL LP')})
+        dl.push({'event': 'pid_'+cdl.CATTParams.pageid});
+        dl.push({'event': (window.getPageData?'CATTDL Accom':'CATTDL LP')})
+        window.dataLayer_TZ9GH9 && window.dataLayer_TZ9GH9.push({'event': (window.getPageData?'CATTDL Accom':'CATTDL LP')})
     }
     return cdl
 }(window.jQuery, window.dataLayer, window.CATTDL))

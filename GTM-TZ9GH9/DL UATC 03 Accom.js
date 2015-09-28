@@ -48,7 +48,7 @@
 
         cdl.DL_uatc = {
             profileid       : 'UA-33036832-7',
-            cookiedomain    : twlh(/thomascook.io/i)?"thomascook.io":"thomascook.com",
+            cookiedomain    : cdpm.cookiedomain || 'thomascook.com',
             name            : 'CATTUATC',
             set             : {
                 anonymizeIp : false,
@@ -171,7 +171,7 @@
         var srpsortlist = params.srplist || 'search';
         params.accomposition = {};
         params.accomposition[accId || 'na'] =  accPosition;
-        CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', '.'+((cdl.DL_uatc && cdl.DL_uatc.cookiedomain) || 'thomascook.com'));
+        CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', '.'+(cdpm.cookiedomain || 'thomascook.com'));
 
         cdl.DL_uatc.webanalytics.addproductlist = {
             id          : accId,

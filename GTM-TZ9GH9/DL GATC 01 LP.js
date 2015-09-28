@@ -1,4 +1,4 @@
-//<script id='gtm_gatcdlLP'>
+<script id='GTM-TZ9GH9_gatcdlLP'>
 (function gtm_gatcdlLP(cdl, dl, loc){
     'use strict';
     if (cdl && cdl.CATTParams) try {
@@ -19,23 +19,24 @@
             ).toLowerCase();
 
         cdl.DL_gatc = {
-            profileid        : twlh(/directholidays/i)?"UA-33029666-1":"UA-33036832-1",
-            cookiedomain     : twlh(/airtours/i)?"airtours.co.uk":(twlh(/club18-30/i)?"club18-30.com":(twlh(/directholidays/i)?"directholidays.co.uk":(twlh(/staging.eceit/i)?"staging.eceit.net":(twlh(/thomascook.io/i)?"thomascook.io":"thomascook.com")))),
+            profileid          : twlh(/directholidays/i)?"UA-33029666-1":"UA-33036832-1",
+            cookiedomain       : cdpm.cookiedomain,
             trackername        : 'CATTGATC',
             anonymizeip        : false,
             allowlinker        : true,
-            organicsearch    : {'search.bt.com': 'p',
-                            'search.sky.com': 'term',
-                            'search.mywebsearch.com': 'searchfor',
-                            'search.orange.co.uk': 'q',
-                            'search.virginmedia.com': 'q',
-                            'search.incredibar.com': 'q',
-                            'search.alot.com': 'q',
-                            'search.sweetim.com': 'q',
-                            'searchmobileonline.com': 'q',
-                            'searchbrowsing.com': 'q',
-                            'advancedsearch2.virginmedia.com': 'SearchQuery'
-                            }
+            addignoredref      : 'thomascook.com',            
+            organicsearch      : {'search.bt.com': 'p',
+                                    'search.sky.com': 'term',
+                                    'search.mywebsearch.com': 'searchfor',
+                                    'search.orange.co.uk': 'q',
+                                    'search.virginmedia.com': 'q',
+                                    'search.incredibar.com': 'q',
+                                    'search.alot.com': 'q',
+                                    'search.sweetim.com': 'q',
+                                    'searchmobileonline.com': 'q',
+                                    'searchbrowsing.com': 'q',
+                                    'advancedsearch2.virginmedia.com': 'SearchQuery'
+                                }
         };
         cdl.DL_gatc.webanalytics = {
             vp    : cdpmVP,
@@ -62,13 +63,15 @@
                 '&AppServer='+(cdpm.appserver || '')
                 ).toLowerCase(),
             customvars : {
-                var02     : {'index': 2,    'name':'AppServer',         'value':(cdpm.appserver || ''),                    'scope': 3},
-                var04     : {'index': 4,    'name':'InternalCampaign',  'value':(cdpm.internalcampaignid || ''),        'scope': 3},
-                var30     : {'index': 30,    'name':'UtmaGuid',         'value':(cdpm.utmaguid || ''),                    'scope': 1},
-                var31     : {'index': 31,    'name':'eCircleID',        'value':(cdpm.ecircleid || ''),                    'scope': 1},
-                var32     : {'index': 32,    'name':'dreamCaptureID',   'value':(cdpm.dreamcaptureid || ''),            'scope': 1},
-                var35     : {'index': 35,    'name':'UtmbGuid',         'value':(cdpm.utmbguid || ''),                    'scope': 2},
-                var36     : {'index': 36,    'name':'tags',             'value':(cdpm.poolcontrol && 'control' || 'variant'),                    'scope': 1},
+                var02     : {'index': 2,    'name':'AppServer',                 'value':(cdpm.appserver || ''),                     'scope': 3},
+                var04     : {'index': 4,    'name':'InternalCampaign',          'value':(cdpm.internalcampaignid || ''),            'scope': 3},
+                var30     : {'index': 30,    'name':'UtmaGuid',                 'value':(cdpm.utmaguid || ''),                      'scope': 1},
+                var31     : {'index': 31,    'name':'eCircleID',                'value':(cdpm.ecircleid || ''),                     'scope': 1},
+                var32     : {'index': 32,    'name':'dreamCaptureID',           'value':(cdpm.dreamcaptureid || ''),                'scope': 1},
+                var33     : {'index': 33,    'name':'MyAccountUserID',          'value':(cdpm.user && cdpm.user.id || ''),          'scope': 3},
+                var34     : {'index': 34,    'name':'MyAccountAnonymousID',     'value':(window.userId || ''),                      'scope': 3},
+                var35     : {'index': 35,    'name':'UtmbGuid',                 'value':(cdpm.utmbguid || ''),                      'scope': 2},
+                var36     : {'index': 36,    'name':'tags',                     'value':(cdpm.poolcontrol && 'control' || 'variant'),                    'scope': 1},
                 var39     : {'index': 39,    'name':'dreamCaptureAbtaVisitorSession',    'value':(cdpm.abtanumber || '')+(cdpm.consultantref?('-'+cdpm.consultantref):'' || ''), 'scope': 1}
             },
             events : {
@@ -82,7 +85,7 @@
         cdl.error('GTM UK TC GATCDL LP: '+e);
     } finally {
         dl.push({'event': 'GATCDL LP'});
-        window.gatcDL && gatcDL.push({'event': 'GATCDL LP'});
+        window.dataLayer_TZ9GH9 && window.dataLayer_TZ9GH9.push({'event': 'GATCDL LP'});
     }
     return cdl && cdl.CATTParams && cdl.DL_gatc;
 }(window.CATTDL, window.dataLayer, document.location || window.location))

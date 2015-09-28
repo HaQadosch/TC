@@ -1,4 +1,4 @@
-<script id='gtm_uatcdlCust'>
+<script id='GTM-TZ9GH9_uatcdlCust'>
 (function gtm_uatcdlCust(jQ, dl, cdl, loc){
     'use strict';
     if (jQ && cdl && cdl.CATTParams) try {
@@ -50,7 +50,7 @@
 
         cdl.DL_uatc = {
             profileid       : 'UA-33036832-7',
-            cookiedomain    : twlh(/thomascook.io/i)?"thomascook.io":"thomascook.com",
+            cookiedomain    : cdpm.cookiedomain || 'thomascook.com',
             name            : 'CATTUATC',
             set             : {
                 anonymizeIp : false,

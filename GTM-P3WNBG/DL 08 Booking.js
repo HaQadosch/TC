@@ -213,7 +213,7 @@
         if (bkgrefcount > 0){cdpm.pageid = 'refreshbookconf'
         } else {
             paramsbookingref.push(cdpm.bookingref);
-            cdl.ckset('gtm_bookingref', JSON.stringify(paramsbookingref), Infinity, '/', '.'+(cdl.DL_uatc && cdl.DL_uatc.cookiedomain || 'thomascook.com'));
+            cdl.ckset('gtm_bookingref', JSON.stringify(paramsbookingref), Infinity, '/', '.'+(cdpm.cookiedomain || 'thomascook.com'));
         };
         var userId = cdpm.user && cdpm.user.id || '';
         if (!userId) {

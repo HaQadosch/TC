@@ -22,8 +22,7 @@
 
         } else keeps['trailingsteps'] = cdpm.pageid+'(1)';
 
-        var domainName = cdl.twlh(/airtours/i)?'.airtours.co.uk':(cdl.twlh(/club18-30/i)?'.club18-30.com':(cdl.twlh(/directholidays/gi)?'.directholidays.co.uk':'.thomascook.com'))
-        cdl.ckset('gtm_cdpm', JSON.stringify(keeps), Infinity, '/', domainName);
+        cdl.ckset('gtm_cdpm', JSON.stringify(keeps), Infinity, '/', '.'+(cdpm.cookiedomain || 'thomascook.com'));
 
         var userId = cdpm.user && cdpm.user.id || '';
         if (!userId) {

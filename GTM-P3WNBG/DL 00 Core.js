@@ -1,5 +1,5 @@
 <script id='GTM-P3WNBG_cattdlCore'>
-  (function gtm_cattdlCore(jQ, w, dl) {
+  (function gtm_cattdlCore(jQ, w, dl, loc) {
     'use strict';
     var cons = window.console;
     var timeStart = window.dataLayer
@@ -22,11 +22,11 @@
       var exc = function exc(r, u){return RegExp.prototype.exec.call(r, u); };
 
       if (ld && ld.assign) ld.assign (cdl, {
-          twlh    : ld.partialRight(tst, w.location.host)
+          twlh    : ld.partialRight(tst, loc.host)
         , twdc    : ld.partialRight(tst, d.cookie)
-        , twls    : ld.partialRight(tst, w.location.search)
+        , twls    : ld.partialRight(tst, loc.search)
         , ewdc    : ld.partialRight(exc, d.cookie)
-        , ewls    : ld.partialRight(exc, w.location.search)
+        , ewls    : ld.partialRight(exc, loc.search)
         , gadate  : function gadate(dt){var pd = new Date(dt); return ((''+pd.getDate()).replace(/^(\d)$/i, '0$1')+'/'+(''+(1+pd.getMonth())).replace(/^(\d)$/i, '0$1')+'/'+pd.getFullYear());}
         , gatime  : function gatime(ts){var pt = new Date(ts); return ((''+pt.getHours()).replace(/^(\d)$/i, '0$1')+':'+(''+pt.getMinutes()).replace(/^(\d)$/i, '0$1')+':'+(''+pt.getSeconds()).replace(/^(\d)$/i, '0$1'));}
         , ckget   : function ckget(sKey) {return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;}
@@ -44,20 +44,20 @@
         var dpush = function dpush(evt){dl.push(evt); window.dataLayer_TZ9GH9 && window.dataLayer_TZ9GH9.push(evt); };
         var cookieTestInfo = function cookieTestInfo(mess){if (w.CATTDL.twdc(/test=test/i)) cons.info(mess)};
         jQ.subscribe('updatePageData', function gtm_updatePageData(d){
-          cookieTestInfo('GTM updatePageData updated', '\n', d, '\n', Object.keys(window.getPageData()).join('|'), '\n', window.getPageData(), '\n', 'pathname is ', (location.pathname == '/' && /#!/i.test(location.hash) && (/([^#!][^?]*)/i.exec(location.hash) || ['']).pop() || location.pathname));
+          cookieTestInfo('GTM updatePageData updated', '\n', d, '\n', Object.keys(window.getPageData()).join('|'), '\n', window.getPageData(), '\n', 'pathname is ', (loc.pathname == '/' && /#!/i.test(loc.hash) && (/([^#!][^?]*)/i.exec(loc.hash) || ['']).pop() || loc.pathname));
           if (d && d.error) {
             dpush({'event': 'updatePageData_error'});
-          } else if (d && d.errorCode && /payment/i.test(location.pathname == '/' && /#!/i.test(location.hash) && (/([^#!][^?]*)/i.exec(location.hash) || ['']).pop() || location.pathname)) {
+          } else if (d && d.errorCode && /payment/i.test(loc.pathname == '/' && /#!/i.test(loc.hash) && (/([^#!][^?]*)/i.exec(loc.hash) || ['']).pop() || loc.pathname)) {
             dpush({'event': 'updatePageData_errorPayment'});
           } else if (d && d.id == "pax-go-to-passenger-details-is-valid") {
             dpush({'event': 'updatePageData_addpax'});
           } else if (d && !d.carouselItems) {
-            dpush({'event': 'updatePageData', 'pathname': location.pathname, 'timestamp': +new Date()});
+            dpush({'event': 'updatePageData', 'pathname': loc.pathname, 'timestamp': +new Date()});
           }
         });
         jQ.subscribe('PageView', function gtm_PageView(d) {
           cookieTestInfo('GTM PageView updated', '\n', d /*, '\n', Object.keys(window.getPageData()).join('|'), '\n', window.getPageData()*/);
-          dpush({'event': 'PageView','pathname':(d && d.page || (location.pathname == '/' && /#!/i.test(location.hash) && (/([^#!][^?]*)/i.exec(location.hash) || ['']).pop()) || location.pathname),'timestamp':+new Date()});
+          dpush({'event': 'PageView','pathname':(d && d.page || (loc.pathname == '/' && /#!/i.test(loc.hash) && (/([^#!][^?]*)/i.exec(loc.hash) || ['']).pop()) || loc.pathname),'timestamp':+new Date()});
         });
         jQ.subscribe('domEvent', function gtm_domEvent(d){
           cookieTestInfo('GTM domEvent updated', '\n', d /*, '\n', Object.keys(window.getPageData()).join('|'), '\n', window.getPageData()*/);
@@ -82,6 +82,20 @@
 
       cdpm.device = (function(t){var n="desktop";var r=/mobile/i.test(t);var i=/android/i.test(t);var s=/phone/i.test(t);var o=i&&!/mobile/i.test(t);var u=/ipad/i.test(t);var a=/tablet/i.test(t);if(a||o||u)n="tablet";else if(r||i||s)n="mobile";return n})(navigator.userAgent||"") || '';
       cdpm.poolcontrol = !Boolean((cdpm.utmaguid || 1)%20);
+      cdpm.cookiedomain = 
+          ({
+          	'thomascook'					:'thomascook.com',
+            'airtours'						:'airtours.co.uk',
+            'club18-30'						:'club18-30.com',
+            'eceit'							:'staging.eceit.net',
+            'directholidays'				:'directholidays.co.uk',
+            'uk.staging'					:'uk.staging.thomascook.io',
+            'uk.qa'							:'uk.qa.thomascook.io',
+            'uk.integration'				:'uk.integration.thomascook.io',
+            'uk.int'						:'uk.int.thomascook.io'
+
+          })[((/([^\.]*).co.uk|([^\.]*).com|([^\.]*).net|(.+)\.thomascook\.io/i.exec(loc.hostname) || []).filter(function hostname(e){return e}) || ['thomascook']).pop()];
+
       window.CATTDL.CATTParams = cdpm;
 
     } catch(e) {
@@ -91,5 +105,5 @@
       dl.push({'event': 'dl core', 'timestamp': stampEpoch, 'since gtm.start': stampEpoch - timeStart});
     }
     return cdl;
-  }(window.jQuery, window, window.dataLayer));
+  }(window.jQuery, window, window.dataLayer, window.location));
 </script>

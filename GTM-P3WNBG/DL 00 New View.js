@@ -7,19 +7,11 @@
         var locpathname = loc.pathname == '/' && /#!/i.test(loc.hash) && (/([^#!][^?]*)/i.exec(loc.hash) || ['']).pop() || loc.pathname
         var wgD = w.getPageData && w.getPageData(locpathname) || {}
 
-        var domainName = ({
-          'airtours':'.airtours.co.uk',
-          'club18-30':'.club18-30.com',
-          'eceit':'staging.eceit.net',
-          'directholidays':'.directholidays.co.uk',
-          'thomascook':'.thomascook.com'
-        })[((/([^\.]*).co.uk|([^\.]*).com|([^\.]*).net/i.exec(loc.hostname) || []).filter(function hostname(e){return e}) || ['thomascook']).pop()];
-
         //Set previous pageid
         /*window.sessionStorage.setItem('gtm_previouspageid', cdpm.pageid || '')*/
         var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
         params.previouspageid = cdpm.pageid || '';
-        CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', domainName);
+        CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', '.'+(cdpm.cookiedomain || 'thomascook.com'));
 
         //Not keeping all params from the previous view. Refreshing CATTParams.
         var refreshparams = [
@@ -35,6 +27,7 @@
           , "domevents"
           , "device"
           , "poolcontrol"
+          , "cookiedomain"
         ]
         var cdpmkeys = Object.keys(cdpm);
 
@@ -114,7 +107,7 @@
           cdpm['consultantref'] =  cdurl.consultantRef || (w.CATTDL.ewls(/consultantRef=([^&|\s|\?]*)/i) || []).pop() || ""
           cdpm['qsearchedkeyword'] = cdurl.q || w.CATTDL.ewls(/[&\?]q=([^&|\s|\?]*)/i) && w.CATTDL.ewls(/[&\?]q=([^&|\s|\?]*)/i).pop() || ""
         }
-        cdl.ckset('gtm_cdpm', JSON.stringify(keeps), Infinity, '/', domainName);
+        cdl.ckset('gtm_cdpm', JSON.stringify(keeps), Infinity, '/', '.'+(cdpm.cookiedomain || 'thomascook.com'));
         jQ.extend(cdl.CATTParams, keeps);
         cdpm.pageid = cdpm.pageid || 'home';
 

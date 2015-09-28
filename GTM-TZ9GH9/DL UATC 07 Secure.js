@@ -58,7 +58,7 @@
         var vppage = (vpagepath || '') + '?' + (vpqsp_cat || '') +'&'+ (vpqsp_st || '') +'&'+ (vpqsp_p || '');
         cdl.DL_uatc = {
             profileid       : 'UA-33036832-7',
-            cookiedomain    : twlh(/thomascook.io/i)?"thomascook.io":"thomascook.com",
+            cookiedomain    : cdpm.cookiedomain || 'thomascook.com',
             name            : 'CATTUATC',
             set             : {
                 anonymizeIp : false,

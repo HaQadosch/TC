@@ -16,7 +16,7 @@
         var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
         params.errors = {};
         params.errors.secure = 1
-        CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', '.thomascook.com');    
+        CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', '.'+(cdpm.cookiedomain || 'thomascook.com'));
 
         cdpm.lob = "package"
         cdpm.holidaytype = "generic-angular"

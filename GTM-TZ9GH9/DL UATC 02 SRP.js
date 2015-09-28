@@ -1,4 +1,4 @@
-<script id='gtm_uatcdlSRP'>
+<script id='GTM-TZ9GH9_uatcdlSRP'>
 (function gtm_uatcdlSRP(jQ, dl, cdl, loc) {
     'use strict';
     if (jQ && cdl && cdl.CATTParams) try {
@@ -44,7 +44,7 @@
 
         cdl.DL_uatc = {
             profileid       : 'UA-33036832-7',
-            cookiedomain    : twlh(/thomascook.io/i)?"thomascook.io":"thomascook.com",
+            cookiedomain    : cdpm.cookiedomain || 'thomascook.com',
             name            : 'CATTUATC',
             set             : {
                 anonymizeIp : false,
@@ -83,9 +83,9 @@
                         dimension11     : {'holidaytype'                : cdpm.holidaytype || ''},
                         dimension12     : {'pageid'                     : cdpm.pageid || ''},
                         dimension13     : {'resort'                     : cdpm.resort || ''},
-                        dimension14     : {'sessionid'                  : cdpm.sessionid || ''},
+                        dimension14     : {'sessionid'                  : cdpm.sessionid || 'empty'},
                         dimension17     : {'accomname'                  : cdpm.accomnamesearched || ''},
-                        dimension19     : {'errorcode'                  : cdpm.errors && cdpm.errors.errormsg && cdpm.errors.errormsg.length > 0 && (cdpm.errors.errorcode || "unknown") || ""},
+                        dimension19     : {'errorcode'                  : ''+(cdpm.errors && cdpm.errors.errormsg && cdpm.errors.errormsg.length > 0 && (cdpm.errors.errorcode || "unknown") || "")},
                         dimension20     : {'touroperator'               : cdfc.touroperator && cdfc.touroperator.toString() || 'any'},
                         dimension21     : {'destinationsearched'        : cdpm.destination || ''},
                         dimension23     : {'searchresultspagenbr'       : cdpm.searchresultspagenbr && (''+cdpm.searchresultspagenbr) || ''},
@@ -103,7 +103,7 @@
                         dimension37     : {'paxtotal'                   : ''+(cdpm.paxtotal || '0')},
                         dimension52     : {'anonymousid'                : window.userId || ''},
                         dimension53     : {'myaccountuserid'            : cdpm.user && cdpm.user.id || ''},
-                        //dimension54     : {'myaccountaction'            : ''},                          
+                        dimension55     : {'hittype'                    : 'page'},
                         dimension64     : {'dreamcaptureid'             : cdpm.dreamcaptureid || ''},
                         dimension65     : {'pagetimestamp'              : cdl.gadate && cdl.gatime && cdl.gadate(cdpm.pagetimestamp || 0)+' '+cdl.gatime(cdpm.pagetimestamp || 0) || ''},
                         dimension67     : {'concepts'                   : cdfc.concepts && cdfc.concepts.toString() || ''},
@@ -113,15 +113,16 @@
                         dimension74     : {'deptdateend'                : cdl.gadate && cdl.gadate(cdpm.deptdateend || 0) || ''},
                         dimension75     : {'unixtimestamp'              : ''+(cdpm.pagetimestamp || 0) || ''},
                         dimension77     : {'searchwidened'              : cdpm.searchwidened || ''},
-                        dimension78     : {'searchwidenedselected'      : cdpm.searchwidenedselected || ''},                    
+                        dimension78     : {'searchwidenedselected'      : cdpm.searchwidenedselected || ''},
+                        dimension80     : {'basketid'                   : cdpm.tc_basket_id || ''},
                         dimension102    : {'pagecontext'                : cdpm.pagecontext || ''},
                         dimension115    : {'errormessage'               : cdpm.errors && cdpm.errors.errormsg || ''},               
                         dimension118    : {'vprealpath'                 : locpathname || ''},
                         dimension119    : {'vprealparameter'            : locsearch || ''}
                     },
                 events : {
-                internalcampaignid  : {'category': 'InternalCampaign', 'action': cdpm.internalcampaignid || '', 'label': lochost+locpathname, 'value': 1, 'noninteraction': true, 'page': vppage},
-                errorcode           : {'category': 'Errors', 'action': cdpm.errors && Object.keys(cdpm.errors) && (cdpm.errors.errorcode || '')+(cdpm.errors.errorcode && cdpm.errors.errormsg && ' ' || '')+(cdpm.errors.errormsg || '') || '', 'label': lochost+locpathname+'/?destination='+(cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'&deptairport='+(cdpm.deptairport || '')+'&deptdate='+(cdpm.deptdate && cdl.gadate(cdpm.deptdate) || '')+'&duration='+(cdpm.duration || '')+'&appserver='+(cdpm.appserver || '')+(((/[\?].+/.exec(lochref)) || '').toString()).replace(/\?/, '&'), 'value': 1, 'noninteraction': true, 'page':vppage}
+                    internalcampaignid  : {'category': 'InternalCampaign', 'action': cdpm.internalcampaignid || '', 'label': lochost+locpathname, 'value': 1, 'noninteraction': true, 'page': vppage},
+                    errorcode           : {'category': 'Errors', 'action': cdpm.errors && Object.keys(cdpm.errors) && (cdpm.errors.errorcode || '')+(cdpm.errors.errorcode && cdpm.errors.errormsg && ' ' || '')+(cdpm.errors.errormsg || '') || '', 'label': lochost+locpathname+'/?destination='+(cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'&deptairport='+(cdpm.deptairport || '')+'&deptdate='+(cdpm.deptdate && cdl.gadate(cdpm.deptdate) || '')+'&duration='+(cdpm.duration || '')+'&appserver='+(cdpm.appserver || '')+(((/[\?].+/.exec(lochref)) || '').toString()).replace(/\?/, '&'), 'value': 1, 'noninteraction': true, 'page':vppage}
                 }
             }
         };
@@ -154,7 +155,7 @@
         cdl.error('GTM UK TC UATCDL SRP: '+e)
     } finally {
         dl.push({'event': 'UATCDL SRP'})
-        gatcDL.push({'event': 'UATCDL SRP'})
+        window.dataLayer_TZ9GH9 && window.dataLayer_TZ9GH9.push({'event': 'UATCDL SRP'})
     }   
     return  cdl.DL_uatc
 }(window.jQuery, window.dataLayer || [], window.CATTDL, window.location))

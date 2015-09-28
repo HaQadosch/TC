@@ -61,15 +61,15 @@
                         if (uawa.nbrimpressions && uawa.addimpression && uawa.addimpression.length){
                                 for (var i = 0; i < uawa.nbrimpressions; i++){
                                     curUAImp = uaImp[i] || {}
-                                    w.ga(trackerName+'ec:addImpression', {
-                                              'id':             curUAImp.id || '',
-                                              'name':           curUAImp.name || '',
-                                              'category':       curUAImp.category || '',
-                                              'brand':          curUAImp.brand || '',
-                                              'variant':        curUAImp.variant || '',
-                                              'list':           curUAImp.list || '',
-                                              'position':       curUAImp.position || '',
-                                              'dimension27':    curUAImp.dimension27 || ''
+                                    w.ga(trackerName+'ec:addImpression', {
+                                              'id':             curUAImp.id || '',
+                                              'name':           curUAImp.name || '',
+                                              'category':       curUAImp.category || '',
+                                              'brand':          curUAImp.brand || '',
+                                              'variant':        curUAImp.variant || '',
+                                              'list':           curUAImp.list || '',
+                                              'position':       curUAImp.position || '',
+                                              'dimension27':    curUAImp.dimension27 || ''
                                     })
                                 }               
                                 for (i = 0; i < uawa.nbrimpressions; accoms.push((uaImp[i++].id) || ""));

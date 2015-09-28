@@ -27,7 +27,7 @@
                     for (var setOption in uadl.set) {trc.set(setOption, uadl.set[setOption])};
                         
                     if (typeof trc.plugins_ === 'undefined' || !/displayfeatures/i.test(trc.plugins_ && trc.plugins_.keys || '')) trc.require && trc.require('displayfeatures') || w.ga(trackerName+'require', 'displayfeatures');
-                    if (typeof trc.plugins_ === 'undefined' || !/ec/i.test(trc.plugins_ && trc.plugins_.keys || '')) trc.require && trc.require('ec', 'ec.js') || w.ga(trackerName+'require', 'ec', 'ec.js');
+                    if (typeof trc.plugins_ === 'undefined' || !/ec/i.test(trc.plugins_ && trc.plugins_.keys || '')) trc.require && trc.require('ec', 'ec.js') || w.ga(trackerName+'require', 'ec', 'ec.js');
                     cdl.CATTParams.gaguid =  /(.+)\./i.exec(trc.get('clientId') || '.').pop() || cdl.CATTParams.gaguid || ''
                     uawa && uawa.dimensions && (uawa.dimensions.dimension51 = {'gaguid' : cdl.CATTParams.gaguid || 'empty'})
 
@@ -79,14 +79,14 @@
                         sendSetPurchase.dimension12 = 'purchase';
                         sendSetPurchase.dimension55 = 'event';
 
-                        w.ga(trackerName+'ec:addProduct', prodDimMet);
+                        w.ga(trackerName+'ec:addProduct', prodDimMet);
                         w.ga(trackerName+'ec:setAction','purchase', {
                             'id'            : uapurch.id,
-                            'affiliation'   : uapurch.affiliation,
+                            'affiliation'   : uapurch.affiliation,
                             'revenue'       : uapurch.revenue,
-                            'tax'           : uapurch.tax,
-                            'shipping'      : uapurch.shipping,
-                            'coupon'        : uapurch.coupon
+                            'tax'           : uapurch.tax,
+                            'shipping'      : uapurch.shipping,
+                            'coupon'        : uapurch.coupon
                         });
                        w.ga(trackerName+'send','event', 'ECPurchase', uaprod.id
                                     ,  ''+uaprod.position

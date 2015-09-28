@@ -1,4 +1,4 @@
-//<script id='gtm_gatcdlCust'>
+<script id='GTM-TZ9GH9_gatcdlCust'>
 (function gtm_gatcdlCust(cdl, dl, loc) {
     'use strict';
     if (cdl && cdl.CATTParams) try {
@@ -19,10 +19,11 @@
 
         cdl.DL_gatc = {
             profileid        : twlh(/directholidays/i)?"UA-33029666-1":"UA-33036832-1",
-            cookiedomain     : twlh(/airtours/i)?"airtours.co.uk":(twlh(/club18-30/i)?"club18-30.com":(twlh(/directholidays/i)?"directholidays.co.uk":(twlh(/staging.eceit/i)?"staging.eceit.net":(twlh(/thomascook.io/i)?"thomascook.io":"thomascook.com")))),
+            cookiedomain     	: cdpm.cookiedomain || 'thomascook.com',
             trackername        : 'CATTGATC',
             anonymizeip        : false,
             allowlinker        : true,
+            addignoredref   : 'thomascook.com',            
             organicsearch    : {
                 'search.bt.com': 'p',
                 'search.sky.com': 'term',
@@ -65,28 +66,30 @@
                 '&AppServer='+(cdpm.appserver || '')
                 ).toLowerCase(),
             customvars : {
-                var02     : {'index': 2,    'name':'AppServer',            'value':(cdpm.appserver || ''),                    'scope': 3},
-                var04     : {'index': 4,    'name':'InternalCampaign',    'value':(cdpm.internalcampaignid || ''),        'scope': 3},
-                var30     : {'index': 30,    'name':'UtmaGuid',            'value':(cdpm.utmaguid || ''),                    'scope': 1},
-                var31     : {'index': 31,    'name':'eCircleID',            'value':(cdpm.ecircleid || ''),                    'scope': 1},
-                var32     : {'index': 32,    'name':'dreamCaptureID',    'value':(cdpm.dreamcaptureid || ''),            'scope': 1},
-                var35     : {'index': 35,    'name':'UtmbGuid',             'value':(cdpm.utmbguid || ''),                    'scope': 2},
-                var36     : {'index': 36,    'name':'tags',             'value':(cdpm.poolcontrol && 'control' || 'variant'),                    'scope': 1},
-                var39     : {'index': 39,    'name':'dreamCaptureAbtaVisitorSession',    'value':(cdpm.abtanumber || '')+(cdpm.consultantref?('-'+cdpm.consultantref):'' || ''), 'scope': 1}
+                var02     : {'index': 2,  'name':'AppServer',               'value':(cdpm.appserver || ''),                 'scope': 3},
+                var04     : {'index': 4,  'name':'InternalCampaign',        'value':(cdpm.internalcampaignid || ''),        'scope': 3},
+                var30     : {'index': 30, 'name':'UtmaGuid',                'value':(cdpm.utmaguid || ''),                  'scope': 1},
+                var31     : {'index': 31, 'name':'eCircleID',               'value':(cdpm.ecircleid || ''),                 'scope': 1},
+                var32     : {'index': 32, 'name':'dreamCaptureID',          'value':(cdpm.dreamcaptureid || ''),            'scope': 1},
+                var33     : {'index': 33, 'name':'MyAccountUserID',         'value':(cdpm.user && cdpm.user.id || ''),      'scope': 3},
+                var34     : {'index': 34, 'name':'MyAccountAnonymousID',    'value':(window.userId || ''),                  'scope': 3},                 
+                var35     : {'index': 35, 'name':'UtmbGuid',                'value':(cdpm.utmbguid || ''),                  'scope': 2},
+                var36     : {'index': 36, 'name':'tags',                    'value':(cdpm.poolcontrol && 'control' || 'variant'),    'scope': 1},
+                var39     : {'index': 39, 'name':'dreamCaptureAbtaVisitorSession',    'value':(cdpm.abtanumber || '')+(cdpm.consultantref?('-'+cdpm.consultantref):'' || ''), 'scope': 1}
             },
             events : {
                 angularpages        : {'category': 'Angular Pages', 'action': locpathname || '', 'label': loc.host, 'value': 1, 'noninteraction': true},
-                internalcampaignid    : {'category': 'InternalCampaign', 'action': cdpm.internalcampaignid || '', 'label': loc.host+locpathname, 'value': 1, 'noninteraction': true},
+                internalcampaignid  : {'category': 'InternalCampaign', 'action': cdpm.internalcampaignid || '', 'label': loc.host+locpathname, 'value': 1, 'noninteraction': true},
                 qsearchedkeyword    : {'category': 'GoogleInternalSearch', 'action': cdpm.qsearchedkeyword || '', 'label': loc.host+locpathname, 'value': 1, 'noninteraction': true},
-                errorcode             : {'category': 'Errors', 'action': cdpm.errors && Object.keys(cdpm.errors) && (cdpm.errors.errorcode || '')+(cdpm.errors.errorcode && cdpm.errors.errormsg && ' ' || '')+(cdpm.errors.errormsg || '') || '', 'label': loc.hostname+locpathname+'?destination='+(cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'&deptairport='+(cdpm.deptairport || '')+'&deptdate='+(cdpm.deptdate && cdl.gadate(cdpm.deptdate) || '')+'&duration='+(cdpm.duration || '')+'&appserver='+(cdpm.appserver || '')+(((/[\?].+/.exec(lochref)) || '').toString()).replace(/\?/, '&'), 'value': 1, 'noninteraction': true},
-                opcreative             : {'category': 'OptimostCreative', 'action': cdpm.optimostcreative || '', 'label': loc.href || '', 'value': 1, 'noninteraction': true}
+                errorcode           : {'category': 'Errors', 'action': cdpm.errors && Object.keys(cdpm.errors) && (cdpm.errors.errorcode || '')+(cdpm.errors.errorcode && cdpm.errors.errormsg && ' ' || '')+(cdpm.errors.errormsg || '') || '', 'label': loc.hostname+locpathname+'?destination='+(cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'&deptairport='+(cdpm.deptairport || '')+'&deptdate='+(cdpm.deptdate && cdl.gadate(cdpm.deptdate) || '')+'&duration='+(cdpm.duration || '')+'&appserver='+(cdpm.appserver || '')+(((/[\?].+/.exec(lochref)) || '').toString()).replace(/\?/, '&'), 'value': 1, 'noninteraction': true},
+                opcreative          : {'category': 'OptimostCreative', 'action': cdpm.optimostcreative || '', 'label': loc.href || '', 'value': 1, 'noninteraction': true}
             }
         };
     } catch(e){
         cdl.error('GTM UK TC GATCDL Cust: '+e);
     } finally {
         dl.push({'event': 'GATCDL Cust'});
-        window.gatcDL && gatcDL.push({'event': 'GATCDL Cust'});
+        window.dataLayer_TZ9GH9 && window.dataLayer_TZ9GH9.push({'event': 'GATCDL Cust'});
     }
     return cdl && cdl.CATTParams && cdl.DL_gatc;
 }(window.CATTDL, window.dataLayer, document.location || window.location))

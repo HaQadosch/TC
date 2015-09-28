@@ -1,4 +1,4 @@
-<script>
+<script id='GTM-P3WNBG_cattdlSRPitems'>
 (function gtm_cattdlSRPitems(jQ, dl, cdl) {
     'use strict'
     if (jQ && jQ.extend && cdl) try {
@@ -29,9 +29,13 @@
             srpPM['accomname'] = accom || '';
 
             var strdeptdate = ''
-            srpPM['deptdate'] = (strdeptdate = wgdSrch.when || "19700101") && +new Date(strdeptdate.substring(0,4), strdeptdate.substring(4,6)-1, strdeptdate.substring(6,8)) || 0;
+            if  (wgdSrch.when && wgdSrch.when._d) {
+                srpPM['deptdate'] = wgdSrch.when._d || '0';
+            } else {
+                srpPM['deptdate'] = (strdeptdate = wgdSrch.when || wgdSrch.when || "19700101") && +new Date(strdeptdate.substring(0,4), strdeptdate.substring(4,6)-1, strdeptdate.substring(6,8)) || 0;                
+            }
             var wgdItems = wgetDataSrch.items || {}
-            srpPM['searchresultstop3'] = ((wgdItems[0] && wgdItems[0].id || "") +"-"+(wgdItems[1] && wgdItems[2].id || "")+"-"+(wgdItems[2] && wgdItems[2].id || "")) || "";
+            srpPM['searchresultstop3'] = wgdItems && ((wgdItems[0] && wgdItems[0].id || "")+"-"+(wgdItems[1] && wgdItems[1].id || "")+"-"+(wgdItems[2] && wgdItems[2].id || ""))|| '';
             srpPM['searchlist'] = wgdItems.length || 0;     
 
             var wgdStats = wgetDataSrch.stats || {}
@@ -163,8 +167,8 @@
     } catch(e) {
         cdl.error('GTM CATTDL SRP items: '+e)
     } finally {
-        dataLayer.push({'event': 'CATTDL SRP items'+'|'+(cdl.CATTParams && cdl.CATTParams.pageid)});
-        window.gatcDL && window.gatcDL.push({'event': 'CATTDL SRP items'+'|'+(cdl.CATTParams && cdl.CATTParams.pageid || '')});
+        dl.push({'event': 'CATTDL SRP items'+'|'+(cdl.CATTParams && cdl.CATTParams.pageid)});
+        window.dataLayer_TZ9GH9 && window.dataLayer_TZ9GH9.push({'event': 'CATTDL SRP items'+'|'+(cdl.CATTParams && cdl.CATTParams.pageid || '')});
     }
     return jQ && jQ.extend && cdl
 }(window.jQuery, window.dataLayer, window.CATTDL))

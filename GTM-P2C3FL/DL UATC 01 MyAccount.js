@@ -15,7 +15,7 @@
 
         cdl.DL_uatc = {
             profileid       : 'UA-33036832-7',
-            cookiedomain    : twlh(/airtours/i)?"airtours.co.uk":(twlh(/club18-30/i)?"club18-30.com":(twlh(/directholidays/i)?"directholidays.co.uk":(twlh(/staging.eceit/i)?"staging.eceit.net":(twlh(/thomascook.io/i)?"thomascook.io":"thomascook.com")))),
+            cookiedomain    : cdpm.cookiedomain || 'thomascook.com',
             name            : 'CATTUATC',
             set             : {
                 anonymizeIp : false
