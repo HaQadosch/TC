@@ -74,7 +74,7 @@
                                         ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
                                         ,'dimension75': ''+(window.Date && window.Date.now() || 0)
                                     }
-                                    , {'nonInteraction': true, 'location': uawa.location});
+                                    , {'nonInteraction': 1, 'location': uawa.location});
                             });
                         };
                         if(!/gtm_uabound/i.test(jQ('#idRemoveAccount').attr('class'))){
@@ -92,7 +92,7 @@
                                         ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
                                         ,'dimension75': ''+(window.Date && window.Date.now() || 0)
                                     }
-                                    , {'nonInteraction': true, 'location': uawa.location});
+                                    , {'nonInteraction': 1, 'location': uawa.location});
                             });
                         };
                         jQ('.cookieWarning a.btn.btn-default.btn-block.close').on('click',function(e){
@@ -108,7 +108,7 @@
                                         ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
                                         ,'dimension75': ''+(window.Date && window.Date.now() || 0)
                                     }
-                                    , {'nonInteraction': true, 'location': uawa.location});
+                                    , {'nonInteraction': 1, 'location': uawa.location});
                        });
                     window.dataLayer.push({'event':'UATC LP'})
                 })
