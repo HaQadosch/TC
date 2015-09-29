@@ -31,7 +31,7 @@
                             page            : '/vp/en/'+(cdpm.lob || 'multicom')+'/'+(cdpm.holidaytype || 'multicom')+'/'+(cdpm.pageid || 'multicom'),
                             location        : loc && loc.href || window.document && window.document.URL || '',
                             addproduct      : {
-                                id              : cdpm.accomguid || '',
+                                id              : cdpm.accomguid || cdpm.accomcode || '',
                                 name            : ((cdpm.accomname || cdpm.cruiseship || '')+'|'+(cdpm.destairport || '')+'|'+(cdpm.accomcountry || '')+'|'+(cdpm.accomregion || '')+'|'+(cdpm.accomresort || '')).toLowerCase() || "",
                                 category        : ('en|'+(cdpm.lob || '')+'|'+(cdpm.holidaytype || '')).toLowerCase() || "",
                                 brand           : (cdpm.touroperator || '').toLowerCase() || "",
