@@ -77,7 +77,7 @@
                                     ,  (accoms && accoms.toString() || "")
                                     , 1
                                     , eventsendSet
-                                    , {'nonInteraction': true});
+                                    , {'nonInteraction': 1});
                             
                             };
                     }());

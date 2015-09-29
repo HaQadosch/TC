@@ -27,7 +27,7 @@
                     for (var setOption in uadl.set) {trc.set(setOption, uadl.set[setOption])};
                         
                     if (typeof trc.plugins_ === 'undefined' || !/displayfeatures/i.test(trc.plugins_ && trc.plugins_.keys || '')) trc.require && trc.require('displayfeatures') || w.ga(trackerName+'require', 'displayfeatures');
-                    if (typeof trc.plugins_ === 'undefined' || !/ec/i.test(trc.plugins_ && trc.plugins_.keys || '')) trc.require && trc.require('ec', 'ec.js') || w.ga(trackerName+'require', 'ec', 'ec.js');
+                    if (typeof trc.plugins_ === 'undefined' || !/ec/i.test(trc.plugins_ && trc.plugins_.keys || '')) trc.require && trc.require('ec', 'ec.js') || w.ga(trackerName+'require', 'ec', 'ec.js');
                     cdl.CATTParams.gaguid =  /(.+)\./i.exec(trc.get('clientId') || '.').pop() || cdl.CATTParams.gaguid || ''
                     uawa && uawa.dimensions && (uawa.dimensions.dimension51 = {'gaguid' : cdl.CATTParams.gaguid || 'empty'})
 
@@ -54,16 +54,13 @@
                     var eventsendSet = {};
                     jQ.extend(eventsendSet, sendSet);
                     delete eventsendSet.dimension12;
-                    delete eventsendSet.metric51;
-                    delete eventsendSet.metric52;
-                    delete eventsendSet.metric53;
                     eventsendSet.dimension55 = 'event';
 
                     var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
                     var uaprod = uadl.webanalytics.addproductlist || {};
                     if (wgdSrch && params && params.previouspageid && (params.previouspageid === 'search' || params.previouspageid === 'searchmap' || params.previouspageid === 'searchseo')) { 
                         /*w.sessionStorage.getItem('gtm_previouspageid') === 'search' && wgdSrch*/    
-                        w.ga(trackerName+'ec:addProduct', {
+                        w.ga(trackerName+'ec:addProduct', {
                             'id'        : uaprod.id,
                             'name'      : uaprod.name,
                             'category'  : uaprod.category,
@@ -73,7 +70,7 @@
                             'position'  : uaprod.position
                         });
 
-                        w.ga(trackerName+'ec:setAction', 'click', {'list': uaprod.list});
+                        w.ga(trackerName+'ec:setAction', 'click', {'list': uaprod.list});
                         w.ga(trackerName+'send','event', 'ECProductListClick', uaprod.id
                                     ,  ''+uaprod.position
                                     , 1
@@ -85,20 +82,20 @@
                     w.ga(trackerName+'send','pageview', sendSet);     
 
                     if(cdpm.pageid !== 'accomcalendar'){
-                        w.ga(trackerName+'ec:addProduct', {
+                        w.ga(trackerName+'ec:addProduct', {
                             'id'        : uaprod.id || '',
                             'name'      : uaprod.name || '',
                             'category'  : uaprod.category || '',
                             'brand'     : uaprod.brand || '',
                             'variant'   : uaprod.variant || ''
                         });
-                        w.ga(trackerName+'ec:setAction', 'detail');
+                        w.ga(trackerName+'ec:setAction', 'detail');
                         w.ga(trackerName+'send','event', 'ECProductView'
                                 , uaprod.id || 'error'
                                 ,  ''+(uaprod.position || 0)
                                 , 1
                                 , eventsendSet
-                                , {'nonInteraction': true});
+                                , {'nonInteraction': 1});
                         dl.push({'event': 'UATCEC productview'});
                     };
 
@@ -127,7 +124,7 @@
                                 ,'dimension118': (locpathname || '')
                                 ,'dimension119': (locsearch || '')                    
                             }
-                            , {'noninteraction': true});
+                            , {'noninteraction': 1});
                     });
                  })
         })

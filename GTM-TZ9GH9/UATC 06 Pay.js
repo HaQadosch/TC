@@ -26,7 +26,7 @@
                     for (var setOption in uadl.set) {trc.set(setOption, uadl.set[setOption])};
                         
                     if (typeof trc.plugins_ === 'undefined' || !/displayfeatures/i.test(trc.plugins_ && trc.plugins_.keys || '')) trc.require && trc.require('displayfeatures') || w.ga(trackerName+'require', 'displayfeatures');
-                    if (typeof trc.plugins_ === 'undefined' || !/ec/i.test(trc.plugins_ && trc.plugins_.keys || '')) trc.require && trc.require('ec', 'ec.js') || w.ga(trackerName+'require', 'ec', 'ec.js');
+                    if (typeof trc.plugins_ === 'undefined' || !/ec/i.test(trc.plugins_ && trc.plugins_.keys || '')) trc.require && trc.require('ec', 'ec.js') || w.ga(trackerName+'require', 'ec', 'ec.js');
                     cdl.CATTParams.gaguid =  /(.+)\./i.exec(trc.get('clientId') || '.').pop() || cdl.CATTParams.gaguid || ''
                     uawa && uawa.dimensions && (uawa.dimensions.dimension51 = {'gaguid' : cdl.CATTParams.gaguid || 'empty'})
 
@@ -55,7 +55,7 @@
                     delete eventsendSet.dimension12;
                     eventsendSet.dimension55 = 'event';
                     
-                    w.ga(trackerName+'ec:addProduct', {
+                    w.ga(trackerName+'ec:addProduct', {
                         'id'        : uaprod.id,
                         'name'      : uaprod.name,
                         'category'  : uaprod.category,
@@ -65,12 +65,12 @@
                         'quantity'  : uaprod.quantity                   
                     });
 
-                    w.ga(trackerName+'ec:setAction','checkout', {'step':4, 'label': 'pay'})
+                    w.ga(trackerName+'ec:setAction','checkout', {'step':4, 'label': 'pay'})
                     w.ga(trackerName+'send','event', 'ECProductView', uaprod.id
                                 ,  ''+uaprod.position
                                 , 1
                                 , eventsendSet
-                                , {'nonInteraction': true});
+                                , {'nonInteraction': 1});
 
                     if (ux) {window.ECEOP.pageview = []};
 

@@ -92,7 +92,7 @@
                                     ,  ''+uaprod.position
                                     , 1
                                     , sendSetPurchase
-                                    , {'nonInteraction': true});
+                                    , {'nonInteraction': 1});
                     };
 
                     if (ux) {window.ECEOP.pageview = []};            

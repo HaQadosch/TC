@@ -69,7 +69,7 @@
                 var evtaction = 'page view'
                 var evtlabel = lobholidaytypepageid;
                 var evtvalue = 1;
-                var evtnoninteraction = true;
+                var evtnoninteraction = 1;
 
                 w.ga(uatrc+'send', 'event'
                 , evtcategory

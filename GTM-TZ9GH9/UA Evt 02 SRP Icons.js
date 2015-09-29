@@ -23,7 +23,7 @@
                     ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
                     ,'dimension75': ''+(window.Date && window.Date.now() || 0)
                 }
-                , {'nonInteraction': true, 'location': uawa.location});
+                , {'nonInteraction': 1, 'location': uawa.location});
         }
         function GAevent(category,action,label) {
                 w._gaq.push([(cdl && cdl.DL_gatc && cdl.DL_gatc.trackername)+'._trackEvent'
@@ -31,7 +31,7 @@
                 , action
                 , label
                 , 1     
-                , {'noninteraction': true}]);
+                , {'noninteraction': 1}]);
         }
         
         //departure airport
@@ -101,7 +101,7 @@
             jQ('input#when').addClass('gtm_uabound');
             jQ('input#when').on('blur',function(e){
                 jQ('table.ui-datepicker-calendar td').on('click',function(e){
-                    var evtaction = 'Calendar';
+                    var evtaction = 'Calendar - Selection';
                     var evtlabel = (jQ(this).attr('data-year') && jQ(this).find('a') && jQ(this).attr('data-month'))?(("0"+(jQ(this).find('a').text()) || "01").slice(-2)+'/'+("0"+(parseInt(jQ(this).attr('data-month') || "0")+1)).slice(-2)+'/'+jQ(this).attr('data-year')):"01/01/1970";
                     //UA
                     UAevent(evtcategory,evtaction,evtlabel);

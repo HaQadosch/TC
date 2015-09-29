@@ -33,7 +33,7 @@
         var evtaction = cdom.data || '';
         var evtlabel = lobholidaytypepageid || '';
         var evtvalue = 1;
-        var evtnoninteraction = false;
+        var evtnoninteraction = 0;
         var evtcategory = '';
 
         if (/accom-flight-(changeMonth|nextMonth|previousMonth)/.test(cdom.id)) { evtcategory = 'Accom_Change_Month'}

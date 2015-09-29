@@ -5,7 +5,8 @@
         try 
     {
         var cdpm = cdl.CATTParams || [];
-        var trackerName = (uadl.name+".") || "";
+        var uatrc = (uadl.name+".") || ".";
+        var gatrc = ((cdl && cdl.DL_gatc && cdl.DL_gatc.trackername)+".") || ".";
         var uawa = uadl.webanalytics || {};
         var cdom = cdpm.domevents;
         var cdomid = cdom && cdomid || '';
@@ -13,7 +14,7 @@
         var cdurl = cdpm.urlparams || {};
 
         function UAevent(category,action,label,value,noninteraction) {
-            w.ga(trackerName+'send', 'event'
+            w.ga(uatrc+'send', 'event'
             , category
             , action
             , label
@@ -29,7 +30,7 @@
             , {'nonInteraction': noninteraction});
         };
         function GAevent(category,action,label,value,noninteraction) {
-            w._gaq.push([(cdl && cdl.DL_gatc && cdl.DL_gatc.trackername)+'._trackEvent'
+            w._gaq.push([gatrc+'_trackEvent'
             , category
             , action
             , label
@@ -44,7 +45,7 @@
                 var evtaction = 'Navigate'
                 var evtlabel = lobholidaytypepageid;
                 var evtvalue = 1;
-                var evtnoninteraction = true;
+                var evtnoninteraction = 1;
                 UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
                 GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
             } catch(e) {cdl.info('GTM Evt 03 Accom - AskandAnswer Navigate: '+e)}
@@ -56,7 +57,7 @@
                 var evtaction = /true/.test(cdpm.domevents && cdpm.domevents.id)?'Show':'Hide'
                 var evtlabel = lobholidaytypepageid;
                 var evtvalue = 1;
-                var evtnoninteraction = true;
+                var evtnoninteraction = 1;
                 UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
                 GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
             } catch(e) {cdl.info('GTM Evt 03 Accom - AskandAnswer Show: '+e)}
@@ -68,7 +69,7 @@
                 var evtaction = 'FromOurCustomers'
                 var evtlabel = lobholidaytypepageid;
                 var evtvalue = 1;
-                var evtnoninteraction = true;
+                var evtnoninteraction = 1;
                 UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
                 GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
             } catch(e) {cdl.info('GTM Evt 03 Accom - Reviews: '+e)}
@@ -80,7 +81,7 @@
                 var evtaction = 'Navigate'
                 var evtlabel = lobholidaytypepageid;
                 var evtvalue = 1;
-                var evtnoninteraction = true;
+                var evtnoninteraction = 1;
                 UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
                 GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
             } catch(e) {cdl.info('GTM Evt 03 Accom - Reviews: '+e)}
@@ -92,19 +93,19 @@
                 var evtaction = 'Navigate'
                 var evtlabel = lobholidaytypepageid;
                 var evtvalue = 1;
-                var evtnoninteraction = true;
+                var evtnoninteraction = 1;
                 UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
                 GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
             } catch(e) {cdl.info('GTM Evt 03 Accom - Facilities: '+e)}
         };
         //Accom Flights Navigate
-        if (/accom-flight/.test(cdom.id)){
+        if (/^accom-flight$/.test(cdom.id)){
             try {
                 var evtcategory = 'AccomFlight';
                 var evtaction = 'Navigate'
                 var evtlabel = lobholidaytypepageid;
                 var evtvalue = 1;
-                var evtnoninteraction = true;
+                var evtnoninteraction = 1;
                 UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
                 GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
             } catch(e) {cdl.info('GTM Evt 03 Accom - Flights: '+e)}
@@ -116,7 +117,7 @@
                 var evtaction = 'Navigate'
                 var evtlabel = lobholidaytypepageid;
                 var evtvalue = 1;
-                var evtnoninteraction = true;
+                var evtnoninteraction = 1;
                 UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
                 GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
             } catch(e) {cdl.info('GTM Evt 03 Accom - Flights: '+e)}
@@ -128,7 +129,7 @@
                 var evtaction = 'Hotelvideo'
                 var evtlabel = lobholidaytypepageid;
                 var evtvalue = 1;
-                var evtnoninteraction = true;
+                var evtnoninteraction = 1;
                 UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
                 GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
             } catch(e) {cdl.info('GTM Evt 03 Accom - Video: '+e)}
@@ -140,7 +141,7 @@
                 var evtaction = cdom && cdom.data && (cdom.data.productId+'|'+(cdom.data.hotelName && cdom.data.hotelName.value)+'|'+(cdom.data.tourOperator && cdom.data.tourOperator.name)+'|'+cdom.data.seasonCode);
                 var evtlabel = cdpm && cdpm.lob+'|'+cdpm.holidaytype;
                 var evtvalue = 1;
-                var evtnoninteraction = true;
+                var evtnoninteraction = 1;
                 UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
                 GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
             } catch(e) {cdl.info('GTM Evt 03 Accom - Map: '+e)}

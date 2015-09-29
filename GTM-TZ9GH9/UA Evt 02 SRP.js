@@ -5,11 +5,11 @@
         try 
     {
         var cdpm = cdl.CATTParams || [];
-        var uatrc = (uadl.name+".") || "";
-        var gatrc = ((cdl && cdl.DL_gatc && cdl.DL_gatc.trackername)+".") || "";
+        var uatrc = (uadl.name+".") || ".";
+        var gatrc = ((cdl && cdl.DL_gatc && cdl.DL_gatc.trackername)+".") || ".";
         var uawa = uadl.webanalytics || {};
         var cdom = cdpm.domevents;
-        var cdomid = cdom && cdomid || '';
+        var cdomid = cdom && cdom.id || '';
         var cdurl = cdpm.urlparams || {};
 
         function UAevent(category,action,label,value,noninteraction) {
@@ -51,8 +51,11 @@
         //SRP Sort Options
         if (/srp-sort-results/.test(cdom.id)){
             try {
+                var htmlval = $('[analytics-id="srp-sort-results"] option').filter(':selected').attr('label')
+                    || $(cdom && cdom.rawEvent && cdom.rawEvent.originalEvent.path).find('[analytics-id="srp-sort-results"] option').filter(':selected').attr('label') 
+                    || "";
                 var evtcategory = 'SRP SortOption';
-                var evtaction = cdom && cdom.data && cdom.data.val;
+                var evtaction = cdom && cdom.data && cdom.data.val || htmlval || "";
                 var evtlabel = cdpm && cdpm.lob+'|'+cdpm.holidaytype;
                 var evtvalue = 1;
                 var evtnoninteraction = false;
@@ -72,7 +75,6 @@
                 GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
             } catch(e) {cdl.info('GTM Evt 02 SRP - Show Carousel: '+e)}
         };
-
     } catch(e) {
         cdl.error('GTM Evt 02 SRP: '+e)
     }

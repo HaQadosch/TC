@@ -1,5 +1,5 @@
-<script id='GTM-TZ9GH9_evtBooking'>
-(function gtm_evtBooking(jQ, cdl, uadl, w){
+<script id='GTM-TZ9GH9_evtPayment'>
+(function gtm_evtPayment(jQ, cdl, uadl, w){
         'use strict';
     if (cdl && uadl) 
         try 
@@ -11,6 +11,7 @@
         var cdom = cdpm.domevents;
         var cdomid = cdom && cdom.id || '';
         var cdurl = cdpm.urlparams || {};
+        var wgD = window.getPageData(cdurl.pathname);
 
         function UAevent(category,action,label,value,noninteraction) {
             w.ga(uatrc+'send', 'event'
@@ -36,33 +37,36 @@
             , value  
             , {'noninteraction': noninteraction}]); 
         };
-        //Holiday Essentials
-        if (/confirmation-holiday_extras_link/.test(cdom.id)){
+        //Payment Submit
+        if (/payment-submit/.test(cdom.id)){
             try {
-                var evtcategory = 'HolidayExtrasLink';
-                var evtaction = cdpm.bookingref || '';
-                var evtlabel = cdpm.airlineref || '';
+                var evtcategory = 'PaymentSubmitButton';
+                var evtaction = cdpm.lob || '';
+                var evtlabel = cdpm.holidaytype || '';
                 var evtvalue = 1;
                 var evtnoninteraction = 0;
                 UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
                 GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
-            } catch(e) {cdl.info('GTM Evt 08 Booking - Holiday Essentials: '+e)}
+            } catch(e) {cdl.info('GTM Evt 06 Payment - Payment Submit: '+e)}
         };
-        //Print Booking Conf
-        if (/checkout-print-page/.test(cdom.id)){
+        //Payment Promo Code
+        if (/payment-promo/.test(cdom.id)){
             try {
-                var evtcategory = 'PrintBookingConfirmation';
-                var evtaction = cdpm.bookingref || '';
-                var evtlabel = cdpm.airlineref || '';
-                var evtvalue = 1;
+            if (cdom.data && typeof cdom.data == 'string') setTimeout(function gtm_promoCodeEvt(){
+                var evtcategory = 'PromoCodes';
+                var evtaction = cdom.data && typeof cdom.data == 'string' && cdom.data || '';
+                var evtlabel = (wgD && wgD.errorCode === 500)?'PromoCode invalid':(/invalid/i.test(cdom.rawEvent.currentTarget.className)?'PromoCode invalid':'PromoCode Valid');
+                var evtvalue = parseInt(wgD.promotion && wgD.promotion.promoDiscount) || 0;
                 var evtnoninteraction = 0;
                 UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
                 GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
-            } catch(e) {cdl.info('GTM Evt 08 Booking -Print Confirmation: '+e)}
+            }, 500)
+
+            } catch(e) {cdl.info('GTM Evt 06 Payment - Payment Promo Code: '+e)}
         };
 
     } catch(e) {
-        cdl.error('GTM Evt 08 Booking: '+e)
+        cdl.error('GTM Evt 06 Payment: '+e)
     }
 }(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_uatc, window))
 </script>

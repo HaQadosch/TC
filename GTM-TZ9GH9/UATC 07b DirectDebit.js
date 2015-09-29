@@ -70,7 +70,7 @@
                                 ,  ''+uaprod.position
                                 , 1
                                 , eventsendSet
-                                , {'nonInteraction': true});
+                                , {'nonInteraction': 1});
                         
                     if (ux) {window.ECEOP.pageview = []};
 

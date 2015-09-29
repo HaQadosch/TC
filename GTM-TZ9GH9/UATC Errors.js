@@ -1,4 +1,4 @@
-<script id='gtm_UATCErrors'>
+<script id='GTM-TZ9GH9_UATCErrors'>
 (function gtm_UATCErrors(jQ, loc, cdl, w) {
     'use strict'
     if (jQ && cdl && cdl.CATTParams) try{
@@ -27,7 +27,7 @@
                     ,'dimension118' : (cdurl && cdurl.pathname || location.pathname || '')
                     ,'dimension119' : (cdurl && cdurl.paramstring || location.search || '') 
                 }
-                , {'nonInteraction': true}
+                , {'nonInteraction': 1}
             );
         }           
 
