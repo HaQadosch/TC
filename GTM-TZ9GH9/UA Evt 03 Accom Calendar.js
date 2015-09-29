@@ -13,14 +13,14 @@
         var lobholidaytypepageid = cdpm && cdpm.lob+'|'+cdpm.holidaytype+'|'+cdpm.pageid+'|'+(cdpm.accomguid || 'accomguid')        
         var cdurl = cdpm.urlparams || {};
 
-        function UAevent(category,action,label,value,noninteraction,dims) {
+        function UAevent(category,action,label,value,dims) {
             w.ga(uatrc+'send', 'event'
-            , category
-            , action
-            , label
-            , 1
-            , dims        
-            , {'nonInteraction': noninteraction});
+                , category
+                , action
+                , label
+                , 1
+                , dims
+            );
         };
         function GAevent(category,action,label,value,noninteraction) {
             w._gaq.push([gatrc+'_trackEvent'
@@ -42,28 +42,29 @@
 
         setTimeout(function CallGA(){
             var options = { 
-                    'page'           : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
-                    , 'dimension1'   : cdpm.deptairport || ''
-                    , 'dimension2'   : cdpm.destination || ''
-                    , 'dimension10'  : cdpm.lob || ''
-                    , 'dimension11'  : cdpm.holidaytype || ''
-                    , 'dimension12'  : cdpm.pageid || ''
-                    , 'dimension16'  : cdpm.accomcode || ''
-                    , 'dimension20'  : cdpm.touroperator || ''
-                    , 'dimension22'  : cdpm.destairport || ''
-                    , 'dimension51'  : cdpm.gaguid || 'empty'
-                    , 'dimension55'  : 'event'
-                    , 'dimension58'  : cdpm.accomguid || ''
-                    , 'dimension65'  : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
-                    , 'dimension75'  : ''+(window.Date && window.Date.now() || 0)
-                    , 'dimension118' : (cdurl && cdurl.pathname || location.pathname || '')
-                    , 'dimension119' : (cdurl && cdurl.paramstring || location.search || '')
-                    , 'metric15'     : 1
+                    'page'              : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                    , 'dimension1'      : cdpm.deptairport || ''
+                    , 'dimension2'      : cdpm.destination || ''
+                    , 'dimension10'     : cdpm.lob || ''
+                    , 'dimension11'     : cdpm.holidaytype || ''
+                    , 'dimension12'     : cdpm.pageid || ''
+                    , 'dimension16'     : cdpm.accomcode || ''
+                    , 'dimension20'     : cdpm.touroperator || ''
+                    , 'dimension22'     : cdpm.destairport || ''
+                    , 'dimension51'     : cdpm.gaguid || 'empty'
+                    , 'dimension55'     : 'event'
+                    , 'dimension58'     : cdpm.accomguid || ''
+                    , 'dimension65'     : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                    , 'dimension75'     : ''+(window.Date && window.Date.now() || 0)
+                    , 'dimension118'    : (cdurl && cdurl.pathname || location.pathname || '')
+                    , 'dimension119'    : (cdurl && cdurl.paramstring || location.search || '')
+                    , 'metric15'        : 1
+                    ,'noninteraction'   : evtnoninteraction
             };
 
             if (evtcategory == 'Accom_Change_DeptAirport') {options.dimension1 = evtaction};
             if (evtcategory) {
-                UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction,options);
+                UAevent(evtcategory,evtaction,evtlabel,evtvalue,options);
                 GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
             }
         

@@ -54,12 +54,12 @@
                     jQ.extend(eventsendSet, sendSet);
                     delete eventsendSet.dimension12;
                     eventsendSet.dimension55 = 'event';
+                    eventsendSet.noninteraction = 1;
 
                     for (var evt in uawa.events) {
                         var gevt = uawa.events[evt]
                         if (gevt.action) (trc.send('event', gevt.category, gevt.action,  gevt.label, gevt.value
-                            , eventsendSet
-                            , {'nonInteraction': gevt.noninteraction}));
+                            , eventsendSet));
                     };
 
                     if (ux) {window.ECEOP.pageview = []};

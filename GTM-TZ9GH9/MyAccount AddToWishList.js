@@ -38,10 +38,11 @@
                             || d.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id.replace('package-','') 
                             || ""*/
                     , 1
-                    , { 'dimension51': cdpm.gaguid || 'empty',
-                        'dimension65': cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || '',
-                        'dimension75': ''+(window.Date && window.Date.now() || 0)}                          
-                    , {'nonInteraction': 1});
+                    , { 'dimension51': cdpm.gaguid || 'empty'
+                        ,'dimension65': cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                        ,'dimension75': ''+(window.Date && window.Date.now() || 0)
+                        ,'nonInteraction': 1
+                    });
                     //GATC
                     wgp([tn+'_trackEvent', 'FrogWishList'
                             , d.target.innerText.replace(/Add To Wish List/i

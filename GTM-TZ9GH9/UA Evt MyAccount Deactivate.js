@@ -26,8 +26,7 @@
                         ,'dimension55': 'event'
                         ,'dimension65': cdl.gadate && cdl.gatime && w.Date && cdl.gadate(w.Date.now())+' '+cdl.gatime(w.Date.now()) || ''
                         ,'dimension75': ''+(w.Date && w.Date.now() || 0)
-                    }
-                    , {'nonInteraction': 1, 'location': uawa.location});
+                        ,'nonInteraction': 1, 'location': uawa.location});
             });
         };
     } catch(e) {

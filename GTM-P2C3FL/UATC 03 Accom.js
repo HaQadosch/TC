@@ -58,12 +58,12 @@
                         });
 
                             w.ga(trackerName+'ec:setAction', 'click', {'list': uaprod.list});
-                            trc.send('event', 'ECProductListClick', uaprod.id,  ''+uaprod.position, 1, {'nonInteraction': 1});
+                            w.ga(trackerName+'send','event', 'ECProductListClick', uaprod.id,  ''+uaprod.position, 1, {'nonInteraction': 1});
                             dl.push({'event': 'UATCECDL Accom EC'})
                     };
 
                     sendSet['page'] = uawa.page;
-                    trc.send('pageview', sendSet);
+                    w.ga(trackerName+'send','pageview', sendSet);
 
                     (function gtm_uatcAccomAddProductListView(){
                         w.ga(trackerName+'ec:addProduct', {
@@ -75,7 +75,7 @@
                         });
 
                         w.ga(trackerName+'ec:setAction', 'detail');
-                        trc.send('event', 'ECProductView', uaprod.id, ''+uaprod.position, 1, {'nonInteraction': 1});
+                        w.ga(trackerName+'send','event', 'ECProductView', uaprod.id, ''+uaprod.position, 1, {'nonInteraction': 1});
                         dl.push({'event': 'UATCECaddProduct'});
                     }());
 
@@ -86,17 +86,16 @@
                         var timestamp = +new Date(window.Date && window.Date.now() || 0);
                         if (gevt.action) {w.ga(trackerName+'send','event'
                                                     , gevt.category, gevt.action,  gevt.label, gevt.value
-                                                    , { 'page': gevt.page || location.pathname+(location.search || '') || '',
-                                                        'dimension51': cdl.CATTParams && cdl.CATTParams.gaguid || 'empty',
-                                                        'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(timestamp)+' '+cdl.gatime(timestamp) || '',
-                                                        'dimension75': ''+(timestamp || 0)}
-                                                    , {'nonInteraction': gevt.noninteraction})};
+                                                    , { 'page': gevt.page || location.pathname+(location.search || '') || ''
+                                                        ,'dimension51': cdl.CATTParams && cdl.CATTParams.gaguid || 'empty'
+                                                        ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(timestamp)+' '+cdl.gatime(timestamp) || ''
+                                                        ,'dimension75': ''+(timestamp || 0)
+                                                        ,'nonInteraction': gevt.noninteraction})};
                     };        
 
                     jQ('button.btn.btn-block.btn-default.src-accomHighlights-videoButton').on('click',function(e){
                         var cdl = window.CATTDL || {};
-                        var trc = ga.getByName(cdl.DL_uatc && cdl.DL_uatc.name);
-                        trc.send('event'
+                        w.ga(trackerName+'send','event'
                                     , 'Videoclicks'
                                     , 'Hotelvideo'
                                     , (cdpm.lob || '')+'|'+(cdpm.holidaytype || '')+'|'+(cdpm.pageid || '')+'|'+(cdpm.accomguid || 'accomguid')

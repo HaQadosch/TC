@@ -50,11 +50,11 @@
                             var timestamp = +new Date(window.Date && window.Date.now() || 0);
                             if (gevt.action) {trc.send('event'
                                                         , gevt.category, gevt.action,  gevt.label, gevt.value
-                                                        , { 'page': gevt.page || location.pathname+(location.search || '') || '',
-                                                            'dimension51': cdpm.gaguid || 'empty',
-                                                            'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(timestamp)+' '+cdl.gatime(timestamp) || '',
-                                                            'dimension75': ''+(timestamp || 0)}
-                                                        , {'nonInteraction': gevt.noninteraction})};
+                                                        , { 'page': gevt.page || location.pathname+(location.search || '') || ''
+                                                            ,'dimension51': cdpm.gaguid || 'empty'
+                                                            ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(timestamp)+' '+cdl.gatime(timestamp) || ''
+                                                            ,'dimension75': ''+(timestamp || 0)
+                                                            ,'nonInteraction': gevt.noninteraction})};
                         };
 
                         if (ux) {window.ECEOP.pageview = []};
@@ -73,8 +73,7 @@
                                         ,'dimension54' : jQ(this).attr('id') && jQ(this).attr('id').toString() || ''
                                         ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
                                         ,'dimension75': ''+(window.Date && window.Date.now() || 0)
-                                    }
-                                    , {'nonInteraction': 1, 'location': uawa.location});
+                                        ,'nonInteraction': 1, 'location': uawa.location});
                             });
                         };
                         if(!/gtm_uabound/i.test(jQ('#idRemoveAccount').attr('class'))){
@@ -91,8 +90,7 @@
                                         ,'dimension54' : jQ(this).attr('id') && jQ(this).attr('id').toString() || ''
                                         ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
                                         ,'dimension75': ''+(window.Date && window.Date.now() || 0)
-                                    }
-                                    , {'nonInteraction': 1, 'location': uawa.location});
+                                        ,'nonInteraction': 1, 'location': uawa.location});
                             });
                         };
                         jQ('.cookieWarning a.btn.btn-default.btn-block.close').on('click',function(e){
@@ -107,8 +105,7 @@
                                         ,'dimension54' : jQ(this).attr('id') && jQ(this).attr('id').toString() || ''
                                         ,'dimension65': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
                                         ,'dimension75': ''+(window.Date && window.Date.now() || 0)
-                                    }
-                                    , {'nonInteraction': 1, 'location': uawa.location});
+                                        ,'nonInteraction': 1, 'location': uawa.location});
                        });
                     window.dataLayer.push({'event':'UATC LP'})
                 })

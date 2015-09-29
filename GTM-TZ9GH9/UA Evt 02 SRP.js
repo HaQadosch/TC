@@ -25,8 +25,8 @@
                 ,'dimension75'  : ''+(window.Date && window.Date.now() || 0)
                 ,'dimension118' : (cdurl && cdurl.pathname || location.pathname || '')
                 ,'dimension119' : (cdurl && cdurl.paramstring || location.search || '') 
-            }                
-            , {'nonInteraction': noninteraction});
+                ,'nonInteraction': noninteraction
+            });
         };
         function GAevent(category,action,label,value,noninteraction) {
             w._gaq.push([gatrc+'_trackEvent'

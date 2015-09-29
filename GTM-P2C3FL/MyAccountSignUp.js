@@ -20,8 +20,8 @@
                 ,'dimension53': (cdpm.user && cdpm.user.msg || "") || '' //my account userid
                 ,'dimension54': (cdpm.user && cdpm.user.action || "") || '' // action
                 ,'dimension65': cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
-                ,'dimension75': ''+(window.Date && window.Date.now() || 0)}                          
-                , {'nonInteraction': 1});
+                ,'dimension75': ''+(window.Date && window.Date.now() || 0)
+                , 'nonInteraction': 1});
   }
   catch(e){cdl.error('GTM UATC MyAccountSignUp: '+e)}
 }(!window.jQuery?!1:window.jQuery, !window.CATTDL?!1:window.CATTDL, !window.CATTDL.DL_uatc?!1:window.CATTDL.DL_uatc, window))

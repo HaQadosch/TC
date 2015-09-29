@@ -54,6 +54,7 @@
                     jQ.extend(eventsendSet, sendSet);
                     delete eventsendSet.dimension12;
                     eventsendSet.dimension55 = 'event';
+                    eventsendSet.nonInteraction = 1;
 
                     var accoms = [];
                     (function gtm_uatcSRPAddImpressions(){
@@ -77,7 +78,7 @@
                                     ,  (accoms && accoms.toString() || "")
                                     , 1
                                     , eventsendSet
-                                    , {'nonInteraction': 1});
+                                    );
                             
                             };
                     }());
@@ -85,7 +86,7 @@
                         var gevt = uawa.events[evt]
                         if (gevt.action) (w.ga(trackerName+'send','event', gevt.category, gevt.action,  gevt.label, gevt.value
                             , eventsendSet
-                            , {'nonInteraction': gevt.noninteraction}));
+                        ));
                     };
 
                     if (ux) {window.ECEOP.pageview = []};

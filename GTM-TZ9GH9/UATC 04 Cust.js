@@ -54,6 +54,7 @@
                     jQ.extend(eventsendSet, sendSet);
                     delete eventsendSet.dimension12;
                     eventsendSet.dimension55 = 'event';
+                    eventsendSet.nonInteraction = 1;
 
                     w.ga(trackerName+'ec:addProduct', {
                         'id'        : uaprod.id,
@@ -69,16 +70,14 @@
                             , uaprod.id
                             ,  ''+uaprod.position
                             , 1
-                            , eventsendSet
-                            , {'nonInteraction': 1});
+                            , eventsendSet);
 
                     if (ux) {window.ECEOP.pageview = []};
 
                     for (var evt in uawa.events) {
                         var gevt = uawa.events[evt]
                         if (gevt.action) (w.ga(trackerName+'send','event', gevt.category, gevt.action,  gevt.label, gevt.value
-                            , eventsendSet
-                            , {'nonInteraction': gevt.noninteraction}));
+                            , eventsendSet));
                     };
                 })
         })

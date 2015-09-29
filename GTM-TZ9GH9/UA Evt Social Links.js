@@ -26,8 +26,7 @@
                 ,'dimension75': ''+(window.Date && window.Date.now() || 0)
                 ,'dimension118': (cdurl && cdurl.pathname || location.pathname || '')
                 ,'dimension119': (cdurl && cdurl.paramstring || location.search || '') 
-            }               
-            , {'nonInteraction': 1});
+                ,'nonInteraction': 1});
 
     } catch(e) {
         cdl.error('GTM UATC Events Social Links: '+e)

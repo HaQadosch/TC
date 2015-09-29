@@ -55,6 +55,7 @@
                     jQ.extend(eventsendSet, sendSet);
                     delete eventsendSet.dimension12;
                     eventsendSet.dimension55 = 'event';
+                    eventsendSet.nonInteraction = 1;
 
                     var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
                     var uaprod = uadl.webanalytics.addproductlist || {};
@@ -74,8 +75,7 @@
                         w.ga(trackerName+'send','event', 'ECProductListClick', uaprod.id
                                     ,  ''+uaprod.position
                                     , 1
-                                    , eventsendSet
-                                    , {'nonInteraction': true});
+                                    , eventsendSet);
                         dl.push({'event': 'UATCEC productclick'})
                     };
 
@@ -94,16 +94,14 @@
                                 , uaprod.id || 'error'
                                 ,  ''+(uaprod.position || 0)
                                 , 1
-                                , eventsendSet
-                                , {'nonInteraction': 1});
+                                , eventsendSet);
                         dl.push({'event': 'UATCEC productview'});
                     };
 
                     for (var evt in uawa.events) {
                         var gevt = uawa.events[evt]
                         if (gevt.action) (w.ga(trackerName+'send','event', gevt.category, gevt.action,  gevt.label, gevt.value
-                            , eventsendSet
-                            , {'nonInteraction': gevt.noninteraction}));
+                            , eventsendSet));
                     };
                     if (ux) {window.ECEOP.pageview = []};
 
@@ -123,8 +121,8 @@
                                 ,'dimension75': ''+(window.Date && window.Date.now() || 0)
                                 ,'dimension118': (locpathname || '')
                                 ,'dimension119': (locsearch || '')                    
-                            }
-                            , {'noninteraction': 1});
+                                ,'noninteraction': 1
+                            });
                     });
                  })
         })

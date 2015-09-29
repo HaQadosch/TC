@@ -72,12 +72,14 @@
                     jQ.extend(eventsendSet, sendSet);
                     delete eventsendSet.dimension12;
                     eventsendSet.dimension55 = 'event';
+                    eventsendSet.nonInteraction = 1;
 
                     if (cdpm.pageid === 'booking') {
                         var sendSetPurchase = {};
                         jQ.extend(sendSetPurchase, sendSet);
                         sendSetPurchase.dimension12 = 'purchase';
                         sendSetPurchase.dimension55 = 'event';
+                        sendSetPurchase.nonInteraction = 1;
 
                         w.ga(trackerName+'ec:addProduct', prodDimMet);
                         w.ga(trackerName+'ec:setAction','purchase', {
@@ -91,8 +93,7 @@
                        w.ga(trackerName+'send','event', 'ECPurchase', uaprod.id
                                     ,  ''+uaprod.position
                                     , 1
-                                    , sendSetPurchase
-                                    , {'nonInteraction': 1});
+                                    , sendSetPurchase);
                     };
 
                     if (ux) {window.ECEOP.pageview = []};            
@@ -100,8 +101,7 @@
                     for (evt in uawa.events) {
                         var gevt = uawa.events[evt]
                         if (gevt.action) (w.ga(trackerName+'send','event', gevt.category, gevt.action,  gevt.label, gevt.value
-                            , eventsendSet
-                            , {'nonInteraction': gevt.noninteraction}));
+                            , eventsendSet));
                     };
                 })
         })                
