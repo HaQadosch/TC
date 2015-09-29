@@ -1,4 +1,4 @@
-<script id='gtm_uatcSRP'>
+<script id='GTM-557RZS_uatcSRP'>
 (function gtm_uatcSRP(jQ, cdl, uadl, w, d, dl){
     'use strict';
     if (cdl && uadl) try {
@@ -15,15 +15,10 @@
         window.ga && window.ga(function gtm_useTracker() {
             var trc = ga.getByName(uadl.name)
             if (trc) {
-                //console.info('trc', trc)
-                //trc.plugins_ && console.info('plugins', trc.plugins_.keys) || console.info('no plugins') 
                 console.info('clientID', trc.get('clientId'))
             } else {
-                //console.info('no trc')
                 w.ga('create', uadl.profileid, uadl.cookiedomain, {'name': uadl.name})
                 trc = ga.getByName(uadl.name)
-                //console.info('trc', trc)
-                //console.info('clientID', trc.get('clientId'))
             }
             for (var setOption in uadl.set) trc.set(setOption, uadl.set[setOption]);
             if (typeof trc.plugins_ === 'undefined' || !/displayfeatures/i.test(trc.plugins_ && trc.plugins_.keys || '')) trc.require && trc.require('displayfeatures') || w.ga(trackerName+'require', 'displayfeatures');
@@ -74,15 +69,15 @@
                                             , gevt.category, gevt.action,  gevt.label, gevt.value
                                             , { 'dimension30': cdpm.gaguid || 'empty'
                                                 ,'dimension115': (locpathname || '')                                            
-                                                ,'dimension119': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(timestamp)+' '+cdl.gatime(timestamp) || ''}
-                                            , {'nonInteraction': gevt.noninteraction})};
+                                                ,'dimension119': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(timestamp)+' '+cdl.gatime(timestamp) || ''
+                                                ,'nonInteraction': gevt.noninteraction})};
             };
-            dl.push({'event': 'UATC SRP'});
         })
     } catch(e) {
         cdl.error('GTM NL NEC UATC SRP: '+e)
     } finally {
-        window.externalLayer && externalLayer.push({'event' : 'uapageview'+'|'+(cdl.CATTParams && cdl.CATTParams.pageid || 'home')+'|'+(cdl.CATTParams && cdl.CATTParams.urlparams && cdl.CATTParams.urlparams.pathname || '/')})
+        window.dataLayer && dataLayer.push({'event' : 'UATC SRP'})
+        window.dataLayer_557RZS && dataLayer_557RZS.push({'event' : 'UATC SRP'})
     }
     return cdl && uadl
 }(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_uatc, window, document, window.dataLayer || []))

@@ -1,4 +1,4 @@
-<script id='gtm_uatcAddPax'>
+<script id='GTM-557RZS_uatcAddPax'>
 (function gtm_uatcAddPax(jQ, cdl, uadl, w, d, dl){
     'use strict';
     if (cdl && uadl) try {
@@ -15,15 +15,10 @@
         window.ga && window.ga(function gtm_useTracker() {
             var trc = ga.getByName(uadl.name)
             if (trc) {
-                //console.info('trc', trc)
-                //trc.plugins_ && console.info('plugins', trc.plugins_.keys) || console.info('no plugins') 
                 console.info('clientID', trc.get('clientId'))
             } else {
-                // console.info('no trc')
                 w.ga('create', uadl.profileid, uadl.cookiedomain, {'name': uadl.name})
                 trc = ga.getByName(uadl.name)
-                //console.info('trc', trc)
-                //console.info('clientID', trc.get('clientId'))
             }
             for (var setOption in uadl.set) trc.set(setOption, uadl.set[setOption]);
             trc.set('location', uawa.location);
@@ -66,15 +61,15 @@
                                             , gevt.category, gevt.action,  gevt.label, gevt.value
                                             , { 'dimension30': cdpm.gaguid || 'empty'
                                                 ,'dimension115': (locpathname || '')                                            
-                                                ,'dimension119': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(timestamp)+' '+cdl.gatime(timestamp) || ''}
-                                            , {'nonInteraction': gevt.noninteraction})};
+                                                ,'dimension119': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(timestamp)+' '+cdl.gatime(timestamp) || ''
+                                                ,'nonInteraction': gevt.noninteraction})};
             };
         })
-        dl.push({'event': 'UATCECcheckout AddPax'});
     } catch(e) {
         cdl.error('GTM NL NEC UATC AddPax: '+e); 
     } finally {     
-        window.externalLayer && externalLayer.push({'event' : 'uapageview'+'|'+(cdl.CATTParams && cdl.CATTParams.pageid || 'home')+'|'+(cdl.CATTParams && cdl.CATTParams.urlparams && cdl.CATTParams.urlparams.pathname || '/')})
+        window.dataLayer && dataLayer.push({'event' : 'UATC AddPax'})
+        window.dataLayer_557RZS && dataLayer_557RZS.push({'event' : 'UATC AddPax'})
     }
     return cdl && uadl
 }(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_uatc, window, document, window.dataLayer || []))

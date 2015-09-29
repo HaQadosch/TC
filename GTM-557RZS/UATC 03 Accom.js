@@ -16,15 +16,10 @@
         window.ga && window.ga(function gtm_useTracker() {
             var trc = ga.getByName(uadl.name)
             if (trc) {
-                //console.info('trc', trc)
-                //trc.plugins_ && console.info('plugins', trc.plugins_.keys) || console.info('no plugins') 
                 console.info('clientID', trc.get('clientId'))
             } else {
-                //console.info('no trc')
                 w.ga('create', uadl.profileid, uadl.cookiedomain, {'name': uadl.name})
                 trc = ga.getByName(uadl.name)
-                //console.info('trc', trc)
-                //console.info('clientID', trc.get('clientId'))
             }
             for (var setOption in uadl.set) trc.set(setOption, uadl.set[setOption]);
             trc.set('location', uawa.location);
@@ -87,15 +82,17 @@
                                             , gevt.category, gevt.action,  gevt.label, gevt.value
                                             , { 'dimension30': cdpm.gaguid || 'empty'
                                                 ,'dimension115': (locpathname || '')                                            
-                                                ,'dimension119': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(timestamp)+' '+cdl.gatime(timestamp) || ''}
-                                            , {'nonInteraction': gevt.noninteraction})};
+                                                ,'dimension119': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(timestamp)+' '+cdl.gatime(timestamp) || ''
+                                                ,'nonInteraction': gevt.noninteraction
+                                            }
+                )};
             };
 
             jQ('button.close').on('click',function(){
             var cdl = window.CATTDL || {};
             var cdpm = cdl && cdl.CATTParams || {};
-            var trc = window.ga.getByName(cdl && cdl.DL_uatc && cdl.DL_uatc.name);
-            trc.send('event'
+
+            w.ga(trackerName+'send','event'
                 , 'Videoclosed'
                 , 'Hotelvideo'
                 , (cdpm.lob || '')+'|'+(cdpm.holidaytype || '')+'|'+(cdpm.pageid || '')+'|'+(cdpm.accomguid || 'accomcode')

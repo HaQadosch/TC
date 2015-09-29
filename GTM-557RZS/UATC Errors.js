@@ -1,4 +1,4 @@
-<script>
+<script id="GTM-557RZS_UATCErrors">
 (function gtm_UATCErrors(jQ, loc, cdl, w) {
 	'use strict'
 	if (jQ && cdl && cdl.CATTParams) try{
@@ -16,10 +16,11 @@
 				, 'Errors'
 				, errorcode || ''
 				, errrormsg || ''
-				, {	'dimension19' : errormsg && errormsg.length > 0 && (errorcode+errormsg || "unknown") || ""}
-					//,'dimension115' : errormsg || ''}
 				, 1
-				, {'nonInteraction': true}
+				, {	
+					'dimension19' : errormsg && errormsg.length > 0 && (errorcode+errormsg || "unknown") || ""
+					, 'nonInteraction': true
+				}
 			);
 		}			
 

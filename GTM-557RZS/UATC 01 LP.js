@@ -42,8 +42,10 @@
                 if (gevt.action) {w.ga(trackerName+'send','event'
                                             , gevt.category, gevt.action,  gevt.label, gevt.value
                                             , { 'dimension30': cdpm.gaguid || 'empty'
-                                                ,'dimension119': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(timestamp)+' '+cdl.gatime(timestamp) || ''}
-                                            , {'nonInteraction': gevt.noninteraction})};
+                                                ,'dimension119': cdl.gadate && cdl.gatime && window.Date && cdl.gadate(timestamp)+' '+cdl.gatime(timestamp) || ''
+                                                ,'nonInteraction': gevt.noninteraction
+                                            }
+                )};
             };
             dataLayer.push({'event': 'UATC LP'});
         })
