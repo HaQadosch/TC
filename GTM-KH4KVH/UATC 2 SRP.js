@@ -18,16 +18,16 @@
 
       var sendSet = {};
       if (jQ){
-        jQ.each(uadl.webanalytics.dimensions, function gtm_keyDimension(kDim, vDim){
+        jQ.each(uawa.dimensions, function gtm_keyDimension(kDim, vDim){
           jQ.each(vDim, function valDimension(_, val){val && (sendSet[kDim]=val);});
         });
-        jQ.each(uadl.webanalytics.metrics, function gtm_keyMetrics(kMet, vMet){
+        jQ.each(uawa.metrics, function gtm_keyMetrics(kMet, vMet){
           jQ.each(vMet, function valMetrics(_, val){val && (sendSet[kMet]=val);});
         });
       }
 
-      for (var evt in gawa.events) {
-        var gevt = gawa.events[evt];
+      for (var evt in uawa.events) {
+        var gevt = uawa.events[evt];
         if (gevt.action) w.ga(trackerName+'send', 'event', gevt.category, gevt.action,  gevt.label, gevt.value, {'nonInteraction': gevt.noninteraction, 'page': uawa.page, 'useBeacon': true});
       }
 
