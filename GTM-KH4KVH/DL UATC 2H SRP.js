@@ -61,6 +61,12 @@
         };
       }).value();
 
+      var virtualPage = cdl.transpose('/vp/en/{lob}/{holidaytype}/{pageid}', {
+                            'lob'         : cdpm.lob || 'epackage'
+                          , 'holidaytype' : cdpm.holidaytype || 'epackage'
+                          , 'pageid'      : cdpm.pageid || 'search'
+                        }).toLowerCase();
+
       ld.assign(cdl.DL_uatc, {
           profileid       : 'UA-33036832-7'
         , cookiedomain    : 'thomascook.com'
@@ -72,7 +78,7 @@
           , hostname    : loc && loc.hostname || ''
         }
         , webanalytics    : {
-            page            : '/vp/en/'+(cdpm.lob || 'epackage')+'/'+(cdpm.holidaytype || 'epackage')+'/'+(cdpm.pageid || 'search')
+            page            : virtualPage
           , location        : loc && loc.href || window.document && window.document.URL || ''
           , nbrimpressions  : cdpm.searchresultstotal
           , addimpression   : ldaddimpression
@@ -125,6 +131,10 @@
             , dimension75     : {'unixtimestamp'              : ''+(cdpm.pagetimestamp || 0) || ''}
             , dimension118    : {'vprealpath'                 : locpathname || ''}
             , dimension119    : {'vprealparameter'            : locsearch || ''}
+          }
+          , events : {
+              internalcampaignid : {'category': 'InternalCampaign', 'action': cdpm.internalcampaignid || '', 'label': virtualPage+'_'+loc.host, 'value': 1, 'noninteraction': true}
+            , errorcode          : {'category': 'Errors',           'action': cdpm.errorcode ||  '',         'label': (document.URL || virtualPage || '')+"&sessid="+(cdpm.sessid || '')+"&AppServer="+(cdpm.appserver || ''), 'value': 1, 'noninteraction': true}
           }
         }
       });

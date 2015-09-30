@@ -26,7 +26,13 @@
         });
       }
 
+      for (var evt in uawa.events) {
+        var gevt = uawa.events[evt];
+        if (gevt.action) w.ga(trackerName+'send', 'event', gevt.category, gevt.action,  gevt.label, gevt.value, {'nonInteraction': gevt.noninteraction, 'page': uawa.page, 'useBeacon': true});
+      }
+
       sendSet = {
+        'useBeacon' : true,
         'page': uawa.page,
         'hitCallback': function gtm_uatcPaxPayAddProduct(){
           w.ga(trackerName+'ec:addProduct', uaProd);

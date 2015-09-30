@@ -60,6 +60,11 @@
           , 'dimension27': 'SRP_Viewer'
         };
       }).value();
+      var virtualPage = cdl.transpose('/vp/en/{lob}/{holidaytype}/{pageid}', {
+                            'lob'         : cdpm.lob || 'epackage'
+                          , 'holidaytype' : cdpm.holidaytype || 'epackage'
+                          , 'pageid'      : cdpm.pageid || 'search'
+                        }).toLowerCase();
 
       ld.assign(cdl.DL_uatc, {
           profileid       : 'UA-33036832-7'
@@ -72,11 +77,7 @@
           , hostname    : loc && loc.hostname || ''
         }
         , webanalytics    : {
-            page            : cdl.transpose('/vp/en/{lob}/{holidaytype}/{pageid}', {
-                                  'lob'         : cdpm.lob || 'epackage'
-                                , 'holidaytype' : cdpm.holidaytype || 'epackage'
-                                , 'pageid'      : cdpm.pageid || 'search'
-                              }).toLowerCase()
+            page            : virtualPage
           , location        : loc && loc.href || window.document && window.document.URL || ''
           , nbrimpressions  : cdpm.searchresultstotal
           , addimpression   : ldaddimpression
@@ -131,25 +132,11 @@
             , dimension119    : {'vprealparameter'            : locsearch || ''}
           }
           , events : {
-              internalcampaignid : {'category': 'InternalCampaign', 'action': cdpm.internalcampaignid || '', 'label': cdpmVP+'_'+loc.host, 'value': 1, 'noninteraction': true}
-            , errorcode          : {'category': 'Errors',           'action': cdpm.errorcode ||  '',         'label': (document.URL || cdpmVP || '')+"&sessid="+(cdpm.sessid || '')+"&AppServer="+(cdpm.appserver || ''), 'value': 1, 'noninteraction': true}
+              internalcampaignid : {'category': 'InternalCampaign', 'action': cdpm.internalcampaignid || '', 'label': virtualPage+'_'+loc.host, 'value': 1, 'noninteraction': true}
+            , errorcode          : {'category': 'Errors',           'action': cdpm.errorcode ||  '',         'label': (document.URL || virtualPage || '')+"&sessid="+(cdpm.sessid || '')+"&AppServer="+(cdpm.appserver || ''), 'value': 1, 'noninteraction': true}
           }
         }
       });
-
-
-      //       for (var evt in gawa.events) {
-            //   var gevt = gawa.events[evt];
-            //   if (gevt.action) wgp([tn+'_trackEvent', gevt.category, gevt.action, gevt.label, gevt.value, gevt.noninteraction]);
-            // }
-            ga('send', {
-  'hitType': 'event',          // Required.
-  'eventCategory': 'button',   // Required.
-  'eventAction': 'click',      // Required.
-  'eventLabel': 'nav buttons',
-  'eventValue': 4
-});
-ga('send', 'event', 'category', 'action', {'nonInteraction': 1, 'page': '/my-new-page'});
     } catch(e) {
       cdl.error('GTM UK multicom UATCDL SRP: '+e);
     } finally {

@@ -12,6 +12,12 @@
       cdl.DL_uatc = {};
       cdl.DL_uatc.webanalytics = {};
 
+      var virtualPage = cdl.transpose('/vp/en/{lob}/{holidaytype}/{pageid}', {
+                            'lob'         : cdpm.lob || 'epackage'
+                          , 'holidaytype' : cdpm.holidaytype || 'epackage'
+                          , 'pageid'      : cdpm.pageid || 'paxpay'
+                        }).toLowerCase();
+
       ld.assign(cdl.DL_uatc, {
           profileid       : 'UA-33036832-7'
         , cookiedomain    : 'thomascook.com'
@@ -23,7 +29,7 @@
           , hostname    : loc && loc.hostname || ''
         }
         , webanalytics    : {
-            page            : '/vp/en/'+(cdpm.lob || 'epackage')+'/'+(cdpm.holidaytype || 'epackage')+'/'+(cdpm.pageid || 'quote')
+            page            : virtualPage
           , location        : loc && loc.href || window.document && window.document.URL || ''
           , nbrimpressions  : cdpm.searchresultstotal
           , addproduct      : JSON.parse(window.unescape(cdpm.cookies && cdpm.cookies.gtm_uaprod || '{}'))
@@ -85,6 +91,10 @@
             , dimension111    : {'totalprice'                 : ''+(cdpm.bookingvalue || '0')}
             , dimension118    : {'vprealpath'                 : locpathname || ''}
             , dimension119    : {'vprealparameter'            : locsearch || ''}
+          }
+          , events : {
+              internalcampaignid : {'category': 'InternalCampaign', 'action': cdpm.internalcampaignid || '', 'label': virtualPage+'_'+loc.host, 'value': 1, 'noninteraction': true}
+            , errorcode          : {'category': 'Errors',           'action': cdpm.errorcode ||  '',         'label': (document.URL || virtualPage || '')+"&sessid="+(cdpm.sessid || '')+"&AppServer="+(cdpm.appserver || ''), 'value': 1, 'noninteraction': true}
           }
         }
       });

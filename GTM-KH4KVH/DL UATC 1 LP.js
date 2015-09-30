@@ -28,20 +28,23 @@
               metric15        : {'hitcount'               : 1}
           }
           , dimensions      : {
-              dimension19     : {'errorcode'                  : cdpm.errors && cdpm.errors.code || cdpm.errorcode || ''}
-            , dimension30     : {'utmaguid'                   : cdpm.utmaguid || 'empty'}
-            , dimension31     : {'utmbguid'                   : cdpm.utmbguid || 'empty'}
-            , dimension32     : {'emailguid'                  : cdpm.emailguid || 'empty'}
-            , dimension51     : {'gaguid'                     : cdpm.gaguid || 'empty'}
-            , dimension55     : {'hittype'                    : 'page'}
-            , dimension65     : {'pagetimestamp'              : cdl.gadate && cdpm.pagetimestamp && cdl.gadate(cdpm.pagetimestamp)+' '+cdl.gatime(cdpm.pagetimestamp) || ''}
-            , dimension75     : {'unixtimestamp'              : ''+(cdpm.pagetimestamp || 0) || ''}
-            , dimension118    : {'vprealpath'                 : locpathname || ''}
-            , dimension119    : {'vprealparameter'            : locsearch || ''}
+              dimension19     : {'errorcode'       : cdpm.errors || cdpm.errorcode || ''}
+            , dimension30     : {'utmaguid'        : cdpm.utmaguid || 'empty'}
+            , dimension31     : {'utmbguid'        : cdpm.utmbguid || 'empty'}
+            , dimension32     : {'emailguid'       : cdpm.emailguid || 'empty'}
+            , dimension51     : {'gaguid'          : cdpm.gaguid || 'empty'}
+            , dimension55     : {'hittype'         : 'page'}
+            , dimension65     : {'pagetimestamp'   : cdl.gadate && cdpm.pagetimestamp && cdl.gadate(cdpm.pagetimestamp)+' '+cdl.gatime(cdpm.pagetimestamp) || ''}
+            , dimension75     : {'unixtimestamp'   : ''+(cdpm.pagetimestamp || 0) || ''}
+            , dimension118    : {'vprealpath'      : locpathname || ''}
+            , dimension119    : {'vprealparameter' : locsearch || ''}
+          }
+          , events : {
+              internalcampaignid : {'category': 'InternalCampaign', 'action': cdpm.internalcampaignid || '', 'label': 'home_'+loc.host, 'value': 1, 'noninteraction': true}
+            , errorcode          : {'category': 'Errors',           'action': cdpm.errorcode ||  '',         'label': (document.URL || '')+"&sessid="+(cdpm.sessid || '')+"&AppServer="+(cdpm.appserver || ''), 'value': 1, 'noninteraction': true}
           }
         }
       });
-
     } catch(e) {
       cdl.error('GTM UK multicom UATCDL: '+e);
     } finally {

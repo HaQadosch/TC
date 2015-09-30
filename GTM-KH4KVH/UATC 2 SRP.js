@@ -26,7 +26,13 @@
         });
       }
 
+      for (var evt in gawa.events) {
+        var gevt = gawa.events[evt];
+        if (gevt.action) w.ga(trackerName+'send', 'event', gevt.category, gevt.action,  gevt.label, gevt.value, {'nonInteraction': gevt.noninteraction, 'page': uawa.page, 'useBeacon': true});
+      }
+
       sendSet.page = uawa.page;
+      sendSet.useBeacon = true;
       w.ga(trackerName+'send', 'pageview', sendSet);
 
       uaImp.map(function lduaImp(imp, index){
