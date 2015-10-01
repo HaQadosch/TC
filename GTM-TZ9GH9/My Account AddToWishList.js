@@ -16,7 +16,6 @@
             var trc = ga.getByName(uadl.name)
             if (trc) {
             } else {
-
                 w.ga('create', uadl.profileid, uadl.cookiedomain, {'name': uadl.name})
                 trc = ga.getByName(uadl.name)
             }
@@ -29,27 +28,24 @@
             var srpItems = cdpm.srpresults
             for (i = 0; i < cdpm.srpresults.length; i++)
             {var accoms = jQ('div#package-'+srpItems[i].accomguid) || jQ([]);
-                accoms.find('a.btn.btn-default.btn-wishlist.popover-dismiss.pull-right').on('click', function(d){
+                accoms.find('a.BtnWishlist.popover-dismiss.pull-right').on('click', function(d){
                     //UATC
-                    trc.send('event', 'FrogWishList'
+                    w.ga(trackerName+'send','event', 'SRP WishList'
                             , d.target.innerText.replace(/Add To Wish List/i, 'Add').trim() || ""
                             , d.target.parentElement.parentElement.parentElement.parentElement.parentElement.id.replace('package-','') || ""
-                        /*d.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id.replace('package-','') 
-                            || d.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id.replace('package-','') 
-                            || ""*/
                     , 1
-                    , { 'dimension51': cdpm.gaguid || 'empty',
-                        'dimension65': cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || '',
-                        'dimension75': ''+(window.Date && window.Date.now() || 0)}                          
-                    , {'nonInteraction': true});
+                    , { 
+                        'dimension14': cdpm.sessionid || 'empty'
+                        ,'dimension51': cdpm.gaguid || 'empty'
+                        ,'dimension65': cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                        ,'dimension75': ''+(window.Date && window.Date.now() || 0)
+                        ,'nonInteraction': 1
+                    });
                     //GATC
-                    wgp([tn+'_trackEvent', 'FrogWishList'
+                    wgp([tn+'_trackEvent', 'SRP WishList'
                             , d.target.innerText.replace(/Add To Wish List/i
                             , 'Add').trim() || ""
                             , d.target.parentElement.parentElement.parentElement.parentElement.parentElement.id.replace('package-','') || ""
-                            /*d.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id.replace('package-','')
-                            || d.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id.replace('package-','')
-                            || ""*/
                     ]);
 
                 });
