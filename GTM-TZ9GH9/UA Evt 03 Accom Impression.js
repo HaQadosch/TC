@@ -77,12 +77,16 @@
                 , evtlabel
                 , 1
                 , { 'page'              : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                    ,'dimension1'       : cdpm.deptairport || ''
+                    ,'dimension2'       : cdpm.destination || ''
                     ,'dimension5'       : cdl.gadate && cdl.gadate(cdpm.deptdate || 0)
                     ,'dimension10'      : cdpm.lob || ''
                     ,'dimension11'      : cdpm.holidaytype || ''
                     ,'dimension12'      : cdpm.pageid || ''
                     ,'dimension14'      : cdpm.sessionid || ''
                     ,'dimension16'      : cdpm.accomcode || ''
+                    ,'dimension17'      : cdpm.accomname || ''
+                    ,'dimension22'       : cdpm.destairport || ''
                     ,'dimension51'      : cdpm.gaguid || 'empty'
                     ,'dimension55'      : 'event'
                     ,'dimension65'      : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
@@ -123,12 +127,16 @@
                     , label
                     , 1
                     , { 'page'              : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                        ,'dimension1'       : cdpm.deptairport || ''
+                        ,'dimension2'       : cdpm.destination || ''
                         ,'dimension5'       : cdl.gadate && cdl.gadate(cdpm.deptdate || 0)
                         ,'dimension10'      : cdpm.lob || ''
                         ,'dimension11'      : cdpm.holidaytype || ''
                         ,'dimension12'      : cdpm.pageid || ''
                         ,'dimension14'      : cdpm.sessionid || ''
                         ,'dimension16'      : cdpm.accomcode || ''
+                        ,'dimension17'      : cdpm.accomname || ''
+                        ,'dimension22'       : cdpm.destairport || ''
                         ,'dimension51'      : cdpm.gaguid || 'empty'
                         ,'dimension55'      : 'event'
                         ,'dimension58'      : cdpm.accomguid || ''

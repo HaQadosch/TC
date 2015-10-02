@@ -20,12 +20,16 @@
             , label
             , 1
             , { 'page'              : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                ,'dimension1'       : cdpm.deptairport || ''
+                ,'dimension2'       : cdpm.destination || ''
                 ,'dimension5'       : cdl.gadate && cdl.gadate(cdpm.deptdate || 0)
                 ,'dimension10'      : cdpm.lob || ''
                 ,'dimension11'      : cdpm.holidaytype || ''
                 ,'dimension12'      : cdpm.pageid || ''
                 ,'dimension14'      : cdpm.sessionid || ''
                 ,'dimension16'      : cdpm.accomcode || ''
+                ,'dimension17'      : cdpm.accomname || ''
+                ,'dimension22'      : cdpm.destairport || ''
                 ,'dimension51'      : cdpm.gaguid || 'empty'
                 ,'dimension55'      : 'event'
                 ,'dimension65'      : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
@@ -152,7 +156,42 @@
                 GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
             } catch(e) {cdl.info('GTM Evt 03 Accom - Map: '+e)}
         };
-
+        //Accom Back to Search
+        if (/accom-backToSearch/.test(cdom.id)){
+            try {
+                var evtcategory = 'Accom Back to Search';
+                var evtaction = cdom && cdom.data && (cdom.data.productId+'|'+(cdom.data.hotelName && cdom.data.hotelName.value)+'|'+(cdom.data.tourOperator && cdom.data.tourOperator.name)+'|'+cdom.data.seasonCode);
+                var evtlabel = cdpm && cdpm.lob+'|'+cdpm.holidaytype;
+                var evtvalue = 1;
+                var evtnoninteraction = 1;
+                UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
+                GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
+            } catch(e) {cdl.info('GTM Evt 03 Accom - Back to Search: '+e)}
+        };
+        //Accom Also Included in your holidays
+        if (/show-alsoIncluded-details/.test(cdom.id)){
+            try {
+                var evtcategory = 'Accom Also Included Link';
+                var evtaction = cdpm.includedinpackage && cdpm.includedinpackage.join('|') || '';
+                var evtlabel = cdpm && cdpm.lob+'|'+cdpm.holidaytype;
+                var evtvalue = 1;
+                var evtnoninteraction = 1;
+                UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
+                GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
+            } catch(e) {cdl.info('GTM Evt 03 Accom - Also Included Link: '+e)}
+        };
+        //Accom Room BoardBasis Info
+        if (/accom-room-boardBasisInfo/.test(cdom.id)){
+            try {
+                var evtcategory = 'Accom Room BoardBasis Info';
+                var evtaction = (/([^-]*)$/.exec(cdom.id) || ['']).pop();
+                var evtlabel = cdpm && cdpm.lob+'|'+cdpm.holidaytype;
+                var evtvalue = 1;
+                var evtnoninteraction = 1;
+                UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
+                GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
+            } catch(e) {cdl.info('GTM Evt 03 Accom - Room BoardBasis Info: '+e)}
+        };
     } catch(e) {
         cdl.error('GTM Evt 03 Accom: '+e)
     }

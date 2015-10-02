@@ -21,17 +21,17 @@
             
             var wgdDetails = wgD.details || {};
             var wgdPath = (wgdAccom.geoPath && wgdAccom.geoPath.split("/")) || (wgdDetails.geoPath && wgdDetails.geoPath && wgdDetails.geoPath.value.split("/")) ||  []
+            var wgdPrice = wgD.matrix && wgD.matrix.data && wgD.matrix.data.priceList && wgD.matrix.data.priceList[0] || !1
             newPM['accomcountry'] = wgdPath.length > 0 && wgdPath[0] || "";
             newPM['accomregion'] = wgdPath.length > 1 && wgdPath[1] || "";
             newPM['accomresort'] = wgdPath.length > 2 && wgdPath[2] || "";
             newPM['resort'] = newPM.accomresort;
             newPM['accomconcept'] = (typeof wgdAccom.concepts == 'string') && wgdAccom.concepts || wgdDetails.concepts && wgdDetails.concepts[0] && wgdDetails.concepts[0].type || "";
-            newPM['duration'] = +wgdAccom.duration || 0;
+            newPM['duration'] = +(wgdAccom.duration || wgdPrice.duration || '0');
             newPM['accomvideo'] = ($('button.btn.btn-block.btn-default.src-accomHighlights-videoButton'))?'y':'n';
             var wgdAF = wgD.matrix && wgD.matrix.data && wgD.matrix.data.alternativeFlights;
             newPM['premiumcabinvisible'] = false; for (var i=0;i<(wgdAF && wgdAF.length);i++){if(wgdAF[i] && wgdAF[i].flights[0] && wgdAF[i].flights[0].inbound && wgdAF[i].flights[0].inbound.premium && wgdAF[i].flights[0].inbound.premium === true) {newPM.premiumcabinvisible = true}}
 
-            var wgdPrice = wgD.matrix && wgD.matrix.data && wgD.matrix.data.priceList && wgD.matrix.data.priceList[0] || !1
             if (wgdPrice) {
                 var flout = wgdPrice && wgdPrice.flights && wgdPrice.flights[0] && wgdPrice.flights[0].outbound && wgdPrice.flights[0].outbound.legs || '';
                 if (flout) {
@@ -108,7 +108,7 @@
                     newPM['returntime'] = newPM.flightdetails.inbound[fltinlen-1].depart.time            
                 }
 
-                newPM['includedinpackage'] = []; for (var i = 0; i < (wgdPrice.whatsIncluded && wgdPrice.whatsIncluded.length || 0); newPM.includedinpackage.push(wgdPrice.whatsIncluded[i++].description));
+                newPM['includedinpackage'] = []; for (var i = 0; i < (wgdPrice.whatsIncluded && wgdPrice.whatsIncluded.included && wgdPrice.whatsIncluded.included.length || 0); newPM.includedinpackage.push(wgdPrice.whatsIncluded.included[i++].description));
                 newPM['touroperator'] = wgdPrice.brandCode || ""
                 newPM['totalprice'] = wgdPrice.priceSummary && wgdPrice.priceSummary.totalAmount || 0
                 newPM['pricepp'] = wgdPrice.priceSummary && wgdPrice.priceSummary.priceFrom || 0
