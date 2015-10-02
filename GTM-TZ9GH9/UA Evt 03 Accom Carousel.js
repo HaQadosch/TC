@@ -19,7 +19,7 @@
             , action
             , label
             , 1
-            , { 'page'          : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+            , { 'page'              : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
                 ,'dimension1'       : cdpm.deptairport || ''
                 ,'dimension2'       : cdpm.destination || ''
                 ,'dimension5'       : cdl.gadate && cdl.gadate(cdpm.deptdate || 0)
@@ -29,14 +29,15 @@
                 ,'dimension14'      : cdpm.sessionid || ''
                 ,'dimension16'      : cdpm.accomcode || ''
                 ,'dimension17'      : cdpm.accomname || ''
-                ,'dimension22'       : cdpm.destairport || ''
+                ,'dimension22'      : cdpm.destairport || ''
                 ,'dimension51'      : cdpm.gaguid || 'empty'
                 ,'dimension55'      : 'event'
-                ,'dimension65'  : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
-                ,'dimension75'  : ''+(window.Date && window.Date.now() || 0)
-                ,'dimension118' : (cdurl && cdurl.pathname || location.pathname || '')
-                ,'dimension119' : (cdurl && cdurl.paramstring || location.search || '') 
-                ,'nonInteraction': noninteraction
+                ,'dimension58'      : cdpm.accomguid || ''
+                ,'dimension65'      : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                ,'dimension75'      : ''+(window.Date && window.Date.now() || 0)
+                ,'dimension118'     : (cdurl && cdurl.pathname || location.pathname || '')
+                ,'dimension119'     : (cdurl && cdurl.paramstring || location.search || '') 
+                ,'nonInteraction'   : noninteraction
             });
         };
         function GAevent(category,action,label,value,noninteraction) {

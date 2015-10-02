@@ -13,20 +13,35 @@
         var cdurl = cdpm.urlparams || {};
 
         function UAevent(category,action,label,value,noninteraction) {
+            var UAoptions = [
+                    {'page'              : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''}
+                    ,{'dimension1'       : cdpm.deptairport || ''}
+                    ,{'dimension2'       : cdpm.destination || ''}
+                    ,{'dimension5'       : cdl.gadate && cdl.gadate(cdpm.deptdate || 0)}
+                    ,{'dimension10'      : cdpm.lob || ''}
+                    ,{'dimension11'      : cdpm.holidaytype || ''}
+                    ,{'dimension12'      : cdpm.pageid || ''}
+                    ,{'dimension14'      : cdpm.sessionid || ''}
+                    ,{'dimension16'      : cdpm.accomcode || cdom.data && cdom.data.hotel && cdom.data.hotel.code || ''}
+                    ,{'dimension17'      : cdpm.accomname || cdom.data && cdom.data.hotel && cdom.data.hotel.value || ''}
+                    ,{'dimension51'      : cdpm.gaguid || 'empty'}
+                    ,{'dimension55'      : 'event'}
+                    ,{'dimension58'      : cdpm.accomguid || cdom.data && cdom.data.id || ''}
+                    ,{'dimension65'      : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''}
+                    ,{'dimension75'      : ''+(window.Date && window.Date.now() || 0)}
+                    ,{'dimension118'     : (cdurl && cdurl.pathname || location.pathname || '')}
+                    ,{'dimension119'     : (cdurl && cdurl.paramstring || location.search || '')}
+                    ,{'nonInteraction'   : noninteraction}
+            ];
+            var options = {}; UAoptions.filter(function(e){ return e[Object.keys(e)] }).forEach(function(e){var dim = Object.keys(e); options[dim]=e[dim] }) ;
+
             w.ga(uatrc+'send', 'event'
             , category
             , action
             , label
             , 1
-            , { 'page'          : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
-                ,'dimension51'  : cdpm.gaguid || 'empty'
-                ,'dimension55'  : 'event'
-                ,'dimension65'  : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
-                ,'dimension75'  : ''+(window.Date && window.Date.now() || 0)
-                ,'dimension118' : (cdurl && cdurl.pathname || location.pathname || '')
-                ,'dimension119' : (cdurl && cdurl.paramstring || location.search || '') 
-                ,'nonInteraction': noninteraction
-            });
+            , options
+            );
         };
         function GAevent(category,action,label,value,noninteraction) {
             w._gaq.push([gatrc+'_trackEvent'
@@ -74,6 +89,19 @@
                 UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
                 GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
             } catch(e) {cdl.info('GTM Evt 02 SRP - Show Carousel: '+e)}
+        };
+        //SRP What's Included
+        if (/show-whatsIncluded/.test(cdom.id)){
+            try {
+                var evtcategory = 'SRP What is Included';
+                var included = []; for (var i = 0; i < (cdom && cdom.data && cdom.data.included && cdom.data.included.length || 0); included.push(cdom.data.included[i++].description));
+                var evtaction = included.join('|') || '';
+                var evtlabel = cdpm && cdpm.lob+'|'+cdpm.holidaytype;
+                var evtvalue = 1;
+                var evtnoninteraction = 1;
+                UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
+                GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
+            } catch(e) {cdl.info('GTM Evt 02 SRP - What is Included: '+e)}
         };
     } catch(e) {
         cdl.error('GTM Evt 02 SRP: '+e)
