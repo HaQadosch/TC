@@ -8,8 +8,9 @@
 
         cdpm.errors = {}
         var errorPM = {};
+        var errormess = (wgD.message || wgD.store && wgD.store['/notfound'] && wgD.store['/notfound'].message || ['']);
         errorPM['errorcode'] = wgD.errorCode || wgD.store && wgD.store['/notfound'] && wgD.store['/notfound'].errorCode || "";
-        errorPM['errormsg'] = (wgD.message || wgD.store && wgD.store['/notfound'] && wgD.store['/notfound'].message || ['']).join(' ');
+        errorPM['errormsg'] = (typeof errormess === "string")?errormess:errormess.join(' ');
 
         var userId = cdpm.user && cdpm.user.id || '';
         if (!userId) {
