@@ -12,7 +12,6 @@
         var wgdPkg = wgD && wgD.package || {}
         var wgdSum = wgD.costSummary || {};
 
-        /*window.sessionStorage && window.sessionStorage.setItem('gtm_errorPS', '1')*/
         var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
         params.errors = {};
         params.errors.secure = 1
@@ -35,8 +34,12 @@
             newPM['starrating'] = wgdPkg.content.starRating || ""
             newPM['touroperator'] = wgdPkg.brandCode || ""
             newPM['accomname'] = wgdPkg.content && wgdPkg.content.hotelName || wgdPkg.accomodationList && wgdPkg.accomodationList[0] && wgdPkg.accomodationList[0].hotelName || ""
-            newPM['accomcode'] = ((/tosCode=([^&]+)/.exec(wgdPkg.contentUrl || '') || ['']).pop()) || (wgdPkg.accomodationList && wgdPkg.accomodationList[0] && (wgdPkg.accomodationList[0].hotelCode || "").replace("|","-"))|| ""
-            newPM['accomguid'] = wgdPkg.productId || ""
+            newPM['accomguid'] = wgdPkg.productId || "";
+            var wgdAcc = window.getPageData('/packages/'+newPM.accomguid) || {};
+            newPM['accomcode'] = ((/tosCode=([^&]+)/.exec(wgdPkg.contentUrl || '') || ['']).pop()) 
+                || (wgdPkg.accomodationList && wgdPkg.accomodationList[0] && (wgdPkg.accomodationList[0].hotelCode || "").replace("|","-"))
+                || (wgdAcc.matrix && wgdAcc.matrix.data && wgdAcc.matrix.data.priceList && wgdAcc.matrix.data.priceList[0] && wgdAcc.matrix.data.priceList[0].rooms && wgdAcc.matrix.data.priceList[0].rooms[0] && wgdAcc.matrix.data.priceList[0].rooms[0].context && wgdAcc.matrix.data.priceList[0].rooms[0].context.hotelCode || '').replace('|','-')
+                || "";
             newPM['boardbasis'] = wgdPkg.accomodationList && wgdPkg.accomodationList[0] && wgdPkg.accomodationList[0].roomProfiles && wgdPkg.accomodationList[0].roomProfiles[0] && wgdPkg.accomodationList[0].roomProfiles[0].mealPlan && wgdPkg.accomodationList[0].roomProfiles[0].mealPlan.description || "";
             newPM['duration'] = wgdPkg.dateRange && wgdPkg.dateRange.duration || 0;
             newPM['deptdate'] = +new Date(wgdPkg.dateRange && wgdPkg.dateRange.startDate || 0)

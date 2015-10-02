@@ -17,7 +17,7 @@
             cdpm.lob = "package"
             cdpm.holidaytype = wgdAccom?((wgdAccom.connectorCode == 1)?((wgdAccom.brand === "Z")?"flexitrips-angular":"package-angular"):((wgdAccom.connectorCode == 2)?"multi-angular":"generic-angular")):"generic-angular"
             cdpm.pagecontext = "angular";
-            cdpm.tc_basket_id = JSON.parse(cdl.ckget('tc_basket_id')) || '';            
+            cdpm.tc_basket_id = JSON.parse(cdl.ckget('tc_basket_id')) || '';
             
             var wgdDetails = wgD.details || {};
             var wgdPath = (wgdAccom.geoPath && wgdAccom.geoPath.split("/")) || (wgdDetails.geoPath && wgdDetails.geoPath && wgdDetails.geoPath.value.split("/")) ||  []

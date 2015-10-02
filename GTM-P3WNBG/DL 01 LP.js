@@ -4,17 +4,17 @@
     if (jQ && jQ.extend && cdl) try {
         var cdpm = cdl.CATTParams
         var newPM = {}
-        var wgetData = window.getPageData && window.getPageData(cdpm.urlparams && cdpm.urlparams.pathname) || {}
+        var wgD = window.getPageData && window.getPageData(cdpm.urlparams && cdpm.urlparams.pathname) || {}
 
         cdpm.errors = {}
         var errorPM = {};
-        errorPM['errorcode'] = wgetData.errorCode || "";
-        errorPM['errormsg'] = (wgetData.message || []).join(' ');
+        errorPM['errorcode'] = wgD.errorCode || wgD.store && wgD.store['/notfound'] && wgD.store['/notfound'].errorCode || "";
+        errorPM['errormsg'] = (wgD.message || wgD.store && wgD.store['/notfound'] && wgD.store['/notfound'].message || ['']).join(' ');
 
         var userId = cdpm.user && cdpm.user.id || '';
         if (!userId) {
             if(location.host === 'www.thomascook.com') { 
-                $.ajax('https://www.thomascook.com/api/users/session').success(function(data, textStatus, jqXHR){
+                jQ.ajax('https://www.thomascook.com/api/users/session').success(function(data, textStatus, jqXHR){
                     if (data && data.id && jqXHR.status === 200) {
                         cdpm['user'] = {};
                         cdpm.user.id = data.id || '';
