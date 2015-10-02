@@ -1,9 +1,12 @@
 <script id='GTM-P2C3FL_CATTDLcoreLodash'>
-(function gtm_cattdlCore(jQ, d, w, dl, cdl) {
+(function gtm_cattdlCore(jQ, d, w, dl) {
     'use strict';
-    if ( jQ && cdl && dl && !dl.some(function(a){return /core_/i.test(a && a.event || '')}) ) try {
-        var cdpm = cdl.CATTParams || {}
-        var ld = cdl._
+    if ( jQ && dl && !dl.some(function(a){return /c ore_/i.test(a && a.event || '')}) ) try {
+        window.CATTDL = window.CATTDL || {};
+        var cdl = window.CATTDL;
+        var cdpm = cdl.CATTParams || {};
+        cdl._ = w._ ;
+        var ld = cdl._;
         var transpose = function transpose(s, d){for (var p in d) s = s.replace(new RegExp('{'+p+'}', 'g'), d[p]);return s;}
         var tst = function tst(r, u){return RegExp.prototype.test.call(r, u)}
         var exc = function exc(r, u){return RegExp.prototype.exec.call(r, u)};
@@ -32,7 +35,7 @@
                     if (/lob|holidaytype|pageid/i.test(key)) {n = n.toLowerCase() || 'generic'}
                     else if (/lob|holidaytype|pageid|errrocode/i.test(key)) n = ld.trunc(n, 267)
                     else if (/destination|boardbasis|searchresultstop3/i.test(key)) {n.replace(/\&amp;/g, '-').replace(/\&/g, '-') || ""}
-                    r[key] = typeof n === 'string'?ld.trim(n):n;
+                    r[key] = (typeof n === 'string' && new String().trim )? n.trim() : n;
                 })
             )
         };
@@ -60,7 +63,7 @@
         cdpm.pagetimestamp = Date.now();
         cdpm.user = cdpm.user || {};
 
-      	cdpm.cookiedomain = 
+      	cdpm.cookiedomain =
           ({
           	'thomascook'					:'thomascook.com',
             'airtours'						:'airtours.co.uk',
@@ -74,9 +77,10 @@
 
           })[((/([^\.]*).co.uk|([^\.]*).com|([^\.]*).net|(.+)\.thomascook\.io/i.exec(w.location.hostname) || []).filter(function hostname(e){return e}) || ['thomascook']).pop()];
 
+        window.CATTDL = cdl;
         window.CATTDL.CATTParams = cdpm;
     } catch(e) {
-        var msg = 'GTM CATTDL Core: '+e; 
+        var msg = 'GTM CATTDL Core: '+e;
         console && ((console.error)?console.error(msg):console.log(msg));
     } finally {
         var pid = window.CATTDL && window.CATTDL.CATTParams && window.CATTDL.CATTParams.pageid || '';
@@ -84,5 +88,5 @@
         if (/accom/i.test(pid)) setTimeout(function(){dl.push(core_pid)}, 500); else dl.push(core_pid);
     }
     return w.CATTDL;
-}(window.jQuery, window.document, window, window.dataLayer, window.CATTDL));
+}(window.jQuery, window.document, window, window.dataLayer));
 </script>

@@ -6,14 +6,15 @@
         var uawa = uadl.webanalytics || {};
         var cdpm = cdl.CATTParams || {};
         var cdurl = {};
+        var ld = cdl._;
         cdurl.pathname = location.pathname || '/';
         cdurl.paramstring = location.searches || '';
 
-        if(!w.ga || w.ga.length < 1) {w.ga=w.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date};
+        if( !w.ga || ld(w.ga).isEmpty() ) {w.ga=w.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date};
 
         var userId = (cdpm.user && cdpm.user.id) || '';
 
-        w.ga && w.ga(function gtm_getTracker(){
+        w.ga && !ld(w.ga).isEmpty() && w.ga(function gtm_getTracker(){
                 var tracker = w.ga.getByName(uadl.name);
                 if (!tracker) { w.ga('create', uadl.profileid, uadl.cookiedomain, {'name': uadl.name}) };
 
@@ -33,16 +34,16 @@
                             jQ.each(ux && ux.pageview || [], function ux_keyDimension(kDim, vDim){
                                 jQ.each(vDim, function uxvalDimension(_, val){val && (sendSet['dimension'+vDim.dimension]=val)})
                             })
-                        };            
+                        };
                         if (jQ){
                             jQ.each(uawa && uawa.dimensions || [], function gtm_keyDimension(kDim, vDim){
                                 jQ.each(vDim, function valDimension(_, val){val && (sendSet[kDim]=val)})
                             })
                             jQ.each(uawa && uawa.metrics || [], function gtm_keyMetrics(kMet, vMet){
                                 jQ.each(vMet, function valMetrics(_, val){val && (sendSet[kMet]=val)})
-                            })  
+                            })
                         }
-                        sendSet['page'] = uawa.page;            
+                        sendSet['page'] = uawa.page;
                         w.ga(trackerName+'send','pageview', sendSet);
 
                         for (var evt in uawa.events) {
@@ -60,8 +61,8 @@
                         if (ux) {window.ECEOP.pageview = []};
 
                         if(!/gtm_uabound/i.test(jQ('button.btn.btn-default.active.alertActBtn').attr('class'))){
-                            jQ('button.btn.btn-default.active.alertActBtn').addClass('gtm_uabound'); 
-                            jQ('button.btn.btn-default.active.alertActBtn').on('click',function(e){ 
+                            jQ('button.btn.btn-default.active.alertActBtn').addClass('gtm_uabound');
+                            jQ('button.btn.btn-default.active.alertActBtn').on('click',function(e){
                                 w.ga(trackerName+'send','event'
                                     , 'MyAccount ResendActivationEmail'
                                     , window.userId
@@ -77,8 +78,8 @@
                             });
                         };
                         if(!/gtm_uabound/i.test(jQ('#idRemoveAccount').attr('class'))){
-                            jQ('#idRemoveAccount').addClass('gtm_uabound'); 
-                            jQ('#idRemoveAccount').on('click',function(e){ 
+                            jQ('#idRemoveAccount').addClass('gtm_uabound');
+                            jQ('#idRemoveAccount').on('click',function(e){
                                 w.ga(trackerName+'send','event'
                                     , 'MyAccount Deactivate'
                                     , window.userId
@@ -112,7 +113,7 @@
         })
     } catch(e) {
         cdl.error('GTM UK TC UATC LP: '+e)
-    } 
+    }
     return jQ && cdl && uadl
 }(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_uatc, window))
 </script>
