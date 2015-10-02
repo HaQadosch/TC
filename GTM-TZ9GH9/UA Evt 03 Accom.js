@@ -9,7 +9,7 @@
         var gatrc = ((cdl && cdl.DL_gatc && cdl.DL_gatc.trackername)+".") || ".";
         var uawa = uadl.webanalytics || {};
         var cdom = cdpm.domevents;
-        var cdomid = cdom && cdomid || '';
+        var cdomid = cdom && cdom.id || '';
         var lobholidaytypepageid = cdpm && cdpm.lob+'|'+cdpm.holidaytype+'|'+cdpm.pageid+'|'+(cdpm.accomguid || cdpm.domevents && cdpm.domevents.data && cdpm.domevents.data.productId || 'accomguid')        
         var cdurl = cdpm.urlparams || {};
 
@@ -19,14 +19,20 @@
             , action
             , label
             , 1
-            , { 'page'          : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
-                ,'dimension51'  : cdpm.gaguid || 'empty'
-                ,'dimension55'  : 'event'
-                ,'dimension65'  : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
-                ,'dimension75'  : ''+(window.Date && window.Date.now() || 0)
-                ,'dimension118' : (cdurl && cdurl.pathname || location.pathname || '')
-                ,'dimension119' : (cdurl && cdurl.paramstring || location.search || '') 
-                ,'nonInteraction': noninteraction
+            , { 'page'              : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                ,'dimension5'       : cdl.gadate && cdl.gadate(cdpm.deptdate || 0)
+                ,'dimension10'      : cdpm.lob || ''
+                ,'dimension11'      : cdpm.holidaytype || ''
+                ,'dimension12'      : cdpm.pageid || ''
+                ,'dimension14'      : cdpm.sessionid || ''
+                ,'dimension16'      : cdpm.accomcode || ''
+                ,'dimension51'      : cdpm.gaguid || 'empty'
+                ,'dimension55'      : 'event'
+                ,'dimension65'      : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                ,'dimension75'      : ''+(window.Date && window.Date.now() || 0)
+                ,'dimension118'     : (cdurl && cdurl.pathname || location.pathname || '')
+                ,'dimension119'     : (cdurl && cdurl.paramstring || location.search || '') 
+                ,'nonInteraction'   : noninteraction
             });
         };
         function GAevent(category,action,label,value,noninteraction) {
