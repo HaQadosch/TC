@@ -28,11 +28,11 @@
   (function gtm_dlForward(dl, dlK2, sessStore, ld){
     'use strict';
     var cons = window.console;
-    var lastEvt;
+    var lastEvt = {};
     if (ld, dl && dlK2 && sessStore && sessStore.getItem('dl_K2PDWX')) try {
-      lastEvt = ld(dl).last();
+      ld.assign(lastEvt, ld(dl).last());
       if (lastEvt.forward || /Loaded|Page|Destination|Hotel|Offer|Booking|Confimration/i.test(lastEvt.event)) {
-        lastEvt.event = 'W8VW7T_'+lastEvt.event;
+        lastEvt.event = 'K2PDWX_'+lastEvt.event;
         dlK2.push(lastEvt);
       }
     } catch (err) {
