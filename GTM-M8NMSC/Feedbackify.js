@@ -17,7 +17,7 @@ fby.push(['showTab', {id: '9953', position: 'right', color: '#FFA500'}]);
     if (dl && cdl) try {
       var cdpm = cdl.CATTParams || {};
       var pooltest = cdl.twdc(/test=feedbackify/) || !((cdpm && cdpm.utmaguid || 1)%2);
-      if (pooltest) {
+      if (pooltest && !/mobile/i.test(cdpm.device || '')) {
         window.fby = cdl._.union(window.fby, []);
         window.fby.push(['showTab', {id: '9953', position: 'right', color: '#FFA500'}]);
         fbdl = cdl.insertJS({
