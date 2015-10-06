@@ -11,8 +11,10 @@
 
       ld.assign(cdl.DL_uatc, {
           profileid       : 'UA-33036832-7'
+        , profileid2      : 'UA-33029666-1'
         , cookiedomain    : 'directholidays.co.uk'
         , name            : 'CATTUATC'
+        , name2           : 'CATT2UATC'
         , set             : {
             anonymizeIp : false
           , location    : loc && loc.href || window.document && window.document.URL || ''

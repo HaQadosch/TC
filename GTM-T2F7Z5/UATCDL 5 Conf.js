@@ -14,8 +14,10 @@
 
       ld.assign(cdl.DL_uatc, {
           profileid       : 'UA-33036832-7'
+        , profileid2      : 'UA-33029666-1'
         , cookiedomain    : 'directholidays.co.uk'
         , name            : 'CATTUATC'
+        , name2           : 'CATT2UATC'
         , set             : {
             anonymizeIp : false
           , location    : loc && loc.href || window.document && window.document.URL || ''
@@ -23,7 +25,11 @@
           , hostname    : loc && loc.hostname || ''
         }
         , webanalytics    : {
-            page            : '/vp/en/'+(cdpm.lob || 'epackage')+'/'+(cdpm.holidaytype || 'epackage')+'/'+(cdpm.pageid || 'booking')
+            page            : cdl.transpose('/vp/en/{lob}/{holidaytype}/{pageid}', {
+                                  'lob'         : cdpm.lob || 'epackage'
+                                , 'holidaytype' : cdpm.holidaytype || 'epackage'
+                                , 'pageid'      : cdpm.pageid || 'booking'
+                              }).toLowerCase()
           , location        : loc && loc.href || window.document && window.document.URL || ''
           , addproduct      : {
               id              : cdpm.accomcode || ''

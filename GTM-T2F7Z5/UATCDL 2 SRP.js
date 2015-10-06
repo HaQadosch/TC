@@ -18,7 +18,10 @@
       var jqaname = '';
       var jqadepdate = '';
       var jqaid = '';
-      var cdpmcategory = ('en|'+(cdpm.lob||"")+'|'+(cdpm.holidaytype||"")).toLowerCase();
+      var cdpmcategory = cdl.transpose('en|{lob}|{holidaytype}', {
+                            'lob'         : cdpm.lob || 'epackage'
+                          , 'holidaytype' : cdpm.holidaytype || 'epackage'
+                        }).toLowerCase();
       var jqabrand = '';
       var jqavariant = '';
       var jqaboardbasis = '';
@@ -43,7 +46,17 @@
         jqadepdate     = cdl.gadate(new Date(jqflights.find('span.dateTime.departure span:eq(0)').text()));
         jqaretdate     = cdl.gadate(new Date(jqflights.find('div.details:eq(1) span.date.arrival span').text()));
         jqatotalprice  = ld.words(jqa.find('div.ResultItemPriceBox span.ResultItemHeaderTotalPrice.ResultItemHeaderPrice').text()).join('.');
-        jqavariant     = ((jqaboardbasis || '')+'|'+(jqaairportcode || jqaairportname || "")+'|'+(jqadepdate ||"")+'|'+(jqaretdate ||"")+'|'+(cdpm.paxtotal || "0")+'|'+(cdpm.paxadult || "0")+'|'+(cdpm.paxchild || "0")+'|'+(cdpm.paxinfant || "0")+'|'+(jqatotalprice || '')).toLowerCase();
+        jqavariant     = cdl.transpose('{boardbasis}|{airport}|{depdate}|{retdate}|{paxtotal}|{paxadult}|{paxchild}|{paxinfant}|{totalprice}', {
+                              'boardbasis': jqaboardbasis || ''
+                              , 'airport': jqaairportcode || jqaairportname || ""
+                              , 'depdate': jqadepdate ||""
+                              , 'retdate': jqaretdate ||""
+                              , 'paxtotal': cdpm.paxtotal || "0"
+                              , 'paxadult': cdpm.paxadult || "0"
+                              , 'paxchild': cdpm.paxchild || "0"
+                              , 'paxinfant': cdpm.paxinfant || "0"
+                              , 'totalprice': jqatotalprice || ''
+                          }).toLowerCase();
 
         return {
             'id'         : jqaid
@@ -60,8 +73,10 @@
 
       ld.assign(cdl.DL_uatc, {
           profileid       : 'UA-33036832-7'
+        , profileid2      : 'UA-33029666-1'
         , cookiedomain    : 'directholidays.co.uk'
         , name            : 'CATTUATC'
+        , name2           : 'CATT2UATC'
         , set             : {
             anonymizeIp : false
           , location    : loc && loc.href || window.document && window.document.URL || ''
@@ -69,7 +84,11 @@
           , hostname    : loc && loc.hostname || ''
         }
         , webanalytics    : {
-            page            : '/vp/en/'+(cdpm.lob || 'epackage')+'/'+(cdpm.holidaytype || 'epackage')+'/'+(cdpm.pageid || 'search')
+            page            : cdl.transpose('/vp/en/{lob}/{holidaytype}/{pageid}', {
+                                  'lob'         : cdpm.lob || 'epackage'
+                                , 'holidaytype' : cdpm.holidaytype || 'epackage'
+                                , 'pageid'      : cdpm.pageid || 'search'
+                              }).toLowerCase()
           , location        : loc && loc.href || window.document && window.document.URL || ''
           , nbrimpressions  : cdpm.searchresultstotal
           , addimpression   : ldaddimpression
