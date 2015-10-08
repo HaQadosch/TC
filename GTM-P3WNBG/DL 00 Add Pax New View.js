@@ -21,15 +21,15 @@
                     var cdurl = cdpm.urlparams;
                     cdurl.paramstring = "";
                     if (/\/#\!\//.test(loc.href)) {
-                        cdurl.paramstring = (/([?].*)/.exec(loc.hash) || []).pop();
-                        cdurl.fullurl = (loc.href).replace(/#\!\//,'') || "";
+                        cdurl.paramstring = decodeURIComponent((/([?].*)/.exec(loc.hash) || []).pop());
+                        cdurl.fullurl = decodeURIComponent((loc.href).replace(/#\!\//,'') || "");
                     } else {
-                        cdurl.paramstring = loc.search;
-                        cdurl.fullurl = loc.href || "";
+                        cdurl.paramstring = decodeURIComponent(loc.search);
+                        cdurl.fullurl = decodeURIComponent(loc.href || "");
                     };
                         cdurl.pathname = locpathname;
                         ((cdurl && cdurl.paramstring).split(/\?|&/g).slice(1)).forEach(function urlparams(prm, _){ var cur = /([^=]+)=(.*)/i.exec(prm); if (cur && cur.length > 1) {cdurl[cur[1]]=cur[2]} });
-                        cdurl.referrer = refurl || document.referrer ||  "";
+                        cdurl.referrer = refurl || decodeURIComponent(document.referrer) ||  "";
                     cdpm.urlparams = cdurl;
 
                     cdpm.cookies = {}; (document.cookie.split(/;\s?/g)).forEach(function cookies(coo, _){ var cur = /([^=]+)=(.*)/i.exec(coo); if (cur && cur.length > 1) cdpm.cookies[cur[1]]=cur[2]})

@@ -7,8 +7,7 @@
         var locpathname = loc.pathname == '/' && /#!/i.test(loc.hash) && (/([^#!][^?]*)/i.exec(loc.hash) || ['']).pop() || loc.pathname
         var wgD = w.getPageData && w.getPageData(locpathname) || {}
 
-        //Set previous pageid
-        /*window.sessionStorage.setItem('gtm_previouspageid', cdpm.pageid || '')*/
+        //Set previous pageid*/
         var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
         params.previouspageid = cdpm.pageid || '';
         CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', '.'+(cdpm.cookiedomain || 'thomascook.com'));
@@ -36,7 +35,7 @@
             var reg = new RegExp(cdpmkeys[i], 'i');
             if (!reg.test(refreshparams.join('|'))) delete cdpm[cdpmkeys[i]]
               };
-        }
+        };
 
         //url & cookies
         var refurl = cdpm.urlparams && cdpm.urlparams.fullurl || "";
@@ -44,15 +43,15 @@
         cdpm.urlparams.paramstring = "";
         var cdurl = cdpm.urlparams;
         if (/\/#\!\//.test(loc.href)) {
-          cdurl.paramstring = (/([?].*)/.exec(loc.hash) || []).pop();
-          cdurl.fullurl = loc.href.replace(/#\!\//,'') || "";
+          cdurl.paramstring = decodeURIComponent((/([?].*)/.exec(loc.hash) || []).pop());
+          cdurl.fullurl = decodeURIComponent(loc.href.replace(/#\!\//,'') || "");
         } else {
-          cdurl.paramstring = loc.search;
-          cdurl.fullurl = loc.href || "";
+          cdurl.paramstring = decodeURIComponent(loc.search);
+          cdurl.fullurl = decodeURIComponent(loc.href || "");
         };
         cdurl.pathname = locpathname;
         ((cdurl && cdurl.fullurl).split(/\?|&|#/g).slice(1)).forEach(function urlparams(prm, _){ var cur = /([^=]+)=(.*)/i.exec(prm); if (cur && cur.length > 1) {cdurl[cur[1]]=cur[2]} });
-        cdurl.referrer = refurl || document.referrer ||  "";
+        cdurl.referrer = refurl || decodeURIComponent(document.referrer) ||  "";
         cdpm.urlparams = cdurl;
 
         cdpm.cookies = {}; (document.cookie.split(/;\s?/g)).forEach(function cookies(coo, _){ var cur = /([^=]+)=(.*)/i.exec(coo); if (cur && cur.length > 1) cdpm.cookies[cur[1]]=cur[2]})
