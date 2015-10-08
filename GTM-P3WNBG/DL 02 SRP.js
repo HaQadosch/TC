@@ -30,8 +30,8 @@
             newPM['destinationsearched'] = wgdCurrent.goingTo || "";
             newPM['resortsearched'] = wgdCurrent.resortCode || "";
             newPM['accomnamesearched'] = wgdCurrent.hotelName || "";
-            newPM['searchwidened'] = ''+(wgD.widened || false);
-            newPM['searchwidenedselected'] = ''+(wgdCurrent.flexible || false);
+            newPM['searchwidened'] = (''+wgdCurrent.flexible == 'true')?'true':((''+wgD.widened == 'true')?'true':'false');
+            newPM['searchwidenedselected'] = (''+wgdCurrent.flexible == 'true')?'true':'false';
             newPM['sortoption'] = wgdCurrent.sort || "";
             newPM['duration'] = wgdCurrent.duration || "I dont mind";
             newPM['searchapp'] = (wgdCurrent.connectorCode && wgdCurrent.connectorCode == 1)?"solr":"multicom";

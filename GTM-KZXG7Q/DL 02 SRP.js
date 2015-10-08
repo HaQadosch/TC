@@ -38,8 +38,8 @@
             newPM['deptdate'] = strdeptdatewhen || newPM.deptdatestart || 0;
             if ((rngdeptdate  || '').split(',')[1]) {newPM['deptdaterange'] = true} else {newPM['deptdaterange'] = false};
             
-            newPM['searchwidened'] = ''+(wgD.widened || false);
-            newPM['searchwidenedselected'] = ''+(wgdCurrent.flexible || false);
+            newPM['searchwidened'] = (''+wgdCurrent.flexible == 'true')?'true':((''+wgD.widened == 'true')?'true':'false');
+            newPM['searchwidenedselected'] = (''+wgdCurrent.flexible == 'true')?'true':'false';
             newPM['sortoption'] = wgdCurrent.sort || "";
             newPM['duration'] = wgdCurrent.duration || "Geen Voorkeu";
             newPM['searchapp'] = (wgdCurrent.connectorCode == 3?"solr":"unknown");
