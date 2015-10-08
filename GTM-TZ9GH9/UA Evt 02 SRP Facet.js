@@ -200,11 +200,33 @@
                         UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
                         GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
                     } catch(e) {cdl.info('GTM Evt 02 SRP - Facet Kids from £1: '+e)}
+			//Hotel Facilities
+            } else if (/srp-facet-hotelFacilities/.test(cdom.id)) {
+                  try {
+                        var evtcategory = eventCat;
+                        var evtaction = 'Hotel Facilities';
+                        var evtlabel = cdom && (cdom.data && cdom.data.title || cdom.data || '');
+                        var evtvalue = 1;
+                        var evtnoninteraction = 0;
+                        UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
+                        GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
+                    } catch(e) {cdl.info('GTM Evt 02 SRP - Hotel Facilities: '+e)}
+			//Room Facilities
+            } else if (/srp-facet-roomFacilities/.test(cdom.id)) {
+                  try {
+                        var evtcategory = eventCat;
+                        var evtaction = 'Room Facilities';
+                        var evtlabel = cdom && (cdom.data && cdom.data.title || cdom.data || '');
+                        var evtvalue = 1;
+                        var evtnoninteraction = 0;
+                        UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
+                        GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
+                    } catch(e) {cdl.info('GTM Evt 02 SRP - Room Facilities: '+e)}
             } else {
                     try {
                         var evtcategory = eventCat;
                         var evtaction = $(cdom.rawEvent.originalEvent.path).eq(3).find('div.bold.facetTitle').text();
-                        var evtlabel = ''+(cdom && (cdom.data && cdom.data.title || cdom.data || 'undo'));
+                        var evtlabel = ''+(cdom && (cdom.data && cdom.data.title || cdom.data || ''));
                         var evtvalue = 1;
                         var evtnoninteraction = 0;
                         UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
