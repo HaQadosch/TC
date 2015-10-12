@@ -12,7 +12,7 @@
                 //Set previous pageid       
                 var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
                 params.previouspageid = cdpm.pageid || '';
-                CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', cdpm.cookiedomain);  
+                CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', '.'+(cdpm.cookiedomain || 'neckermann.nl'));  
 
                 //url & cookies
                 var refurl = decodeURIComponent(cdpm.urlparams && cdpm.urlparams.fullurl || "");
@@ -58,7 +58,7 @@
                 cdpm['consultantref'] =  cdurl.consultantRef || (w.CATTDL.ewls(/consultantRef=([^&|\s|\?]*)/i) || []).pop() || ""
                 cdpm['qsearchedkeyword'] = cdurl.q || w.CATTDL.ewls(/[&\?]q=([^&|\s|\?]*)/i) && w.CATTDL.ewls(/[&\?]q=([^&|\s|\?]*)/i).pop() || ""
                 }
-                cdl.ckset('gtm_cdpm', JSON.stringify(keeps), Infinity, '/', cdpm.cookiedomain);
+                cdl.ckset('gtm_cdpm', JSON.stringify(keeps), Infinity, '/', '.'+(cdpm.cookiedomain || 'neckermann.nl'));
                 jQ.extend(cdl.CATTParams, keeps);
                 cdpm.pageid = cdpm.pageid || 'home';
                     window.CATTDL.CATTParams = cdpm

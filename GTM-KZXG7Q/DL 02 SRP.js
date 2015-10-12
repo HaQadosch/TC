@@ -70,7 +70,7 @@
             var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
             params.sortoption = newPM['sortoption'] || '';
             params.srplist = (locpathname).replace(/^\/|\/$/g, '') || '';
-            CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', cdpm.cookiedomain);
+            CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', '.'+(cdpm.cookiedomain || 'neckermann.nl'));
 
             cdpm.srpfacets = {};
             var facetPM = {};

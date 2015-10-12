@@ -26,8 +26,8 @@
             newPM['deptdate'] = strdeptdatewhen || newPM.deptdatestart || 0;
             if ((rngdeptdate  || '').split(',')[1]) {newPM['deptdaterange'] = true} else {newPM['deptdaterange'] = false};
 
-            newPM['deptairportsearched'] = wgdCurrent.origin || "";
-            newPM['destinationsearched'] = wgdCurrent.goingTo || "";
+            newPM['deptairportsearched'] = wgdCurrent.origin && (wgdCurrent.origin.map && wgdCurrent.origin.map(function(e){return e.replace(/\&amp;/g, '-').replace(/\&/g, '-')}) || wgdCurrent.origin.replace(/\&amp;/g, '-').replace(/\&/g, '-')) || '';
+            newPM['destinationsearched'] = wgdCurrent.goingTo && (wgdCurrent.goingTo.map && wgdCurrent.goingTo.map(function(e){return e.replace(/\&amp;/g, '-').replace(/\&/g, '-')}) || wgdCurrent.goingTo.replace(/\&amp;/g, '-').replace(/\&/g, '-')) || '';
             newPM['resortsearched'] = wgdCurrent.resortCode || "";
             newPM['accomnamesearched'] = wgdCurrent.hotelName || "";
             newPM['searchwidened'] = (''+wgdCurrent.flexible == 'true')?'true':((''+wgD.widened == 'true')?'true':'false');

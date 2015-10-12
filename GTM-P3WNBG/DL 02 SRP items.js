@@ -11,8 +11,8 @@
         if (Object.keys(wgetDataSrch).length !== 0) {
             var srpPM = {};
             var wgdSrch = wgetDataSrch.links && wgetDataSrch.links.search && wgetDataSrch.links.search.context || {}
-            srpPM['deptairportsearched'] = wgdSrch.origin || "";
-            srpPM['destinationsearched'] = wgdSrch.goingTo || "";
+            srpPM['deptairportsearched'] = wgdSrch.origin && (wgdSrch.origin.map && wgdSrch.origin.map(function(e){return e.replace(/\&amp;/g, '-').replace(/\&/g, '-')}) || wgdSrch.origin.replace(/\&amp;/g, '-').replace(/\&/g, '-')) || '';
+            srpPM['destinationsearched'] = wgdSrch.goingTo && (wgdSrch.goingTo.map && wgdSrch.goingTo.map(function(e){return e.replace(/\&amp;/g, '-').replace(/\&/g, '-')}) || wgdSrch.goingTo.replace(/\&amp;/g, '-').replace(/\&/g, '-')) || '';
             srpPM['duration'] = wgdSrch.duration || "I dont mind";
             srpPM['resortsearched'] = wgdSrch.resortCode || "";
             srpPM['searchwidened'] = wgdSrch.flexible || '';

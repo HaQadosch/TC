@@ -44,7 +44,7 @@
 
         cdl.DL_uatc = {
             profileid       : 'UA-27847231-2',
-            cookiedomain    : twlh(/neckermann.io/i)?"neckermann.io":"neckermann.nl",
+            cookiedomain    : cdpm.cookiedomain || 'neckermann.nl',
             name            : 'CATTUATC',
             set             : {
                 anonymizeIp : true,
@@ -151,7 +151,7 @@
         var srpsortlist = params.srplist || 'search';
         params.accomposition = {};
         params.accomposition[accId || 'na'] =  accPosition;
-        CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', '.neckermann.nl');
+        CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', '.'+(cdpm.cookiedomain || 'neckermann.nl'));
 
         cdl.DL_uatc.webanalytics.addproductlist = {
             id          : accId,

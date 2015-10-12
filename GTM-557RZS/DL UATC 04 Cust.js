@@ -47,7 +47,7 @@
         
         cdl.DL_uatc = {
             profileid       : 'UA-27847231-2',
-            cookiedomain    : twlh(/neckermann.io/i)?"neckermann.io":"neckermann.nl",
+            cookiedomain    : cdpm.cookiedomain || 'neckermann.nl',
             name            : 'CATTUATC',
             set             : {
                 anonymizeIp : true,

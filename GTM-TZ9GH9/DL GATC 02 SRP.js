@@ -20,7 +20,7 @@
 
         cdl.DL_gatc = {
             profileid       : twlh(/directholidays/i)?"UA-33029666-1":"UA-33036832-1",
-			cookiedomain    : cdpm.cookiedomain || 'thomascook.com',
+            cookiedomain    : cdpm.cookiedomain || 'thomascook.com',
             trackername     : 'CATTGATC',
             anonymizeip     : false,
             allowlinker     : true,
@@ -59,7 +59,7 @@
                 '&PaxChild='+(cdpm.paxchild || '')+
                 '&PaxInfant='+(cdpm.paxinfant || '')+
                 '&BoardBasis='+(cdfc.boardbasis && cdfc.boardbasis.toString() || '')+
-                '&Destination='+(cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+
+                '&Destination='+(cdpm.destination || '')+
                 '&srpTop3='+(cdpm.searchresultstop3 || '')+
                 '&srpTot='+(cdpm.searchresultstotal || '')+
                 '&duration='+(cdpm.duration || '')+

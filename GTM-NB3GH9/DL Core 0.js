@@ -1,5 +1,5 @@
 <script id='GTM-NB3GH9_cattdlCore'>
-  (function gtm_cattdlCore(w, d, dl) {
+  (function gtm_lodashCore(w, d, dl) {
     'use strict';
     var cdpm;
     if ( w && dl && !dl.some(function(a){return /lodash/i.test(a && a.event || '');}) ) try {
@@ -15,7 +15,9 @@
           s.onload = null;
           s.onreadystatechange = null;
           (function gtm_cattdlCore(jQ, d, w, dl, cdl) {
-            if ( jQ && !dl.some(function(a){return /core_/i.test(a && a.event || '');}) ) try {
+            if (!window.jQuery) {console.log('JQUERY NOT THERE')}
+            if ( window.jQuery ) try {
+              console.log('TEST')
               cdpm = cdl.CATTParams || {};
               var ld = cdl._;
               var transpose = function transpose(s, d){for (var p in d) s = s.replace(new RegExp('{'+p+'}', 'g'), d[p]);return s;};

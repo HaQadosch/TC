@@ -1,4 +1,4 @@
-<script id='GTM-KZXG7Q_cattdlCore'>
+<script id='GTM-NCQJZJ_cattdlCore'>
 (function gtm_cattdlCore(jQ, w, dl, loc) {
     'use strict';
     setTimeout(function(){
@@ -27,7 +27,7 @@
                     document.cookie = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "")
                     return true
                 },
-                post    : function post(key, value) {document.cookie = key+"="+value+"; path=/; domain=.thomascook.com;"},
+                post    : function post(key, value) {document.cookie = key+"="+value+"; path=/; domain=.neckermann.nl;"},
                 get     : function get(key) {
                     var regKey = new RegExp(key+'=([^;]*)', 'i')
                     return regKey.test(document.cookie) && (regKey.exec(document.cookie) || []).pop() || false
@@ -38,13 +38,19 @@
 
             cdpm['device'] = (function(t){var n="desktop";var r=/mobile/i.test(t);var i=/android/i.test(t);var s=/phone/i.test(t);var o=i&&!/mobile/i.test(t);var u=/ipad/i.test(t);var a=/tablet/i.test(t);if(a||o||u)n="tablet";else if(r||i||s)n="mobile";return n})(navigator.userAgent||"")
             || ''
-            cdpm['cookiedomain'] = ({'neckermann':'neckermann.nl'})[((/([^\.]*).io|([^\.]*).com|([^\.]*).nl|([^\.]*).net/i.exec(location.hostname) || []).filter(function hostname(e){return e}) || ['neckermann']).pop()]
-            || (/nl\..+\.thomascook\.io/.test(location.hostname))?location.hostname:'';
+            cdpm.cookiedomain = 
+                ({
+                  'neckermann'          :'neckermann.nl',
+                  'nl.staging'          :'nl.staging.thomascook.io',
+                  'nl.qa'               :'nl.qa.thomascook.io',
+                  'nl.integration'      :'nl.integration.thomascook.io',
+                  'nl.int'              :'nl.int.thomascook.io'
+                })[((/([^\.]*).com|([^\.]*).nl|([^\.]*).net|(.+)\.thomascook\.io/i.exec(loc.hostname) || []).filter(function hostname(e){return e}) || ['neckermann']).pop()];
 
             window.CATTDL.CATTParams = cdpm
 
             if ($.subscribe) {
-            var dpush = function dpush(evt){dataLayer.push(evt); window.dataLayer_557RZS && window.dataLayer_557RZS.push(evt)};
+            var dpush = function dpush(evt){dataLayer_NCQJZJ.push(evt)};
             var cookieTestInfo = function cookieTestInfo(mess){if (w.CATTDL.twdc(/test=test/i)) console.info(mess)};
             $.subscribe('updatePageData', function gtm_updatePageData(d){
               cookieTestInfo('GTM updatePageData updated', '\n', d, '\n', Object.keys(window.getPageData()).join('|'), '\n', window.getPageData(), '\n', 'pathname is ', (location.pathname == '/' && /#!/i.test(location.hash) && (/([^#!][^?]*)/i.exec(location.hash) || ['']).pop() || location.pathname));
@@ -91,5 +97,5 @@
         }
         return w.CATTDL         
     }, 1000)
-}(window.jQuery, window, window.dataLayer, document.location))
+}(window.jQuery, window, window.dataLayer_NCQJZJ, document.location))
 </script>

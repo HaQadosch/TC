@@ -14,7 +14,7 @@
         params.errors = {};
         params.errors.secure = 1
         newPM['initialholidaytype'] = params && params.initialholidaytype || '';
-        CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', cdpm.cookiedomain);    
+        CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', '.'+(cdpm.cookiedomain || 'neckermann.nl'));    
 
         cdpm.lob = "generic";
         cdpm.holidaytype = "generic";

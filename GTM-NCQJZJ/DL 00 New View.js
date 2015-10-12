@@ -1,4 +1,4 @@
-<script id='GTM-KZXG7Q_cattdlNewView'>
+<script id='GTM-NCQJZJ_cattdlNewView'>
 (function gtm_cattdlNewView(jQ, w, dl, cdl, loc) {
     'use strict';
     setTimeout(function cattNewView() {
@@ -103,7 +103,7 @@
             cdpm['consultantref'] =  cdurl.consultantRef || (w.CATTDL.ewls(/consultantRef=([^&|\s|\?]*)/i) || []).pop() || ""
             cdpm['qsearchedkeyword'] = cdurl.q || w.CATTDL.ewls(/[&\?]q=([^&|\s|\?]*)/i) && w.CATTDL.ewls(/[&\?]q=([^&|\s|\?]*)/i).pop() || ""
             }
-            cdl.ckset('gtm_cdpm', JSON.stringify(keeps), Infinity, '/', '.'+(cdpm.cookiedomain || 'neckermann.nl'));
+            cdl.ckset('gtm_cdpm', JSON.stringify(keeps), Infinity, '/', cdpm.cookiedomain);
             jQ.extend(cdl.CATTParams, keeps);
             cdpm.pageid = cdpm.pageid || 'home';
             
@@ -115,5 +115,5 @@
         }
         return w.CATTDL
     }, 500)
-}(window.jQuery, window, window.dataLayer, window.CATTDL, document.location))
+}(window.jQuery, window, window.dataLayer_NCQJZJ, window.CATTDL, document.location))
 </script>
