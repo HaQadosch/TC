@@ -26,9 +26,13 @@
             newPM['deptdate'] = strdeptdatewhen || newPM.deptdatestart || 0;
             if ((rngdeptdate  || '').split(',')[1]) {newPM['deptdaterange'] = true} else {newPM['deptdaterange'] = false};
 
-            newPM['deptairportsearched'] = wgdCurrent.origin && (wgdCurrent.origin.map && wgdCurrent.origin.map(function(e){return e.replace(/\&amp;/g, '-').replace(/\&/g, '-')}) || wgdCurrent.origin.replace(/\&amp;/g, '-').replace(/\&/g, '-')) || '';
-            newPM['destinationsearched'] = wgdCurrent.goingTo && (wgdCurrent.goingTo.map && wgdCurrent.goingTo.map(function(e){return e.replace(/\&amp;/g, '-').replace(/\&/g, '-')}) || wgdCurrent.goingTo.replace(/\&amp;/g, '-').replace(/\&/g, '-')) || '';
-            newPM['resortsearched'] = wgdCurrent.resortCode || "";
+            newPM['deptairportsearchedarray'] = (typeof wgdCurrent.origin == 'string')?[(wgdCurrent.origin && wgdCurrent.origin.replace(/\&amp;/g, '-').replace(/\&/g, '-') || '')]:(wgdCurrent.origin.map && wgdCurrent.origin.map(function(e){return e.replace(/\&amp;/g, '-').replace(/\&/g, '-')}) || ['']);
+            newPM['deptairportsearched'] = newPM.deptairportsearchedarray && newPM.deptairportsearchedarray.join(';') || '';
+            newPM['destinationsearchedarray'] = (typeof wgdCurrent.goingTo == 'string')?[(wgdCurrent.goingTo && wgdCurrent.goingTo.replace(/\&amp;/g, '-').replace(/\&/g, '-') || '')]:(wgdCurrent.goingTo.map && wgdCurrent.goingTo.map(function(e){return e.replace(/\&amp;/g, '-').replace(/\&/g, '-')}) || ['']);
+            newPM['destinationsearched'] = newPM.destinationsearchedarray && newPM.destinationsearchedarray.join(';') || '';
+            newPM['resortsearchedarray'] = (typeof wgdCurrent.resortCode == 'string')?[(wgdCurrent.resortCode && wgdCurrent.resortCode.replace(/\&amp;/g, '-').replace(/\&/g, '-') || '')]:(wgdCurrent.resortCode.map && wgdCurrent.resortCode.map(function(e){return e.replace(/\&amp;/g, '-').replace(/\&/g, '-')}) || ['']);
+            newPM['resortsearched'] = newPM.resortsearchedarray && newPM.resortsearchedarray.join(';') || '';
+
             newPM['accomnamesearched'] = wgdCurrent.hotelName || "";
             newPM['searchwidened'] = (''+wgdCurrent.flexible == 'true')?'true':((''+wgD.widened == 'true')?'true':'false');
             newPM['searchwidenedselected'] = (''+wgdCurrent.flexible == 'true')?'true':'false';

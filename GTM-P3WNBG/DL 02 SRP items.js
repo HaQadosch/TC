@@ -10,12 +10,19 @@
         var wgetDataSrch = window.getPageData && (window.getPageData('/search') || window.getPageData('/searchresults-map') || (/\/holidays\/.+\/.+/i.test(locpathname) && window.getPageData(locpathname))) || {}
         if (Object.keys(wgetDataSrch).length !== 0) {
             var srpPM = {};
-            var wgdSrch = wgetDataSrch.links && wgetDataSrch.links.search && wgetDataSrch.links.search.context || {}
-            srpPM['deptairportsearched'] = wgdSrch.origin && (wgdSrch.origin.map && wgdSrch.origin.map(function(e){return e.replace(/\&amp;/g, '-').replace(/\&/g, '-')}) || wgdSrch.origin.replace(/\&amp;/g, '-').replace(/\&/g, '-')) || '';
-            srpPM['destinationsearched'] = wgdSrch.goingTo && (wgdSrch.goingTo.map && wgdSrch.goingTo.map(function(e){return e.replace(/\&amp;/g, '-').replace(/\&/g, '-')}) || wgdSrch.goingTo.replace(/\&amp;/g, '-').replace(/\&/g, '-')) || '';
-            srpPM['duration'] = wgdSrch.duration || "I dont mind";
-            srpPM['resortsearched'] = wgdSrch.resortCode || "";
-            srpPM['searchwidened'] = wgdSrch.flexible || '';
+            var wgdSrch = wgetDataSrch.links && wgetDataSrch.links.search && wgetDataSrch.links.search.context || wgetDataSrch.searchParams || {};
+
+            srpPM['deptairportsearchedarray'] = (typeof wgdSrch.origin == 'string')?[(wgdSrch.origin && wgdSrch.origin.replace(/\&amp;/g, '-').replace(/\&/g, '-') || '')]:(wgdSrch.origin.map && wgdSrch.origin.map(function(e){return e.replace(/\&amp;/g, '-').replace(/\&/g, '-')}) || ['']);
+            srpPM['deptairportsearched'] = srpPM.deptairportsearchedarray && srpPM.deptairportsearchedarray.join(';') || '';
+            srpPM['destinationsearchedarray'] = (typeof wgdSrch.goingTo == 'string')?[(wgdSrch.goingTo && wgdSrch.goingTo.replace(/\&amp;/g, '-').replace(/\&/g, '-') || '')]:(wgdSrch.goingTo.map && wgdSrch.goingTo.map(function(e){return e.replace(/\&amp;/g, '-').replace(/\&/g, '-')}) || ['']);
+            srpPM['destinationsearched'] = srpPM.destinationsearchedarray && srpPM.destinationsearchedarray.join(';') || '';
+            srpPM['resortsearchedarray'] = (typeof wgdSrch.resortCode == 'string')?[(wgdSrch.resortCode && wgdSrch.resortCode.replace(/\&amp;/g, '-').replace(/\&/g, '-') || '')]:(wgdSrch.resortCode.map && wgdSrch.resortCode.map(function(e){return e.replace(/\&amp;/g, '-').replace(/\&/g, '-')}) || ['']);
+            srpPM['resortsearched'] = srpPM.resortsearchedarray && srpPM.resortsearchedarray.join(';') || '';
+
+            srpPM['accomnamesearched'] = wgdSrch.hotelName || "";
+            srpPM['searchwidened'] = (''+wgdSrch.flexible == 'true')?'true':((''+wgD.widened == 'true')?'true':'false');
+            srpPM['searchwidenedselected'] = (''+wgdSrch.flexible == 'true')?'true':'false';
+            srpPM['duration'] = wgdSrch.duration || "I dont mind";            
             srpPM['sortoption'] = wgdSrch.sort || "";
 
             var destination = ''; wgetDataSrch.commercialDestination && (wgetDataSrch.commercialDestination.options || []).filter(function(e){return e && e.selected}).forEach(function(e){destination=(e.title)});
