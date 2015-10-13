@@ -13,13 +13,13 @@
         var errParams = wgD.searchParams || {}
         var wgdAccom = wgD.matrix && wgD.matrix.data.links && wgD.matrix.data.links.self.context || {}      
         
-        if (wgD && wgD.details && wgD.matrix) {
+        if (wgD && (wgD.details || wgD.accommodation) && wgD.matrix) {
             cdpm.lob = "package"
             cdpm.holidaytype = wgdAccom?((wgdAccom.connectorCode == 1)?((wgdAccom.brand === "Z")?"flexitrips-angular":"package-angular"):((wgdAccom.connectorCode == 2)?"multi-angular":"generic-angular")):"generic-angular"
             cdpm.pagecontext = "angular";
-            cdpm.tc_basket_id = JSON.parse(cdl.ckget('tc_basket_id')) || '';
+            cdpm.tc_basket_id = JSON.parse(cdl.ckget('tc_basket_id')) || '';            
             
-            var wgdDetails = wgD.details || {};
+            var wgdDetails = wgD.details || wgD.accommodation || {};
             var wgdPath = (wgdAccom.geoPath && wgdAccom.geoPath.split("/")) || (wgdDetails.geoPath && wgdDetails.geoPath && wgdDetails.geoPath.value.split("/")) ||  []
             var wgdPrice = wgD.matrix && wgD.matrix.data && wgD.matrix.data.priceList && wgD.matrix.data.priceList[0] || !1
             newPM['accomcountry'] = wgdPath.length > 0 && wgdPath[0] || "";
@@ -67,10 +67,10 @@
                         newPM['carrier'].push ({ code : newPMflout.carrier.code
                                                 , name : newPMflout.carrier.name});
                         newPM['deptairport'] = wgdAccom.depAirport || newPMflout.depart.airportcode || "";
-                        newPM['destairport'] = newPMflout.arrive.airportcode
-                        newPM['arrivaltime'] = newPMflout.arrive.time
-                        newPM['depttime'] = newPMflout.depart.time
-                        newPM['flightno'] = newPMflout.depart.flightno
+                        newPM['destairport'] = newPMflout.arrive && newPMflout.arrive.airportcode || '';
+                        newPM['arrivaltime'] = newPMflout.arrive.time || 0;
+                        newPM['depttime'] = newPMflout.depart && newPMflout.depart.time || 0;
+                        newPM['flightno'] = newPMflout.depart && newPMflout.depart.flightno || newPMflout.flightno;
                         newPM['premiumcabin'] = newPMflout.premium
                 };
 
@@ -118,7 +118,7 @@
                 newPM['brochure'] = wgdPrice.brochureName || ""
                 var strdeptdate = wgdAccom.selectedDate || wgdAccom.startDate || 0;
                 newPM['deptdate'] = strdeptdate && +(new Date(strdeptdate.substring(4,0), strdeptdate.substring(5,7)-1, strdeptdate.substring(8,10))) 
-                                    || flightout && flightout.departure && flightout.departure.time && +new Date(flightout.departure.time) 
+                                    || flout && flout[0] && flout[0].departure && flout[0].departure.time && +new Date(flout[0].departure.time) 
                                     || 0;
             };
             if (wgdDetails) {
@@ -147,7 +147,7 @@
             newPM['accomguid'] = wgdAccom.id || wgdAccom.hotelId || wgdDetails.productId || "";
             newPM['destination'] = (wgdAccom.geoPath && wgdAccom.geoPath) || (wgdDetails.geoPath && wgdDetails.geoPath.value) || "";
 
-            var arrpax = wgdAccom.room || ""
+            var arrpax = wgdAccom.room || "";
             if (typeof arrpax == "string"){
                 newPM['paxadultperroom'] = []; newPM['paxadultperroom'].push(+arrpax.split(",")[1] || 0);
                 newPM['paxchildperroom'] = []; newPM['paxchildperroom'].push((arrpax.split(",")).slice(2).map(Number).filter(function(e){return e>1}).length || 0);

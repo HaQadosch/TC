@@ -151,7 +151,7 @@
 
             //Payment
             newPM['depositselected'] = (wgD.selectedPaymentOption && wgD.selectedPaymentOption.id || "").toLowerCase();
-            newPM['depositvalue'] = wgD.selectedPaymentOption.paymentPortion[0] && wgD.selectedPaymentOption.paymentPortion[0].originalPrice || 0;
+            newPM['depositvalue'] = wgD.selectedPaymentOption && wgD.selectedPaymentOption.paymentPortion[0] && wgD.selectedPaymentOption.paymentPortion[0].originalPrice || 0;
             newPM['paymentoption'] = wgD.selectedCard && wgD.selectedCard.name || "";
             newPM['paymentfee'] = wgD.selectedCard && wgD.selectedCard.fee && wgD.selectedCard.fee.actualValue || 0;
             newPM['paymentinstallments'] = wgdSum.paymentOptionsObj && wgdSum.paymentOptionsObj.paymentPortion && wgdSum.paymentOptionsObj.paymentPortion.map(function(e){return {'name': e.name, 'duedate': +new Date(e.dueDate), 'value': e.originalPrice} })
