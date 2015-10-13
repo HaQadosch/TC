@@ -37,7 +37,7 @@
         jqa            = jQ(accom);
         jqflights      = jqa.find('div.ResultItemDetails div.flight div.journey-legs-container div.journey-leg:eq(0)');
 
-        jqaid          = jqa.find('span.exactMatch').attr('id').substr(0, 6);
+        jqaid          = jqa.find('span.exactMatch, span.suggestion').attr('id').substr(0, 6); console.log(jqaid);
         jqaname        = jqa.find('span.headerInfo span.name').text()+'||||';
         jqabrand       = jqflights.find('img.SupplierLogo').attr('title').toLowerCase();
         jqaboardbasis  = jqa.find('div.boardBasisContainer div.ResultItemDetailsHeader div').text();
@@ -47,7 +47,7 @@
         jqaretdate     = cdl.gadate(new Date(jqflights.find('div.details:eq(1) span.date.arrival span').text()));
         jqatotalprice  = ld.words(jqa.find('div.ResultItemPriceBox span.ResultItemHeaderTotalPrice.ResultItemHeaderPrice').text()).join('.');
         jqavariant     = cdl.transpose('{boardbasis}|{airport}|{depdate}|{retdate}|{paxtotal}|{paxadult}|{paxchild}|{paxinfant}|{totalprice}', {
-                              'boardbasis': jqaboardbasis || ''
+                                'boardbasis': jqaboardbasis || ''
                               , 'airport': jqaairportcode || jqaairportname || ""
                               , 'depdate': jqadepdate ||""
                               , 'retdate': jqaretdate ||""
