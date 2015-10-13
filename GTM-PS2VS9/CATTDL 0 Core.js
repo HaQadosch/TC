@@ -52,7 +52,7 @@
         cdpm.hashes = {}; prms = {}; ld.map(ld.words(d.location.hash, /[^#]+/g), function(e){prms = ld.words(e, /[^=]+/g);cdpm.searches[prms[0]] = prms[1];});
 
         if (ld && ld.assign) ld.assign(cdpm, {
-          internalcampaignid: cdpm.searches && cdpm.searches.intcmp || cdpm.hashes && cdpm.hashes.intcmp || cdl.twls(/intcmp=/i) && (cdl.ewls(/intcmp=([^&|\s|\?]*)/i) || []).pop() || ""
+            internalcampaignid: cdpm.searches && cdpm.searches.intcmp || cdpm.hashes && cdpm.hashes.intcmp || cdl.twls(/intcmp=/i) && (cdl.ewls(/intcmp=([^&|\s|\?]*)/i) || []).pop() || ""
           , emailguid         : cdpm.searches && cdpm.searches.user_id || cdl.twls(/user_id=/i) && (cdl.ewls(/user_id=([^&]*)/i) || []).pop() || ""
           , utmaguid          : cdpm.utmaguid || (/^[^;\.%=]*\.([^;\.%=]*)\./i.exec(cdpm.cookies.__utma || ['']) || ['']).pop() || cdl.twdc(/_utma=/i) && cdl.ewdc(/_utma=[^;\.%=]*\.([^;\.%=]*)\./i) && cdl.ewdc(/_utma=[^;\.%=]*\.([^;\.%=]*)\./i).pop() || ""
           , utmbguid          : cdpm.utmbguid || cdpm.cookies.__utmb || cdl.twdc(/_utmb=/i) && cdl.ewdc(/_utmb=([^;%=]*)/i) && cdl.ewdc(/_utmb=([^;%=]*)/i).pop() || ""
