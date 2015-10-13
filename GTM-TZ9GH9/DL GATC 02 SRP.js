@@ -42,7 +42,7 @@
         cdl.DL_gatc.webanalytics = {
             vp  : cdpmVP,
             qsp_st : ('ss_st='+
-                (cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'_'+
+                (cdpm.destination || '')+'_'+
                 (cdl.gadate(cdpm.deptdate) || '')+'_'+
                 ((cdpm.searchresultstotal === 0?'nResults':'yResults') || '')
                 ).toLowerCase(),

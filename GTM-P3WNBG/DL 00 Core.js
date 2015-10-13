@@ -72,7 +72,8 @@
           cdpm.user.action = d && d.action || "";
           cdpm.user.msg = d && d.data && (d.data.id || d.data.data && d.data.data.message || d.data.statusText) || "";
           cdpm.user.id = d && d.data && d.data.id || d.user && d.user.id || "";
-          dpush({'event': 'updateUserData','action':""+(d && d.action || '')});
+          var status = (d && d.data == 'OK')?'OK':'';
+          dpush({'event': 'updateUserData','action':""+(d && d.action || ''),'status':status});
         });
         jQ.subscribe('error', function gtm_error(d){
           cookieTestInfo('GTM error updated', '\n', d /*, '\n', Object.keys(window.getPageData()).join('|'), '\n', window.getPageData()*/);
@@ -87,12 +88,12 @@
             'thomascook'          :'thomascook.com',
             'airtours'            :'airtours.co.uk',
             'club18-30'           :'club18-30.com',
-            'eceit'             :'staging.eceit.net',
-            'directholidays'        :'directholidays.co.uk',
+            'eceit'               :'staging.eceit.net',
+            'directholidays'      :'directholidays.co.uk',
             'uk.staging'          :'uk.staging.thomascook.io',
-            'uk.qa'             :'uk.qa.thomascook.io',
-            'uk.integration'        :'uk.integration.thomascook.io',
-            'uk.int'            :'uk.int.thomascook.io'
+            'uk.qa'               :'uk.qa.thomascook.io',
+            'uk.integration'      :'uk.integration.thomascook.io',
+            'uk.int'              :'uk.int.thomascook.io'
 
           })[((/([^\.]*).co.uk|([^\.]*).com|([^\.]*).net|(.+)\.thomascook\.io/i.exec(loc.hostname) || []).filter(function hostname(e){return e}) || ['thomascook']).pop()];
 

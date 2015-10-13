@@ -20,16 +20,16 @@
         if (wgdPkg) {
             cdpm.holidaytype =  (/MULTICOM/i.test(wgdPkg.provider || '')) && (wgdPkg.brandCode == 'Z')?'flexitrips-angular':((/MULTICOM/i.test(wgdPkg.provider || '')) && (wgdPkg.brandCode !== 'Z')?'multi-angular':'package-angular')
 
-            newPM['destination'] = wgdPkg.content && wgdPkg.content.geoPath || ""
-            var wgdPath = newPM.destination && newPM.destination.split(",") || []
-            newPM['accomcountry'] = wgdPath.length > 0 && (wgdPath[0] || "").trim() || ''
-            newPM['accomregion'] = wgdPath.length > 1 && (wgdPath[1] || "").trim() || ''
-            newPM['accomresort'] = wgdPath.length > 2 && (wgdPath[2] || "").trim() ||  wgdPkg.accomodationList && wgdPkg.accomodationList[0] && wgdPkg.accomodationList[0].resortName || ''
-            newPM['starrating'] = wgdPkg.content && wgdPkg.content.starRating || ""
-            newPM['touroperator'] = wgdPkg.brandCode || ""
-            newPM['accomname'] = wgdPkg.content && wgdPkg.content.hotelName || wgdPkg.accomodationList && wgdPkg.accomodationList[0] && wgdPkg.accomodationList[0].hotelName || ""
+            newPM['destination'] = (wgdPkg.content && wgdPkg.content.geoPath || "").replace(/\&amp;/g, '-').replace(/\&/g, '-');
+            var wgdPath = newPM.destination && newPM.destination.split(",") || [];
+            newPM['accomcountry'] = wgdPath.length > 0 && (wgdPath[0] || "").trim() || '';
+            newPM['accomregion'] = wgdPath.length > 1 && (wgdPath[1] || "").trim() || '';
+            newPM['accomresort'] = wgdPath.length > 2 && (wgdPath[2] || "").trim() ||  wgdPkg.accomodationList && wgdPkg.accomodationList[0] && wgdPkg.accomodationList[0].resortName || '';
+            newPM['starrating'] = wgdPkg.content && wgdPkg.content.starRating || "";
+            newPM['touroperator'] = wgdPkg.brandCode || "";
+            newPM['accomname'] = (wgdPkg.content && wgdPkg.content.hotelName || wgdPkg.accomodationList && wgdPkg.accomodationList[0] && wgdPkg.accomodationList[0].hotelName || "").replace(/\&amp;/g, '-').replace(/\&/g, '-')
             newPM['accomcode'] = ((/tosCode=([^&]+)/.exec(wgdPkg.contentUrl || '') || ['']).pop()) || (wgdPkg.accomodationList && wgdPkg.accomodationList[0] && (wgdPkg.accomodationList[0].hotelCode || "").replace("|","-"))|| ""
-            newPM['accomguid'] = wgdPkg.productId || ""
+            newPM['accomguid'] = wgdPkg.productId || "";
             newPM['boardbasis'] = wgdPkg.accomodationList && wgdPkg.accomodationList[0] && wgdPkg.accomodationList[0].roomProfiles && wgdPkg.accomodationList[0].roomProfiles[0] && wgdPkg.accomodationList[0].roomProfiles[0].mealPlan && wgdPkg.accomodationList[0].roomProfiles[0].mealPlan.description || "";
             newPM['duration'] = wgdPkg.dateRange && wgdPkg.dateRange.duration || 0;
             newPM['deptdate'] = +new Date(wgdPkg.dateRange && wgdPkg.dateRange.startDate || 0)

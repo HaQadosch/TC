@@ -20,14 +20,14 @@
 
         if (wgdPkg) {
             cdpm.holidaytype =  (/MULTICOM/i.test(wgdPkg.provider || '')) && (wgdPkg.brandCode == 'Z')?'flexitrips-angular':((/MULTICOM/i.test(wgdPkg.provider || '')) && (wgdPkg.brandCode !== 'Z')?'multi-angular':'package-angular');
-            newPM['destination'] = wgdPkg.content && wgdPkg.content.geoPath || ""
-            var wgdPath = newPM.destination && newPM.destination.split(",") || []
-            newPM['accomcountry'] = wgdPath.length > 0 && (wgdPath[0] || "").trim() || ''
-            newPM['accomregion'] = wgdPath.length > 1 && (wgdPath[1] || "").trim() || ''
+            newPM['destination'] = (wgdPkg.content && wgdPkg.content.geoPath || "").replace(/\&amp;/g, '-').replace(/\&/g, '-');
+            var wgdPath = newPM.destination && newPM.destination.split(",") || [];
+            newPM['accomcountry'] = wgdPath.length > 0 && (wgdPath[0] || "").trim() || '';
+            newPM['accomregion'] = wgdPath.length > 1 && (wgdPath[1] || "").trim() || '';
             newPM['accomresort'] = wgdPath.length > 2 && (wgdPath[2] || "").trim() ||  wgdPkg.accomodationList && wgdPkg.accomodationList[0] && wgdPkg.accomodationList[0].resortName || ''
-            newPM['starrating'] = wgdPkg.content && wgdPkg.content.starRating || ""
-            newPM['touroperator'] = wgdPkg.brandCode || ""
-            newPM['accomname'] = wgdPkg.content && wgdPkg.content.hotelName || wgdPkg.accomodationList && wgdPkg.accomodationList[0] && wgdPkg.accomodationList[0].hotelName || ""
+            newPM['starrating'] = wgdPkg.content && wgdPkg.content.starRating || "";
+            newPM['touroperator'] = wgdPkg.brandCode || "";
+            newPM['accomname'] = (wgdPkg.content && wgdPkg.content.hotelName || wgdPkg.accomodationList && wgdPkg.accomodationList[0] && wgdPkg.accomodationList[0].hotelName || "").replace(/\&amp;/g, '-').replace(/\&/g, '-')
             newPM['accomguid'] = wgdPkg.productId || "";
             var wgdAcc = window.getPageData('/packages/'+newPM.accomguid) || {};
             newPM['accomcode'] = ((/tosCode=([^&]+)/.exec(wgdPkg.contentUrl || '') || ['']).pop()) 

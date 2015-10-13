@@ -19,7 +19,7 @@
 
         cdl.DL_gatc = {
             profileid        : twlh(/directholidays/i)?"UA-33029666-1":"UA-33036832-1",
-            cookiedomain     	: cdpm.cookiedomain || 'thomascook.com',
+            cookiedomain        : cdpm.cookiedomain || 'thomascook.com',
             trackername        : 'CATTGATC',
             anonymizeip        : false,
             allowlinker        : true,
@@ -41,7 +41,7 @@
         cdl.DL_gatc.webanalytics = {
             vp    : cdpmVP,
             qsp_st : ('ss_st='+
-                (cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'_'+
+                (cdpm.destination || '')+'_'+
                 (cdpm.accomname || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'_'+
                 (cdpm.accomcode || '')
                 ).toLowerCase(),
@@ -57,7 +57,7 @@
                 '&PaxChild='+(cdpm.paxchild || '')+
                 '&PaxInfant='+(cdpm.paxinfant || '')+
                 '&BoardBasis='+(cdpm.boardbasis || '')+
-                '&Destination='+(cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+
+                '&Destination='+(cdpm.destination || '')+
                 '&AccomCode='+(cdpm.accomcode || '')+
                 '&AccomGuid='+(cdpm.accomguid || '')+
                 '&AccomName='+(cdpm.accomname || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+

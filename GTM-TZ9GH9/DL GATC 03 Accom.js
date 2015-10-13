@@ -42,7 +42,7 @@
         cdl.DL_gatc.webanalytics = {
             vp  : cdpmVP,
             qsp_st : ('ss_st='+
-                (cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'_'+
+                (cdpm.destination || '')+'_'+
                 (cdpm.accomname || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'_'+
                 (cdpm.accomcode || '')
                 ).toLowerCase(),
@@ -57,7 +57,7 @@
                 '&PaxChild='+(cdpm.paxchild || '')+
                 '&PaxInfant='+(cdpm.paxinfant || '')+
                 '&BoardBasis='+(cdfc.boardbasis && cdfc.boardbasis.toString() || '')+
-                '&Destination='+(cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+
+                '&Destination='+(cdpm.destination || '')+
                 '&AccomCode='+(cdpm.accomcode || '')+
                 '&AccomName='+(cdpm.accomname || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+
                 '&Rooms='+(cdpm.rooms || '')+

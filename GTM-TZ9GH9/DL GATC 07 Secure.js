@@ -18,31 +18,31 @@
             ).toLowerCase();
 
         cdl.DL_gatc = {
-            profileid        	: twlh(/directholidays/i)?"UA-33029666-1":"UA-33036832-1",
-            cookiedomain     	: cdpm.cookiedomain || 'thomascook.com',
-            trackername        	: 'CATTGATC',
-            anonymizeip        	: false,
-            allowlinker        	: true,
-            addignoredref   	: 'thomascook.com',            
-            organicsearch    	: {
-	                                'search.bt.com': 'p',
-	                                'search.sky.com': 'term',
-	                                'search.mywebsearch.com': 'searchfor',
-	                                'search.orange.co.uk': 'q',
-	                                'search.virginmedia.com': 'q',
-	                                'search.incredibar.com': 'q',
-	                                'search.alot.com': 'q',
-	                                'search.sweetim.com': 'q',
-	                                'searchmobileonline.com': 'q',
-	                                'searchbrowsing.com': 'q',
-	                                'advancedsearch2.virginmedia.com': 'SearchQuery'
-                            	}
+            profileid           : twlh(/directholidays/i)?"UA-33029666-1":"UA-33036832-1",
+            cookiedomain        : cdpm.cookiedomain || 'thomascook.com',
+            trackername         : 'CATTGATC',
+            anonymizeip         : false,
+            allowlinker         : true,
+            addignoredref       : 'thomascook.com',            
+            organicsearch       : {
+                                    'search.bt.com': 'p',
+                                    'search.sky.com': 'term',
+                                    'search.mywebsearch.com': 'searchfor',
+                                    'search.orange.co.uk': 'q',
+                                    'search.virginmedia.com': 'q',
+                                    'search.incredibar.com': 'q',
+                                    'search.alot.com': 'q',
+                                    'search.sweetim.com': 'q',
+                                    'searchmobileonline.com': 'q',
+                                    'searchbrowsing.com': 'q',
+                                    'advancedsearch2.virginmedia.com': 'SearchQuery'
+                                }
         };
         cdl.DL_gatc.webanalytics = {
             vp    : cdpmVP,
             qsp_st : ('ss_st='+
-                (cdpm.destination || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'_'+
-                (cdpm.accomname || '').replace(/\&amp;/g, '-').replace(/\&/g, '-')+'_'+
+                (cdpm.destination || '')+'_'+
+                (cdpm.accomname || '')+'_'+
                 (cdpm.accomcode || '')
                 ).toLowerCase(),
             qsp_cat : ('ss_cat='+

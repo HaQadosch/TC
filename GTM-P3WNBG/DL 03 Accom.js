@@ -70,8 +70,8 @@
                         newPM['destairport'] = newPMflout.arrive && newPMflout.arrive.airportcode || '';
                         newPM['arrivaltime'] = newPMflout.arrive.time || 0;
                         newPM['depttime'] = newPMflout.depart && newPMflout.depart.time || 0;
-                        newPM['flightno'] = newPMflout.depart && newPMflout.depart.flightno || newPMflout.flightno || '';
-                        newPM['premiumcabin'] = newPMflout.premium;
+                        newPM['flightno'] = newPMflout.depart && newPMflout.depart.flightno || newPMflout.flightno;
+                        newPM['premiumcabin'] = newPMflout.premium
                 };
 
                 var flin = wgdPrice && wgdPrice.flights && wgdPrice.flights[0] && wgdPrice.flights[0].inbound && wgdPrice.flights[0].inbound.legs || '';
@@ -138,14 +138,14 @@
                 }               
                 newPM['accomlongitude'] = wgdDetails.geoLocation && wgdDetails.geoLocation.longitude || "";
                 newPM['accomlatitude'] = wgdDetails.geoLocation && wgdDetails.geoLocation.latitude || "";
-                newPM['accomname'] = wgdDetails.hotelName && wgdDetails.hotelName.value || wgdPrice.hotelName || "";
+                newPM['accomname'] = (wgdDetails.hotelName && wgdDetails.hotelName.value || wgdPrice.hotelName || "").replace(/\&amp;/g, '-').replace(/\&/g, '-');
             } 
 
             newPM['accomcode'] = wgdPrice.hotelCode 
                     || wgdPrice.rooms && wgdPrice.rooms[0] && wgdPrice.rooms[0].context && wgdPrice.rooms[0].context.hotelCode.replace('|','-')
                     || wgdAccom.hotelCode || wgdAccom.id || wgdAccom.hotelId || wgdDetails.productId || "";
             newPM['accomguid'] = wgdAccom.id || wgdAccom.hotelId || wgdDetails.productId || "";
-            newPM['destination'] = (wgdAccom.geoPath && wgdAccom.geoPath) || (wgdDetails.geoPath && wgdDetails.geoPath.value) || "";
+            newPM['destination'] = ((wgdAccom.geoPath && wgdAccom.geoPath) || (wgdDetails.geoPath && wgdDetails.geoPath.value) || "").replace(/\&amp;/g, '-').replace(/\&/g, '-');
 
             var arrpax = wgdAccom.room || "";
             if (typeof arrpax == "string"){
