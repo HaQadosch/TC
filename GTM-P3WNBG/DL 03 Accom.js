@@ -70,8 +70,8 @@
                         newPM['destairport'] = newPMflout.arrive && newPMflout.arrive.airportcode || '';
                         newPM['arrivaltime'] = newPMflout.arrive.time || 0;
                         newPM['depttime'] = newPMflout.depart && newPMflout.depart.time || 0;
-                        newPM['flightno'] = newPMflout.depart && newPMflout.depart.flightno || newPMflout.flightno;
-                        newPM['premiumcabin'] = newPMflout.premium
+                        newPM['flightno'] = newPMflout.depart && newPMflout.depart.flightno || newPMflout.flightno || '';
+                        newPM['premiumcabin'] = newPMflout.premium;
                 };
 
                 var flin = wgdPrice && wgdPrice.flights && wgdPrice.flights[0] && wgdPrice.flights[0].inbound && wgdPrice.flights[0].inbound.legs || '';

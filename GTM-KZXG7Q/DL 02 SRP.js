@@ -51,22 +51,40 @@
             newPM['sessionid'] = window.sessionToken || "";
             newPM['searchlist'] = wgdItems && wgdItems.length || 0;
 
-            newPM['deptairportsearched'] = wgdCurrent.origin || "";
-            newPM['destinationsearched'] = wgdCurrent.goingTo || "";
+            newPM['deptairportsearchedarray'] = (typeof wgdCurrent.origin == 'string')?[(wgdCurrent.origin && wgdCurrent.origin.replace(/\&amp;/g, '-').replace(/\&/g, '-') || '')]:(wgdCurrent.origin.map && wgdCurrent.origin.map(function(e){return e.replace(/\&amp;/g, '-').replace(/\&/g, '-')}) || ['']);
+            newPM['deptairportsearched'] = newPM.deptairportsearchedarray && newPM.deptairportsearchedarray.join(';') || '';
+            newPM['destinationsearchedarray'] = (typeof wgdCurrent.goingTo == 'string')?[(wgdCurrent.goingTo && wgdCurrent.goingTo.replace(/\&amp;/g, '-').replace(/\&/g, '-') || '')]:(wgdCurrent.goingTo.map && wgdCurrent.goingTo.map(function(e){return e.replace(/\&amp;/g, '-').replace(/\&/g, '-')}) || ['']);
+            newPM['destinationsearched'] = newPM.destinationsearchedarray && newPM.destinationsearchedarray.join(';') || '';
+            newPM['resortsearchedarray'] = (typeof wgdCurrent.resortCode == 'string')?[(wgdCurrent.resortCode && wgdCurrent.resortCode.replace(/\&amp;/g, '-').replace(/\&/g, '-') || '')]:(wgdCurrent.resortCode.map && wgdCurrent.resortCode.map(function(e){return e.replace(/\&amp;/g, '-').replace(/\&/g, '-')}) || ['']);
+            newPM['resortsearched'] = newPM.resortsearchedarray && newPM.resortsearchedarray.join(';') || '';
+
+            newPM['regionsearchedarray'] = [];
+            newPM['resortsearchedarray'] = [];
+            newPM['countrysearchedarray'] = [];
             newPM['regionsearched'] = "";
             newPM['resortsearched'] = "";
             newPM['countrysearched'] = "";
-            if (!wgdCurrent.resortCategory && !wgdCurrent.regionCategory) {
-                newPM['countrysearched'] = (!wgdCurrent.destinationCategory)?(wgdCurrent.goingTo || ""):((typeof wgdCurrent.destinationCategory == "string")?(wgdCurrent.destinationCategory || ""):(wgdCurrent.resortCategory[0] || ''));
-            } else if (wgdCurrent.regionCategory && !wgdCurrent.resortCategory) {
-                newPM['regionsearched'] = (typeof wgdCurrent.regionCategory == "string")?(wgdCurrent.regionCategory || ''):(wgdCurrent.regionCategory[0] || '');
-            } else if (wgdCurrent.resortCategory) {
-                newPM['resortsearched'] = (typeof wgdCurrent.resortCategory == "string")?(wgdCurrent.resortCategory || ''):(wgdCurrent.resortCategory[0] || '');
-                newPM['regionsearched'] = (wgdCurrent.goingTo && wgdCurrent.goingTo.split(',') || ['',''])[1].trim();
-                newPM['countrysearched'] = (wgdCurrent.goingTo && wgdCurrent.goingTo.split(',') || ['','',''])[2].trim();
-            }
-            //window.sessionStorage.setItem('gtm_srpsortoption',newPM['sortoption']);
-            //window.sessionStorage.setItem('gtm_srplist',(locpathname).replace(/^\/|\/$/g, ''));
+            var resCat = (typeof wgdCurrent.resortCategory == 'string')?[wgdCurrent.resortCategory]:wgdCurrent.resortCategory;
+            var regCat = (typeof wgdCurrent.regionCategory == 'string')?[wgdCurrent.regionCategory]:wgdCurrent.regionCategory;
+            var desCat = (typeof wgdCurrent.destinationCategory == 'string')?[wgdCurrent.destinationCategory]:wgdCurrent.destinationCategory;
+            if ((!resCat || resCat.length < 1) && (!regCat || regCat.length < 1)) {
+                if (!desCat || desCat.length < 1){
+                    newPM['countrysearchedarray'] = newPM.destinationsearchedarray;
+                } else {
+                    newPM['countrysearchedarray'] = desCat || [];
+                }
+            } else if ((regCat && regCat.length > 0) && (!resCat || regCat.length < 1)) {
+                newPM['regionsearchedarray'] = regCat.map && regCat.map(function(e){return e.replace(/\&amp;/g, '-').replace(/\&/g, '-')}) || [''];
+                newPM['countrysearchedarray'] = newPM.destinationsearchedarray.map && newPM.destinationsearchedarray.map(function(e){if(/,\sAlle$/.test(e)) { return e } else {return (e.split(',') || ['']).pop().trim()}})
+            } else if (resCat && resCat.length > 0) {
+                newPM['resortsearchedarray'] = resCat && resCat.map && resCat.map(function(e){return e.replace(/\&amp;/g, '-').replace(/\&/g, '-')}) || [''];
+                newPM['regionsearchedarray'] = newPM.destinationsearchedarray.map && newPM.destinationsearchedarray.map(function(e){return (e.split(',') || ['',''])[1].trim()});
+                newPM['countrysearchedarray'] = newPM.destinationsearchedarray.map && newPM.destinationsearchedarray.map(function(e){return (e.split(',') || ['']).pop().trim()});
+            };
+            newPM['regionsearched'] = newPM.regionsearchedarray && newPM.regionsearchedarray.join(';') || '';
+            newPM['countrysearched'] = newPM.countrysearchedarray && newPM.countrysearchedarray.join(';') || '';
+            newPM['resortsearched'] = newPM.resortsearchedarray && newPM.resortsearchedarray.join(';') || '';
+
             var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
             params.sortoption = newPM['sortoption'] || '';
             params.srplist = (locpathname).replace(/^\/|\/$/g, '') || '';
