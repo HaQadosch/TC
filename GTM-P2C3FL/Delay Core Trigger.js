@@ -5,7 +5,7 @@
     try{
       if (window.triggerCount) {
         if (window.triggerCount > 0) {
-          if (/accom/i.test(window.location.pathname)) {
+          if (/accom$/i.test(window.location.pathname)) {
             setTimeout(function(){dl.push({'event':'Trigger'}); }, 500);
           }  else {
             dl.push({'event':'Trigger'}) ;
