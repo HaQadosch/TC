@@ -72,12 +72,15 @@
           cdpm.user.action = d && d.action || "";
           cdpm.user.msg = d && d.data && (d.data.id || d.data.data && d.data.data.message || d.data.statusText) || "";
           cdpm.user.id = d && d.data && d.data.id || d.user && d.user.id || "";
-          var status = (d && d.data == 'OK')?'OK':'';
-          dpush({'event': 'updateUserData','action':""+(d && d.action || ''),'status':status});
+          dpush({'event': 'updateUserData','action':""+(d && d.action || '')});
         });
         jQ.subscribe('error', function gtm_error(d){
-          cookieTestInfo('GTM error updated', '\n', d /*, '\n', Object.keys(window.getPageData()).join('|'), '\n', window.getPageData()*/);
+          cookieTestInfo('GTM error updated', '\n', d);
           dpush({'event': 'jserror'});
+        });
+        jQ.subscribe('debugEvent', function gtm_debugEvent(d){
+          cookieTestInfo('GTM debugEvent updated', '\n',d);
+          dpush({'event': 'debugEvent','id':d && d.id,'element':d && d.event,'status':d && d.status,'timestamp':d && d.timestamp});
         });
       } else cons.log('GTM $.subsribe undefined');
 
