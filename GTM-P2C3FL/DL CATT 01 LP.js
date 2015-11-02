@@ -14,9 +14,9 @@
             if (steps[steps.length-1] === '') steps.pop()
             var lastSteps = steps.pop();
             lastSteps = /(.+)\((\d+)\)/.exec(lastSteps)
-            if (lastSteps[1] === cdpm.pageid) 
+            if (lastSteps[1] === cdpm.pageid)
                 lastSteps = lastSteps[1]+'('+(++lastSteps[2])+')'
-            else 
+            else
                 lastSteps = cdpm.pageid+'(1)';
             keeps['trailingsteps'] = lastSteps
 
@@ -26,7 +26,7 @@
 
         var userId = cdpm.user && cdpm.user.id || '';
         if (!userId) {
-            if(location.host === 'www.thomascook.com') { 
+            if(location.host === 'www.thomascook.com') {
                 $.ajax('https://www.thomascook.com/api/users/session').success(function(data, textStatus, jqXHR){
                     if (data && data.id && jqXHR.status === 200) {
                         cdpm['user'] = {};
@@ -49,8 +49,8 @@
         cdl.error('GTM CATTDL LP: '+e)
     } finally {
         dl.push({'event': 'pid_'+cdl.CATTParams.pageid});
-        dl.push({'event': 'CATTDL LP'})     
+        dl.push({'event': 'CATTDL LP'})
     }
     return cdl
-}(window.jQuery, window.dataLayer, window.CATTDL))
+}(!window.CATTDL?!1:window.CATTDL.jQ, window.dataLayer, window.CATTDL));
 </script>

@@ -15,9 +15,9 @@
             if (steps[steps.length-1] === '') steps.pop()
             var lastSteps = steps.pop();
             lastSteps = /(.+)\((\d+)\)/.exec(lastSteps)
-            if (lastSteps[1] === cdpm.pageid) 
+            if (lastSteps[1] === cdpm.pageid)
                 lastSteps = lastSteps[1]+'('+(++lastSteps[2])+')'
-            else 
+            else
                 lastSteps = lastSteps[0]+cdpm.pageid+'(1)';
             keeps['trailingsteps'] = steps.join('')+lastSteps
 
@@ -29,7 +29,7 @@
             newPM['errormessage'] = (/\!(.*)/i.exec(errorBlock.text()) || ['']).pop() || ''
         }
         if (/sorry/i.test($('div.priceTicket-priceDetails').text())) {
-            newPM['errormessage'] = $('div.priceTicket-priceDetails .h4').text() || ''          
+            newPM['errormessage'] = $('div.priceTicket-priceDetails .h4').text() || ''
         }
 
         newPM['duration'] = cdpm.duration
@@ -70,7 +70,7 @@
         }(jQ('script').filter(function fltrScript(){return !jQ(this).attr('src')}).filter(function fltrSrc(){return /settings/i.test(jQ(this).text())}).eq(0).text() || ''));
 
 
-        keeps['accomguid'] = cdpm.accomguid 
+        keeps['accomguid'] = cdpm.accomguid
             || window.app && (/package\/([^\/]+)\//i.exec(window.app.matrixUrl || '') || []).pop()
             || newPM.settings && (/package\/([^\/]+)\//i.exec(newPM.settings.matrixUrl || '') || []).pop()
             || jQ('section.panel.panel-result.js-answers.text-default.clearfix').attr('data-id')
@@ -88,25 +88,25 @@
             || cdpm.accomname
             || ''
         newPM['accomprice'] = (/\d+/.exec(jQ('td.is-selected button.pika-button span').text()) || []).pop()
-            || (/\d+/.exec(jQ('p.priceTicket-item.clearfix.font-family-bold span.pull-right.text-right').text()) || []).pop() 
+            || (/\d+/.exec(jQ('p.priceTicket-item.clearfix.font-family-bold span.pull-right.text-right').text()) || []).pop()
             || 0;
         keeps['accomurl'] = (newPM.accomtitle && newPM.accomname && newPM.accomtitle && ('http://www.thomascook.com/destinations/'+newPM.accomtitle.replace(/,\s*/g, '/')+'/'+newPM.accomname).replace(/\s/g, '-').replace(/í/, 'i').replace(/è/, 'e').toLowerCase())
             || cdpm.accomurl
             || ''
-            if (encodeURI(keeps.accomurl) !== keeps.accomurl) keeps['accomurl'] = ''    
-        var dests = newPM.accomtitle && newPM.accomtitle.split(/\//) 
-            || [] 
+            if (encodeURI(keeps.accomurl) !== keeps.accomurl) keeps['accomurl'] = ''
+        var dests = newPM.accomtitle && newPM.accomtitle.split(/\//)
+            || []
         keeps['accomcountry'] = dests && dests.shift()
             || CATTParams && CATTParams.destination
             || cdpm.accomcountry
             || ""
         keeps['accomregion'] = dests && dests.shift()
-            ||  cdpm.accomregion 
+            ||  cdpm.accomregion
             || ""
-        keeps['accomdestrest'] = dests && dests.join(',') 
+        keeps['accomdestrest'] = dests && dests.join(',')
             || cdpm.accomdestrest && cdpm.accomdestrest.replace(/(",|")/g,'')
             || ""
-        newPM['departureairportselected'] = jQ('div.depAirport select.form-control option:selected').attr('value') 
+        newPM['departureairportselected'] = jQ('div.depAirport select.form-control option:selected').attr('value')
             || (/(\w+)\s>/.exec(jQ('div.priceTicket-line:eq(1) span:eq(1)').text()) || []).pop()
             || cdpm.departureairportselected
             || ""
@@ -137,7 +137,7 @@
             || ''
 
         newPM['boardbasis'] = CATTParams && CATTParams.BoardBasis
-            || ((/[,].+/.exec(jQ('header.priceTicket-durationLabel.h3.font-family-bold.clearfix').text()) || []).pop() || '').replace(/,\s/,'') 
+            || ((/[,].+/.exec(jQ('header.priceTicket-durationLabel.h3.font-family-bold.clearfix').text()) || []).pop() || '').replace(/,\s/,'')
             || '';
         newPM['brand'] = cdpm.brand
             || (/sprite-brand-(\w*)/i.exec(jQ('div[class*=sprite-brand-]').attr('class') || []) || []).pop()
@@ -156,11 +156,11 @@
             || cdpm.paxadult
             || '0'
         newPM['paxchild'] = (function (){var total = 0; jQ.each(newPM['paxchildperroom'],function() {total += this;}); return total}())
-            || +(/(\d+)\sChild/i.exec(paccom) || []).pop() 
+            || +(/(\d+)\sChild/i.exec(paccom) || []).pop()
             || cdpm.paxchild
             || '0';
         newPM['paxinfant'] = (function (){var total = 0; jQ.each(newPM['paxinfantperroom'],function() {total += this;}); return total}())
-            || +(/(\d+)\sInfant/i.exec(paccom) || []).pop() 
+            || +(/(\d+)\sInfant/i.exec(paccom) || []).pop()
             || cdpm.paxinfant
             || '0';
         newPM['paxtotal'] = parseInt(newPM.paxadult || 0)+parseInt(newPM.paxchild || 0)+parseInt(newPM.paxinfant || 0) || 0
@@ -184,7 +184,7 @@
 
         var userId = cdpm.user && cdpm.user.id || '';
         if (!userId) {
-            if(location.host === 'www.thomascook.com') { 
+            if(location.host === 'www.thomascook.com') {
                 $.ajax('https://www.thomascook.com/api/users/session').success(function(data, textStatus, jqXHR){
                     if (data && data.id && jqXHR.status === 200) {
                         cdpm['user'] = {};
@@ -202,8 +202,8 @@
         cdl.error('GTM CATTDL Accom: '+e)
     } finally {
         dl.push({'event': 'pid_'+cdl.CATTParams.pageid});
-        dl.push({'event': 'CATTDL Accom'})      
+        dl.push({'event': 'CATTDL Accom'})
     }
     return jQ && jQ.extend && cdl || !1
-}(window.jQuery, window.dataLayer, window.CATTDL))
+}(!window.CATTDL?!1:window.CATTDL.jQ, window.dataLayer, window.CATTDL))
 </script>
