@@ -52,5 +52,5 @@
         dl.push({'event': 'CATTDL LP'})
     }
     return cdl
-}(!window.CATTDL?!1:window.CATTDL.jQ, window.dataLayer, window.CATTDL));
+}(window.CATTDL?window.CATTDL.jQ:!1, window.dataLayer, window.CATTDL));
 </script>
