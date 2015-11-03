@@ -27,7 +27,7 @@
         var userId = cdpm.user && cdpm.user.id || '';
         if (!userId) {
             if(location.host === 'www.thomascook.com') {
-                $.ajax('https://www.thomascook.com/api/users/session').success(function(data, textStatus, jqXHR){
+                jQ.ajax('https://www.thomascook.com/api/users/session').success(function(data, textStatus, jqXHR){
                     if (data && data.id && jqXHR.status === 200) {
                         cdpm['user'] = {};
                         cdpm.user.id = data.id || '';

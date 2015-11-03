@@ -22,7 +22,7 @@
         }
 
         try{
-            $("#util1 > ul > li").first().one("click",function gtm_clickRetrieveBooking(){
+            jQ("#util1 > ul > li").first().one("click",function gtm_clickRetrieveBooking(){
                 wgp([tn+"_trackEvent","Retrieve Booking","href="+d.location.href,"referrer="+d.referrer,1,true])
             })
         }catch(e){};
@@ -43,5 +43,5 @@
         window.dataLayer && window.dataLayer.push({'event':'GAPoolControl'});
     }
     return cdl && gadl
-}(window.jQuery, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_gatc, window, document))
+}(!window.CATTDL?!1:window.CATTDL.jQ, window.CATTDL, !window.CATTDL?!1:window.CATTDL.DL_gatc, window, document))
 </script>

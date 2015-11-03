@@ -36,6 +36,7 @@
                     try {
                       cdpm = cdl.CATTParams || {};
                       var ld = cdl._;
+                      var jQ = cdl.jQ || window.jQuery;
                       var transpose = function transpose(s, d){for (var p in d) s = s.replace(new RegExp('{'+p+'}', 'g'), d[p]);return s;};
                       var tst = function tst(r, u){return RegExp.prototype.test.call(r, u); };
                       var exc = function exc(r, u){return RegExp.prototype.exec.call(r, u); };
