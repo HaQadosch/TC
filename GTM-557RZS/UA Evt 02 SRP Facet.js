@@ -106,7 +106,7 @@
                         UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
                     } catch(e) {cdl.info('GTM Evt 02 SRP - Facet depAirport: '+e)}
             }
-            //SRP Facet TripAdvisorRating
+            //SRP Facet ZooverRating
             else if (/srp-facet-zoover/.test(cdom.id)) {
                   try {
                         var evtcategory = eventCat;

@@ -84,6 +84,7 @@
                         dimension12     : {'pageid'                     : cdpm.pageid || ''},
                         dimension13     : {'resort'                     : cdpm.resort || ''},
                         dimension14     : {'sessionid'                  : cdpm.sessionid || 'empty'},
+                        dimension16     : {'accomcode'                  : cdpm.accomcodesearched || ''},
                         dimension17     : {'accomname'                  : cdpm.accomnamesearched || ''},
                         dimension19     : {'errorcode'                  : ''+(cdpm.errors && cdpm.errors.errormsg && cdpm.errors.errormsg.length > 0 && (cdpm.errors.errorcode || "unknown") || "")},
                         dimension20     : {'touroperator'               : cdfc.touroperator && cdfc.touroperator.join(';') || 'any'},

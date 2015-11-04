@@ -9,10 +9,11 @@
         var cdurl = cdpm.urlparams;
         var searchseo = ''; Object.getOwnPropertyNames(window.getPageData() || {}).forEach(function(val, idx, array) {if(/\/holidays\/.+\/.+/i.test(val) && window.getPageData(val)) {searchseo = val}});
         var wgdSrch = window.getPageData && window.getPageData('/search') || window.getPageData('searchresults-map') || window.getPageData(searchseo) || {};
-        var locpathname = cdurl && cdurl.pathanme || ''
-        var locsearch = cdurl && cdurl.paramstring || ''
-        var lochref = cdurl && cdurl.fullurl || ''
-        var lochost = loc.hostname || loc.host || ''
+        var locpathname = cdurl && cdurl.pathanme || '';
+        var locsearch = cdurl && cdurl.paramstring || '';
+        var lochref = cdurl && cdurl.fullurl || '';
+        var lochost = loc.hostname || loc.host || '';
+        var cdpr = cdpm.srpparams || {};
 
         var vpagepath = '/vp/en/'+(cdpm.lob || 'angular')+'/'+(cdpm.holidaytype || 'angular')+'/'+(cdpm.pageid || 'angular');
         var vpqsp_cat   = ('ss_cat='+ 
@@ -64,11 +65,11 @@
                     metric3         : {'paxinfant'              : parseInt(cdpm.paxinfant) || 0},
                     metric4         : {'paxtotal'               : parseInt(cdpm.paxtotal) || 0},
                     metric5         : {'rooms'                  : parseInt(cdpm.rooms) || 0},
-                    metric6         : {'searchresultspagenbr'   : parseInt(cdpm.srpparams && cdpm.srpparams.searchresultspagenbr) || ''},
-                    metric7         : {'searchresultspages'     : parseInt(cdpm.srpparams && cdpm.srpparams.searchresultspages) || ''},
-                    metric8         : {'searchresultsperpage'   : parseInt(cdpm.srpparams && cdpm.srpparams.searchresultsperpage) || ''},
-                    metric9         : {'searchresultstotal'     : parseInt(cdpm.srpparams && cdpm.srpparams.searchresultstotal) || ''},
-                    metric10        : {'bookingvalue'           : parseInt(cdpm.totalprice) || 0},
+                    metric6         : {'searchresultspagenbr'   : parseInt(cdpr.searchresultspagenbr) || ''},
+                    metric7         : {'searchresultspages'     : parseInt(cdpr.searchresultspages) || ''},
+                    metric8         : {'searchresultsperpage'   : parseInt(cdpr.searchresultsperpage) || ''},
+                    metric9         : {'searchresultstotal'     : parseInt(cdpr.searchresultstotal) || ''},
+                    metric10        : {'bookingvalue'           : +(cdpm.totalprice || 0)},
                     metric11        : {'depositvalue'           : parseInt(cdpm.depositvalue) || 0},
                     metric12        : {'discountvalue'          : parseInt(cdpm.discountvalue) || 0},
                     metric26        : {'hitcount'               : 1}
@@ -77,16 +78,16 @@
                     dimension1      : {'deptairport'                : cdpm.deptairport || 'empty'},
                     dimension2      : {'destination'                : cdpm.destination || 'empty'},
                     dimension3      : {'brochure'                   : cdpm.brochure || 'empty'},
-                    dimension4      : {'searchresultstop3'          : cdpm.srpparams && cdpm.srpparams.searchresultstop3 || ''},
+                    dimension4      : {'searchresultstop3'          : cdpr.searchresultstop3 || ''},
                     dimension5      : {'deptdate'                   : cdl.gadate && cdl.gadate(cdpm.deptdate || 0) || ''},
                     dimension6      : {'appserver'                  : cdpm.appserver || 'empty'},
                     dimension7      : {'boardbasis'                 : cdpm.boardbasis || 'empty'},
-                    dimension8      : {'budget'                     : cdpm.srpparams && cdpm.srpparams.budget || ''},
+                    dimension8      : {'budget'                     : cdpr.budget || ''},
                     dimension9      : {'duration'                   : ''+(cdpm.duration || 'empty')},
                     dimension10     : {'lob'                        : cdpm.lob || ''},
                     dimension11     : {'holidaytype'                : cdpm.holidaytype || ''},
                     dimension12     : {'pageid'                     : cdpm.pageid || ''},
-                    dimension13     : {'resortsearched'             : cdpm.srpparams && cdpm.srpparams.resort || ''},
+                    dimension13     : {'resortsearched'             : cdpr.resort || ''},
                     dimension14     : {'sessid'                     : cdpm.sessionid || 'empty'},
                     dimension15     : {'starrating'                 : cdpm.starrating || 'empty'},
                     dimension16     : {'accomcode'                  : cdpm.accomcode || 'empty'},
@@ -96,12 +97,12 @@
                     dimension20     : {'touroperator'               : cdpm.touroperator || 'empty'},
                     dimension21     : {'destination'                : cdpm.destination || 'empty'},
                     dimension22     : {'destairport'                : cdpm.destairport || 'empty'},
-                    dimension23     : {'searchresultspagenbr'       : cdpm.srpparams && ''+cdpm.srpparams.searchresultspagenbr || ''},
-                    dimension24     : {'searchresultspages'         : cdpm.srpparams && ''+cdpm.srpparams.searchresultspages || ''},
-                    dimension25     : {'searchresultsperpage'       : cdpm.srpparams && ''+cdpm.srpparams.searchresultsperpage || ''},
-                    dimension26     : {'searchresultstotal'         : cdpm.srpparams && ''+cdpm.srpparams.searchresultstotal || ''},
-                    dimension28     : {'sortoption'                 : cdpm.srpparams && cdpm.srpparams.sortoption || ''},
-                    dimension29     : {'sortoptionsearched'         : cdpm.srpparams && cdpm.srpparams.sortoption || ''},
+                    dimension23     : {'searchresultspagenbr'       : ''+(cdpr.searchresultspagenbr || '')},
+                    dimension24     : {'searchresultspages'         : ''+(cdpr.srpparams.searchresultspages || '')},
+                    dimension25     : {'searchresultsperpage'       : ''+(cdpr.srpparams.searchresultsperpage || '')},
+                    dimension26     : {'searchresultstotal'         : ''+(cdpr.srpparams.searchresultstotal || '')},
+                    dimension28     : {'sortoption'                 : cdpr.sortoption || ''},
+                    dimension29     : {'sortoptionsearched'         : cdpr.sortoption || ''},
                     dimension30     : {'gaguid'                     : cdpm.gaguid || ''},
                     dimension32     : {'emailguid'                  : cdpm.emailguid || ''},
                     dimension33     : {'carrier'                    : cdpm.carrier && cdpm.carrier.code || ''},
@@ -123,6 +124,7 @@
                     dimension122    : {'totalprice'                 : ''+(cdpm.totalprice || '0')},
                     dimension123    : {'discountperc'               : ''+(cdpm.discountperc || '0')},
                     dimension124    : {'discountvalue'              : ''+(cdpm.discountvalue || '0')},
+                    dimension126    : {'searchtype'                 : cdpr.searchtype || ''},
                     dimension132    : {'errormessage'               : cdpm.errors && cdpm.errors.errormsg && cdpm.errors.errormsg.length > 0 && (cdpm.errors.errorcode+' '+cdpm.errors.errormsg || cdpm.errorcode || "unknown") || ""},
                     dimension133    : {'zooverrating'               : cdpm.ratings && cdpm.ratings.zoover && cdpm.ratings.zoover.avgrating || ''},
                     dimension134    : {'zoovercount'                : cdpm.ratings && cdpm.ratings.zoover && cdpm.ratings.zoover.count || ''}                    
@@ -136,7 +138,7 @@
 
         var accId = cdpm.accomcode || "";
         var accSort = wgdSrch && wgdSrch.links && wgdSrch.links.search && wgdSrch.links.search.context && wgdSrch.links.search.context.sort || "";
-        var accPage = cdpm.srpparams && cdpm.srpparams.searchresultspagenbr || 0;
+        var accPage = cdpr.searchresultspagenbr || 0;
         var accPosition = 0
         if (wgdSrch && wgdSrch.items) {
             for (i = 0; i < wgdSrch.items.length; i++) {
