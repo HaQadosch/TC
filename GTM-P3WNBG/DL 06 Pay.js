@@ -221,6 +221,10 @@
             var params = JSON.parse(CATTDL.ckget('gtm_params') || '{}');
             delete params.errors;
             CATTDL.ckset('gtm_params', JSON.stringify(params), '', '/', '.'+(cdpm.cookiedomain || 'thomascook.com'));
+        } else if (jQ('p.error-text') && jQ('p.error-text').length > 0) {
+            errorPM['errorcode'] = (/Error Code:\s(.+)\)/.exec(jQ('p.error-text').text()) || ['']).pop();
+            errorPM['errormsg'] =  jQ('p.error-text').text() || '';
+            jQ.extend(cdpm.errors, errorPM)
         }
         window.CATTDL.CATTParams = cdpm;
     } catch(e) {
