@@ -68,7 +68,7 @@
           , 'list'       : cdpmlist
           , 'position'   : ++cdpmposition
           , 'dimension27': 'SRP_Viewer'
-        };
+        };          
       }).value();
 
       ld.assign(cdl.DL_uatc, {
@@ -125,7 +125,7 @@
             , dimension23     : {'searchresultspagenbr'       : '1'}
             , dimension24     : {'searchresultspages'         : '1'}
             , dimension25     : {'searchresultsperpage'       : cdpm.searchresultstotal || 'empty'}
-            , dimension26     : {'searchresultstotal'         : cdpm.searchresultstotal || 'empty'}
+            , dimension26     : {'searchresultstotal'         : cdpm.searchresultstotal || '0'}
             , dimension28     : {'sortoption'                 : cdpm.sortoption || 'empty'}
             , dimension29     : {'sortoption'                 : cdpm.sortoption || 'empty'}
             , dimension30     : {'utmaguid'                   : cdpm.utmaguid || 'empty'}

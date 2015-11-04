@@ -13,6 +13,7 @@
         var locsearch = cdurl && cdurl.paramstring || loc.search || '';
         var lochref = cdurl && cdurl.fullurl || loc.href || '';
         var lochost = location.hostname || location.host || '';
+        var cdpr = cdpm.srpparams || {};
 
         var fltoutbound = cdpm.flightdetails && cdpm.flightdetails.outbound;
         var fltinbound = cdpm.flightdetails && cdpm.flightdetails.inbound;
@@ -63,34 +64,34 @@
                 qsp_p           : vpqsp_p, 
                 location        : lochref,
                 metrics         : {
-                    metric1         : {'paxadult'               : parseInt(cdpm.paxadult) || 0},
-                    metric2         : {'paxchild'               : parseInt(cdpm.paxchild) || 0},
-                    metric3         : {'paxinfant'              : parseInt(cdpm.paxinfant) || 0},
-                    metric4         : {'paxtotal'               : parseInt(cdpm.paxtotal) || 0},
-                    metric5         : {'rooms'                  : parseInt(cdpm.rooms) || 0},
-                    metric6         : {'searchresultspagenbr'   : parseInt(cdpm.srpparams && cdpm.srpparams.searchresultspagenbr) || ''},
-                    metric7         : {'searchresultspages'     : parseInt(cdpm.srpparams && cdpm.srpparams.searchresultspages) || ''},
-                    metric8         : {'searchresultsperpage'   : parseInt(cdpm.srpparams && cdpm.srpparams.searchresultsperpage) || ''},
-                    metric9         : {'searchresultstotal'     : parseInt(cdpm.srpparams && cdpm.srpparams.searchresultstotal) || ''},
-                    metric10        : {'bookingvalue'           : parseInt(cdpm.totalprice) || 0},
-                    metric11        : {'depositvalue'           : parseInt(cdpm.depositvalue) || 0},
-                    metric12        : {'discountvalue'          : parseInt(cdpm.discountvalue) || 0},
-                    metric15        : {'hitcount'               : 1},
-                    metric29        : {'premiumcabin'           : parseInt(+cdpm.premiumcabin || 0)}
+                    metric1         : {'paxadult'                   : parseInt(cdpm.paxadult) || 0},
+                    metric2         : {'paxchild'                   : parseInt(cdpm.paxchild) || 0},
+                    metric3         : {'paxinfant'                  : parseInt(cdpm.paxinfant) || 0},
+                    metric4         : {'paxtotal'                   : parseInt(cdpm.paxtotal) || 0},
+                    metric5         : {'rooms'                      : parseInt(cdpm.rooms) || 0},
+                    metric6         : {'searchresultspagenbr'       : parseInt(cdpr.searchresultspagenbr) || 0},
+                    metric7         : {'searchresultspages'         : parseInt(cdpr.searchresultspages) || 0},
+                    metric8         : {'searchresultsperpage'       : parseInt(cdpr.searchresultsperpage) || 0},
+                    metric9         : {'searchresultstotal'         : parseInt(cdpr.searchresultstotal) || 0},
+                    metric10        : {'bookingvalue'               : +(cdpm.totalprice || 0)},
+                    metric11        : {'depositvalue'               : parseInt(cdpm.depositvalue) || 0},
+                    metric12        : {'discountvalue'              : parseInt(cdpm.discountvalue) || 0},
+                    metric15        : {'hitcount'                   : 1},
+                    metric29        : {'premiumcabin'               : parseInt(+cdpm.premiumcabin) || 0}
                 },
                 dimensions      : {
                     dimension1      : {'deptairport'                : cdpm.deptairport || 'empty'},
                     dimension2      : {'destination'                : cdpm.destination || 'empty'},
-                    dimension4      : {'searchresultstop3'          : cdpm.srpparams && cdpm.srpparams.searchresultstop3 || ''},
+                    dimension4      : {'searchresultstop3'          : cdpr.searchresultstop3 || ''},
                     dimension5      : {'deptdate'                   : cdl.gadate && cdl.gadate(cdpm.deptdate || 0) || ''},
                     dimension6      : {'appserver'                  : cdpm.appserver || 'empty'},
                     dimension7      : {'boardbasis'                 : cdpm.boardbasis || 'empty'},
-                    dimension8      : {'budget'                     : cdpm.srpparams && cdpm.srpparams.budget || ''},
+                    dimension8      : {'budget'                     : cdpr.budget || ''},
                     dimension9      : {'duration'                   : ''+(cdpm.duration || 'empty')},
                     dimension10     : {'lob'                        : cdpm.lob || ''},
                     dimension11     : {'holidaytype'                : cdpm.holidaytype || ''},
                     dimension12     : {'pageid'                     : cdpm.pageid || ''},
-                    dimension13     : {'resortsearched'             : cdpm.srpparams && cdpm.srpparams.resort || ''},
+                    dimension13     : {'resortsearched'             : cdpr.resort || ''},
                     dimension14     : {'sessid'                     : cdpm.sessionid || 'empty'},
                     dimension15     : {'starrating'                 : cdpm.starrating || 'empty'},
                     dimension16     : {'accomcode'                  : cdpm.accomcode || 'empty'},
@@ -98,14 +99,14 @@
                     dimension18     : {'accomresort'                : cdpm.accomresort || 'empty'},
                     dimension19     : {'errorcode'                  : ''+(cdpm.errors && cdpm.errors.errormsg && cdpm.errors.errormsg.length > 0 && (cdpm.errors.errorcode || "unknown") || "")},
                     dimension20     : {'touroperator'               : cdpm.touroperator || 'empty'},
-                    dimension21     : {'destinationsearched'        : cdpm.srpparams && cdpm.srpparams.destination || ''},
+                    dimension21     : {'destinationsearched'        : ''+(cdpr.destination || '')},
                     dimension22     : {'destairport'                : cdpm.destairport || 'empty'},
-                    dimension23     : {'searchresultspagenbr'       : cdpm.srpparams && ''+cdpm.srpparams.searchresultspagenbr || ''},
-                    dimension24     : {'searchresultspages'         : cdpm.srpparams && ''+cdpm.srpparams.searchresultspages || ''},
-                    dimension25     : {'searchresultsperpage'       : cdpm.srpparams && ''+cdpm.srpparams.searchresultsperpage || ''},
-                    dimension26     : {'searchresultstotal'         : cdpm.srpparams && ''+cdpm.srpparams.searchresultstotal || ''},
-                    dimension28     : {'sortoption'                 : cdpm.srpparams && cdpm.srpparams.sortoption || ''},
-                    dimension29     : {'sortoption'                 : cdpm.srpparams && cdpm.srpparams.sortoption || ''},
+                    dimension23     : {'searchresultspagenbr'       : ''+(cdpr.searchresultspagenbr || '')},
+                    dimension24     : {'searchresultspages'         : ''+(cdpr.searchresultspages || '')},
+                    dimension25     : {'searchresultsperpage'       : ''+(cdpr.searchresultsperpage || '')},
+                    dimension26     : {'searchresultstotal'         : ''+(cdpr.searchresultstotal || '')},
+                    dimension28     : {'sortoption'                 : ''+(cdpr.sortoption || '')},
+                    dimension29     : {'sortoption'                 : ''+(cdpr.sortoption || '')},
                     dimension30     : {'utmaguid'                   : cdpm.utmaguid || 'empty'},
                     dimension31     : {'utmbguid'                   : cdpm.utmbguid || 'empty'},
                     dimension32     : {'emailguid'                  : cdpm.emailguid || ''},
@@ -131,6 +132,7 @@
                     dimension75     : {'unixtimestamp'              : ''+(cdpm.pagetimestamp || 0) || ''},
                     dimension79     : {'flighttype'                 : flttype || ''},
                     dimension80     : {'basketid'                   : cdpm.tc_basket_id || ''},
+                    dimension87     : {'searchtype'                 : cdpr.searchtype || 'landing/deeplinks'},
                     dimension103    : {'rooms'                      : ''+(cdpm.rooms || '0')},
                     dimension106    : {'arrivaltimeoutbound'        : cdl.gatime && fltoutbound && fltoutbound[0] && fltoutbound[0].arrive && cdl.gatime(fltoutbound[0].arrive.date) || ''},
                     dimension107    : {'departuretimeoutbound'      : cdl.gatime && fltoutbound && fltoutbound[0] && fltoutbound[0].depart && cdl.gatime(fltoutbound[0].depart.date) || ''},
@@ -156,7 +158,7 @@
 
         var accId = cdpm.accomguid || "";
         var accSort = wgdSrch && wgdSrch.links && wgdSrch.links.search && wgdSrch.links.search.context && wgdSrch.links.search.context.sort || "";
-        var accPage = cdpm.srpparams && cdpm.srpparams.searchresultspagenbr || 0;
+        var accPage = cdpr.searchresultspagenbr || 0;
         var accPosition = 0
         if (wgdSrch && wgdSrch.items) {
             for (i = 0; i < wgdSrch.items.length; i++) {

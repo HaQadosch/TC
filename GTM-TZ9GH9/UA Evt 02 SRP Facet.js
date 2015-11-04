@@ -200,7 +200,7 @@
                         UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
                         GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
                     } catch(e) {cdl.info('GTM Evt 02 SRP - Facet Kids from £1: '+e)}
-			//Hotel Facilities
+            //Hotel Facilities
             } else if (/srp-facet-hotelFacilities/.test(cdom.id)) {
                   try {
                         var evtcategory = eventCat;
@@ -211,7 +211,7 @@
                         UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
                         GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
                     } catch(e) {cdl.info('GTM Evt 02 SRP - Hotel Facilities: '+e)}
-			//Room Facilities
+            //Room Facilities
             } else if (/srp-facet-roomFacilities/.test(cdom.id)) {
                   try {
                         var evtcategory = eventCat;
@@ -222,6 +222,39 @@
                         UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
                         GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
                     } catch(e) {cdl.info('GTM Evt 02 SRP - Room Facilities: '+e)}
+            //Duration
+            } else if (/srp-facet-durationFacet/.test(cdom.id)) {
+                  try {
+                        var evtcategory = eventCat;
+                        var evtaction = 'Duration';
+                        var evtlabel = cdom && (cdom.data && cdom.data.title || cdom.data || '');
+                        var evtvalue = 1;
+                        var evtnoninteraction = 0;
+                        UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
+                        GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
+                    } catch(e) {cdl.info('GTM Evt 02 SRP - Duration: '+e)}
+            //Departure Time
+            } else if (/srp-facet-outgoingDepartureTime/.test(cdom.id)) {
+                  try {
+                        var evtcategory = eventCat;
+                        var evtaction = 'Departure Time';
+                        var evtlabel = cdom && (jQ(cdom.data && cdom.data.title).text() || '');
+                        var evtvalue = 1;
+                        var evtnoninteraction = 0;
+                        UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
+                        GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
+                    } catch(e) {cdl.info('GTM Evt 02 SRP - Departure Time: '+e)}
+            //Return Time
+            } else if (/srp-facet-incomingDepartureTime/.test(cdom.id)) {
+                  try {
+                        var evtcategory = eventCat;
+                        var evtaction = 'Return Time';
+                        var evtlabel = cdom && (jQ(cdom.data && cdom.data.title).text() || '');
+                        var evtvalue = 1;
+                        var evtnoninteraction = 0;
+                        UAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
+                        GAevent(evtcategory,evtaction,evtlabel,evtvalue,evtnoninteraction);
+                    } catch(e) {cdl.info('GTM Evt 02 SRP - Return Time: '+e)}
             } else {
                     try {
                         var evtcategory = eventCat;
