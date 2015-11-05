@@ -5,7 +5,8 @@
       var cons = window.console;
       var timeStart = window.dataLayer
         .filter(function dlFilter(evt) {return evt['gtm.start'] || !1; })
-        .map(function dlMap(evt) {return evt['gtm.start']; }) || 0;
+        .map(function dlMap(evt) {return evt['gtm.start']; })
+        .pop() || 0;
       if ( w && dl && !dl.some(function(a){return /lodash/i.test(a && a.event || '');}) ) try {
           w.CATTDL = w.CATTDL || {};
           var s = d.createElement('script'); s.async = true; s.src = 'https://cdnjs.cloudflare.com/ajax/libs/lodash-compat/3.10.0/lodash.min.js';
