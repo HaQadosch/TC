@@ -8,6 +8,7 @@
         var uawa = uadl.webanalytics || {};
         var cdom = cdpm.domevents;
         var cdurl = cdpm.urlparams || {};
+        var cdfc = cdpm.srpfacet || {};
 
         if(!w.ga || w.ga.llength < 1) { w.ga=w.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date; w.ga=w.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date };
        
@@ -15,20 +16,32 @@
         var eventCat = 'SRP Facets';
         
         function UAevent(category,action,label,value,noninteraction) {
+            var options = { 'page'  : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
+                ,'dimension1'       : cdpm.deptairport || ''
+                ,'dimension2'       : cdpm.destination || ''
+                ,'dimension5'       : cdl.gadate && cdl.gadate(cdpm.deptdate || 0)
+                ,'dimension9'       : cdpm.duration || ''
+                ,'dimension16'      : cdpm.accomcode || ''
+                ,'dimension17'      : cdpm.accomname || ''
+                ,'dimension34'      : ''+(cdpm.paxadult || '')
+                ,'dimension35'      : ''+(cdpm.paxchild || '')
+                ,'dimension36'      : ''+(cdpm.paxinfant || '')
+                ,'dimension37'      : ''+(cdpm.paxtotal || '')
+                ,'dimension51'      : cdpm.gaguid || 'empty'
+                ,'dimension55'      : 'event'
+                ,'dimension65'      : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
+                ,'dimension75'      : ''+(window.Date && window.Date.now() || 0)
+                ,'dimension118'     : (cdurl && cdurl.pathname || location.pathname || '')
+                ,'dimension119'     : (cdurl && cdurl.paramstring || location.search || '') 
+                ,'nonInteraction'    : noninteraction
+            };
+            Object.keys(options).forEach(function(e){if(!options[e]){delete options[e]}});
             w.ga(uatrc+'send', 'event'
             , category
             , action
             , label
             , 1
-            , { 'page'          : uawa.page || ((cdurl.pathname || '/')+(cdurl.paramstring || '')) || ''
-                ,'dimension51'  : cdpm.gaguid || 'empty'
-                ,'dimension55'  : 'event'
-                ,'dimension65'  : cdl && cdl.gadate && cdl.gatime && window.Date && cdl.gadate(window.Date.now())+' '+cdl.gatime(window.Date.now()) || ''
-                ,'dimension75'  : ''+(window.Date && window.Date.now() || 0)
-                ,'dimension118' : (cdurl && cdurl.pathname || location.pathname || '')
-                ,'dimension119' : (cdurl && cdurl.paramstring || location.search || '') 
-               ,'nonInteraction': noninteraction
-            });
+            , options);
         };
         function GAevent(category,action,label,value,noninteraction) {
             w._gaq.push([gatrc+'_trackEvent'
