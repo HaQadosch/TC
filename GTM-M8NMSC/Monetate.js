@@ -1,4 +1,4 @@
-<script id="GTM-K83N5Q_monetate">
+<script id="GTM-M8NMSC_monetate">
   (function gtm_MonetateLP(cdl, dl) {
     'use strict';
     var mtdl = {};
@@ -60,5 +60,5 @@
       dl.push({'event': 'Monetate', 'timestamp': stampEpoch, 'since gtm.start': stampEpoch - timeStart});
     }
     return cdl && dl && mtdl;
-  }(window.CATTDL, window.dataLayer_K83N5Q || window.dataLayer));
+  }(window.CATTDL, window.dataLayer_M8NMSC || window.dataLayer));
 </script>
