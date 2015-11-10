@@ -110,7 +110,7 @@
              ss.onload = ss.onreadystatechange = function gtm_jQOnLoad(){
                var rdyState = ss.readyState;
                if (!rdyState || /complete|loaded/i.test(ss.readyState)) {
-                 w.CATTDL.$ = w.jQuery.noConflict();
+                 w.CATTDL.$ = w.jQuery.noConflict(true);
                  ss.onload = null;
                  ss.onreadystatechange = null;
                  var stampEpoch = +new Date();
