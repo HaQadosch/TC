@@ -11,60 +11,36 @@
             var wgD = window.getPageData && window.getPageData(locpathname) || {}
             var wgdItems = wgD.items || {}
             var wgdStats = wgD.stats || {}
-            var wgdCur = (!/500|502|404/.test(wgD.status) && (!wgD.errorCode || wgD.errorCode !== null))?(wgD.links && wgD.links.search && wgD.links.search.context || {}):(wgD.searchParams || {})
+            var wgdCurrent = (!/500|502|404/.test(wgD.status) && (!wgD.errorCode || wgD.errorCode !== null))?(wgD.links && wgD.links.search && wgD.links.search.context || {}):(wgD.searchParams || {})
 
             //Page Info
             cdpm.lob = "package";
-            cdpm.holidaytype = wgdCur && (wgdCur.connectorCode == 1)?"package-angular":(wgdCur.connectorCode == 2)?"multi-angular":"generic-angular";
+            cdpm.holidaytype = wgdCurrent && (wgdCurrent.connectorCode == 1)?"package-angular":(wgdCurrent.connectorCode == 2)?"multi-angular":"generic-angular";
             cdpm.pagecontext = "angular"
             cdpm.tc_basket_id = JSON.parse(cdl.ckget('tc_basket_id')) || '';
             var strdeptdate = ''
-            var strdeptdatewhen = (strdeptdate = wgdCur.when && wgdCur.when._i || wgdCur.when || "19700101") && +new Date(strdeptdate.substring(0,4), strdeptdate.substring(4,6)-1, strdeptdate.substring(6,8)) || 0;
-            var rngdeptdate = wgdCur && wgdCur.departureDate || '';
+            var strdeptdatewhen = (strdeptdate = wgdCurrent.when && wgdCurrent.when._i || wgdCurrent.when || "19700101") && +new Date(strdeptdate.substring(0,4), strdeptdate.substring(4,6)-1, strdeptdate.substring(6,8)) || 0;
+            var rngdeptdate = wgdCurrent && wgdCurrent.departureDate || '';
             newPM['deptdatestart'] = +new Date(((rngdeptdate || '').split(',')[0]).replace(/(\d\d\d\d)(\d\d)(\d\d)/, '$1-$2-$3') || strdeptdatewhen || 0);
             newPM['deptdateend'] = +new Date(((rngdeptdate  || '').split(',')[1] || (rngdeptdate  || '').split(',')[0]).replace(/(\d\d\d\d)(\d\d)(\d\d)/, '$1-$2-$3') || strdeptdatewhen || 0);
             newPM['deptdate'] = strdeptdatewhen || newPM.deptdatestart || 0;
             if ((rngdeptdate  || '').split(',')[1]) {newPM['deptdaterange'] = true} else {newPM['deptdaterange'] = false};
 
-            var depairlist = [];
-            var real_depairarray = [];
-            var real_depairidarray = (typeof wgdCur.depAirport == 'string')?[(wgdCur.depAirport && wgdCur.depAirport.replace(/_/g, ' ').replace(/\s-/, ',') || '')]:(wgdCur.depAirport.map && wgdCur.depAirport.map(function(e){return e.replace(/_/g, ' ').replace(/\s-/, ',')}) || ['']);
-            var panel_deptairarray = (typeof wgdCur.origin == 'string')?[(wgdCur.origin && wgdCur.origin.replace(/_/g, ' ').replace(/\s-/, ',') || 'Any Airport')]:(wgdCur.origin.map && wgdCur.origin.map(function(e){return e.replace(/_/g, ' ').replace(/\s-/, ',')}) || ['Any Airport']);
-            var facet_depairlist = wgD.depAirport && wgD.depAirport.options || [];
-            var facet_depairarray = facet_depairlist.filter(function(e){return e.selected == true}).map(function(f){return (f.title || '').replace(/_/g, ' ').replace(/\s-/, ',')});
+            newPM['deptairportsearchedarray'] = (!wgdCurrent.origin || typeof wgdCurrent.origin == 'string')?[(wgdCurrent.origin && wgdCurrent.origin.replace(/\&amp;/g, '-').replace(/\&/g, '-') || '')]:(wgdCurrent.origin.map && wgdCurrent.origin.map(function(e){return e.replace(/\&amp;/g, '-').replace(/\&/g, '-')}) || ['']);
+            newPM['deptairportsearched'] = newPM.deptairportsearchedarray && newPM.deptairportsearchedarray.join(';') || '';
+            newPM['destinationsearchedarray'] = (!wgdCurrent.goingTo || typeof wgdCurrent.goingTo == 'string')?[(wgdCurrent.goingTo && wgdCurrent.goingTo.replace(/\&amp;/g, '-').replace(/\&/g, '-') || 'Any destination')]:(wgdCurrent.goingTo.map && wgdCurrent.goingTo.map(function(e){return e.replace(/\&amp;/g, '-').replace(/\&/g, '-')}) || ['Any destination']);
+            if(!newPM.destinationsearchedarray.toString()){newPM.destinationsearchedarray = ['Any destination']};
+            newPM['destinationsearched'] = newPM.destinationsearchedarray && newPM.destinationsearchedarray.join(';') || '';
+            newPM['resortsearchedarray'] = (!wgdCurrent.resortCode || typeof wgdCurrent.resortCode == 'string')?[(wgdCurrent.resortCode && wgdCurrent.resortCode.replace(/\&amp;/g, '-').replace(/\&/g, '-') || '')]:(wgdCurrent.resortCode.map && wgdCurrent.resortCode.map(function(e){return e.replace(/\&amp;/g, '-').replace(/\&/g, '-')}) || ['']);
+            newPM['resortsearched'] = newPM.resortsearchedarray && newPM.resortsearchedarray.join(';') || '';
 
-            var panel_destarray = (typeof wgdCur.goingTo == 'string')?[(wgdCur.goingTo && wgdCur.goingTo.replace(/_/g, ' ').replace(/\s-/, ',') || 'Any destination')]:(wgdCur.goingTo.map && wgdCur.goingTo.map(function(e){return e.replace(/_/g, ' ').replace(/\s-/, ',')}) || ['Any destination']);
-            var real_destarray = (!wgdCur.commercialDestination || typeof wgdCur.commercialDestination == 'string')?[(wgdCur.commercialDestination && wgdCur.commercialDestination.replace(/_/g, ' ').replace(/\s-/, ',') || 'Any destination')]:(wgdCur.commercialDestination.map && wgdCur.commercialDestination.map(function(e){return e.replace(/_/g, ' ').replace(/\s-/, ',')}) || ['Any destination']);
-            var facet_destarray = wgD.commercialDestination && wgD.commercialDestination && wgD.commercialDestination.options.filter(function(e){return e.selected == true}).map(function(f){return (f.title || '').replace(/_/g, ' ').replace(/\s-/, ',')});
-            var facet_resortarray = (typeof wgdCur.resortCode == 'string')?[(wgdCur.resortCode && wgdCur.resortCode.replace(/_/g, ' ').replace(/\s-/, ',') || '')]:(wgdCur.resortCode.map && wgdCur.resortCode.map(function(e){return e.replace(/_/g, ' ').replace(/\s-/, ',')}) || ['']);
-
-            newPM['deptairportsearchedarray'] = panel_deptairarray;
-            newPM['deptairportsearched'] = panel_deptairarray.join(';') || '';
-            newPM['destinationsearchedarray'] = panel_destarray;
-            newPM['destinationsearched'] = panel_destarray.join(';') || '';
-            newPM['resortsearchedarray'] = facet_resortarray
-            newPM['resortsearched'] = facet_resortarray.join(';') || '';
-
-            $.ajax('/api/airports?d=any').success(function(data, textStatus, jqXHR){
-                if (jqXHR.status === 200) {
-                    depairlist = data
-                    real_depairarray = real_depairidarray.map(function(e){return depairlist.filter(function(d){return d.code== e})}).map(function(c){return (c[0] && c[0].title || '')})
-                    cdpm['deptairport'] = ''; 
-                    if (!(real_depairarray.join(';'))){
-                        real_depairarray = real_depairidarray.map(function(e){return facet_depairlist.filter(function(d){return d.value== e})}).map(function(c){return (c[0] && c[0].title || '')})
-                            || newPM['deptairportsearchedarray'];
-                    };
-                    cdpm['deptairport']=real_depairarray.join(';') || '';
-                }
-            });
-
-            newPM['accomcodesearched'] = wgdCur.hotelId.toString() || "";
-            newPM['accomnamesearched'] = wgdCur.hotelName || "";
-            newPM['searchwidened'] = (''+wgdCur.flexible == 'true')?'true':((''+wgD.widened == 'true')?'true':'false');
-            newPM['searchwidenedselected'] = (''+wgdCur.flexible == 'true')?'true':'false';
-            newPM['sortoption'] = wgdCur.sort || "";
-            newPM['durationsearched'] = wgdCur.duration || "I dont mind";
-            newPM['searchapp'] = (wgdCur.connectorCode && wgdCur.connectorCode == 1)?"solr":"multicom";
+            newPM['accomcodesearched'] = wgdCurrent.hotelId.toString() || "";
+            newPM['accomnamesearched'] = wgdCurrent.hotelName || "";
+            newPM['searchwidened'] = (''+wgdCurrent.flexible == 'true')?'true':((''+wgD.widened == 'true')?'true':'false');
+            newPM['searchwidenedselected'] = (''+wgdCurrent.flexible == 'true')?'true':'false';
+            newPM['sortoption'] = wgdCurrent.sort || "";
+            newPM['durationsearched'] = wgdCurrent.duration || "I dont mind";
+            newPM['searchapp'] = (wgdCurrent.connectorCode && wgdCurrent.connectorCode == 1)?"solr":"multicom";
             newPM['searchresultstop3'] = wgdItems && ((wgdItems[0] && wgdItems[0].id || "")+"-"+(wgdItems[1] && wgdItems[1].id || "")+"-"+(wgdItems[2] && wgdItems[2].id || ""))|| '';
             newPM['searchresultstotal'] = wgdStats && wgdStats.total || 0;      
             newPM['searchresultsperpage'] = wgdItems && Math.ceil(wgdItems.length/10)*10 || 1;
@@ -82,15 +58,12 @@
             cdpm.srpfacets = {};
             var facetPM = {};
 
-            facetPM['destinationarray'] = facet_destarray;
-            facetPM['deptairportarray'] = facet_depairarray;
-            facetPM['destination'] = facet_destarray.join(';') || '';
-            facetPM['deptairport'] = facet_depairarray.join(';') || '';
-            facetPM['resort'] = facet_resortarray.join(';')
-                || jQ('[analytics-id="srp-facet-resortCategory"] :selected') && jQ('[analytics-id="srp-facet-resortCategory"] :selected').attr('label') && jQ('[analytics-id="srp-facet-resortCategory"] :selected').attr('label').replace(/(.*)\s\(\d+\)/,'$1') 
-                || wgdCur.resortCategory && wgdCur.resortCategory[0]
+            facetPM['destination'] = jQ('[analytics-id="srp-facet-commercialDestination"] :selected') && jQ('[analytics-id="srp-facet-commercialDestination"] :selected').attr('label') && jQ('[analytics-id="srp-facet-commercialDestination"] :selected').attr('label').replace(/(.*)\s\(\d+\)/,'$1') || '';
+            facetPM['deptairport'] = jQ('[analytics-id="srp-facet-depAirport"] :selected') && jQ('[analytics-id="srp-facet-depAirport"] :selected').attr('label') && jQ('[analytics-id="srp-facet-depAirport"] :selected').attr('label').replace(/(.*)\s\(\d+\)/,'$1') || '';
+            facetPM['resort'] = jQ('[analytics-id="srp-facet-resortCategory"] :selected') && jQ('[analytics-id="srp-facet-resortCategory"] :selected').attr('label') && jQ('[analytics-id="srp-facet-resortCategory"] :selected').attr('label').replace(/(.*)\s\(\d+\)/,'$1') 
+                || wgdCurrent.resortCategory && wgdCurrent.resortCategory[0]
                 || '';
-            facetPM['duration'] = "I don't mind"; (wgD && wgD.durationFacet && wgD.durationFacet.options || []).forEach(function(e){if(e.selected == true) {(+e.value==0)?"I don't mind":(facetPM.duration = e.value)}});
+            facetPM['duration'] = "I don't mind"; (wgD && wgD.durationFacet && wgD.durationFacet.options || []).forEach(function(e){if(e.selected == true) {facetPM.duration = e.value}});
 
             facetPM['boardbasis'] = []; (wgD && wgD.boardType && wgD.boardType.options || []).forEach(function(e){if(e.selected == true) {facetPM.boardbasis.push(e.title)}});
             facetPM['concepts'] = []; (wgD && wgD.concept && wgD.concept.options || []).forEach(function(e){if(e.selected == true) {facetPM.concepts.push(e.title)}});
@@ -122,7 +95,7 @@
                 if(jQ(this) && jQ(this).is(':checked') && jQ(this).attr('type') === 'checkbox') { facetPM['freechild'] = true || false }
             })};
 
-            var arrpax = wgdCur && wgdCur.occupation || ""; //'2' or [2]  or ['2, 3'] or ["2,1,2", "1,6"] 
+            var arrpax = wgdCurrent && wgdCurrent.occupation || ""; //'2' or [2]  or ['2, 3'] or ["2,1,2", "1,6"] 
             newPM['paxadultperroom'] = []
             newPM['paxchildperroom'] = []
             newPM['paxinfantperroom'] = []
@@ -143,11 +116,13 @@
             newPM['paxinfant'] = newPM.paxinfantperroom.reduce(function gtm_reduceAdd(x, y){ return x+y }) || 0
             newPM['paxtotal'] = newPM['paxadult']+newPM['paxchild']+newPM['paxinfant'];
             newPM['rooms'] = newPM['paxadultperroom'].length;
-
-            newPM['destination'] = ''; if (!(real_destarray.join(';'))){
-                newPM['destination']=newPM['destinationsearched']} else {newPM['destination']=real_destarray.join(';') || ''
+            newPM['destination'] = ''; if (!facetPM.destination || newPM.destinationsearched.replace(/,/g,' -').toLowerCase().match(facetPM.destination.toLowerCase())){
+                newPM['destination']=newPM['destinationsearched']} else {newPM['destination']=facetPM['destination']
             };
             newPM['resort'] = ''; if (!facetPM['resort']){newPM['resort']=newPM['resortsearched']} else {newPM['resort']=facetPM['resort']};
+            newPM['deptairport'] = ''; if (!facetPM.deptairport || facetPM.deptairport === 'Any Airport' || newPM.deptairportsearched.replace(/,/g,' -').toLowerCase().match(facetPM.deptairport.toLowerCase())){
+                newPM['deptairport']=newPM['deptairportsearched']} else {newPM['deptairport']=facetPM['deptairport']
+            };
             newPM['duration'] = ''; if (!facetPM['duration']){newPM['duration']=newPM['durationsearched']} else {newPM['duration']=facetPM['duration']};
 
             var userId = cdpm.user && cdpm.user.id || '';
