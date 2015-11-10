@@ -95,7 +95,7 @@
                     dimension14     : {'sessid'                     : cdpm.sessionid || 'empty'},
                     dimension15     : {'starrating'                 : cdpm.starrating || 'empty'},
                     dimension16     : {'accomcode'                  : cdpm.accomcode || 'empty'},
-                    dimension17     : {'accomname'                  : cdpm.accomname || 'empty'},
+                    dimension17     : {'accomname'                  : cdpm.accomname || cdpr.accomnamesearched || 'empty'},
                     dimension18     : {'accomresort'                : cdpm.accomresort || 'empty'},
                     dimension19     : {'errorcode'                  : ''+(cdpm.errors && cdpm.errors.errormsg && cdpm.errors.errormsg.length > 0 && (cdpm.errors.errorcode || "unknown") || "")},
                     dimension20     : {'touroperator'               : cdpm.touroperator || 'empty'},
