@@ -1,7 +1,8 @@
 <script id='GTM-MSD88R_cattdlLP'>
 (function gtm_cattdlLP(jQ, dl, cdl){
     'use strict'
-    if (jQ && jQ.extend && cdl && dl && !dl.some(function(a){return /CATTDL LP/i.test(a && a.event || '')})) try {
+    if (jQ && jQ.extend && cdl && dl && !dl.some(function(a){return /CATTDL LP/i.test(a && a.event || '')})) 
+    try {
         var cdpm = cdl.CATTParams
         var cdsr = cdpm.searches
         var newPM = {}

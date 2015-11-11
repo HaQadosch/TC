@@ -70,7 +70,6 @@
             },
             events : {
                 internalcampaignid    : {'category': 'InternalCampaign', 'action': cdpm.internalcampaignid || '', 'label': loc.host+loc.pathname, 'value': 1, 'noninteraction': true},
-                nodejspages            : {'category': 'NodeJS Pages', 'action': loc.host+loc.pathname || '', 'label': loc.host, 'value': 1, 'noninteraction': true},
                 qsearchedkeyword    : {'category': 'GoogleInternalSearch', 'action': cdpm.qsearchedkeyword || '', 'label': loc.host+loc.pathname, 'value': 1, 'noninteraction': true},
                 errorcode             : {'category': 'Errors', 'action': cdpm.errorcode || (cdpm.errors && cdpm.errors.Code) || '', 'label': (loc.host+loc.pathname || '')+"?SessionID="+cdpm.sessionid+"&AppServer="+cdpm.appserver+loc.search.replace(/\?/, '&'), 'value': 1, 'noninteraction': true}
             }
