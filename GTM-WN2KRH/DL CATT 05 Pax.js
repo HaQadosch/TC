@@ -1,4 +1,4 @@
-<script>
+<script id='GTM-WN2KRH_CATTDL5Pax'>
 (function gtm_cattdlPax(jQ, dl, cdl) {
     'use strict'
     if (jQ && jQ.extend && cdl) try {
