@@ -1,0 +1,86 @@
+<script>
+(function gtm_cattdlPax(jQ, dl, cdl) {
+    'use strict'
+    if (jQ && jQ.extend && cdl) try {
+        var cdpm = cdl.CATTParams || {};
+        var ctpm = window.CATTParams || {};
+        var newPM = {}
+
+        cdpm.errors = {}
+        var errorPM = {};
+        errorPM['errorcode'] = (/(^\d+)/.exec(ctpm.ErrorCode) || '') || [].pop() || '';
+        errorPM['errormsg'] = ctpm.ErrorCode || '';
+        jQ.extend(cdl.CATTParams.errors, errorPM);
+        
+        var refreshparams = [
+            "AccomCode"
+            , "AccomName"
+            , "AccomGEOLocation"
+            , "AccomResort"
+            , "AppServer"
+            , "BoardBasis"
+            , "Brochure"
+            , "DeptDate"
+            , "DepartureAirportSelected"
+            , "Destination"
+            , "DestinationAirportSelected"
+            , "DestinationISOCode"
+            , "Duration"
+            , "PaxAdult"
+            , "PaxChild"
+            , "PaxInfant"
+            , "PaxTotal"
+            , "Region"
+            , "RegionGEOLocation"
+            , "RetDate"
+            , "Rooms"
+            , "SearchApp"
+            , "SessId"
+            , "TourOperator"
+            , "PageContext"
+            , "PageType"
+            , "SearchResultsPageNbr"
+            , "SearchResultsPages"
+            , "SearchResultsPerPage"
+            , "SearchResultsTop3"
+            , "SearchResultsTotal"
+            , "SiteLanguage"
+            , "StarRating"          
+            , "siteType"
+        ];
+
+        var ctpmkeys = Object.keys(ctpm);
+        for (var i in ctpmkeys){
+                    var ctpmval = ctpmkeys[i] || ''
+                    var reg = new RegExp(ctpmval, 'i');
+                    if (ctpmval && reg.test(refreshparams.join('|'))) { 
+                        cdpm[ctpmval.toLowerCase()] = ctpm[ctpmval]
+                    }
+        };      
+
+        cdpm['accomcountry'] = ctpm.Destination || '';
+        cdpm['accomregion'] = ctpm.Region || '';
+        cdpm['accomresort'] = ctpm.AccomResort || '';
+        cdpm['deptdate'] = +(new Date(ctpm.DeptDate && ctpm.DeptDate.replace(/(\d+)\/(\d+)\/(\d+)/,'$3-$2-$1')) || new Date((jQuery('div#foCashTicket').find('div[class="flight-breakdown"]').find('span[class="trip-datetime"]').eq(0).text() || '').trim().replace(/(\d+)\/(\d+)\/(\d+)/,'$3-$2-$1').substring(0,10)) || '0');
+        cdpm['destairport'] = (ctpm.DestinationAirportSelected || '').toUpperCase();      
+        cdpm['depairport'] = (ctpm.DepartureAirportSelected || '').toUpperCase();
+        cdpm['returndate'] = +(new Date(ctpm.RetDate && ctpm.RetDate.replace(/(\d+)\/(\d+)\/(\d+)/,'$3-$2-$1')) ||new Date((jQuery('div#foCashTicket').find('div[class="flight-breakdown"]').find('span[class="trip-datetime"]').eq(2).text() || '').trim().replace(/(\d+)\/(\d+)\/(\d+)/,'$3-$2-$1').substring(0,10)) || '0');
+        cdpm['duration'] = +(/\d+/.exec(jQuery('div#foCashTicket').find('div[class="flight-breakdown"]').find('span[class="trip-party"]').text()) || []).pop() || 0;
+        cdpm['roomcodes'] = ctpm.RoomType && ctpm.RoomType.split('|') || [];
+        cdpm['sessionid'] = ctpm.SessId || '';
+        cdpm['starrating'] = ctpm.StarRating && ctpm.StarRating.replace(',','.');
+        cdpm['pricetotal'] = (/\d+/.exec((jQuery('p.price.big-font') && jQuery('p.price.big-font').eq(0)).text() || '') || []).pop()
+            || (/\d+/.exec((jQuery('div.price-total-line').find('[class="price"]').text() || '').replace('.','')) || []).pop()
+        //cdpm['pricepp'] = (/\d+/.exec((jQuery('p.price.big-font') && jQuery('p.price.big-font').eq(1)).text() || '') || []).pop()
+
+        window.CATTDL.CATTParams = cdpm;
+    } catch(e) {
+        cdl.error('GTM CATTDL Pax: '+e)
+    } finally {
+        dl.push({'event': 'pid_'+cdl.CATTParams.pageid});
+        dl.push({'event': 'CATTDL Pax'})
+        window.gatcDL && gatcDL.push({'event': 'CATTDL Pax'})
+    }
+    return jQ && jQ.extend && cdl
+}(window.jQuery, window.dataLayer, window.CATTDL))
+</script>
