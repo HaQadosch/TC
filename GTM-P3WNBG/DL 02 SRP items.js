@@ -29,7 +29,7 @@
 
             var panel_destarray = (!wgdSrch.goingTo || typeof wgdSrch.goingTo == 'string')?[(wgdSrch.goingTo && wgdSrch.goingTo.replace(/_/g, ' ').replace(/\s-/, ',') || 'Any destination')]:(wgdSrch.goingTo.map && wgdSrch.goingTo.map(function(e){return e.replace(/_/g, ' ').replace(/\s-/, ',')}) || ['Any destination']);
             var real_destarray = (!wgdSrch.commercialDestination || typeof wgdSrch.commercialDestination == 'string')?[(wgdSrch.commercialDestination && wgdSrch.commercialDestination.replace(/_/g, ' ').replace(/\s-/, ',') || 'Any destination')]:(wgdSrch.commercialDestination.map && wgdSrch.commercialDestination.map(function(e){return e.replace(/_/g, ' ').replace(/\s-/, ',')}) || ['Any destination']);
-            var facet_destarray = wgetDataSrch.commercialDestination && wgetDataSrch.commercialDestination && wgetDataSrch.commercialDestination.options.filter(function(e){return e.selected == true}).map(function(f){return (f.title || '').replace(/_/g, ' ').replace(/\s-/, ',')});
+            var facet_destarray = wgetDataSrch.commercialDestination && wgetDataSrch.commercialDestination && wgetDataSrch.commercialDestination.options.filter(function(e){return e.selected == true}).map(function(f){return (f.title || '').replace(/_/g, ' ').replace(/\s-/, ',')}) || [];
             var facet_resortarray = (typeof wgdSrch.resortCode == 'string')?[(wgdSrch.resortCode && wgdSrch.resortCode.replace(/_/g, ' ').replace(/\s-/, ',') || '')]:(wgdSrch.resortCode.map && wgdSrch.resortCode.map(function(e){return e.replace(/_/g, ' ').replace(/\s-/, ',')}) || ['']);
 
             srpPM['deptairportsearchedarray'] = panel_deptairarray;
@@ -73,7 +73,7 @@
             if  (wgdSrch.when && wgdSrch.when._d) {
                 srpPM['deptdate'] = wgdSrch.when._d || '0';
             } else {
-                srpPM['deptdate'] = (strdeptdate = wgdSrch.when || wgdSrch.when || "19700101") && +new Date(strdeptdate.substring(0,4), strdeptdate.substring(4,6)-1, strdeptdate.substring(6,8)) || 0;                
+                srpPM['deptdate'] = (strdeptdate == wgdSrch.when || wgdSrch.when || "19700101") && +new Date(strdeptdate.substring(0,4), strdeptdate.substring(4,6)-1, strdeptdate.substring(6,8)) || 0;                
             }
             var wgdItems = wgetDataSrch.items || {}
             srpPM['searchresultstop3'] = wgdItems && ((wgdItems[0] && wgdItems[0].id || "")+"-"+(wgdItems[1] && wgdItems[1].id || "")+"-"+(wgdItems[2] && wgdItems[2].id || ""))|| '';

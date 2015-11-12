@@ -19,7 +19,7 @@
             cdpm.pagecontext = "angular"
             cdpm.tc_basket_id = JSON.parse(cdl.ckget('tc_basket_id')) || '';
             var strdeptdate = ''
-            var strdeptdatewhen = (strdeptdate = wgdCur.when && wgdCur.when._i || wgdCur.when || "19700101") && +new Date(strdeptdate.substring(0,4), strdeptdate.substring(4,6)-1, strdeptdate.substring(6,8)) || 0;
+            var strdeptdatewhen = (strdeptdate == wgdCur.when && wgdCur.when._i || wgdCur.when || "19700101") && +new Date(strdeptdate.substring(0,4), strdeptdate.substring(4,6)-1, strdeptdate.substring(6,8)) || 0;
             var rngdeptdate = wgdCur && wgdCur.departureDate || '';
             newPM['deptdatestart'] = +new Date(((rngdeptdate || '').split(',')[0]).replace(/(\d\d\d\d)(\d\d)(\d\d)/, '$1-$2-$3') || strdeptdatewhen || 0);
             newPM['deptdateend'] = +new Date(((rngdeptdate  || '').split(',')[1] || (rngdeptdate  || '').split(',')[0]).replace(/(\d\d\d\d)(\d\d)(\d\d)/, '$1-$2-$3') || strdeptdatewhen || 0);
@@ -35,7 +35,7 @@
 
             var panel_destarray = (typeof wgdCur.goingTo == 'string')?[(wgdCur.goingTo && wgdCur.goingTo.replace(/_/g, ' ').replace(/\s-/, ',') || 'Any destination')]:(wgdCur.goingTo.map && wgdCur.goingTo.map(function(e){return e.replace(/_/g, ' ').replace(/\s-/, ',')}) || ['Any destination']);
             var real_destarray = (!wgdCur.commercialDestination || typeof wgdCur.commercialDestination == 'string')?[(wgdCur.commercialDestination && wgdCur.commercialDestination.replace(/_/g, ' ').replace(/\s-/, ',') || 'Any destination')]:(wgdCur.commercialDestination.map && wgdCur.commercialDestination.map(function(e){return e.replace(/_/g, ' ').replace(/\s-/, ',')}) || ['Any destination']);
-            var facet_destarray = wgD.commercialDestination && wgD.commercialDestination && wgD.commercialDestination.options.filter(function(e){return e.selected == true}).map(function(f){return (f.title || '').replace(/_/g, ' ').replace(/\s-/, ',')});
+            var facet_destarray = wgD.commercialDestination && wgD.commercialDestination && wgD.commercialDestination.options.filter(function(e){return e.selected == true}).map(function(f){return (f.title || '').replace(/_/g, ' ').replace(/\s-/, ',')}) || [];
             var facet_resortarray = (typeof wgdCur.resortCode == 'string')?[(wgdCur.resortCode && wgdCur.resortCode.replace(/_/g, ' ').replace(/\s-/, ',') || '')]:(wgdCur.resortCode.map && wgdCur.resortCode.map(function(e){return e.replace(/_/g, ' ').replace(/\s-/, ',')}) || ['']);
 
             newPM['deptairportsearchedarray'] = panel_deptairarray;

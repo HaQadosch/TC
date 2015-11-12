@@ -105,15 +105,15 @@
                       if (!cdpm.pageid && /srv-search\/accom|destinations/i.test(window.location.pathname)) cdpm.pageid = 'accom';
                       else if (typeof w.CATTParams === 'undefined' && location.pathname === '/' || !cdpm.pageid) cdpm.pageid = 'home';
                       cdpm.cookiedomain = ({
-                        'thomascook'				:'thomascook.com',
-                        'airtours'					:'airtours.co.uk',
-                        'club18-30'					:'club18-30.com',
-                        'eceit'							:'staging.eceit.net',
-                        'directholidays'		:'directholidays.co.uk',
-                        'uk.staging'				:'uk.staging.thomascook.io',
-                        'uk.qa'							:'uk.qa.thomascook.io',
-                        'uk.integration'		:'uk.integration.thomascook.io',
-                        'uk.int'						:'uk.int.thomascook.io'
+                        'thomascook'        :'thomascook.com',
+                        'airtours'          :'airtours.co.uk',
+                        'club18-30'         :'club18-30.com',
+                        'eceit'             :'staging.eceit.net',
+                        'directholidays'    :'directholidays.co.uk',
+                        'uk.staging'        :'uk.staging.thomascook.io',
+                        'uk.qa'             :'uk.qa.thomascook.io',
+                        'uk.integration'    :'uk.integration.thomascook.io',
+                        'uk.int'            :'uk.int.thomascook.io'
                       })[((/([^\.]*).co.uk|([^\.]*).com|([^\.]*).net|(.+)\.thomascook\.io/i.exec(w.location.hostname) || []).filter(function hostname(e){return e}) || ['thomascook']).pop()];
 
                       window.CATTDL = cdl;

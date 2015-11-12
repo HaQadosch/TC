@@ -1,6 +1,6 @@
 <script id='GTM-MSD88R_uatcdlLP'>
 (function gtm_galibrary(dl, cdl){
-  if (!window.dataLayer.some(function(a){return /UA library/i.test(a && a.event || '')})) 
+  if (dl && !dl.some(function(a){return /UA library/i.test(a && a.event || '')})) 
   window.CATTDL.insertJS({
     'name': 'analytics',
     'src': 'https://www.google-analytics.com/analytics.js',
