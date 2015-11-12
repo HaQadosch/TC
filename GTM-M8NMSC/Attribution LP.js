@@ -1,4 +1,4 @@
-<script id='GTM-P2C3FL_attribution'>
+<script id='GTM-M8NMSC_attLP'>
 (function gtm_attribtionLP(jQ, cdl) {
 	'use strict';
 	if (jQ && cdl) {
@@ -33,5 +33,5 @@
 		if (!cdl && window.console) window.console.log('GTM-P2C3FL_attribution: no cdl');
 	}
 	return cdl;
-}(window.CATTDL?window.CATTDL.jQ:!1, window.CATTDL));
+}(window.jQ, window.CATTDL));
 </script>
